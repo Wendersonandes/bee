@@ -1,0 +1,13 @@
+  <%posts.in_groups_of(3, false).each do |group| %>
+  <div class="w3-row-padding">
+    <% group.each do |item| %>
+    <div class="w3-third w3-container w3-margin-bottom">
+      <%= link_to (image_tag item.image.url(:thumb), class:"w3-hover-opacity", style:'width:100%'), post_path(item) %>
+      <div class="w3-container w3-white">
+        <br>
+        <p><b><%= item.caption %></b></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% end %>

@@ -1,0 +1,8 @@
+//$('#follow-button i').attr('class', 'fa fa-user fa-fw w3-margin-right');
+$('#follow-button').attr('class', 'w3-padding w3-text-teal')
+                   //.text('SEGUINDO')
+                   .attr('href', "/<%= @user.id %>/unfollow_user")
+                   .attr('id', 'unfollow-button');
+$('#coco1').hide();
+$('#coco2').show();
+	//.children('.fa fa-envelope fa-fw w3-margin-right').toggleClass('class','fa fa-user fa-fw w3-margin-right');

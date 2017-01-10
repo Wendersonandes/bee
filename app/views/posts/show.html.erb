@@ -1,0 +1,578 @@
+<script charset="UTF-8" type="text/javascript" src="../assets/three.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../assets/OrbitControls.js"></script>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script charset="UTF-8" type="text/javascript">
+  $(document).ready(function(){
+    window.addEventListener("load", function () {
+    "use strict";
+    
+    var w = 640, h = 550;
+    
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(w, h);
+    var view = document.getElementById("view");
+    view.appendChild(renderer.domElement);
+    
+      var camera = new THREE.PerspectiveCamera(45, w / h, 1, 1000);
+      camera.position.set(0, 0, 150);
+      var controls = new THREE.OrbitControls(camera, view);
+    
+    var scene = new THREE.Scene();
+    scene.add(new THREE.AmbientLight(0x666666));
+    scene.background = new THREE.Color( 0xf9f9f9);
+    
+    var alpha;
+    var degrees;
+    var cameraAng;
+    var maior;
+    
+    var light1 = new THREE.DirectionalLight(0xffffff);
+    light1.position.set(0, 100, 100);
+    scene.add(light1);
+    
+    var light2 = new THREE.DirectionalLight(0xffffff);
+    light2.position.set(0, -100, -100);
+    scene.add(light2);
+    
+    var mat = new THREE.MeshPhongMaterial({
+        color: 0xcccccc, ambient: 0xcccccc, specular: 0x030303,
+    });
+    var obj = new THREE.Mesh(new THREE.Geometry(), mat);
+    scene.add(obj);
+
+    var pivot = new THREE.Object3D();
+    scene.add(pivot);
+    var manager = new THREE.LoadingManager();
+
+      // file load
+    var oStlLoader = new THREE.STLLoader();
+    oStlLoader.load('../uploads/post/<%= @post.id %>/<%= File.basename(@post.attachment.path, ".*")%>-binary.stl', function(geometry) {
+
+        var material = new THREE.MeshPhongMaterial({
+        color: 0xcccccc, ambient: 0xcccccc, specular: 0x030303,
+      });
+
+        obj = new THREE.Mesh(geometry, material);
+        obj.rotation.x = -90 * Math.PI/180; //-105 graus
+
+        var box = new THREE.Box3().setFromObject( obj );
+        console.log( box.min, box.max, box.size(),obj.rotation );
+            obj.position.y = -(box.max.y - (box.size().y/2));
+            obj.position.x = -(box.max.x - (box.size().x/2));
+            obj.position.z = -(box.max.z - (box.size().z/2));
+            //obj.position.x = box.max.x - box.size();
+            //obj.position.x = (box.min.x + (box.size().x/2));
+            //obj.position.y = obj.position.y - box.size().y/2;
+        pivot = new THREE.Object3D();
+
+        //pivot.position.set(obj.position.x, obj.position.y, obj.position.z);
+        pivot.position.set(0, 0, 0);
+        //pivot.rotation.set(obj.rotation.x, obj.rotation.y, obj.rotation.z);
+        //obj.rotation.set(0, 0, 0);
+        pivot.rotation.set(0, 0, 0);
+
+        pivot.add(obj);
+        //pivot.rotation.x = -105 * Math.PI/180;;
+
+        //var w = 640, h = 450;
+        if ((box.size().x>box.size().y)||(box.size().z>box.size().y)) {
+              if (box.size().z>box.size().y) {
+                maior = box.size().z;
+              }
+              else{
+                maior = box.size().x;
+              }
+        }else{
+            maior = box.size().y;
+        };
+
+        alpha = 2*Math.atan(maior/400);
+        console.log(alpha);
+
+        degrees = alpha * (180/Math.PI);
+        camera = new THREE.PerspectiveCamera(degrees, w / h, 1, 800);
+        //camera.position.set(0, 86.55, 150);
+        camera.position.set(0, 63.767, 300);
+        cameraAng = 12 * (Math.PI/180);
+        camera.rotation.set(-cameraAng, 0, 0);
+        controls = new THREE.OrbitControls(camera, view);
+
+        scene.add(pivot);
+    });
+
+    //pivot.rotation.z = 90;
+    function loop() {
+        requestAnimationFrame(loop);
+        pivot.rotation.y += 0.0014;
+        controls.update();
+        renderer.clear();
+        renderer.render(scene, camera);
+    };
+       loop();
+
+}, false);
+});
+</script>
+<script charset="UTF-8" type="text/javascript" src= "../assets/stl.js"></script>
+<script src="../assets/STLLoader.js"></script>
+<script>
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+
+
+
+
+<div class="w3-light-grey w3-content" style="max-width:1600px; padding-top: 45px;">
+
+<!-- Sidenav/menu -->
+
+<div class="col-md-3" id="esquerda">
+<nav class="w3-sidenav w3-collapse" style="z-index:3;width:300px; background-color:#e7e7e7;border-top-right-radius: 15px;" id="navesquerda"><br>
+
+
+
+<div class="w3-container" style="top: 10px;">
+
+    <!--
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+     -->
+
+    <div class="foto" style="border: solid #555 0px;top: 15px;border-bottom-right-radius: 10px; font-weight: 100">
+        
+    <div style="width: 40%;">
+        <%= link_to (image_tag @user.avatar.url(:medium), style: 'max-height: 100%; max-width:100%; border: 3px solid #ccc; border-radius:10px;'), profile_path(@user) %>
+    </div>
+        <br>
+    <div style="">
+    <h5 class="nome" style="">
+    <%= link_to "#{@user.name} #{@user.sobrenome}", profile_path(@user) %>   
+    
+    <div class="avaliacao" style="font-size:15px;">
+    <i class="fa fa-star" aria-hidden="true"></i>
+    <i class="fa fa-star" aria-hidden="true"></i>
+    <i class="fa fa-star" aria-hidden="true"></i>
+    <i class="fa fa-star" aria-hidden="true"></i>
+    <i class="fa fa-star" aria-hidden="true"></i>
+    </div>
+    </h5>
+    </div>
+    <p class="w3-text-grey" style="font-size:13px;"><%=@user.followers.count-1%> SEGUIDORES <%=@user.posts.count%> MODELOS</p>
+    <div style="padding-left:0px;">
+
+    
+
+        <h4 class="w3-padding-0" style="color:#555;font-size:15px; margin:3px;display: table;margin:auto;border:1px;"><%= @user.bio %></h4>
+        
+
+          <br>
+          <h5>Outros projetos de <%= @user.name%>:</h5>
+
+                          <div class="wrapper" id="outrosprojetos">
+                            <div class="scroll" id="scrolloutros">
+                                <div id="imgs">
+                                        <% @posts.each do |item| %>
+                                            <%= link_to (image_tag item.image.url(:medium),{:style=>'box-shadow: 1px 1px 10px #999; margin: 2px;   max-height: 60px;      cursor: pointer;       display:inline-block;        *display:inline;        *zoom:1;        vertical-align:top; padding: 0px;', :class =>"w3-hover-opacity"}), post_path(item) %>
+                                <% end %>
+                                </div>
+                            </div>
+                            </div>
+
+    </div>
+
+    
+    </div>
+  </div>   
+
+
+
+
+
+</nav>
+</div>
+
+
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<div class="col-md-6" style="z-index:6;">
+<div class="posts-wrapper">
+  <div class="post">
+    <div class="post-head">
+      <div class="thumb-img"></div>
+      <div class="user-name">
+      Modelo enviado por:
+        <%= link_to "#{@post.user.name} #{@post.user.sobrenome}", profile_path(@post.user.id) %>
+      </div>
+      <div class="time-ago">
+        <%= time_ago_in_words @post.created_at %>
+      </div>
+    </div>
+    <div class="image center-block">
+      <div class="img-responsive" id="view"></div>
+    </div>
+    <div class="post-bottom">
+      <%= render 'posts/likes', post: @post %>
+      <div class="caption">
+        <div class="caption-content">
+          <div class="user-name">
+            <%= link_to "#{@post.user.name} #{@post.user.sobrenome}", profile_path(@post.user.id) %>
+          </div>
+          <%= @post.caption %>
+          <div class="comments" id="comments_<%= @post.id %>">
+            <% if @post.comments.any? %>
+              <%= render @post.comments.first(4), post: @post %>
+              <% unless @post.comments.count <= 4 %>
+                <div class="paginator" id="#comments-paginator-<%= @post.id %>">
+                  <%= link_to "view all #{@post.comments.count} comments", post_comments_path(@post), remote: true, class: 'more-comments', id: "more_comments_#{@post.id}", data: {post_id: "#{@post.id}", type: "html", value: "#{@post.comments.count}"} %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comment-like-form row">
+      <div class="col-sm-1 like-button">
+        <%= render 'posts/unlike', post: @post %>
+      </div>
+      <div class="comment-form col-sm-11">
+        <%= form_for([@post, @post.comments.build], remote: true) do |f| %>
+          <%= f.text_field :content, placeholder: 'Add a comment...', class: "comment_content", id: "comment_content_#{@post.id}",data: { post_id: "#{@post.id}",value: "#{@post.comments.count}" } %>
+          <%= f.submit 'New Comment', class: 'comment-submit-button'%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+      <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc'>
+        <!--usar esse espaço como footer-->
+        <h4>Mais projetos:</h4>
+        <div class="wrapper">
+            <div class="scroll">
+              <%= render 'profiles/footer', group: @footers %>
+          </div>
+        </div>
+
+     </div>
+
+</div>
+</div>
+</div>
+
+
+<div class="col-md-3">
+
+ <div class="sidebar-nav-fixed affix">
+
+
+
+<nav class="w3-sidenav w3-collapse" style="z-index:3;width:300px;background-color:#e7e7e7;border-top-left-radius:15px;" id="navdireita"><br>
+  <div class="w3-container">
+  <!--
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    -->
+
+<h5>Escolha seu printer:</h5>
+<%= render @printers_all %>
+
+
+
+
+
+
+
+
+
+
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+
+
+
+
+
+  </div>
+   
+</nav>
+</div>
+</div>
+<style type="text/css">
+  
+  #navesquerda{
+    left:50px;
+    top: 62px;
+
+  }
+
+
+
+
+    #navdireita{
+    right:50px;
+    top:62px;
+
+  }
+
+
+
+h5{
+    font-family: "Antenna",Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    color: #666;
+    font-weight: normal;
+    font-size: 18px;
+    position: relative;
+}
+
+h4 {
+    font-family: "Antenna",Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    color: #666;
+    
+    font-weight: normal;
+    font-size: 18px;
+}
+
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+
+}
+#myInput {
+    border-box: box-sizing;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    min-width: 230px;
+    overflow: auto;
+    box-shadow: none;
+}
+
+
+.dropdown a:hover {background-color: #ddd}
+
+.show {display:block;}
+
+#outrosprojetos{
+        width: 100%;
+        height: 72px;
+        background:#EFEFEF; 
+        box-shadow: 1px 1px 10px #999; 
+        margin: auto; 
+        text-align: center; 
+        position: relative;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding-top: 5px;
+}
+    #scrolloutros { 
+        overflow-x: scroll;
+        overflow-y: hidden;
+        height: 70px;
+        white-space:nowrap;
+    } 
+
+
+.wrapper { 
+        width: 100%;
+        height: 180px;
+        background:#EFEFEF; 
+        box-shadow: 1px 1px 10px #999; 
+        margin: auto; 
+        text-align: center; 
+        position: relative;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding-top: 5px;
+    }
+
+    .scroll { 
+        overflow-x: scroll;
+        overflow-y: hidden;
+        height: 200px;
+        white-space:nowrap;
+    } 
+    
+    .scroll img { 
+        box-shadow: 5px 1px 10px #999; 
+        margin: 5px;
+        max-height: 150px;
+        cursor: pointer;
+        display:inline-block;
+        *display:inline;
+        *zoom:1;
+        vertical-align:top;
+    }
+    #imgs > *{
+        box-shadow: 1px 1px 10px #999; 
+        margin: 2px;
+        max-height: 60px;
+        cursor: pointer;
+        display:inline-block;
+        *display:inline;
+        *zoom:1;
+        vertical-align:top;
+        padding: 0px;
+
+    }
+canvas{
+  width: 100% !important;
+}
+h5 a{
+    padding: 0px !important;
+}
+
+h5 .avaliacao{
+position: absolute;
+top: 6px;
+right: 0px;
+
+}
+.nome{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #ccc;
+    border-top: 3px solid #ccc;
+    text-transform: capitalize;
+    font-weight: bold;
+    margin: 0px;
+}
+.user-name a{
+
+
+
+ 
+    text-transform: capitalize;
+    
+
+
+}
+
+.foto a{
+    padding: 0px !important;
+}
+
+  .posts-wrapper{
+
+    padding-top: 16px;
+
+  }
+
+  .post{
+    border-radius: 10px;
+    margin-bottom: 0px;
+    border-color:#e7e7e7;
+    border-width: 1px;
+  }
+
+
+
+    
+</style>
+
+
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+</script>

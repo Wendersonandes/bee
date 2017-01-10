@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+.w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
+</style>
+<!--<script type="text/javascript" src="../assets/show_profile.js"></script>-->
+
+<div class="w3-light-grey w3-content" style="max-width:1600px; padding-top: 45px">
+
+<!-- Sidenav/menu -->
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main">
+
+  <!-- Header -->
+  <div class="w3-container" id="portfolio">
+    <a href="#" onclick="w3_open()"></a>
+    <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i style='padding-top: 40px' class="fa fa-bars"></i></span>
+    <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc'>
+      <span class="w3-margin-right">Filtro:</span>
+      <button class="w3-btn" id="Todos"><i class="fa fa-photo w3-margin-right"></i>Todos</button>
+      <button class="w3-btn w3-white" id="Engenharia" bla="#{posts_path}"><i class="fa fa-print w3-margin-right"></i>Engenharia</button>
+      <button class="w3-btn w3-white" id="Decoracao"><i class="fa fa-diamond w3-margin-right"></i>Decoração</button>
+      <button class="w3-btn w3-white" id="Moda"><i class="fa fa-map-pin w3-margin-right"></i>Moda</button>
+      <button class="w3-btn w3-white" id="Outros"><i class="fa fa-map-pin w3-margin-right"></i>Outros</button>
+    </div>
+  </div>
+  
+  <div id="my-posts">
+  </div>
+
+  <!-- Pagination -->
+  <div id="infinite-scrolling">
+     <%= will_paginate @posts%>
+  </div>
+  <!-- Footer -->
+
+<!-- End page content -->
+</div>
+
+
+<script>
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</div>

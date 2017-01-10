@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<script data-turbolinks-eval="false" charset="UTF-8" type="text/javascript" src="../../assets/three.js"></script>
+<script data-turbolinks-eval="false" charset="UTF-8" type="text/javascript" src= "../../assets/OrbitControls.js"></script>
+<script data-turbolinks-eval="false" charset="UTF-8" type="text/javascript" src= "../../assets/stl.js"></script>
+<div class="posts-wrapper" style="padding-top:75px;font-weight: 300;">
+  <div class="quadradao">
+
+  <div class="post">
+    <div class="post-body">
+      <div class="image-wrap">
+        <div id="view_teste">
+        </div>
+
+        <%= simple_form_for @post, html: { multipart: true } do |f| %>
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <%= f.error_notification %>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="form-group text-center">
+              <h4>Adicione um modelo 3D (.stl):</h4>
+              <%= f.input :attachment, label: false%>
+            </div>
+            <div class="form-group text-center" id="formgroup2">
+              <%= f.input :caption, label: false, placeholder: 'Adicionar Descriçao' %>
+            </div>
+
+            <div class="form-group text-center" >
+            <h4>Adicione uma imagem do modelo:</h4>
+              <%= f.input :image, label: false, placeholder: 'Adicionar uma Imagem:'%>
+            </div>
+            <div class="form-group text-center" id="formgroup2">
+              <%= f.button :submit, class: 'btn-success btn-block' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+<style type="text/css">
+  
+
+
+#post_image {
+    padding: 0em;
+    margin: 0px;
+}
+
+
+
+h4{
+  font-weight: 600;
+}
+
+.quadradao{
+  border: 0px solid black;
+  border-radius: 15px;
+}
+
+#formgroup2{
+  width: 100% !important;
+  
+}
+.btn-success{
+    background-color: white;
+    color: black;
+    border: 3px solid #ccc;
+}
+
+#post_caption{
+  height: 80px;
+}
+
+
+canvas{
+  width: 100% !important;
+
+}
+
+</style>

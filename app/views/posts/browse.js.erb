@@ -1,0 +1,7 @@
+$('#olar').append('<%= j render 'post_dashboard', posts: @posts %>');
+<% if @posts.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @posts %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

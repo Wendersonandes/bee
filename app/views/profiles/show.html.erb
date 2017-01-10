@@ -1,0 +1,169 @@
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+.w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
+</style>
+<!--<script type="text/javascript" src="../assets/show_profile.js"></script>-->
+
+<div class="w3-light-grey w3-content" style="max-width:1600px; padding-top: 45px">
+
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
+  <div class="w3-container foto">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <div style="width:45%; max-width: 100%; max-height: 100%; border-radius:5%; overflow: hidden;" >
+      <a href=<%= profile_path(@user) %>><%= image_tag @user.avatar.url(:medium), style: 'max-height: 100%; max-width:100%' %></a>
+    </div><br>
+    <a href=<%= profile_path(@user) %>><h4 class="w3-padding-0" style="font-size:20px; margin:3px;"><b><%= @user.name %> <%= @user.sobrenome %></b></h4></a>
+    <p class="w3-text-grey" style="font-size:13px;"><%=@user.followers.count-1%> SEGUIDORES <%=@user.posts.count%> DESIGNS</p>
+    <p class="w3-text-grey" style="font-size:15px;"><%= @user.bio %></p>
+  </div>
+  <% if @user == current_user %>
+    <a href=<%= update_profile_path(@user)%> onclick="w3_close()" class="w3-padding w3-text-teal" id="edit"><i class="fa fa-edit fa-fw w3-margin-right"></i>EDITAR</a>
+  <% else %>
+    <% if current_user_is_following(current_user.id, @user.id) %>
+      <script> $(document).ready(function (){
+    $('#coco1').hide(); 
+  })</script>
+      <a class="w3-padding w3-text-teal" id="unfollow-button" data-remote="true" rel="nofollow" data-method="post" href=<%=unfollow_user_path%>>
+      <div id="coco1"><i class="fa fa-th-large fa-fw w3-margin-right"></i>SEGUIR</div>
+      <div id="coco2"><i class="fa fa-th-large fa-fw w3-margin-right"></i>SEGUINDO</div>
+      </a>
+    <% else %>
+    <script> $(document).ready(function (){
+    $('#coco2').hide(); 
+  })</script>
+      <a class="w3-padding w3-text-teal" id="follow-button" data-remote="true" rel="nofollow" data-method="post" href=<%=follow_user_path%>>
+        <div id="coco1"><i class="fa fa-th-large fa-fw w3-margin-right"></i>SEGUIR</div>
+        <div id="coco2"><i class="fa fa-th-large fa-fw w3-margin-right"></i>SEGUINDO</div>
+      </a>
+    <% end %>
+  <% end %>
+  <% if @user == current_user %>
+   <a href=<%= new_printer_path%> class="w3-padding"><i class="fa fa-print fa-fw w3-margin-right"></i>ADD IMPRESSORA 3D</a>
+   <% end %>
+  <a href="#about" onclick="w3_close()" class="w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a>
+  <a href="#contact" onclick="w3_close()" class="w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CHAT</a>
+   
+  <div class="w3-section w3-padding-top w3-large">
+    <a href="#" class="w3-hover-white w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-facebook-official"></i></a>
+    <a href="#" class="w3-hover-white w3-hover-text-red w3-show-inline-block"><i class="fa fa-pinterest-p"></i></a>
+    <a href="#" class="w3-hover-white w3-hover-text-light-blue w3-show-inline-block"><i class="fa fa-twitter"></i></a>
+    <a href="#" class="w3-hover-white w3-hover-text-grey w3-show-inline-block"><i class="fa fa-flickr"></i></a>
+    <a href="#" class="w3-hover-white w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-linkedin"></i></a>
+  </div>
+</nav>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+
+  <!-- Header -->
+  <div class="w3-container" id="portfolio">
+    <a href="#" onclick="w3_open()"><%= image_tag @user.avatar.url(:medium),class:"w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity", style: 'width:65px;' %></a>
+    <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i style='padding-top: 40px'class="fa fa-bars"></i></span>
+    <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc'>
+      <span class="w3-margin-right">Filtro:</span>
+      <button class="w3-btn" id="Projetos"><i class="fa fa-photo w3-margin-right"></i>Projetos</button>
+      <button class="w3-btn w3-white" id="Impressoras" bla="#{posts_path}"><i class="fa fa-print w3-margin-right"></i>Impressoras</button>
+      <button class="w3-btn w3-white" id="Destaques"><i class="fa fa-diamond w3-margin-right"></i>Destaques</button>
+      <button class="w3-btn w3-white" id="Avaliacoes"><i class="fa fa-map-pin w3-margin-right"></i>Avaliações</button>
+    </div>
+  </div>
+  
+  <div id="my-posts">
+    <div id="lady-gaga"><%= render 'projects', posts: @posts %></div>
+  </div>
+  <!-- Pagination -->
+  <div id="infinite-scrolling">
+     <%= will_paginate @posts%>
+  </div>
+
+  <!-- Footer -->
+    <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc;padding-left: 14px;'>
+<!--conteudo do footer-->
+      <h4>Destaques da semana:</h4>
+      <div class="wrapper">
+        <div class="scroll">
+          <%= render 'footer', group: @footers %>
+        </div>
+        </div>
+
+
+    </div>
+
+<!-- End page content -->
+</div>
+
+<script src='../assets/show_profile.js'>
+<script>
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</div>
+
+
+<style type="text/css">
+  
+.wrapper { 
+        width: 100%;
+        height: 180px;
+        background:#EFEFEF; 
+        box-shadow: 1px 1px 10px #999; 
+        margin: auto; 
+        text-align: center; 
+        position: relative;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding-top: 5px;
+    }
+
+
+    h4 {
+    font-family: "Antenna",Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    color: #666;
+    
+    font-weight: normal;
+    font-size: 18px;
+}
+    .scroll { 
+        overflow-x: scroll;
+        overflow-y: hidden;
+        height: 200px;
+        white-space:nowrap;
+    } 
+    
+    .scroll img { 
+        box-shadow: 1px 1px 10px #999; 
+        margin: 2px;
+        max-height: 150px;
+        cursor: pointer;
+        display:inline-block;
+        *display:inline;
+        *zoom:1;
+        vertical-align:top;
+    }
+    .foto a{
+    padding: 0px !important;
+}
+
+
+</style>

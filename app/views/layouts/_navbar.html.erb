@@ -1,0 +1,101 @@
+<nav class="navbar navbar-default navbar-fixed-top" style="border-bottom: 3px solid #ccc; ">
+  <div class="navbar-container" style="width:90%;">
+    <div class="navbar-header" >
+      <button class="navbar-toggle collapsed" data-target="#bs-navbar-collapse-1" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand" style="color:#ccc">
+        <%= link_to "BeePrinted", root_path %>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+
+
+      <div class="nav navbar-nav navbar-left" style="border:solid black 0px;height:0px;padding-top:7px;width:300px;">
+           
+        <div class='books-search'>
+          <%= form_tag search_path, method: :get do %>
+            <div class='form-group3'>
+            <%= text_field_tag :query, params[:query], class: 'form-control typeahead', autocomplete: "off" %>
+            
+
+            <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+            
+            <i class="fa fa-search" aria-hidden="true"></i>
+
+            <% end %>
+
+            </div>
+          <% end %>  
+        </div>
+          
+         </div>
+
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <% if user_signed_in? %>
+          <li>
+            <%= render 'notifications/notification_dropdown' %>
+          </li>
+          <li>
+            <%= link_to "Agora", browse_posts_path %>
+          </li>
+          <li>
+            <%= link_to "Postar", new_post_path %>
+          </li>
+
+          <li>
+            <%= link_to "Perfil", profile_path(current_user) %>
+          </li>
+
+
+          <li>
+            <%= link_to "Sair", destroy_user_session_path, method: :delete %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Entrar", new_user_session_path %>
+          </li>
+          <li>
+            <%= link_to "Registrar", new_user_registration_path %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+</nav>
+
+
+<style type="text/css">
+
+.form-group3{
+  width:500px !important;
+
+
+}
+.twitter-typeahead{
+  width: 300px !important;
+
+
+
+
+}
+
+.btn-primary{
+
+background-color: transparent;;
+border-color:#ccc;
+color: #ccc;
+border-width: 1px;
+height: 34px;
+bottom: 100px;
+}
+
+
+
+
+</style>

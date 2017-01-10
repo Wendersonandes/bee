@@ -1,0 +1,15 @@
+<div id='active_<%= printer.id %>'>
+    <% if printer.active == "true" %>
+        <span>
+            <%= link_to deactive_printer_path(printer), remote: true do %>
+            Desativar</span>
+            <% end %>
+        </span>
+    <% else %>
+        <span>
+            <%= link_to active_printer_path(printer), remote: true do %>
+            Ativar</span>
+            <% end %>
+        </span>
+    <% end %>
+</div>
