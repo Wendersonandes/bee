@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
-
+gem 'bootstrap-typeahead-rails'
 gem 'handlebars_assets'
-gem 'searchkick'
 gem 'rdoc'
 gem 'will_paginate', '~> 3.0.5'
 gem "cocoon"

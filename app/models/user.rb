@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_voter
-  searchkick autocomplete: ['completo']
+  scope :starts_with, -> (completo) { where("completo like ?", "#{completo}%")}
+  #searchkick autocomplete: ['completo']
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   validates :name, presence: true, length: {minimum: 2, maximum: 16}

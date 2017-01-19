@@ -4,8 +4,8 @@ class HomeController < ApplicationController
   end
 
   def search
-      @posts = Post.search(params[:query])
-      @users = User.search(params[:query])
+      #@posts = Post.search(params[:query])
+      #@users = User.search(params[:query])
   end
 
   private

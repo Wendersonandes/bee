@@ -16,7 +16,8 @@
 //= require bootstrap-sprockets
 //  require turbolinks
 //= require cocoon
-//= require typeahead.bundle.min
+//= require bootstrap-typeahead-rails
+//  require typeahead.bundle.min
 //= require posts_search
 //= require handlebars
 //= require_tree .

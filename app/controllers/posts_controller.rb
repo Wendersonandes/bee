@@ -104,13 +104,32 @@ class PostsController < ApplicationController
     render json: posts
   end
   def autocomplete
-    render json: Post.search(params[:query], autocomplete: true, limit: 10).map {|post|
-      { caption: post.caption, value: post.id, image: post.user.avatar.url(:medium), url: post_path(post.id), 
-      user: post.user.name }}
+    posts = Post.starts_with(params[:query]).map do |post|
+      {
+        caption: post.caption,
+        value: post.id,
+        image: post.user.avatar.url(:medium),
+        url: post_path(post.id)
+      }
+    end
+    render json: posts
+
+    #render json: Post.search(params[:query], autocomplete: true, limit: 10).map {|post|
+     # { caption: post.caption, value: post.id, image: post.user.avatar.url(:medium), url: post_path(post.id), 
+      #user: post.user.name }}
   end
   def autocomplete2
-    render json: User.search(params[:query], autocomplete: true, limit: 10).map {|user|
-      { completo: user.completo, value: user.id, image: user.avatar.url(:medium), url: profile_path(user.id)}}
+    users = User.starts_with(params[:query]).map do |user|
+      {
+        completo: user.completo,
+        value: user.id,
+        image: user.avatar.url(:medium),
+        url: profile_path(user.id)
+      }
+    end
+    render json: users
+    #render json: User.search(params[:query], autocomplete: true, limit: 10).map {|user|
+     # { completo: user.completo, value: user.id, image: user.avatar.url(:medium), url: profile_path(user.id)}}
   end
 
 
