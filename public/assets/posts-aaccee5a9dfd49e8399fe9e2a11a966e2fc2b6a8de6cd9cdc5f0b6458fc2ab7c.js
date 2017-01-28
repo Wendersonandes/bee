@@ -1,1 +1,0 @@
-var loadFile=function(e){var t=document.getElementById("image-preview");t.src=URL.createObjectURL(e.target.files[0])};
