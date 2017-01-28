@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20170126194639) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "colors", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -32,8 +35,8 @@ ActiveRecord::Schema.define(version: 20170126194639) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "follows", force: :cascade do |t|
     t.integer  "following_id", null: false
@@ -42,9 +45,9 @@ ActiveRecord::Schema.define(version: 20170126194639) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "follows", ["follower_id"], name: "index_follows_on_follower_id"
-  add_index "follows", ["following_id", "follower_id"], name: "index_follows_on_following_id_and_follower_id", unique: true
-  add_index "follows", ["following_id"], name: "index_follows_on_following_id"
+  add_index "follows", ["follower_id"], name: "index_follows_on_follower_id", using: :btree
+  add_index "follows", ["following_id", "follower_id"], name: "index_follows_on_following_id_and_follower_id", unique: true, using: :btree
+  add_index "follows", ["following_id"], name: "index_follows_on_following_id", using: :btree
 
   create_table "marcas", force: :cascade do |t|
     t.string   "name"
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 20170126194639) do
     t.float    "preco"
   end
 
-  add_index "materials", ["printer_id"], name: "index_materials_on_printer_id"
+  add_index "materials", ["printer_id"], name: "index_materials_on_printer_id", using: :btree
 
   create_table "mats", force: :cascade do |t|
     t.string   "name"
@@ -86,9 +89,16 @@ ActiveRecord::Schema.define(version: 20170126194639) do
     t.datetime "updated_at",                     null: false
   end
 
-  add_index "notifications", ["notified_by_id"], name: "index_notifications_on_notified_by_id"
-  add_index "notifications", ["post_id"], name: "index_notifications_on_post_id"
-  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
+  add_index "notifications", ["notified_by_id"], name: "index_notifications_on_notified_by_id", using: :btree
+  add_index "notifications", ["post_id"], name: "index_notifications_on_post_id", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
+  create_table "pedidos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "material"
+    t.string   "color"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string   "caption"
@@ -107,11 +117,11 @@ ActiveRecord::Schema.define(version: 20170126194639) do
     t.float    "volume"
   end
 
-  add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
-  add_index "posts", ["cached_votes_score"], name: "index_posts_on_cached_votes_score"
-  add_index "posts", ["cached_votes_total"], name: "index_posts_on_cached_votes_total"
-  add_index "posts", ["cached_votes_up"], name: "index_posts_on_cached_votes_up"
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+  add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down", using: :btree
+  add_index "posts", ["cached_votes_score"], name: "index_posts_on_cached_votes_score", using: :btree
+  add_index "posts", ["cached_votes_total"], name: "index_posts_on_cached_votes_total", using: :btree
+  add_index "posts", ["cached_votes_up"], name: "index_posts_on_cached_votes_up", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "posts_types", id: false, force: :cascade do |t|
     t.integer "type_id", null: false
@@ -128,7 +138,7 @@ ActiveRecord::Schema.define(version: 20170126194639) do
     t.string   "active"
   end
 
-  add_index "printers", ["user_id"], name: "index_printers_on_user_id"
+  add_index "printers", ["user_id"], name: "index_printers_on_user_id", using: :btree
 
   create_table "types", force: :cascade do |t|
     t.string   "name"
@@ -160,8 +170,8 @@ ActiveRecord::Schema.define(version: 20170126194639) do
     t.integer  "seguidores",             default: 0
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.integer  "votable_id"
@@ -175,7 +185,7 @@ ActiveRecord::Schema.define(version: 20170126194639) do
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end
