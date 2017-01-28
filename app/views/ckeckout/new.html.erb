@@ -1,0 +1,43 @@
+<br>
+<br>
+<br>
+<br>
+<script>
+jQuery(function() {
+  var colors;
+  colors = $('#anything_color').html();
+  console.log(colors);
+  return $('#anything_material').change(function() {
+    var material, options;
+    material = $('#anything_material :selected').text();
+    options = $(colors).filter("optgroup[label=" + material + "]").html();
+    console.log(options);
+    if (options) {
+      return $('#anything_color').html(options);
+    } else {
+      return $('#anything_color').empty();
+    }
+  });
+});
+</script>
+<%= form_for :anything, url: "#{checkout_path(@post.id)}" do |f| %>
+	<div class="field">
+	<%= f.label :material, "Material:" %>
+  	<%= f.collection_select :material, Printer.last.materials.order(:name), :name, :name, include_blank: true %>
+  	</div>
+  	<div class="field">
+    <%= f.label :color, "Cor:" %>
+    <%= f.grouped_collection_select :color, Printer.last.materials.order(:name),:colors, :name, :name, :name, include_blank: true %>
+  	</div>
+  	<div class="field">
+	<%= f.label :resolution, "Resoluçao:" %>
+  	<%= f.select :resolution, options_for_select(['0,1', '0,2', '0,3', '0,4'], '0,2'),{} %>
+  	</div>
+  	<div class="field">
+	<%= f.label :preench, "Preenchimento:" %>
+  	<%= f.select :preench, options_for_select(['10%', '15%', '20%', '25%','30%','35%','40%','45%','50%','55%','60%','65%','70%','75%','80%','85%','90%','95%','100%'], '15%'),{} %>
+  	</div>
+
+
+  	<%= f.submit  %>
+<% end  %>

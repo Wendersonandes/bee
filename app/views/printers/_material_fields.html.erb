@@ -3,6 +3,11 @@
     <%= f.collection_select :name, Mat.order(:name), :name, :name, include_blank: true %>
   </div>
   <div class="field">
+    <%= f.label :preco , "Preço por centímetro cúbico:"%>
+    
+    <%= f.number_field :preco, step: :any %>
+  </div>
+  <div class="field">
   <%= f.label "Cores" %><br />
   <%= f.collection_check_boxes :color_ids, Color.all, :id, :name do |b| %>
     <div class="collection-check-box">

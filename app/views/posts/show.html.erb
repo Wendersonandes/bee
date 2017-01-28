@@ -8,6 +8,28 @@
     window.addEventListener("load", function () {
     "use strict";
     
+    //--------------- IMPRIMIR -----------------------------
+    $(document).on('click', '#print', function(){
+        var urlMain = window.location.pathname;
+        urlMain = urlMain + '/new';
+        //var urlMain = '/1/projetos';
+        console.log(urlMain);
+
+        $.ajax({
+            url: urlMain,
+            cache: false,
+            success: function(html){
+              $('#print').hide();
+              $('#print').after(html);
+
+            }
+        });
+
+        //$('#print').fadeOut('fast');
+
+    });
+    //------------------------------------------------------
+
     var w = 640, h = 550;
     
     var renderer = new THREE.WebGLRenderer();
@@ -286,17 +308,15 @@ function w3_close() {
 
 
 <nav class="w3-sidenav w3-collapse" style="z-index:3;width:300px;background-color:#e7e7e7;border-top-left-radius:15px;" id="navdireita"><br>
-  <div class="w3-container">
+  <div id="printers" class="w3-container">
   <!--
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
     -->
 
-<h5>Escolha seu printer:</h5>
-<%= render @printers_all %>
 
-
+<button id="print" class="btn btn-default btn-success btn-block">Imprimir</button>
 
 
 

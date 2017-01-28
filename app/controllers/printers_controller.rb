@@ -61,6 +61,6 @@ class PrintersController < ApplicationController
 
   private
   def printer_params
-    params.require(:printer).permit(:name,:marca, :modelo, materials_attributes: [:id, :name, {color_ids:[]},:_destroy])
+    params.require(:printer).permit(:name,:marca, :modelo, materials_attributes: [:id, :name, :preco, {color_ids:[]},:_destroy])
   end
 end

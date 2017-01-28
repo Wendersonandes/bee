@@ -1,6 +1,18 @@
 window.addEventListener("load", function () {
     "use strict";
-    
+  $("#post_volume").hide();
+    //-------------------------------- VOLUME parte 1 ---------------------------------------------------------
+        function volumeOfT(p1, p2, p3){
+            var v321 = p3.x*p2.y*p1.z;
+            var v231 = p2.x*p3.y*p1.z;
+            var v312 = p3.x*p1.y*p2.z;
+            var v132 = p1.x*p3.y*p2.z;
+            var v213 = p2.x*p1.y*p3.z;
+            var v123 = p1.x*p2.y*p3.z;
+            return (-v321 + v231 + v312 - v132 - v213 + v123)/6.0;
+        }
+
+    //-------------------------------------------------------------------------------------------------------
     var w = 640, h = 550;
     
     var renderer = new THREE.WebGLRenderer();
@@ -69,6 +81,34 @@ window.addEventListener("load", function () {
             pivot.rotation.set(0, 0, 0);
 
             pivot.add(obj);
+
+        //----------------------------------- VOLUME parte2 --------------------------------------------------------
+        console.log("pqplsl");
+
+
+        var volumes = 0.0;
+        
+        for(var i = 0; i < obj.geometry.faces.length; i++){
+            console.log("blablabla");
+            var Pi = obj.geometry.faces[i].a;
+            var Qi = obj.geometry.faces[i].b;
+            var Ri = obj.geometry.faces[i].c;
+
+            var P = new THREE.Vector3(obj.geometry.vertices[Pi].x, obj.geometry.vertices[Pi].y, obj.geometry.vertices[Pi].z);
+            var Q = new THREE.Vector3(obj.geometry.vertices[Qi].x, obj.geometry.vertices[Qi].y, obj.geometry.vertices[Qi].z);
+            var R = new THREE.Vector3(obj.geometry.vertices[Ri].x, obj.geometry.vertices[Ri].y, obj.geometry.vertices[Ri].z);
+            volumes += volumeOfT(P, Q, R);
+            //console.log("pqpLSL");
+        }
+ 
+        var loadedObjectVolume = Math.abs(volumes);
+        var boundingboxVolume = box.size().x*box.size().y*box.size().z;
+
+        console.log(boundingboxVolume, loadedObjectVolume);
+
+        $("#post_volume").val(loadedObjectVolume);
+        //---------------------------------------------------------------------------------------------------
+
             if ((box.size().x>box.size().y)||(box.size().z>box.size().y)) {
                 if (box.size().z>box.size().y) {
                     maior = box.size().z;

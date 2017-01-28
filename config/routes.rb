@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'galeria/index'
-
+  post '/checkouts', to: 'ckeckout#checkouts', as: :checkouts_show
   post ':id/follow_user', to: 'relationships#follow_user', as: :follow_user
   post ':id/unfollow_user', to: 'relationships#unfollow_user', as: :unfollow_user
 
@@ -56,4 +56,6 @@ Rails.application.routes.draw do
       get 'unlike'
     end
   end
+  post 'posts/:id/checkout', to: 'ckeckout#create', as: :checkout
+  get 'posts/:id/new', to: 'ckeckout#new', as: :new_checkout
 end

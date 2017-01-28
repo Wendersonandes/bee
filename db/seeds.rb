@@ -10,6 +10,7 @@ Modelo.destroy_all
 Mat.destroy_all
 Color.destroy_all
 Type.destroy_all
+Reso.destroy_all
 
 Marca.create(name: "3D Cloner")
 Marca.create(name: "3D Factories")
@@ -42,3 +43,8 @@ Type.create(name: "Engenharia")
 Type.create(name: "Decoracao")
 Type.create(name: "Moda")
 Type.create(name: "Outros")
+
+Reso.create(name: "0,1")
+Reso.create(name: "0,2")
+Reso.create(name: "0,3")
+Reso.create(name: "0,4")

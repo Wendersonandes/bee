@@ -21,6 +21,7 @@ gem 'devise'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'jquery-turbolinks'
 gem 'carrierwave', '~> 0.9'
+gem "pagseguro-oficial", "~> 2.5.0"
 
 group :development, :test do
   gem 'byebug'

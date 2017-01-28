@@ -5,11 +5,9 @@ $(document).ready(function (){
         var urlMain = window.location.pathname;
         $('#infinite-scrolling').remove();
         $('#my-posts').empty();
-        urlMain = urlMain + '/projetos';
-          console.log(urlMain);
-          //$('#my-posts').after('<div id="infinite-scrolling"></div>');
-          //$('#infinite-scrolling').html($blabla);
-          //$('#my-posts').hide();
+          urlMain = urlMain + '/projetos';
+
+          //console.log(urlMain);
 
           $.ajax({
           url: urlMain,
@@ -21,14 +19,16 @@ $(document).ready(function (){
 
 
 
-    $(document).on('click', '.w3-white', function(){
+    $(document).on('click', '.menuNat', function(){
         var $blabla = $('#infinite-scrolling').html();
 
         $('#infinite-scrolling').remove();
         var urlMain = window.location.pathname;
         var $currentMenu = $(this).attr('id');
         $('.w3-btn').addClass('w3-white');
+        $('.w3-btn').addClass('menuNat');
         $(this).removeClass('w3-white'); //fica escuro
+        $(this).removeClass('menuNat'); 
         $('#my-posts').empty();
         $('#my-posts').append('<div class="created"></div>');
         //MENU

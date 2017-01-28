@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121090546) do
+ActiveRecord::Schema.define(version: 20170126194639) do
 
   create_table "colors", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20161121090546) do
     t.integer  "printer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float    "preco"
   end
 
   add_index "materials", ["printer_id"], name: "index_materials_on_printer_id"
@@ -103,6 +104,7 @@ ActiveRecord::Schema.define(version: 20161121090546) do
     t.integer  "cached_votes_score", default: 0
     t.integer  "cached_votes_up",    default: 0
     t.integer  "cached_votes_down",  default: 0
+    t.float    "volume"
   end
 
   add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down"
