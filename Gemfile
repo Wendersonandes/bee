@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'rails_12factor', group: :production
 gem 'bootstrap-typeahead-rails'
 gem 'handlebars_assets'
 gem 'rdoc'
