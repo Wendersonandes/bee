@@ -17,7 +17,7 @@ class CkeckoutController < ApplicationController
 		payment.items << {
 			id: post.id,
 			description: post.caption,
-			amount: 1
+			amount: preco
 		}
 		payment.extra_params << { material: params[:anything][:material] }
 		payment.extra_params << { material: params[:anything][:color] }
