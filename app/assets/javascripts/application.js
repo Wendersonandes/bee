@@ -24,5 +24,6 @@
 //= require newstl
 //= require stl
 //= require STLLoader
+//= require printers
 //= require handlebars
 //= require_tree .
