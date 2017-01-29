@@ -26,7 +26,7 @@
 //= require STLLoader
 //  require bootstrap.min
 //= require printers
-//  require show_profile
+//= require show_profile
 //  require pagination
 //= require handlebars
 //= require_tree .
