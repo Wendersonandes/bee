@@ -24,6 +24,7 @@
 //= require newstl
 //= require stl
 //= require STLLoader
+//  require bootstrap.min
 //= require printers
 //= require show_profile
 //= require handlebars
