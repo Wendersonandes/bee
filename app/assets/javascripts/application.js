@@ -21,5 +21,6 @@
 //= require posts_search
 //= require three
 //= require OrbitControls
+//= require newstl
 //= require handlebars
 //= require_tree .
