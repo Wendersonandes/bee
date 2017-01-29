@@ -19,5 +19,7 @@
 //= require bootstrap-typeahead-rails
 //  require typeahead.bundle.min
 //= require posts_search
+//= require three
+//= require OrbitControls
 //= require handlebars
 //= require_tree .
