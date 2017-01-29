@@ -25,5 +25,6 @@
 //= require stl
 //= require STLLoader
 //= require printers
+//= require show_profile
 //= require handlebars
 //= require_tree .
