@@ -22,5 +22,7 @@
 //= require three
 //= require OrbitControls
 //= require newstl
+//= require stl
+//= require STLLoader
 //= require handlebars
 //= require_tree .
