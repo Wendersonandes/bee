@@ -17,7 +17,6 @@
 //  require turbolinks
 //= require cocoon
 //= require bootstrap-typeahead-rails
-//  require typeahead.bundle.min
 //= require posts_search
 //= require three
 //= require OrbitControls
@@ -25,6 +24,8 @@
 //= require stl
 //= require STLLoader
 //  require bootstrap.min
+//= require scrollreveal.min
+//= require jquery.magnific-popup.min
 //= require printers
 //= require show_profile
 //  require pagination

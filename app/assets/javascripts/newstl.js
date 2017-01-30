@@ -16,6 +16,7 @@ window.addEventListener("load", function () {
     var w = 640, h = 550;
     
     var renderer = new THREE.WebGLRenderer();
+    if(document.getElementById("view_teste")){
     renderer.setSize(w, h);
     var view = document.getElementById("view_teste");
     view.appendChild(renderer.domElement);
@@ -164,4 +165,5 @@ window.addEventListener("load", function () {
         var file = ev.dataTransfer.files[0];
         openFile(file);
     }, false);
+}
 }, false);
