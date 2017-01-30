@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   acts_as_votable
-  scope :starts_with, -> (caption) { where("caption like ?", "#{caption}%")}
+  scope :starts_with, -> (caption) { where("lower(caption) like ?", "#{caption.downcase}%")}
   #searchkick autocomplete: ['caption']
   validates :attachment, presence: true
   mount_uploader :attachment, AttachmentUploader
