@@ -1,13 +1,14 @@
 // a barca pai
 
 $(document).ready(function (){
+  if(document.getElementById("perfil")){
     //$('#save').hide();
         var urlMain = window.location.pathname;
         $('#infinite-scrolling').remove();
         $('#my-posts').empty();
           urlMain = urlMain + '/projetos';
 
-          //console.log(urlMain);
+          console.log(urlMain);
 
           $.ajax({
           url: urlMain,
@@ -172,5 +173,5 @@ $(document).ready(function (){
           });
         };
     });
-
+  }
 });
