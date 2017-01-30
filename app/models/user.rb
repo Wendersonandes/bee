@@ -4,11 +4,23 @@ class User < ActiveRecord::Base
   #searchkick autocomplete: ['completo']
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  validates :name, presence: true, length: {minimum: 2, maximum: 16}
-  validates :sobrenome, presence: true, length: {minimum: 2, maximum: 16}
+  #validates :name, presence: true, length: {minimum: 2, maximum: 16}
+  #validates :sobrenome, presence: true, length: {minimum: 2, maximum: 16}
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.name = auth.extra.raw_info.first_name
+      user.sobrenome = auth.extra.raw_info.last_name
+      user.completo = "#{user.name} #{user.sobrenome}"
+      user.uid = auth.uid
+      user.password = Devise.friendly_token[0,20]
+      user.image = auth.info.image
+    end
+  end
 
   has_many :posts, dependent: :destroy
   has_many :printers, dependent: :destroy

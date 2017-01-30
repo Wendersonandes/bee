@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
   before_action :owned_profile, only: [:edit, :update]
 
   def show
+      puts @user.avatar.url(:medium)
       @footers = Post.all.order('cached_votes_up DESC').first(6)
        @posts = @user.posts.paginate(page: params[:page], per_page: 12).order('created_at DESC')
       respond_to do |format|

@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+
+
 gem 'rails_12factor', group: :production
 gem 'bootstrap-typeahead-rails'
 gem 'handlebars_assets'
@@ -19,6 +21,8 @@ gem 'paperclip', '~> 4.2.1'
 gem 'simple_form', '~> 3.1.0'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'jquery-turbolinks'
 gem 'carrierwave', '~> 0.9'

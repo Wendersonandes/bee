@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'notifications', to: 'notifications#index'
 
   get 'posts', to: 'posts#index', as: :posts
-
+  get "/users/auth/facebook" => "callbacks#facebook", as: :facebook
   get 'profiles/show'
   resources :posts do
     collection do
@@ -37,8 +37,7 @@ Rails.application.routes.draw do
       get :autocompletepre2
     end
   end
-  devise_for :users, :controllers => { registrations: 'registrations' }
-
+  devise_for :users, :controllers => { registrations: 'registrations', :omniauth_callbacks => "callbacks" }
   root 'home#index'
   get '/search', to: 'home#search', as: :search
 
