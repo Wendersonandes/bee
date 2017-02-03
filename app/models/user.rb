@@ -11,15 +11,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
+    user = where(email: auth.info.email).first_or_create do |user|
+      #user.email = auth.info.email
       user.name = auth.extra.raw_info.first_name
       user.sobrenome = auth.extra.raw_info.last_name
       user.completo = "#{user.name} #{user.sobrenome}"
       user.uid = auth.uid
+      user.provider = auth.provider
       user.password = Devise.friendly_token[0,20]
       user.image = auth.info.image
     end
+    Follow.where(follower_id: user.id, following_id: user.id).first_or_create
+    return user
   end
 
   has_many :posts, dependent: :destroy

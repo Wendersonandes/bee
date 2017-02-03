@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'order/new'
+
+  post 'order/create'
+
+  get 'order/index'
+
   get 'galeria/index'
   post '/checkouts', to: 'ckeckout#checkouts', as: :checkouts_show
   post ':id/follow_user', to: 'relationships#follow_user', as: :follow_user
