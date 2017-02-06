@@ -1,4 +1,5 @@
 class OrderController < ApplicationController
+  skip_before_filter :authenticate_user!, :only => :notification
   protect_from_forgery
  
   # Gerar um Token de sessão para nosso pagamento
@@ -8,7 +9,8 @@ class OrderController < ApplicationController
 
     material = Printer.last.materials[0]
 	volume = @product.volume / 1000
-	@preco = material.preco*volume
+	@preco = (material.preco*volume).round(2)
+	PagMailer.print_email(@user).deliver
   end
  
   # Enviar nosso pagamento para o Pagseguro
@@ -16,12 +18,12 @@ class OrderController < ApplicationController
     @product = Post.find(params[:product_id])
     material = Printer.last.materials[0]
 	volume = @product.volume / 1000
-	@preco = material.preco*volume
+	@preco = (material.preco*volume).round(2)
 
  
     payment = PagSeguro::CreditCardTransactionRequest.new
     payment.notification_url = "https://secret-wave-53573.herokuapp.com/notification  "
-    payment.payment_mode = "gateway"
+    payment.payment_mode = "default"
  
     # Aqui vão os itens que serão cobrados na transação, caso você tenha multiplos itens
     # em um carrinho altere aqui para incluir sua lista de itens
@@ -38,8 +40,37 @@ class OrderController < ApplicationController
     payment.sender = {
       hash: params[:sender_hash],
       name: params[:name],
-      email: params[:email]
+      email: params[:email],
+      cpf: params[:cpf],
+      phone: {
+       area_code: params[:phone_code],
+       number: params[:phone_number]
+     }
     }
+  payment.shipping = {
+  type_name: "sedex",
+  cost: 0,
+  address: {
+    street: params[:street],
+    number: params[:number],
+    complement: params[:complement],
+    district: params[:district],
+    city: params[:city],
+    state: params[:state],
+    postal_code: params[:postal_code]
+  }
+
+}
+  payment.billing_address = {
+    street: params[:street],
+    number: params[:number],
+    complement: params[:complement],
+    district: params[:district],
+    city: params[:city],
+    state: params[:state],
+    postal_code: params[:postal_code]
+
+}
  
     payment.credit_card_token = params[:card_token]
     payment.holder = {
@@ -55,10 +86,10 @@ class OrderController < ApplicationController
      }
     }
  
-    payment.installment = {
-     value: 1,
-     quantity: 1
-    }
+    #payment.installment = {
+     #value: "3,05",
+     #quantity: params[:parcelamento]
+    #}
  
     puts "=> REQUEST"
     puts PagSeguro::TransactionRequest::RequestSerializer.new(payment).to_params
@@ -107,7 +138,18 @@ class OrderController < ApplicationController
     end
  
   end
+  def notification
+    transaction = PagSeguro::Transaction.find_by_notification_code(params[:notificationCode])
+    status = ['Aguardando Pagamento', 'Em análise', 'Paga', 'Disponível', 'Em disputa', 'Devolvida', 'Cancelada']
  
+    if transaction.errors.empty?
+      order = Order.where(reference: transaction.reference).last
+      order.status = status[transaction.status.id.to_i - 1]
+      order.save
+    end
+ 
+      render nothing: true, status: 200
+  end
   def index
     @orders = Order.all
   end

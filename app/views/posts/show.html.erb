@@ -2,7 +2,7 @@
   $(document).ready(function(){
     window.addEventListener("load", function () {
     "use strict";
-    
+    var corAtual;
     //--------------- IMPRIMIR -----------------------------
     $(document).on('click', '#print', function(){
         var urlMain = window.location.pathname;
@@ -16,7 +16,6 @@
             success: function(html){
               $('#print').hide();
               $('#print').after(html);
-
             }
         });
 
@@ -64,7 +63,7 @@
     var manager = new THREE.LoadingManager();
 
       // file load
-    var oStlLoader = new THREE.STLLoader();
+    var oStlLoader = new THREE.STLLoader();  //----------------------------------------------------------------------------------------
     oStlLoader.load('../uploads/post/<%= @post.id %>/<%= File.basename(@post.attachment.path, ".*")%>-binary.stl', function(geometry) {
 
         var material = new THREE.MeshPhongMaterial({
@@ -117,11 +116,23 @@
         controls = new THREE.OrbitControls(camera, view);
 
         scene.add(pivot);
-    });
-
+    });//----------------------------------------------------------------------------------------------------------------------------
     //pivot.rotation.z = 90;
     function loop() {
         requestAnimationFrame(loop);
+
+        corAtual = $('#anything_color').val();
+        if (corAtual === "Vermelho") {
+            obj.material.color.setHex( 0xB22222 );
+        }else if (corAtual === "Azul") {
+            obj.material.color.setHex( 0x4682B4 );
+        }else if (corAtual === "Amarelo") {
+            obj.material.color.setHex( 0xFFD700 );
+        }else if (corAtual === "Verde") {
+            obj.material.color.setHex( 0x008000 );
+        };
+
+        //console.log(instaColor);
         pivot.rotation.y += 0.0014;
         controls.update();
         renderer.clear();
@@ -145,6 +156,7 @@ function w3_close() {
     document.getElementById("myOverlay").style.display = "none";
 }
 </script>
+
 
 
 

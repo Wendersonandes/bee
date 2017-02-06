@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem "figaro"
 gem 'rails_12factor', group: :production
 gem 'bootstrap-typeahead-rails'
 gem 'handlebars_assets'

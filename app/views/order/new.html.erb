@@ -4,8 +4,8 @@
    </div>
    <legend>Dados do Produto</legend>
    <p>Nome: <%= @product.caption %></p>
-   <p>Preço: $1</p>
-   <input id='price' type="hidden" value="210">
+   <p>Preço: R$<%=@preco%></p>
+   <input id='price' type="hidden" value=<%=@preco%>>
    <div id="payment_datas">
    <form class="form-horizontal" role="form" action="/order/create" method="POST">
      <div id='payment-datas'>
@@ -29,14 +29,14 @@
            <div class="col-sm-4">
              <input type="text" class="form-control" name='email' placeholder="exp: c56048717318@sandbox.pagseguro.com.br" required>
            </div>
-           *No sandbox use o email: c56048717318@sandbox.pagseguro.com.br
+           
          </div>
          <div class="form-group">
-           <label class="col-sm-3 control-label">Cpf</label>
+           <label class="col-sm-3 control-label">CPF</label>
            <div class="col-sm-2">
              <input type="text" class="form-control" name='cpf' placeholder="39813476548" required>
            </div>
-           * Não use . ou - no CPF ou trate isso :)
+           * Não use . ou - no CPF
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Telefone</label>
@@ -55,15 +55,57 @@
          </div>
        </fieldset>
        <fieldset>
+         <legend>Endereço do Comprador</legend>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Endereço</label>
+           <div class="col-sm-4">
+             <input type="text" class="form-control" name='street' placeholder="exp: SQS 215 Bloco K" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Número</label>
+           <div class="col-sm-1">
+             <input type="text" class="form-control" name='number' placeholder="999" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Complemento</label>
+           <div class="col-sm-4">
+             <input type="text" class="form-control" name='complement' placeholder="Setor Bancário">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Bairro</label>
+           <div class="col-sm-4">
+             <input type="text" class="form-control" name='district' placeholder="Asa Norte">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Cidade</label>
+           <div class="col-sm-4">
+             <input type="text" class="form-control" name='city' placeholder="Sobradinho">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Estado</label>
+           <div class="col-sm-1">
+             <input type="text" class="form-control" name='state' placeholder="DF" required>
+           </div>
+           <div class="col-sm-2">
+             <input type="text" class="form-control" name='postal_code' placeholder="CEP" required>
+           </div>
+         </div>
+       </fieldset>
+       <fieldset>
          <legend>Dados do Cartão</legend>
          <div class="form-group">
-           <label class="col-sm-3 control-label">Name on Card</label>
+           <label class="col-sm-3 control-label">Nome no Cartão</label>
            <div class="col-sm-4">
              <input type="text" class="form-control" name='card_name' id='card-name' placeholder="Card Holder's Name" required>
            </div>
          </div>
          <div class="form-group">
-           <label class="col-sm-3 control-label" for="card-number">Card Number</label>
+           <label class="col-sm-3 control-label" for="card-number">Número do Cartão</label>
            <div class="col-sm-4">
              <input type="text" class="form-control" name='card-number' id='card-number' placeholder="Debit/Credit Card Number" required>
            </div>
@@ -72,24 +114,24 @@
            </div>
          </div>
          <div class="form-group">
-           <label class="col-sm-3 control-label">Expiration Date</label>
+           <label class="col-sm-3 control-label">Validade</label>
            <div class="col-sm-9">
              <div class="row">
                <div class="col-xs-3">
                  <select class="form-control col-sm-2" name='card-month' id='card-month' required>
-                   <option>Month</option>
+                   <option>Mês</option>
                    <option value="01">Jan (01)</option>
-                   <option value="02">Feb (02)</option>
+                   <option value="02">Fev (02)</option>
                    <option value="03">Mar (03)</option>
-                   <option value="04">Apr (04)</option>
-                   <option value="05">May (05)</option>
-                   <option value="06">June (06)</option>
-                   <option value="07">July (07)</option>
-                   <option value="08">Aug (08)</option>
-                   <option value="09">Sep (09)</option>
-                   <option value="10">Oct (10)</option>
+                   <option value="04">Abr (04)</option>
+                   <option value="05">Mai (05)</option>
+                   <option value="06">Jun (06)</option>
+                   <option value="07">Jul (07)</option>
+                   <option value="08">Ago (08)</option>
+                   <option value="09">Set (09)</option>
+                   <option value="10">Out (10)</option>
                    <option value="11">Nov (11)</option>
-                   <option value="12">Dec (12)</option>
+                   <option value="12">Dez (12)</option>
                  </select>
                </div>
                <div class="col-xs-3">
@@ -122,9 +164,9 @@
          </div>
          <div class="form-group" id="card-options-box" style="display: none">
            <hr />
-           <label class="col-sm-3 control-label">Payment Options (parcelamentos)</label>
+           <label class="col-sm-3 control-label">Opções de Parcelamento</label>
            <div class="col-sm-3">
-             <select class="form-control col-sm-2" id="card-options">
+             <select class="form-control col-sm-2" id="card-options" name='parcelamento'>
              </select>
            </div>
            <hr />
