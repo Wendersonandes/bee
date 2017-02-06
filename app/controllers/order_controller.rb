@@ -10,7 +10,7 @@ class OrderController < ApplicationController
     material = Printer.last.materials[0]
 	volume = @product.volume / 1000
 	@preco = (material.preco*volume).round(2)
-	PagMailer.print_email(User.first).deliver
+	PagMailer.print_email(User.last).deliver
   end
  
   # Enviar nosso pagamento para o Pagseguro
