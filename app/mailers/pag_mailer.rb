@@ -5,3 +5,4 @@ class PagMailer < ApplicationMailer
 		mail(to: @user.email, subject: "Nova Impressão")
 	end
 end
+ 
