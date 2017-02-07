@@ -8,7 +8,7 @@
     <h5>
       Por favor imprima o modelo que está nesse link:
     </h5>
-      <%= link_to 'Clique aqui para baixar o arquivo .stl', "beeprinted.herokuapp.com/uploads/post/<%= @post.id %>/<%= File.basename(@post.attachment.path, ".*")%>-binary.stl" %>
+      <%= link_to 'Clique aqui para baixar o arquivo .stl', "beeprinted.herokuapp.com/uploads/post/#{@post.id}/#{File.basename(@post.attachment.path, '.*')}-binary.stl" %>
     <h5>Imprima com as seguintes especificações:</h5>
       <p>Material: <%= @order.material %></p>
       <p>Cor: <%= @order.color %></p>
