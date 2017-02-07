@@ -1,43 +1,50 @@
 class OrderController < ApplicationController
   skip_before_filter :authenticate_user!, :only => :notification
-  protect_from_forgery
- 
+  #protect_from_forgery with: :exception
+ skip_before_action :verify_authenticity_token
+
   # Gerar um Token de sessão para nosso pagamento
   def new
+    @printer = Printer.last
     @product = Post.find(params[:product_id])
+    @color = params[:color]
+    @material = @printer.materials.find_by_id(params[:material])
+    @preench = params[:preench]
+    @resolution = params[:resolution]
+
     @session_id = (PagSeguro::Session.create).id
 
-    material = Printer.last.materials[0]
-	volume = @product.volume / 1000
-	@preco = (material.preco*volume).round(2)
-	PagMailer.print_email(User.last).deliver
+	  volume = @product.volume / 1000
+	  @preco = (@material.preco*volume).round(2)
+	  #PagMailer.print_email(current_user).deliver
   end
  
   # Enviar nosso pagamento para o Pagseguro
   def create
+    @printer = Printer.last
     @product = Post.find(params[:product_id])
-    material = Printer.last.materials[0]
+    @material = @printer.materials.find_by_id(params[:material])
 	volume = @product.volume / 1000
-	@preco = (material.preco*volume).round(2)
+	@preco = (@material.preco*volume).round(2)
 
  
-    payment = PagSeguro::CreditCardTransactionRequest.new
-    payment.notification_url = "https://secret-wave-53573.herokuapp.com/notification  "
-    payment.payment_mode = "default"
+    @payment = PagSeguro::CreditCardTransactionRequest.new
+    @payment.notification_url = "https://beeprinted.herokuapp.com/order/notification"
+    @payment.payment_mode = "default"
  
     # Aqui vão os itens que serão cobrados na transação, caso você tenha multiplos itens
     # em um carrinho altere aqui para incluir sua lista de itens
-    payment.items << {
+    @payment.items << {
       id: @product.id,
       description: @product.caption,
-      amount: 1,
+      amount: @preco,
       weight: 0
     }
  
     # Criando uma referencia para a nossa ORDER
     reference = "REF_#{(0...8).map { (65 + rand(26)).chr }.join}_#{@product.id}"
-    payment.reference = reference
-    payment.sender = {
+    @payment.reference = reference
+    @payment.sender = {
       hash: params[:sender_hash],
       name: params[:name],
       email: params[:email],
@@ -47,7 +54,7 @@ class OrderController < ApplicationController
        number: params[:phone_number]
      }
     }
-  payment.shipping = {
+  @payment.shipping = {
   type_name: "sedex",
   cost: 0,
   address: {
@@ -61,7 +68,7 @@ class OrderController < ApplicationController
   }
 
 }
-  payment.billing_address = {
+  @payment.billing_address = {
     street: params[:street],
     number: params[:number],
     complement: params[:complement],
@@ -72,8 +79,8 @@ class OrderController < ApplicationController
 
 }
  
-    payment.credit_card_token = params[:card_token]
-    payment.holder = {
+    @payment.credit_card_token = params[:card_token]
+    @payment.holder = {
      name: params[:card_name],
      birth_date: params[:birthday],
      document: {
@@ -86,43 +93,60 @@ class OrderController < ApplicationController
      }
     }
  
-    #payment.installment = {
-     #value: "3,05",
-     #quantity: params[:parcelamento]
-    #}
+    @payment.installment = {
+     value: @preco,
+     quantity: params[:parcelamento]
+    }
  
     puts "=> REQUEST"
-    puts PagSeguro::TransactionRequest::RequestSerializer.new(payment).to_params
+    puts PagSeguro::TransactionRequest::RequestSerializer.new(@payment).to_params
     puts
  
-    payment.create
+    @payment.create
  
     # Cria uma Order para registro das transações
-    Order.create(product_id: @product.id, buyer_name: params[:name], reference: reference, status: 'pending')
- 
-    if payment.errors.any?
+    @order = @product.orders.build(buyer_name: params[:name], reference: reference, status: 'pending', 
+      color: params[:color], 
+      material: @material.name, 
+      resolution: params[:resolution], 
+      preench: params[:preench], 
+      price: @preco,
+      street: params[:street],
+      number: params[:number],
+      complement: params[:complement],
+      district: params[:district],
+      city: params[:city],
+      state: params[:state],
+      postal_code: params[:postal_code]
+
+    )
+    @order.user_id = current_user.id
+    @order.printer_id = @printer.id
+    @order.save
+    if @payment.errors.any?
      puts "=> ERRORS"
-     puts payment.errors.join("\n")
-     render plain: "Erro No Pagamento #{payment.errors.join("\n")}"
+     puts @payment.errors.join("\n")
+     #render plain: "Erro No Pagamento #{payment.errors.join("\n")}"
+     render 'order/error'
     else
      puts "=> Transaction"
-     puts "  code: #{payment.code}"
-     puts "  reference: #{payment.reference}"
-     puts "  type: #{payment.type_id}"
-     puts "  payment link: #{payment.payment_link}"
-     puts "  status: #{payment.status}"
-     puts "  payment method type: #{payment.payment_method}"
-     puts "  created at: #{payment.created_at}"
-     puts "  updated at: #{payment.updated_at}"
-     puts "  gross amount: #{payment.gross_amount.to_f}"
-     puts "  discount amount: #{payment.discount_amount.to_f}"
-     puts "  net amount: #{payment.net_amount.to_f}"
-     puts "  extra amount: #{payment.extra_amount.to_f}"
-     puts "  installment count: #{payment.installment_count}"
+     puts "  code: #{@payment.code}"
+     puts "  reference: #{@payment.reference}"
+     puts "  type: #{@payment.type_id}"
+     puts "  payment link: #{@payment.payment_link}"
+     puts "  status: #{@payment.status}"
+     puts "  payment method type: #{@payment.payment_method}"
+     puts "  created at: #{@payment.created_at}"
+     puts "  updated at: #{@payment.updated_at}"
+     puts "  gross amount: #{@payment.gross_amount.to_f}"
+     puts "  discount amount: #{@payment.discount_amount.to_f}"
+     puts "  net amount: #{@payment.net_amount.to_f}"
+     puts "  extra amount: #{@payment.extra_amount.to_f}"
+     puts "  installment count: #{@payment.installment_count}"
  
      puts "    => Items"
-     puts "      items count: #{payment.items.size}"
-     payment.items.each do |item|
+     puts "      items count: #{@payment.items.size}"
+     @payment.items.each do |item|
        puts "      item id: #{item.id}"
        puts "      description: #{item.description}"
        puts "      quantity: #{item.quantity}"
@@ -130,11 +154,12 @@ class OrderController < ApplicationController
      end
  
      puts "    => Sender"
-     puts "      name: #{payment.sender.name}"
-     puts "      email: #{payment.sender.email}"
-     puts "      phone: (#{payment.sender.phone.area_code}) #{payment.sender.phone.number}"
-     puts "      document: #{payment.sender.document}: #{payment.sender.document}"
-     render plain: "Sucesso, seu pagamento será processado :)"
+     puts "      name: #{@payment.sender.name}"
+     puts "      email: #{@payment.sender.email}"
+     puts "      phone: (#{@payment.sender.phone.area_code}) #{@payment.sender.phone.number}"
+     puts "      document: #{@payment.sender.document}: #{@payment.sender.document}"
+     #render plain: "Sucesso, seu pagamento será processado :)"
+     render 'order/sucesso'
     end
  
   end
@@ -146,6 +171,9 @@ class OrderController < ApplicationController
       order = Order.where(reference: transaction.reference).last
       order.status = status[transaction.status.id.to_i - 1]
       order.save
+      if transaction.status.id.to_i == 3
+        PagMailer.print_email(order).deliver
+      end
     end
  
       render nothing: true, status: 200

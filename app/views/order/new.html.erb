@@ -14,6 +14,10 @@
          <input type="hidden" name="card_token" id="card_token" />
          <input type="hidden" name="sender_hash" id="sender_hash" />
          <input type="hidden" name="session_id" id="session_id" value="<%= @session_id %>" />
+         <input type="hidden" name="color" value="<%= @color %>" />
+         <input type="hidden" name="material" value="<%= @material.id %>" />
+         <input type="hidden" name="preench" value="<%= @preench %>" />
+         <input type="hidden" name="resolution" value="<%= @resolution %>" />
          <%= csrf_meta_tag %>
        </div>
        <fieldset>

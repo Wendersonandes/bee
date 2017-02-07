@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'galeria/index'
   post '/checkouts', to: 'ckeckout#checkouts', as: :checkouts_show
+  post '/order/notification', to: 'order#notification', as: :notification_order
   post ':id/follow_user', to: 'relationships#follow_user', as: :follow_user
   post ':id/unfollow_user', to: 'relationships#unfollow_user', as: :unfollow_user
 

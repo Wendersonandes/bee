@@ -23,7 +23,7 @@ jQuery(function() {
 <%= form_for :anything, url: "#{checkout_path(@post.id)}" do |f| %>
 	<div class="field">
 	<%= f.label :material, "Material:" %>
-  	<%= f.collection_select :material, Printer.last.materials.order(:name), :name, :name, include_blank: true %>
+  	<%= f.collection_select :material, Printer.last.materials.order(:name), :id, :name, include_blank: true %>
   	</div>
   	<div class="field">
     <%= f.label :color, "Cor:" %>
@@ -37,7 +37,6 @@ jQuery(function() {
 	<%= f.label :preench, "Preenchimento:" %>
   	<%= f.select :preench, options_for_select(['10%', '15%', '20%', '25%','30%','35%','40%','45%','50%','55%','60%','65%','70%','75%','80%','85%','90%','95%','100%'], '15%'),{} %>
   	</div>
-<%= link_to "AQUIII", order_new_path(product_id: @post.id) %>
 
   	<%= f.submit  %>
 <% end  %>

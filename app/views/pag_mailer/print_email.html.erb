@@ -4,9 +4,23 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @user.name %></h1>
+    <h1>Olá <%= @user.name %></h1>
     <p>
-      Sample mail sent using smtp.
+      Por favor imprima o modelo que está nesse link:
+      <%= link_to 'Clique aqui para baixar o arquivo .stl', @order.post.attachment.url %>
+      Imprima com as seguintes especificações:
+      Material: <%= @order.material %>
+      Cor: <%= @order.color %>
+      Resolution: <%= @order.resolution %>
+      Preenchimento: <%= @order.preench %>
+
+      Envie para:
+      <%= @order.buyer_name %>
+      <%= @order.street %> <%= @order.number %>
+      <%= @order.complement %>
+      <%= @order.district %>
+      <%= @order.city %>
+      <%= @order.state %> <%= @order.postal_code %>
     </p>
   </body>
 </html>
