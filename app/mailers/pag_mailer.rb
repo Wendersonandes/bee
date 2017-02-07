@@ -3,6 +3,7 @@ class PagMailer < ApplicationMailer
 	def print_email(order)
 		@order = order
 		@user = order.user
+		@post = order.post
 		mail(to: @order.printer.user.email, subject: "Nova Impressão")
 	end
 end
