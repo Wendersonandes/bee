@@ -123,6 +123,7 @@ class OrderController < ApplicationController
     @order.user_id = current_user.id
     @order.printer_id = @printer.id
     @order.save
+    PagMailer.print_email(@order).deliver
     if @payment.errors.any?
      puts "=> ERRORS"
      puts @payment.errors.join("\n")
