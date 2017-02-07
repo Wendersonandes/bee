@@ -4,23 +4,23 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Olá <%= @user.name %></h1>
-    <p>
+    <h3>Olá <%= @user.name %></h3>
+    <h5>
       Por favor imprima o modelo que está nesse link:
-      <%= link_to 'Clique aqui para baixar o arquivo .stl', @order.post.attachment.url %>
-      Imprima com as seguintes especificações:
-      Material: <%= @order.material %>
-      Cor: <%= @order.color %>
-      Resolution: <%= @order.resolution %>
-      Preenchimento: <%= @order.preench %>
+    </h5>
+      <%= link_to 'Clique aqui para baixar o arquivo .stl', "beeprinted.herokuapp.com#{@order.post.attachment.url}" %>
+    <h5>Imprima com as seguintes especificações:</h5>
+      <p>Material: <%= @order.material %></p>
+      <p>Cor: <%= @order.color %></p>
+      <p>Resolution: <%= @order.resolution %></p>
+      <p>Preenchimento: <%= @order.preench %></p>
 
-      Envie para:
-      <%= @order.buyer_name %>
-      <%= @order.street %> <%= @order.number %>
-      <%= @order.complement %>
-      <%= @order.district %>
-      <%= @order.city %>
-      <%= @order.state %> <%= @order.postal_code %>
-    </p>
+      <h5>Envie para:</h5>
+      <p><%= @order.buyer_name %></p>
+      <p><%= @order.street %> <%= @order.number %></p>
+      <p><%= @order.complement %></p>
+      <p><%= @order.district %></p>
+      <p><%= @order.city %></p>
+      <p><%= @order.state %> <%= @order.postal_code %></p>
   </body>
 </html>
