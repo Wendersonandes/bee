@@ -6,17 +6,84 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <!--<script type="text/javascript" src="../assets/show_profile.js"></script>-->
 <div id="perfil"></div>
 <div class="w3-light-grey w3-content" style="max-width:1600px; padding-top: 45px">
-
+<% flash.each do |key, value| %>
+  <% alert_class = case key
+                   when :notice then "success"
+                   when :alert then "danger"
+                   else key
+                   end %>
+  <%= content_tag :div, class: "text-center alert alert-#{alert_class}" do %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= value %>
+  <% end %>
+<% end %>
 <!-- Sidenav/menu -->
 <nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
   <div class="w3-container foto">
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <div style="width:45%; max-width: 100%; max-height: 100%; border-radius:5%; overflow: hidden;" >
-      <a href=<%= profile_path(@user) %>><%= image_tag @user.avatar.url(:medium), style: 'max-height: 100%; max-width:100%' %></a>
-    </div><br>
-    <a href=<%= profile_path(@user) %>><h4 class="w3-padding-0" style="font-size:20px; margin:3px;"><b><%= @user.name %> <%= @user.sobrenome %></b></h4></a>
+      <div class="w3-card-2 w3-round w3-white">
+        <div class="w3-container">
+        <%= form_for @user, url: "#{update_profile_path(@user.id)}" do |f| %>
+         <h4 class="w3-center"><%=@user.completo%></h4>
+
+
+         <p class="w3-center">
+
+        <%= link_to (image_tag @user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(current_user) %>
+
+         </p>
+
+         <hr>
+         <p>
+         <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
+         <%= f.text_field :prof, placeholder: 'Adicionar Profissao', class: 'edit_form w3-border-0'%>
+</p>
+         <p>
+         <i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>
+         <%= f.text_field :city, placeholder: 'Adicionar Cidade', class: 'edit_form w3-border-0'%>
+</p>
+         <p>
+         <i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>
+         <%= f.text_field :niver, placeholder: 'Data de Aniversário', class: 'edit_form w3-border-0'%>
+</p>
+        
+        <div id='submit' style="display: none"><%= f.submit %></div>
+        <% end %>
+        </div>
+      </div>
+
+    
+
+
+      <br>
+      
+      <!-- Accordion -->
+      <div class="w3-card-2 w3-round">
+        <div class="w3-accordion w3-white">
+          <a href=''><button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.followers.count-1%> Seguidores</button></a>
+          <a href=''><button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.following.count-1%> Seguindo</button></a>
+          <a href=<%=new_printer_path%>><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-print fa-fw w3-margin-right"></i> Adicionar impressora</button></a>
+        </div>      
+      </div>
+      <br>
+
+      <div class="w3-card-2 w3-round w3-white w3-hide-small">
+        <div class="w3-container">
+          <p>Descricao</p>
+        <%= form_for @user, url: "#{update_profile_path(@user.id)}" do |f| %>
+          <p class="w3-text-grey" style="font-size:15px;"><%= f.text_field :bio, placeholder: 'Descriçao', class: 'edit_form2 w3-border-0'%></p>
+          <div id='submit2' style="display: none"><%= f.submit %></div>
+          <% end %>
+        </div>
+      </div>
+      <br>
+
+
+
+
+<!--
     <p class="w3-text-grey" style="font-size:13px;"><%=@user.followers.count-1%> SEGUIDORES <%=@user.posts.count%> DESIGNS</p>
     <p class="w3-text-grey" style="font-size:15px;"><%= @user.bio %></p>
   </div>
@@ -53,7 +120,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <a href="#" class="w3-hover-white w3-hover-text-light-blue w3-show-inline-block"><i class="fa fa-twitter"></i></a>
     <a href="#" class="w3-hover-white w3-hover-text-grey w3-show-inline-block"><i class="fa fa-flickr"></i></a>
     <a href="#" class="w3-hover-white w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-linkedin"></i></a>
-  </div>
+  </div> -->
+
+
+
 </nav>
 
 <!-- Overlay effect when opening sidenav on small screens -->
@@ -164,3 +234,14 @@ function w3_close() {
 
 
 </style>
+<script>
+$(".edit_form").click(function() {
+  console.log("blaaaaaa");
+  $("#submit").show();
+});
+$(".edit_form2").click(function() {
+  console.log("blaaaaaa");
+  $("#submit2").show();
+});
+
+</script>

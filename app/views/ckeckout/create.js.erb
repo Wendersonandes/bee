@@ -1,0 +1,5 @@
+$("#quant_order").html("<%= current_user.carrinhos.find_by(status: 'criado').orders.count%>");
+$("#print").show();
+$("#print").html("Imprimir Outro");
+$("#new_order").hide();
+$("#alerta_adicionar").html("<div class='text-center alert alert-success'>Item Adicionado ao Carrinho!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");

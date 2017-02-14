@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  get 'order/new'
+  get 'order/new', to: 'order#new', as: :new_order
 
-  post 'order/create'
-
-  get 'order/index'
-
+  resources :order
   get 'galeria/index'
+  get '/learn', to: 'learn#index', as: :learn
   post '/checkouts', to: 'ckeckout#checkouts', as: :checkouts_show
   post '/order/notification', to: 'order#notification', as: :notification_order
   post ':id/follow_user', to: 'relationships#follow_user', as: :follow_user
@@ -33,6 +31,7 @@ Rails.application.routes.draw do
                                         as: :link_through
   get 'notifications', to: 'notifications#index'
 
+  post '/carrinho/create', to: 'carrinho#create', as: :create_carrinho
   get 'posts', to: 'posts#index', as: :posts
   get "/users/auth/facebook" => "callbacks#facebook", as: :facebook
   get 'profiles/show'

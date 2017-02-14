@@ -1,0 +1,7 @@
+$("#order_<%=@order.id %>").hide();
+$("#preco_total").html("R$<%=@preco%>");
+$("#price").val("<%=@preco%>");
+if ("<%=@preco%>" == '0'){
+	$("#se_forzero").hide();
+}
+$("#quant_order").html("<%= current_user.carrinhos.find_by(status: 'criado').orders.count%>");

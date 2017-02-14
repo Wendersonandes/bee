@@ -40,8 +40,21 @@
           <li>
             <%= render 'notifications/notification_dropdown' %>
           </li>
+          <% if current_user.carrinhos.find_by(status: 'criado') %>
+          	<li>
+            	<a href=<%=new_order_path(carrinho_id: current_user.carrinhos.find_by(status: 'criado').id)%>>
+                <bla id="quant_order">
+                  <%= current_user.carrinhos.find_by(status: 'criado').orders.count%>
+                </bla>
+                <span class='glyphicon glyphicon-shopping-cart'></span>
+              </a>
+          	</li>
+          <%end%>
           <li>
             <%= link_to "Agora", browse_posts_path %>
+          </li>
+          <li>
+            <%= link_to "Learn", learn_path %>
           </li>
           <li>
             <%= link_to "Postar", new_post_path %>
@@ -66,9 +79,7 @@
       </ul>
     </div>
   </div>
-
 </nav>
-
 
 <style type="text/css">
 

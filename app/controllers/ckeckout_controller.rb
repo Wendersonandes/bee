@@ -2,19 +2,41 @@ class CkeckoutController < ApplicationController
 	skip_before_filter :verify_authenticity_token, only: :checkouts
 	layout false
 	def new
-		@post = Post.find(params[:id])
+		if current_user.carrinhos.where(:status => 'criado').any?
+      		carrinho = current_user.carrinhos.find_by(:status => 'criado')
+    	else
+     		carrinho = current_user.carrinhos.build(status: 'criado')
+   		end
+   		@post = Post.find(params[:id])
+   		@order = carrinho.orders.build
 	end
 	def create
+		if current_user.carrinhos.where(:status => 'criado').any?
+      		carrinho = current_user.carrinhos.find_by(:status => 'criado')
+    	else
+     		carrinho = current_user.carrinhos.build(status: 'criado')
+   		end
+   		@order = carrinho.orders.build(order_params)
+
 		post = Post.find(params[:id])
-		material = params[:anything][:material]
-		color = params[:anything][:color]
-		resolution = params[:anything][:resolution]
-		preench = params[:anything][:preench]
-		redirect_to order_new_path(product_id: post.id, material: material, color: color, resolution: resolution, preench: preench)
-    	#payment.extra_params << { material: params[:material] }
-    	#payment.extra_params << { cor: params[:cor] }
-    	#payment.extra_params << { preenchimento: params[:preenchimento] }
-    	#payment.extra_params << { shell: params[:schell] 
+		material = Printer.last.materials.find_by(:name => @order.material)
+		volume = post.volume / 1000
+	  	preco = (material.preco*volume).round(2)
+
+	  	@order.price = preco
+	  	@order.post_id = post.id
+	  	@order.user_id = current_user.id
+
+	  	if @order.save
+	  		if params[:apenas_adicionar]
+	  			respond_to do |format|
+        			format.html {redirect_to new_order_path(carrinho_id: carrinho.id)}
+        			format.js
+        		end
+        	else
+        		redirect_to new_order_path(carrinho_id: carrinho.id)
+			end
+		end 
 	end
 	def checkouts
 		transaction = PagSeguro::Transaction.find_by_notification_code(params[:notificationCode])
@@ -25,5 +47,8 @@ class CkeckoutController < ApplicationController
 			puts "DATA: #{transaction.payment_method.type}"
 		end
 	end
-
+private
+def order_params
+    params.require(:order).permit(:color,:material,:resolution,:preench,:price)
+  end
 end

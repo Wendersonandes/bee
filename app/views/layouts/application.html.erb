@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -14,9 +15,5 @@
 </html>
 <body>
   <%= render 'layouts/navbar' %>
-  <% flash.each do |name, msg| %>
-    <div class="container"></div>
-    <%= content_tag :div, msg, class: [:alert, alert_for(name)] %>
-  <% end %>
   <%= yield %>
 </body>

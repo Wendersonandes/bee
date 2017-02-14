@@ -6,26 +6,20 @@ class OrderController < ApplicationController
   # Gerar um Token de sessão para nosso pagamento
   def new
     @printer = Printer.last
-    @product = Post.find(params[:product_id])
-    @color = params[:color]
-    @material = @printer.materials.find_by_id(params[:material])
-    @preench = params[:preench]
-    @resolution = params[:resolution]
+    @carrinho = Carrinho.find(params[:carrinho_id])
 
     @session_id = (PagSeguro::Session.create).id
-
-	  volume = @product.volume / 1000
-	  @preco = (@material.preco*volume).round(2)
+    @preco = 0
+    @carrinho.orders.each do |order|
+      @preco = @preco + order.price
+    end
+    @preco = @preco.round(2)
 	  #PagMailer.print_email(current_user).deliver
   end
  
   # Enviar nosso pagamento para o Pagseguro
   def create
-    @printer = Printer.last
-    @product = Post.find(params[:product_id])
-    @material = @printer.materials.find_by_id(params[:material])
-	volume = @product.volume / 1000
-	@preco = (@material.preco*volume).round(2)
+    @carrinho = Carrinho.find(params[:carrinho_id])
 
  
     @payment = PagSeguro::CreditCardTransactionRequest.new
@@ -34,15 +28,19 @@ class OrderController < ApplicationController
  
     # Aqui vão os itens que serão cobrados na transação, caso você tenha multiplos itens
     # em um carrinho altere aqui para incluir sua lista de itens
-    @payment.items << {
-      id: @product.id,
-      description: @product.caption,
-      amount: @preco,
-      weight: 0
-    }
+    @preco = 0
+    @carrinho.orders.each do |order|
+      @preco = @preco + order.price
+      @payment.items << {
+        id: order.id,
+        description: order.post.caption,
+        amount: order.price,
+        weight: 0
+      }
+    end
  
     # Criando uma referencia para a nossa ORDER
-    reference = "REF_#{(0...8).map { (65 + rand(26)).chr }.join}_#{@product.id}"
+    reference = "REF_#{(0...8).map { (65 + rand(26)).chr }.join}_#{@carrinho.id}"
     @payment.reference = reference
     @payment.sender = {
       hash: params[:sender_hash],
@@ -105,25 +103,21 @@ class OrderController < ApplicationController
     @payment.create
  
     # Cria uma Order para registro das transações
-    @order = @product.orders.build(buyer_name: params[:name], reference: reference, status: 'pending', 
-      color: params[:color], 
-      material: @material.name, 
-      resolution: params[:resolution], 
-      preench: params[:preench], 
-      price: @preco,
-      street: params[:street],
-      number: params[:number],
-      complement: params[:complement],
-      district: params[:district],
-      city: params[:city],
-      state: params[:state],
-      postal_code: params[:postal_code]
-
+    @carrinho = @carrinho.update_attributes(:buyer_name => params[:name],
+      :email => params[:email],
+      :cpf => params[:cpf],
+      :reference => reference,
+      :status => 'pending', 
+      :price => @preco,
+      :street => params[:street],
+      :number => params[:number],
+      :complement => params[:complement],
+      :district => params[:district],
+      :city => params[:city],
+      :state => params[:state],
+      :postal_code => params[:postal_code]
     )
-    @order.user_id = current_user.id
-    @order.printer_id = @printer.id
-    @order.save
-    PagMailer.print_email(@order).deliver
+    #PagMailer.print_email(@order).deliver
     if @payment.errors.any?
      puts "=> ERRORS"
      puts @payment.errors.join("\n")
@@ -164,14 +158,28 @@ class OrderController < ApplicationController
     end
  
   end
+  def destroy
+    @order = Order.find(params[:id])
+    if @order.user.id == current_user.id
+      @order.delete
+      @preco = 0
+      @order.carrinho.orders.each do |order|
+        @preco = @preco + order.price
+      end
+      respond_to do |format|
+        format.html {redirect_to carrinho_path(@order.carrinho.id)}
+        format.js
+      end
+    end
+  end
   def notification
     transaction = PagSeguro::Transaction.find_by_notification_code(params[:notificationCode])
     status = ['Aguardando Pagamento', 'Em análise', 'Paga', 'Disponível', 'Em disputa', 'Devolvida', 'Cancelada']
  
     if transaction.errors.empty?
-      order = Order.where(reference: transaction.reference).last
-      order.status = status[transaction.status.id.to_i - 1]
-      order.save
+      carrinho = Carrinho.where(reference: transaction.reference).last
+      carrinho.status = status[transaction.status.id.to_i - 1]
+      carrinho.save
       if transaction.status.id.to_i == 3
         PagMailer.print_email(order).deliver
       end
@@ -180,6 +188,6 @@ class OrderController < ApplicationController
       render nothing: true, status: 200
   end
   def index
-    @orders = Order.all
+    @carrinhos = Carrinho.all
   end
 end

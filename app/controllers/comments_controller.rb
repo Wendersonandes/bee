@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       create_notification @post, @comment
+      create_notification_outros @post, @comment
       respond_to do |format|
         format.html { redirect_to root_path }
         format.js
@@ -45,9 +46,20 @@ class CommentsController < ApplicationController
                         notified_by_id: current_user.id,
                         post_id: post.id,
                         identifier: comment.id,
-                        notice_type: 'comment')
+                        notice_type: "#{current_user.completo} comentou no seu Post")
   end
-
+  def create_notification_outros(post, comment)
+  	users = User.joins("INNER JOIN comments ON Users.id = comments.user_id").distinct.where("comments.post_id" => post.id)
+  	users.each do |user|
+  		return if user.id == current_user.id
+  		return if user.id == post.user.id
+    	Notification.create(user_id: user.id,
+                        notified_by_id: current_user.id,
+                        post_id: post.id,
+                        identifier: comment.id,
+                        notice_type: "#{current_user.completo} também comentou no Post")
+    end
+  end
   def comment_params
     params.require(:comment).permit(:content)
   end

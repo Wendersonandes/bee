@@ -1,29 +1,25 @@
-<br>
-<br>
-<br>
-<br>
 <script>
 jQuery(function() {
   var colors;
-  colors = $('#anything_color').html();
+  colors = $('#order_color').html();
   console.log(colors);
-  return $('#anything_material').change(function() {
+  return $('#order_material').change(function() {
     var material, options;
-    material = $('#anything_material :selected').text();
+    material = $('#order_material :selected').text();
     options = $(colors).filter("optgroup[label=" + material + "]").html();
     console.log(options);
     if (options) {
-      return $('#anything_color').html(options);
+      return $('#order_color').html(options);
     } else {
-      return $('#anything_color').empty();
+      return $('#order_color').empty();
     }
   });
 });
 </script>
-<%= form_for :anything, url: "#{checkout_path(@post.id)}" do |f| %>
+<%= form_for @order, url: "#{checkout_path(@post.id)}" do |f| %>
 	<div class="field">
 	<%= f.label :material, "Material:" %>
-  	<%= f.collection_select :material, Printer.last.materials.order(:name), :id, :name, include_blank: true %>
+  	<%= f.collection_select :material, Printer.last.materials.order(:name), :name, :name, include_blank: true %>
   	</div>
   	<div class="field">
     <%= f.label :color, "Cor:" %>
@@ -38,5 +34,12 @@ jQuery(function() {
   	<%= f.select :preench, options_for_select(['10%', '15%', '20%', '25%','30%','35%','40%','45%','50%','55%','60%','65%','70%','75%','80%','85%','90%','95%','100%'], '15%'),{} %>
   	</div>
 
-  	<%= f.submit  %>
+  	<%= f.submit 'Finalizar Compra' %>
+    <%= f.submit 'Adicionar ao Carrinho', name: 'apenas_adicionar', id:'submit_add'%>
 <% end  %>
+<script>
+$("#submit_add").click(function() {
+  console.log("blaaaaaa");
+  $("#new_order").data("remote","true");
+});
+</script>

@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207170930) do
+ActiveRecord::Schema.define(version: 20170213224709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carrinhos", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.string   "buyer_name"
+    t.string   "email"
+    t.string   "cpf"
+    t.string   "reference"
+    t.string   "status"
+    t.float    "price"
+    t.string   "street"
+    t.string   "number"
+    t.string   "complement"
+    t.string   "district"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+  end
 
   create_table "colors", force: :cascade do |t|
     t.string   "name"
@@ -94,10 +113,7 @@ ActiveRecord::Schema.define(version: 20170207170930) do
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "price"
-    t.string   "status"
-    t.string   "buyer_name"
-    t.string   "reference"
+    t.float    "price"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
@@ -107,13 +123,7 @@ ActiveRecord::Schema.define(version: 20170207170930) do
     t.string   "resolution"
     t.string   "preench"
     t.integer  "printer_id"
-    t.string   "street"
-    t.string   "number"
-    t.string   "complement"
-    t.string   "district"
-    t.string   "city"
-    t.string   "state"
-    t.string   "postal_code"
+    t.integer  "carrinho_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -187,6 +197,9 @@ ActiveRecord::Schema.define(version: 20170207170930) do
     t.string   "provider"
     t.string   "uid"
     t.string   "image"
+    t.string   "prof"
+    t.string   "city"
+    t.string   "niver"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

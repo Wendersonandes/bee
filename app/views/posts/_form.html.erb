@@ -28,6 +28,15 @@
             <h4>Adicione uma imagem do modelo:</h4>
               <%= f.input :image, label: false, placeholder: 'Adicionar uma Imagem:'%>
             </div>
+            <div class="form-group text-center">
+              <h4>Categoria:</h4>
+              <%= f.collection_check_boxes :type_ids, Type.all, :id, :name do |b| %>
+                <div class="collection-check-box">
+                    <%= b.check_box %>
+                    <%= b.label %>
+                </div>
+              <% end %>
+            </div>
             <div class="form-group text-center" id="formgroup2">
               <%= f.button :submit, class: 'btn-success btn-block' %>
             </div>

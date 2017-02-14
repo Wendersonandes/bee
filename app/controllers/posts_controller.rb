@@ -34,7 +34,7 @@ class PostsController < ApplicationController
     if @post.save
       converter @post
       flash[:success] = "Your post has been created!"
-      redirect_to posts_path
+      redirect_to browse_posts_path
     else
       flash[:alert] = "Your new post couldn't be created!  Please check the form."
       render :new
@@ -141,7 +141,7 @@ class PostsController < ApplicationController
                         notified_by_id: current_user.id,
                         post_id: post.id,
                         identifier: current_user.id,
-                        notice_type: 'lik')
+                        notice_type: "#{current_user.completo} gostou do seu Post")
   end 
 
 
