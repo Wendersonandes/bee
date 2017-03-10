@@ -1,0 +1,15 @@
+
+      <div id="comments">
+          <%= render pedido.ped_comments, pedido: pedido %>
+
+      </div>
+    <div class="w3-row-padding w3-section " style="padding-top:25px; border-top:1px solid #eeeeee">
+      <div class="w3-col s2" style="width:12%">
+        <%= image_tag current_user.avatar.url(:medium),class: "w3-circle", style: 'height:50px;width:50px' %>
+      </div>
+      <div class="w3-col s8" style="background-color:#eeeeee; border-radius:10px;padding:10px">
+      <%= form_for([pedido, pedido.ped_comments.new], remote: true) do |f| %>
+          <%= f.text_field :content, placeholder: 'Descreva aqui como é o seu projeto...', style: "width:100%;background-color:#eeeeee;border:none;size:30", id: 'ped_comment_content_form' %>
+        <% end %>
+      </div>
+    </div>

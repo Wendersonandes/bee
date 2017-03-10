@@ -1,5 +1,462 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+
+
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+
+#bleee{
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
+}
+.w3-btn, .w3-btn-block{
+background-color: #6441a4;
+}
+
+
+
+
+</style>
+<body class="w3-theme-l5">
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"> 
+<bla id="alerta_adicionar"> 
+</bla>
+  <!-- The Grid -->
+  <div class="w3-row">
+
+    <!-- Left Column -->
+    <div class="w3-col m3" style="">
+      <!-- Profile -->
+      <div class="w3-card-2 w3-round w3-white">
+        <div class="w3-container">
+         <h4 class="w3-center"><%=@user.completo%></h4>
+
+
+         <p class="w3-center">
+
+<%= link_to (image_tag @user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(@user.user_name) %>
+
+         </p>
+
+
+
+         <hr>
+         <% if @user.prof && @user.prof != "" %>
+          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><%=@user.prof%></p>
+         <% end %>
+         <% if @user.city && @user.city != ""%>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i><%=@user.city%></p>
+         <% end %>
+         <% if @user.niver && @user.niver != ""%>
+          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><%=@user.niver%></p>
+         <% end %>
+        </div>
+      </div>
+      <br>
+      
+      <!-- Accordion -->
+      <div class="w3-card-2 w3-round">
+        <div class="w3-accordion w3-white">
+          <a href=''><button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.followers.count-1%> Seguidores</button></a>
+          <a href=''><button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.following.count-1%> Seguindo</button></a>
+          <a href=<%=new_printer_path%>><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.view%> Visualizações do Perfil</button></a>
+        </div>      
+      </div>
+      <br>
+      
+      <!-- Interests --> 
+      <div class="w3-card-2 w3-round w3-white w3-hide-small">
+        <div class="w3-container">
+          <p>Interests</p>
+          <p>
+            <span class="w3-tag w3-small w3-theme-d5">News</span>
+            <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
+            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
+            <span class="w3-tag w3-small w3-theme-d2">Games</span>
+            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
+            <span class="w3-tag w3-small w3-theme">Games</span>
+            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
+            <span class="w3-tag w3-small w3-theme-l2">Food</span>
+            <span class="w3-tag w3-small w3-theme-l3">Design</span>
+            <span class="w3-tag w3-small w3-theme-l4">Art</span>
+            <span class="w3-tag w3-small w3-theme-l5">Photos</span>
+          </p>
+        </div>
+      </div>
+      <br>
+      
+      <!-- Alert Box -->
+      <div class="w3-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+
+           <p>Outros projetos:</p>
+
+                          <div class="wrapper" id="outrosprojetos">
+                            <div class="scroll" id="scrolloutros">
+                                <div id="imgs">
+                                        <% @footers.each do |item| %>
+                                            <%= link_to (image_tag item.image.url(:medium),{:style=>'box-shadow: 1px 1px 10px #999; margin: 2px;   max-height: 60px;      cursor: pointer;       display:inline-block;        *display:inline;        *zoom:1;        vertical-align:top; padding: 0px;', :class =>"w3-hover-opacity"}), post_path(item) %>
+                                <% end %>
+                                </div>
+                            </div>
+                            </div>
+
+
+      </div>
+
+
+
+    
+    <!-- End Left Column -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+    <!-- Middle Column -->
+    <div class="w3-col m7 w3-row ">
+    
+      <div class="w3-row-padding">
+        <div class="w3-col m12">
+          <div class="w3-card-2 w3-round w3-white">
+            <div class="w3-container w3-padding">
+              <div class="w3-left">
+              <h5 class="w3-opacity">Poste seus projetos e ajude a comunidade Bee
+              </h5>
+              </div>
+              <div class="w3-right">
+              <a href=<%= new_post_path %>>
+              <button type="button" class="w3-btn w3-theme"><i class="fa fa-pencil"></i>  Postar</button> 
+              </a>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+                        <div class="w3-container w3-card-2 w3-white w3-round w3-margin">
+                          <div class="post">
+                            <div class="post-head">
+                              <div class="thumb-img"></div>
+                              <div class="user-name">
+                              Modelo enviado por:
+                              
+                                <%= link_to "#{@post.user.name} #{@post.user.sobrenome}", profile_path(@post.user.user_name), style:"text-transform: capitalize;" %>
+                               
+                              </div>
+                              <div class="time-ago">
+      <ul>
+        <li style="float:left"><%= time_ago_in_words @post.created_at %></li>
+        <% if @post.user == current_user %>
+          <li style="float:right;"><%= render 'configurations/post_config_dropdown', post: @post %>
+        <% end %>
+      </ul>
+      </div>
+                            </div>
+                            <div class="image center-block">
+                              <div class="img-responsive" id="view"></div>
+                            </div>
+                            <div class="post-bottom">
+                              <%= render 'posts/likes', post: @post %>
+                              <div class="caption">
+                                <div class="caption-content">
+                                  <div class="user-name">
+                                    <%= link_to "#{@post.user.name} #{@post.user.sobrenome}", profile_path(@post.user.user_name) %>
+                                  </div>
+                                  <%= @post.caption %>
+                                  <div class="comments" id="comments_<%= @post.id %>">
+                                    <% if @post.comments.any? %>
+                                      <%= render @post.comments.first(4), post: @post %>
+                                      <% unless @post.comments.count <= 4 %>
+                                        <div class="paginator" id="#comments-paginator-<%= @post.id %>">
+                                          <%= link_to "view all #{@post.comments.count} comments", post_comments_path(@post), remote: true, class: 'more-comments', id: "more_comments_#{@post.id}", data: {post_id: "#{@post.id}", type: "html", value: "#{@post.comments.count}"} %>
+                                        </div>
+                                      <% end %>
+                                    <% end %>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="comment-like-form row">
+                              <div class="col-sm-1 like-button">
+                                <%= render 'posts/unlike', post: @post %>
+                              </div>
+                              <div class="comment-form col-sm-11">
+                                <%= form_for([@post, @post.comments.build], remote: true) do |f| %>
+                                  <%= f.text_field :content, placeholder: 'Comentar...', class: "comment_content", id: "comment_content_#{@post.id}",data: { post_id: "#{@post.id}",value: "#{@post.comments.count}" } %>
+                                  <%= f.submit 'New Comment', class: 'comment-submit-button'%>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </div>
+
+
+
+
+
+
+
+
+
+      
+      
+      
+    <!-- End Middle Column -->
+    </div>
+    
+    <!-- Right Column -->
+    <div class="w3-col m2">
+      <div class="w3-card-2 w3-round w3-white w3-center">
+        <div class="w3-container">
+
+
+
+                              <div id="printers" class="w3-container">
+                              <!--
+                                <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
+                                  <i class="fa fa-remove"></i>
+                                </a>
+                                -->
+                                <p>Compre agora:</p>
+                                <h2>R$<%= @preco %></h2>
+                            <button id="print" class="w3-btn w3-red w3-btn-block w3-section">Imprimir</button>
+
+
+
+
+
+
+
+
+                            <script>
+                            /* When the user clicks on the button,
+                            toggle between hiding and showing the dropdown content */
+                            function myFunction() {
+                                document.getElementById("myDropdown").classList.toggle("show");
+                            }
+
+                            function filterFunction() {
+                                var input, filter, ul, li, a, i;
+                                input = document.getElementById("myInput");
+                                filter = input.value.toUpperCase();
+                                div = document.getElementById("myDropdown");
+                                a = div.getElementsByTagName("a");
+                                for (i = 0; i < a.length; i++) {
+                                    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                        a[i].style.display = "";
+                                    } else {
+                                        a[i].style.display = "none";
+                                    }
+                                }
+                            }
+                            </script>
+
+
+
+
+
+
+                              </div>
+
+        </div>
+      </div>
+      <br>
+      
+      <div class="w3-card-2 w3-round w3-white w3-center">
+        <div class="w3-container">
+          <p>Confira nossos tutoriais sobre:</p>
+          
+          <p>Acabamento</p>
+          <a href=<%=learn_acabamento_path%>>
+          <div class="media list-group-item" style="border-radius:4px;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;margin: 0px; padding: 0px;  ">
+          <img src="../images/varinha3.jpg" class="img-responsive" style=" " alt="Image">
+            
+          </div>
+          </a>
+          
+          <br>
+
+          <p>Primeira impressão</p>
+          <a href=<%=learn_primeira_path%>>
+          <div class="media list-group-item" style="border-radius:4px;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;margin: 0px; padding: 0px;  ">
+          <img src="../images/varinha3.jpg" class="img-responsive" style=" " alt="Image">
+            
+          </div>
+          </a>
+          <br>
+
+          <p>Top Sites</p>
+          <a href=<%=learn_modelagem_path%>>
+          <div class="media list-group-item" style="border-radius:4px;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;margin: 0px; padding: 0px;  ">
+          <img src="../images/varinha3.jpg" class="img-responsive" style=" " alt="Image">
+            
+          </div>
+          </a>
+          <br>
+
+          <p>ABS ou PLA?</p>
+          <a href=<%=learn_material_path%>>
+          <div class="media list-group-item" style="border-radius:4px;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;margin: 0px; padding: 0px;  ">
+          <img src="../images/varinha3.jpg" class="img-responsive" style=" " alt="Image">
+            
+          </div>
+         </a>
+          <br>
+        </div>
+      </div>
+      <br>
+      
+      <div class="w3-card-2 w3-round w3-white w3-padding-16 w3-center">
+        <p>Entre em contato</p>
+      </div>
+      <br>
+
+      
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
+</div>
+
+
+ 
+<script>
+// Accordion
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+    } else { 
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className = 
+        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    }
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+
+<script>
+// Accordion
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+    } else { 
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className = 
+        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    }
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+
+
+
+</body> 
+
+
+
+<style type="text/css">
+
+.posts-wrapper {
+    padding-top: 40px;
+    margin: 0 auto;
+    max-width: 642px;
+    width: 100%;
+}
+
+  .post{
+  margin-bottom: 16px;
+  margin-top: 16px;
+  }
+
+
+.w3-card-2, .w3-example {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
+}
+
+
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    min-width: 100%;
+}
+canvas{
+  width: 100% !important;
+}
+
+
+</style>
 <script charset="UTF-8" type="text/javascript">
   $(document).ready(function(){
     window.addEventListener("load", function () {
@@ -145,467 +602,3 @@
 }, false);
 });
 </script>
-<script>
-// Script to open and close sidenav
-function w3_open() {
-    document.getElementById("mySidenav").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
-
-
-function w3_close() {
-    document.getElementById("mySidenav").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
-</script>
-
-
-
-<style>
-html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-
-#bleee{
-    border-radius: 4px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
-}
-
-
-
-</style>
-<body class="w3-theme-l5">
-
-<!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"> 
-<bla id="alerta_adicionar"> 
-<% flash.each do |key, value| %>
-  <% alert_class = case key
-                   when :notice then "success"
-                   when :alert then "danger"
-                   else key
-                   end %>
-  <%= content_tag :div, class: "text-center alert alert-#{alert_class}" do %>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <%= value %>
-  <% end %>
-<% end %>
-</bla>
-  <!-- The Grid -->
-  <div class="w3-row">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Left Column -->
-    <div class="w3-col m3" style="">
-      <!-- Profile -->
-      <div class="w3-card-2 w3-round w3-white">
-        <div class="w3-container">
-         <h4 class="w3-center">Nome do Usuário</h4>
-
-
-         <p class="w3-center">
-
-<%= link_to (image_tag current_user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(current_user) %>
-
-         </p>
-
-
-
-         <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> Brasilia, DF</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> 9 novembro, 1992</p>
-        </div>
-      </div>
-      <br>
-      
-      <!-- Accordion -->
-      <div class="w3-card-2 w3-round">
-        <div class="w3-accordion w3-white">
-          <button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
-          <div id="Demo1" class="w3-accordion-content w3-container">
-            <p>Some text..</p>
-          </div>
-          <button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
-          <div id="Demo2" class="w3-accordion-content w3-container">
-            <p>Some other text..</p>
-          </div>
-          <button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
-          <div id="Demo3" class="w3-accordion-content w3-container">
-         <div class="w3-row-padding">
-         <br>
-           <div class="w3-half">
-             <img style="width:100%" class="w3-margin-bottom">
-           </div>
-         </div>
-          </div>
-        </div>      
-      </div>
-      <br>
-      
-      <!-- Interests --> 
-      <div class="w3-card-2 w3-round w3-white w3-hide-small">
-        <div class="w3-container">
-          <p>Interests</p>
-          <p>
-            <span class="w3-tag w3-small w3-theme-d5">News</span>
-            <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
-            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
-            <span class="w3-tag w3-small w3-theme-d2">Games</span>
-            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
-            <span class="w3-tag w3-small w3-theme">Games</span>
-            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
-            <span class="w3-tag w3-small w3-theme-l2">Food</span>
-            <span class="w3-tag w3-small w3-theme-l3">Design</span>
-            <span class="w3-tag w3-small w3-theme-l4">Art</span>
-            <span class="w3-tag w3-small w3-theme-l5">Photos</span>
-          </p>
-        </div>
-      </div>
-      <br>
-      
-      <!-- Alert Box -->
-      <div class="w3-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
-
-           <p>Outros projetos:</p>
-
-                          <div class="wrapper" id="outrosprojetos">
-                            <div class="scroll" id="scrolloutros">
-                                <div id="imgs">
-                                        <% @footers.each do |item| %>
-                                            <%= link_to (image_tag item.image.url(:medium),{:style=>'box-shadow: 1px 1px 10px #999; margin: 2px;   max-height: 60px;      cursor: pointer;       display:inline-block;        *display:inline;        *zoom:1;        vertical-align:top; padding: 0px;', :class =>"w3-hover-opacity"}), post_path(item) %>
-                                <% end %>
-                                </div>
-                            </div>
-                            </div>
-
-
-      </div>
-
-
-
-    
-    <!-- End Left Column -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-    
-    <!-- Middle Column -->
-    <div class="w3-col m7 w3-row ">
-    
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card-2 w3-round w3-white">
-            <div class="w3-container w3-padding">
-              <div class="w3-left">
-              <h5 class="w3-opacity">Poste seus projetos e ajude a comunidade Bee
-              </h5>
-              </div>
-              <div class="w3-right">
-              <a href=<%= new_post_path %>>
-              <button type="button" class="w3-btn w3-theme"><i class="fa fa-pencil"></i>  Postar</button> 
-              </a>
-              </div>
-
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-
-
-        
-
-                        <div class="w3-container w3-card-2 w3-white w3-round w3-margin">
-                          <div class="post">
-                            <div class="post-head">
-                              <div class="thumb-img"></div>
-                              <div class="user-name">
-                              Modelo enviado por:
-                                <%= link_to "#{@post.user.name} #{@post.user.sobrenome}", profile_path(@post.user.id) %>
-                              </div>
-                              <div class="time-ago">
-                                <%= time_ago_in_words @post.created_at %>
-                              </div>
-                            </div>
-                            <div class="image center-block">
-                              <div class="img-responsive" id="view"></div>
-                            </div>
-                            <div class="post-bottom">
-                              <%= render 'posts/likes', post: @post %>
-                              <div class="caption">
-                                <div class="caption-content">
-                                  <div class="user-name">
-                                    <%= link_to "#{@post.user.name} #{@post.user.sobrenome}", profile_path(@post.user.id) %>
-                                  </div>
-                                  <%= @post.caption %>
-                                  <div class="comments" id="comments_<%= @post.id %>">
-                                    <% if @post.comments.any? %>
-                                      <%= render @post.comments.first(4), post: @post %>
-                                      <% unless @post.comments.count <= 4 %>
-                                        <div class="paginator" id="#comments-paginator-<%= @post.id %>">
-                                          <%= link_to "view all #{@post.comments.count} comments", post_comments_path(@post), remote: true, class: 'more-comments', id: "more_comments_#{@post.id}", data: {post_id: "#{@post.id}", type: "html", value: "#{@post.comments.count}"} %>
-                                        </div>
-                                      <% end %>
-                                    <% end %>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="comment-like-form row">
-                              <div class="col-sm-1 like-button">
-                                <%= render 'posts/unlike', post: @post %>
-                              </div>
-                              <div class="comment-form col-sm-11">
-                                <%= form_for([@post, @post.comments.build], remote: true) do |f| %>
-                                  <%= f.text_field :content, placeholder: 'Add a comment...', class: "comment_content", id: "comment_content_#{@post.id}",data: { post_id: "#{@post.id}",value: "#{@post.comments.count}" } %>
-                                  <%= f.submit 'New Comment', class: 'comment-submit-button'%>
-                                <% end %>
-                              </div>
-                            </div>
-                          </div>
-
-
-                        </div>
-
-
-
-
-
-
-
-
-
-      
-      
-      
-    <!-- End Middle Column -->
-    </div>
-    
-    <!-- Right Column -->
-    <div class="w3-col m2">
-      <div class="w3-card-2 w3-round w3-white w3-center">
-        <div class="w3-container">
-
-
-
-                              <div id="printers" class="w3-container">
-                              <!--
-                                <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
-                                  <i class="fa fa-remove"></i>
-                                </a>
-                                -->
-                                <p>Compre agora:</p>
-
-                            <button id="print" class="w3-btn w3-red w3-btn-block w3-section">Imprimir</button>
-
-
-
-
-
-
-
-
-                            <script>
-                            /* When the user clicks on the button,
-                            toggle between hiding and showing the dropdown content */
-                            function myFunction() {
-                                document.getElementById("myDropdown").classList.toggle("show");
-                            }
-
-                            function filterFunction() {
-                                var input, filter, ul, li, a, i;
-                                input = document.getElementById("myInput");
-                                filter = input.value.toUpperCase();
-                                div = document.getElementById("myDropdown");
-                                a = div.getElementsByTagName("a");
-                                for (i = 0; i < a.length; i++) {
-                                    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                                        a[i].style.display = "";
-                                    } else {
-                                        a[i].style.display = "none";
-                                    }
-                                }
-                            }
-                            </script>
-
-
-
-
-
-
-                              </div>
-
-        </div>
-      </div>
-      <br>
-      
-      <div class="w3-card-2 w3-round w3-white w3-center">
-        <div class="w3-container">
-          <p>Confira nossos tutoriais sobre:</p>
-          
-          <p>Acabamento</p>
-          <div class="media list-group-item" style="height:120px;border-radius:4px;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;background-size: 210px 120px;background-image:url('https://scontent.fbsb3-1.fna.fbcdn.net/v/t34.0-12/16729778_1374607259251346_83314151_n.png?oh=aa1b73a26cc55486c8ab8399d412ed85&oe=58A0E497')  ">
-            
-          </div>
-          
-          <br>
-
-          <p>Modelagem</p>
-          <div class="media list-group-item" style="height:120px;border-radius:4px;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;background-size: 210px 120px;background-image:url('https://scontent.fbsb3-1.fna.fbcdn.net/v/t34.0-12/16683148_1374615085917230_1654430121_n.png?oh=45fd3386589f546f58e12cce817f7b32&oe=58A08C38') ">
-            
-          </div>
-          <br>
-
-          <p>ABS ou PLA?</p>
-          <div class="media list-group-item" style="height:120px;border-radius:4px;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;background-size: 210px 120px;background-image:url('https://scontent.fbsb3-1.fna.fbcdn.net/v/t34.0-12/16729778_1374607259251346_83314151_n.png?oh=aa1b73a26cc55486c8ab8399d412ed85&oe=58A0E497') ">
-       
-          </div>
-          <br>
-        </div>
-      </div>
-      <br>
-      
-      <div class="w3-card-2 w3-round w3-white w3-padding-16 w3-center">
-        <p>Entre em contato</p>
-      </div>
-      <br>
-
-      
-    <!-- End Right Column -->
-    </div>
-    
-  <!-- End Grid -->
-  </div>
-  
-<!-- End Page Container -->
-</div>
-
-
- 
-<script>
-// Accordion
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-theme-d1";
-    } else { 
-        x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className = 
-        x.previousElementSibling.className.replace(" w3-theme-d1", "");
-    }
-}
-
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-</script>
-
-
-<script>
-// Accordion
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-theme-d1";
-    } else { 
-        x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className = 
-        x.previousElementSibling.className.replace(" w3-theme-d1", "");
-    }
-}
-
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-</script>
-
-
-
-
-</body> 
-
-
-
-<style type="text/css">
-
-.posts-wrapper {
-    padding-top: 40px;
-    margin: 0 auto;
-    max-width: 642px;
-    width: 100%;
-}
-
-  .post{
-  margin-bottom: 16px;
-  margin-top: 16px;
-  }
-
-
-.w3-card-2, .w3-example {
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
-}
-
-
-
-.img-responsive {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    min-width: 100%;
-}
-canvas{
-  width: 100% !important;
-}
-
-
-</style>

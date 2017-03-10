@@ -4,12 +4,13 @@ class PostsController < ApplicationController
   before_action :owned_post, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.of_followed_users(current_user.following).order('created_at DESC')
+    @posts = Post.of_followed_users(current_user.following).where.not(status: 1).order('created_at DESC')
   end
   def browse
-    @sugestoes = (User.all.order('seguidores DESC') - current_user.following).first(6)
-    @footers = Post.all.order('cached_votes_up DESC').first(6)  
-    @posts = Post.all.paginate(page: params[:page], per_page: 12).order('created_at DESC')
+    @pedido = Pedido.new
+    @sugestoes = (User.all.order('seguidores DESC') - current_user.following).first(4)
+    @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)  
+    @posts = Post.all.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
     respond_to do |format|
       format.html
       format.js
@@ -17,19 +18,42 @@ class PostsController < ApplicationController
   end
 
   def show
+    if current_user != @post.user
+      @post.update_attribute(:view, @post.view + 1)
+    end
     @user = @post.user
-    @posts = @user.posts.where.not(id: @post.id).order('cached_votes_up DESC').first(6)
-    @footers = Post.all.where.not(id: @post.id).order('cached_votes_up DESC').first(6)
+    @posts = @user.posts.where.not(id: @post.id, status: 0).order('cached_votes_up DESC').first(6)
+    @footers = Post.all.where.not(id: @post.id, status: 0).order('cached_votes_up DESC').first(6)
     @printers = @user.printers.order('created_at DESC')
     @printers_all = Printer.all.order('created_at DESC')
+    @preco = ((@post.volume/1000) * Printer.last.materials[0].preco + @post.preco).round(2)
   end
 
   def new
     @post = current_user.posts.build
   end
 
+  def importar
+  	@post = current_user.posts.build
+  end
+
+  def importar_create
+  	@post = current_user.posts.build(import_params)
+  	@post.caption = File.basename(@post.attachment.path)
+  	@post.status = 0
+    if @post.save
+      converter @post
+      flash[:success] = "Your post has been created!"
+      redirect_to post_path(@post)
+    else
+      flash[:alert] = "Your new post couldn't be created!  Please check the form."
+      render :new
+    end
+  end
+
   def create
     @post = current_user.posts.build(post_params)
+    @post.status = 1
 
     if @post.save
       converter @post
@@ -47,7 +71,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       flash[:success] = "Post updated."
-      redirect_to ṕosts_path
+      redirect_to browse_posts_path
     else
       flash[:alert] = "Update failed.  Please check the form."
       render :edit
@@ -57,7 +81,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:success] = "Your post has been deleted."
-    redirect_to posts_path
+    redirect_to browse_posts_path
   end
 
   def like
@@ -86,7 +110,7 @@ class PostsController < ApplicationController
       completo: user.completo,
       value: user.id,
       image: user.avatar.url(:medium), 
-      url: profile_path(user.id)
+      url: profile_path(user.user_name)
     }
     end
     render json: users
@@ -124,12 +148,12 @@ class PostsController < ApplicationController
         completo: user.completo,
         value: user.id,
         image: user.avatar.url(:medium),
-        url: profile_path(user.id)
+        url: profile_path(user.user_name)
       }
     end
     render json: users
     #render json: User.search(params[:query], autocomplete: true, limit: 10).map {|user|
-     # { completo: user.completo, value: user.id, image: user.avatar.url(:medium), url: profile_path(user.id)}}
+     # { completo: user.completo, value: user.id, image: user.avatar.url(:medium), url: profile_path(user.user_name)}}
   end
 
 
@@ -148,7 +172,10 @@ class PostsController < ApplicationController
 
 
   def post_params
-    params.require(:post).permit(:attachment,:image, :caption, :volume, type_ids:[])
+    params.require(:post).permit(:attachment,:image, :caption, :volume,:preco, type_ids:[])
+  end
+  def import_params
+    params.require(:post).permit(:attachment,:volume, :caption)
   end
 
   def set_post
@@ -158,7 +185,7 @@ class PostsController < ApplicationController
   def owned_post
     unless current_user == @post.user
       flash[:alert] = "That post doesn't belong to you!"
-      redirect_to posts_path
+      redirect_to browse_posts_path
     end
   end
 class Float

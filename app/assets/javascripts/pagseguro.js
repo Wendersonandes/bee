@@ -1,5 +1,6 @@
 $( document ).ready(function() {
   // Inicia o PagSeguro
+  if(document.getElementById("carrinho")){
   PagSeguroDirectPayment.setSessionId($("#session_id").val());
  
   // Verifica se existe um cartão preenchido
@@ -39,6 +40,7 @@ $( document ).ready(function() {
   $("#card-number").on('input', function() {
     card_flag();
   });
+}
 });
 
 //--------------------------------------------------- VERIFICACAO DINAMICA -------------------------------------------

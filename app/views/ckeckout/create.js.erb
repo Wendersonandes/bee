@@ -1,4 +1,4 @@
-$("#quant_order").html("<%= current_user.carrinhos.find_by(status: 'criado').orders.count%>");
+$("#quant_order").html("<a href=<%=carrinho_path(current_user.user_name)%>><%= current_user.carrinhos.find_by(status: 'criado').orders.count%><span class='glyphicon glyphicon-shopping-cart'></span></a>");
 $("#print").show();
 $("#print").html("Imprimir Outro");
 $("#new_order").hide();

@@ -5,9 +5,13 @@ class ProfilesController < ApplicationController
   before_action :owned_profile, only: [:edit, :update]
 
   def show
-      puts @user.avatar.url(:medium)
+    if current_user != @user
+      @user.update_attribute(:view, @user.view + 1)
+    end
+      #puts @user.avatar.url(:medium)
       @footers = Post.all.order('cached_votes_up DESC').first(6)
-       @posts = @user.posts.paginate(page: params[:page], per_page: 12).order('created_at DESC')
+      @posts2 = @user.posts.limit(2);
+      @posts = @user.posts.paginate(page: params[:page], per_page: 12).order('created_at DESC')
       respond_to do |format|
       format.html
       format.js
@@ -20,7 +24,7 @@ class ProfilesController < ApplicationController
   def update
     if @user.update(profile_params)
       flash[:success] = 'Your profile has been updated.'
-      redirect_to profile_path(@user.id)
+      redirect_to profile_path(@user.user_name)
     else
       @user.errors.full_messages
       flash[:error] = @user.errors.full_messages
@@ -43,6 +47,9 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def banco
+
+  end
   private
   def determine_layout
   		case action_name
@@ -52,7 +59,8 @@ class ProfilesController < ApplicationController
   	end
 
   def profile_params
-    params.require(:user).permit(:avatar, :bio, :prof, :city, :niver)
+    params.require(:user).permit(:conta_pais,:conta_nome,:conta_sobrenome,:conta_cpf,:conta_banco,:conta_agencia,:conta_tipo,:conta_num,
+      :avatar, :bio, :prof, :city, :niver)
   end
 
   def owned_profile
@@ -63,7 +71,8 @@ class ProfilesController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(user_name: params[:user_name])
+    puts @user.completo
   end
 
 end

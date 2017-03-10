@@ -1,0 +1,67 @@
+<br>
+<br>
+<br>
+<br>
+<style>
+.form-group{
+	width:100%;
+	height:40px;
+}
+</style>
+<div class="w3-modal-content w3-padding-large" style="background-color:#f1f1f1">
+<div class="w3-container w3-center">
+<%= form_for @user, url: "#{update_profile_path(@user.user_name)}",class:"form-horizontal" do |f| %>
+	<fieldset style="padding-left:170px">
+	<legend>Dados da Conta Bancária</legend>
+	<div class="form-group">
+        <label class="col-sm-3 control-label">País do Banco</label>
+        <div class="col-sm-5">
+        	<%= f.text_field :conta_pais, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Nome</label>
+        <div class="col-sm-5">
+        	<%= f.text_field :conta_nome, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Sobrenome</label>
+        <div class="col-sm-5">
+        	<%= f.text_field :conta_sobrenome, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">CPF</label>
+        <div class="col-sm-5">
+        	<%= f.text_field :conta_cpf, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Nome do Banco</label>
+        <div class="col-sm-5">
+        	<%= f.text_field :conta_banco, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Número da Agência</label>
+        <div class="col-sm-5">
+        	<%= f.text_field :conta_agencia, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Tipo da Conta</label>
+        <div class="col-sm-5">
+        	<%= f.select :conta_tipo, options_for_select(['Conta Corrente', 'Poupança'], ),{},class:"form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Número da Conta</label>
+        <div class="col-sm-5">
+        	<%= f.text_field :conta_num, class:"form-control", required: true %>
+        </div>
+    </div>
+	</fieldset>
+<%end%>
+</div>
+</div>

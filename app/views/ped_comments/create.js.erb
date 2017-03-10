@@ -1,0 +1,14 @@
+$('#comments').append("<%=j render 'ped_comments/ped_comment', pedido: @pedido, ped_comment: @ped_comment %>");
+$('#ped_comment_content_form').val('');
+$('#content_<%@pedido.id%>').html("<%if @pedido.ped_comments.any?%>\
+                  <p><%=@pedido.ped_comments.last.content%></p>\
+                <%else%>\
+                  <p>Peça agora!</p>\
+                <%end%>\
+                <small class='text-muted'>\
+              <%if @pedido.ped_comments.any?%>\
+                <%= time_ago_in_words @pedido.ped_comments.last.created_at%>\
+              <%else%>\
+                <%= time_ago_in_words @pedido.created_at%>\
+              <%end%>\
+               </small>");

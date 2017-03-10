@@ -1,300 +1,1566 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- saved from url=(0061)https://bootstrapthemes.co/demo/html/backyard/demo/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 
-<head>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
+        <!-- /.website title -->
+        <title>BEEPRINTED</title>
+        <link rel="shortcut icon" style="border-radius:50%!important" href="images/logo.jpg"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <!-- CSS Files -->
+        <%= stylesheet_link_tag "bootstrap.min"%>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>BeePrinted - Imprima suas Ideias</title>
+        
+        <%= stylesheet_link_tag "pe-icon-7-stroke"%>
+        <%= stylesheet_link_tag "animate"%>
+        <%= stylesheet_link_tag "owl.theme"%>
+        <%= stylesheet_link_tag "owl.carousel"%>
+        <style>
+/**
+* Backyard
+* Landing Page Template
+* Author: MoxDesign - http://www.moxdesign.com
+**/
 
-    <!-- Bootstrap Core CSS -->
-    <!-- Custom Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+body {
+    height:100%;
+    font-family: "Lato", "Serif";
+    font-weight: 300;
+    padding:0;
+    margin:0;
+    font-size:16px;
+    line-height: 28px;
+    color: #777; 
+    background: #fff;
+    overflow-x:hidden;
+    position: relative;
+}
+h1 { font-size: 3em; line-height:1.2em; margin:0 0 .3em; }
+h2 { font-size: 1.8em; line-height:1.4em; margin:0 0 .3em;  }
+h3 { font-size: 1.4em; line-height:1.4em; }
+h4 { font-size: 1.25em; line-height:1.4em;}
+h5 { font-size: 1.1em; line-height:1.4em; }
+h6 { font-size: 1em; line-height:1.2em; }
 
-    <!-- Plugin CSS -->
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    text-decoration: none
+}    
+p { 
+    padding: 0 0 1em;
+    margin:0;
+}
+a {
+    color: #3eb0f7;
+    outline: 0;
+    font-weight: bold;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+} 
+a:hover {
+    text-decoration: none;
+    color: #1f2222;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+.highlight {
+    color: #3eb0f7;
+}
+#preloader { 
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    z-index: 999; 
+    width: 100%; 
+    height: 100%; 
+    overflow: visible; 
+    background: #fff url(../images/loading.gif) no-repeat center center;
+}
+.fullscreen {
+    width:100%;
+    min-height:100%;
+    background-repeat:no-repeat;
+    background-position:50% 50%;
+    background-position:50% 50%\9 !important;
+}
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+#menu {
+    z-index: 99;
+}
+.navbar-default {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0px 0.5px 2px #cecece;
+}
+.navbar-default .navbar-brand {
+    padding: 7px;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #777;
+    font-weight: 500;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #3eb0f7;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    background: transparent;
+    color: #3eb0f7;
+}
+.btn-default {
+    font-size: 17px;
+    margin: 30px 0 10px;
+    margin-right: 10px;
+    line-height: 20px;
+    padding: 15px 35px;
+    height: 50px;
+    border: 2px solid #3eb0f7;
+    background: transparent;
+    transition: all 0.4s;
+    color: #3eb0f7;
+    border-radius: 100px;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+    border: 2px solid #3eb0f7;
+    background: #3eb0f7;
+    color: white;
+}
+.btn-primary {
+    font-size: 17px;
+    margin: 30px 0 10px;
+    margin-right: 10px;
+    line-height: 20px;
+    padding: 15px 35px;
+    height: 50px;
+    border: 2px solid #3eb0f7;
+    background: #3eb0f7;
+    transition: all 0.4s;
+    color: white;
+    border-radius: 100px;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    border: 2px solid #3eb0f7;
+    background: transparent;
+    color: #3eb0f7;
+}
+.btn-secondary {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 20px;
+    padding: 20px 50px;
+    height: 65px;
+    border: none;
+    background: #3eb0f7;
+    transition: all 0.4s;
+    color: white;
+    border-radius: 4px;
+}
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open > .dropdown-toggle.btn-secondary {
+    background: #1f96e0;
+    color: white
+}
 
-    <!-- Theme CSS -->
-    <link href=<%= asset_path('bootstrap.min.css') %> rel="stylesheet">
-    <link href=<%= asset_path('creative.min.css') %> rel="stylesheet">
+.site-name img {
+    width: 150px; 
+    height: 37px
+}
+.logo {
+    margin: 100px 0 40px 0;
+}
+.logo img{
+    width: 150px; 
+    height: 37px
+}
+.landing h1{
+    font-size: 56px;
+    font-weight: 300;
+    color: #fff;
+    margin: 30px 0 30px 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+.landing p, .landing h2 {
+    color: #fff;
+}
+.landing-text {
+    margin-bottom: 20px;
+}
+.landing-text p {
+    font-size: 17px !important; 
+}
+.head-btn {
+    margin-bottom: 150px;
+}
+.option {
+    text-transform: uppercase;
+    padding: 5px;
+    min-width: 80px;
+    margin-right: 5px;
+    transition: all 0.4s;
+    font-size: 14px;
+    color: #fff;
+}
+.signup-header {
+    margin: 150px 0 100px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    padding-left: 20px;
+    padding-right: 20px;    
+}
+.signup-header h3{
+    padding: 20px 0 10px;
+    color: white;
+    font-weight: 300;
+}
+.form-header input {
+    position: relative;
+    padding: 5px 15px;
+}
+.form-header .form-control {
+    border-radius: 0;
+    border: solid 1px #dadada;
+    background-color: #fff;
+    color: #333;
+    height: 55px;
+}
+.form-header .btn {
+    border-radius: 0;
+    height: 55px;
+    width: 100%;
+    background-color: #3eb0f7;
+    color: white;
+    font-size: 17px !important;
+    padding: 0 33px;
+    border: none;
+    margin: 0;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+.form-header .btn:hover {
+    background-color: #1f96e0;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+.privacy {
+    padding-top: 0;
+    font-size: 13px;
+}
+.signup-header p {
+    color: white;
+}
+.privacy a {
+    text-decoration: underline;
+    color: white;
+    font-weight: 300;
+}
+#policy {
+    padding: 100px 0 70px;
+}
+#intro {
+    padding: 100px 0 70px;
+}
+#intro h2 {
+    font-size: 40px;
+    font-weight: 300;
+    margin: 15px 0 15px 0;
+}
+.intro-pic {
+    margin-top: 20px;
+}
+.btn-section {
+    padding-top: 20px;
+}
+#feature {
+    padding-top: 100px;
+    background: #f6f6f6;
+}
+#feature h2 {
+    margin: 15px 0 15px 0;
+    font-size: 40px;
+    font-weight: 300;
+}
+#feature .feature-title p {
+    font-size: 18px;
+}
+.row-feat {
+    padding-top: 50px;
+}
+.feat-list {
+    margin-top: 40px;
+}
+.feat-list i {
+    font-size: 48px;
+    float: left;
+    width: 20%;
+    color: #555;
+    height: 100%;
+    position: relative;
+    opacity: 0.6;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+.feat-list:hover i {
+    color: #3eb0f7;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+#feature .inner {
+    float: left;
+    display: inline-block;
+    width: 80%;
+}
+#feature-2 {
+    padding: 100px 0 100px;
+}
+#feature-2 h2 {
+    font-size: 40px;
+    font-weight: 300;
+    margin: 15px 0 15px 0;
+}
+.feature-2-pic {
+    margin-top: 20px;
+}
+.subscribe {
+    color: #fff;
+}
+.subscribe p {
+    margin: 30px auto 30px;
+}
+.subscribe-form {
+    max-width: 400px;
+    margin: 50px auto 150px;
+    text-align: center;
+    overflow: hidden;
+}
+.subscribe-form form {
+    position: relative;
+}
+.subscribe-form input {
+    max-width: 85%;
+    position: relative;
+    padding: 5px 25px;
+}
+.subscribe-form .form-control {
+    border-radius: 4px 0 0 4px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #333;
+    font-size: 1.2em;
+    height: 55px;
+}
+.subscribe-form button {
+    border-radius: 0 4px 4px 0;
+    background-color: #3eb0f7;
+    color: #ffffff;
+    font-size: 1em;
+    line-height: 52px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 0 30px;
+    margin: 0;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+.subscribe-form .btn {
+    height: 55px;
+}
+.subscribe-form .btn:hover {
+    background-color: #1f96e0;
+    color: #fff;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+.subscribe-form .form-control::-webkit-input-placeholder {
+    color: #333;
+}
+.subscribe-form .form-control:-moz-placeholder { 
+    color: #333;  
+}
+.subscribe-form .form-control::-moz-placeholder { 
+    color: #333;  
+}
+.subscribe-form .form-control:-ms-input-placeholder {  
+    color: #333;  
+}
+#package {
+    padding-top: 100px;
+}
+.title-line {
+    width: 100px;
+    height: 3px;
+    margin: 0 auto;
+    background: #3eb0f7;
+}
+.price-box {
+    border: solid 1px #d1d1d1;
+}
+.package-option {
+    padding: 50px 0 100px;
+}
+.package-option ul {
+    padding: 0;
+}
+.price-heading h3 {
+    margin-top: 0;
+}
+.price-heading i {
+    color: #d1d1d1;
+    font-size: 75px;
+    margin-top: 20px;
+}
+.price-group {
+    padding: 30px 0 10px;
+}
+.price-group .dollar {
+    font-size: 20px;
+    position: relative;
+    bottom: 48px;
+}
+.price-group .price {
+    color: #3eb0f7;
+    font-size: 90px;
+    font-weight: 500;
+}
+.price-group .time {
+    font-size: 18px;
+}
+.price-feature li {
+    margin-left: 30px;
+    margin-right: 30px;
+    list-style: none;
+    border-bottom: solid 1px #d1d1d1;
+    line-height: 40px;
+}
+.btn-price {
+    margin: 5px 0 15px;
+    font-size: 17px;
+    padding: 7px 35px;
+    height: 40px;
+    background: #3eb0f7;
+    transition: all 0.4s;
+    color: white;
+    border-radius: 4px; 
+}
+.btn-price:hover {
+    background: #1f96e0;
+    color: white;
+}
+#client {
+    background: #f6f6f6;
+    padding: 70px 0 70px;
+}
+#client img {
+    max-height: 80px;
+    margin: 0 20px;
+    opacity: 1;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+}
+#client img:hover {
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+}
+#testi {
+    padding: 100px 0 100px;
+}
+.testi-item {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-top: 30px;
+}
+.testi-item .box {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.testi-item .box .message {
+    padding: 20px;
+    font-style: italic;
+    line-height: 30px;
+    font-weight: 300;
+    font-size: 20px;
+}
+.testi-item .client-pic img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    max-width: 100%;
+}
+.testi-item .client-info .client-name {
+    margin-top: 10px;
+    font-size: 16px;
+}
+.testi-item .client-info .company {
+    font-style: italic;
+    color: #3eb0f7;
+}
+.owl-theme .owl-controls .owl-page span{
+    background: #3eb0f7;
+}
+.video-header {
+    margin: 40px 0 30px;
+}
+.video-embed {
+    position: relative;
+    padding-top: 56.25%; 
+    height: 0;
+    background-color: #000000;
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.action {
+    color: #fff;
+}
+.action h2 {
+    margin-top: 100px;
+    font-size: 40px;
+    font-weight: 300;
+}
+.download-cta {
+    padding: 50px 0 160px;
+}
+#contact {
+    width: 100%;
+    min-height: 100%;
+}
+#contact  h2{
+    color: white;
+}
+.ul-address a {
+    font-weight: normal;
+}
+.ul-address a:hover {
+    color: white;
+}
+.ul-address li {
+    padding-right: 20px; 
+    margin-bottom: 8px; 
+    list-style: none;
+    color: white;
+}
+.ul-address i {
+    margin-left: 15px;
+    position: absolute; 
+    left: 0;
+    color: #3eb0f7; 
+    font-size: 25px;
+    line-height: 30px;
+}
+.contact-row {
+    margin: 100px 0 100px;
+}
+#contact-form {
+    margin: 0 auto;
+}
+#contact-form input {
+    position: relative;
+    padding: 5px 25px;
+    width: 100%;
+}
+#contact-form textarea {
+    position: relative;
+    padding: 10px 25px;
+    width: 100%;
+    height: 120px !important;
+}
+#contact-form .form-control {
+    border-radius: 0;
+    border: solid 1px #dadada;
+    background-color: #fff;
+    color: #333;
+    font-size: 1.2em;
+    height: 55px;
+}
+#contact-form .btn {
+    height: 55px;
+    width: 100%;
+    background-color: #3eb0f7;
+    color: #ffffff;
+    font-size: 17px !important;
+    line-height: 18px;
+    padding: 0 33px;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+#contact-form .btn:hover {
+    background-color: #1f96e0;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+#footer {
+    background: #fff;
+    padding: 50px 0 50px;
+}
+.social ul {
+    padding: 0;
+    list-style: none;
+}
+.social li {
+    display: inline-block;
+    padding-right: .3em;
+    padding-bottom: .3em;
+}
+.social li a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    color: #3eb0f7;
+    border-radius: 50%;
+    background: #fff;
+    border: solid 1px #3eb0f7;
+    -webkit-transition: all .8s ease;
+    transition: all .8s ease;
+}
+.social li a:hover {
+    color: #fff;
+    background: #3eb0f7;
+}
+#shortcode-basic {
+    padding: 70px 0 10px;
+}
+#shortcode-button {
+    padding: 50px 0 10px;
+    width: 100%;
+    min-height: 100%;
+}
+#shortcode-button .form-horizontal {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#shortcode-icon {
+    padding: 70px 0 10px;
+}
+#shortcode-alert {
+    padding: 70px 0 10px;
+}
+#shortcode-table {
+    padding: 70px 0 10px;
+}
+#shortcode-column {
+    padding: 50px 0 10px;
+}
+.social-icons i {
+    color: #3eb0f7;
+    font-size: 30px;
+    line-height: 40px
+}
+#shortcode-alert {
+    padding: 70px 0 30px;
+}
+.alert { 
+    border: none; 
+    border-radius: 0; 
+    position: relative; 
+    font-size: 17px; 
+    line-height: 22px; 
+    padding: 16px; 
+    padding-left: 60px; 
+}
+.alert i { 
+    font-size: 28px; 
+    position: absolute; 
+    left: 15px; 
+    top: 13px; 
+} 
+.icon-demo i {
+    font-size: 70px;
+    margin-right: 20px;
+}
+.table > thead > tr > th { 
+    background: #3eb0f7; 
+    color: #fff; 
+    border-bottom: 0; 
+    text-transform: uppercase; 
+}
+.table > thead > tr > th, 
+.table > tbody > tr > td { 
+    font-size: 15px; 
+    font-weight: 300; 
+    padding: 20px 20px; 
+}
+.table-bg > tbody > tr:nth-child(odd) > td, 
+.table-bg > tbody > tr:nth-child(odd) > th { 
+    background: #fff; 
+}
+.table-bg > tbody > tr:nth-child(even) > td, 
+.table-bg > tbody > tr:nth-child(even) > th { 
+    background: #f6f6f6; 
+}
+.scrollToTop{
+    width: 40px; 
+    height: 40px;
+    padding: 5px;
+    font-size: 30px;
+    text-align: center; 
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    display: none;
+}
+.scrollToTop:hover{
+    color: #3eb0f7;
+}
+.control-group .controls {
+    overflow-x: hidden;
+}
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-width : 768px) 
+and (max-width : 1024px) 
+and (orientation : portrait) {
+    .head-btn {
+        margin: 50px 0 100px;
+    }
+    .signup-header {
+        margin: 50px 0 100px;
+    }
+    .price-feature li {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .btn-price {
+        padding: 7px 25px;
+    }
+    #intro {
+        padding: 30px 0 50px;
+    }
+    #policy {
+        padding: 30px 0 50px;
+    }
+    #intro h2, #feature-2 h2 {
+        text-align: center;
+    }
+    #intro p, #feature-2 p {
+        text-align: center;
+    }
+    .btn-section {
+        text-align: center;
+    }
+    #feature {
+        padding-top: 75px;
+    }
+    .feature-img {
+        margin-top: 0;
+    }   
+    .row-feat {
+        padding-top: 10px;
+        padding-bottom: 40px;
+    }
+    #feature-2 {
+        padding: 80px 0 80px;
+    }
+    .feature-2-pic {
+        margin-top: 40px;
+    }
+    #client img {
+        margin: 10px 0 10px;
+        max-height: 40px;
+    }   
+    .video-header {
+        margin: 50px 0 30px;
+    }
+    #bottom-action {
+        text-align: center;
+    }
+    .button-demo li {
+        padding-bottom: 50px;
+    }
+}
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<style>
-header{
-    background-image: url(<%= asset_path('header.jpg') %>);
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-width : 768px) 
+and (max-width : 1024px) 
+and (orientation : landscape) {
+    .logo {
+        margin: 100px 0 30px 0;
+    }
+    .landing h1{
+        margin: 60px 0 60px 0;
+    }   
+    .landing-text {
+        margin: 60px 0 40px 0;
+    }
+    .signup-header {
+        margin-top: 250px;
+    }
+    .intro-pic {
+        margin-top: 100px;
+    }
+    .feature-img {
+        margin-top: 30px;
+    }   
+    .feat-list {
+        margin-top: 10px;
+    }
+    .feat-list p {
+        font-size: 15px;
+    }
+    .feature-2-pic {
+        margin-top: 50px;
+    }
+    #client img {
+        max-height: 45px;
+    }   
+    .video-header {
+        margin: 50px 0 30px;
+    }
+}
+
+/* smart-phone ----------- */
+@media (max-width: 767px) {
+    .logo {
+        margin: 40px 0 30px 0;
+    }
+    .head-btn {
+        margin: 30px 0 80px;
+    }
+    .signup-header {
+        margin: 70px 0 80px;
+    }
+    #intro {
+        padding: 70px 0 70px;
+    }
+    #policy {
+        padding: 70px 0 70px;
+    }
+    #intro h2, #feature-2 h2 {
+        font-weight: 150;
+        text-align: center;
+    }
+    #intro p, #feature-2 p {
+        text-align: center;
+    }
+    .btn-section {
+        text-align: center;
+    }
+    #feature {
+        padding-top: 50px;
+    }
+    .row-feat {
+        padding-top: 10px;
+        padding-bottom: 40px;
+    }
+    .feat-list i {
+        padding-left: 40px;
+    }
+    #feature-2 {
+        padding: 40px 0 50px;
+    }
+    .feature-2-pic {
+        margin-top: 50px;
+    }
+    #package {
+        padding-top: 80px;
+    }
+    .package-option {
+        padding: 50px 0 50px;
+    }
+    .price-box {
+        margin-bottom: 30px;
+    }
+    #client img {
+        margin: 10px 0 10px;
+    }   
+    .contact-left {
+        margin-bottom: 50px;
+    }
+    .video-header {
+        margin: 50px 0 30px;
+    }
+    #bottom-action {
+        text-align: center;
+    }
+}   
+/* iPhone 6Plus (landscape) ----------- */
+@media (max-width: 736px) {
+    .feature-img {
+        margin-top: 0;
+    }
+}
+
+/* iPhone 6 (landscape) ----------- */
+@media (max-width: 667px) {
+    .logo {
+        margin: 30px 0 30px 0;
+    }
+    .landing h1{
+        font-size: 50px;
+        margin: 10px 0 25px 0;
+    }
+    .landing-text {
+        margin-top: 20px;
+    }
+    .subscribe p {
+        margin: 25px auto 15px;
+    }
+    .subscribe-form {
+        margin: 20px auto 100px;
+    }
+    .action h2 {
+        margin-top: 70px;
+    }
+    .download-cta {
+        padding: 50px 0 100px;
+    }
+}
+
+/* iPhone 5 (landscape) ----------- */
+@media (max-width: 568px){
+    .logo {
+        margin: 15px 0 15px 0;
+    }
+    .landing h1{
+        font-size: 40px;
+        margin: 20px 0 10px 0;
+    }
+    .landing-text p {
+        font-size: 16px !important; 
+    }
+    #intro {
+        padding-top: 50px;
+    }
+    #policy {
+        padding-top: 50px;
+    }
+    #feature {
+        padding-top: 50px;
+    }
+    .feat-list i {
+        padding-left: 20px;
+    }
+    #feature-2 {
+        padding: 50px 0 70px;
+    }
+    #screenshot {
+        padding-top: 70px;
+    }   
+    .screenshots {
+        padding-top: 30px;
+        padding-bottom: 70px;
+    }
+    #testi {
+        padding: 70px 0 70px;
+    }
+    .testi-item .box .message {
+        line-height: 25px;
+        font-size: 18px;
+    }
+    .action h2 {
+        margin: 50px 0 20px;
+    }
+    .download-text p {
+        line-height: 1.5;   
+    }   
+}
+
+/* iPhone 4 (landscape) ----------- */
+@media (max-width: 480px) {
+    .feat-list i {
+        padding-left: 5px;
+    }
+    .action h2 {
+        font-size: 30px;
+    }
+    .button-demo li {
+        padding-bottom: 50px;
+    }
+}
+
+/* smart phone width: 360px ----------- */
+@media (max-width: 360px) {
+    #intro h2, #feature h2, #feature-2 h2 {
+        font-size: 30px;
+    }
+    .feat-list i {
+        padding-left: 0;
+    }
+    #feature .inner {
+        padding-left: 15px;
+    }
+    .video-header {
+        margin: 30px 0 30px;
+    }
+}
+
+/* iPhone 4/5 (portrait) ----------- */
+@media (max-width: 320px) {
+    .logo {
+        margin: 30px 0 20px 0;
+    }
+    .landing h1{
+        margin: 20px 0 35px 0;
+    }
+    .btn-default {
+        font-size: 16px;
+        margin: 30px 0 10px;
+        padding: 15px 30px;
+        height: 35px;
+        border-radius: 80px;
+    }
+    .btn-primary {
+        font-size: 16px;
+        margin: 30px 0 10px;
+        margin-right: 15px;
+        padding: 15px 30px;
+        height: 35px;
+        border-radius: 80px;
+    }
+    .subscribe-form {
+        margin: 50px auto 110px;
+    }
+    .subscribe-form input {
+        padding: 5px 15px;
+    }
+    .subscribe-form button {
+        padding: 0 15px;
+    }
+    .action h2 {
+        margin: 70px 0 20px;
+    }
+    .table > thead > tr > th, 
+    .table > tbody > tr > td { 
+        padding: 20px 10px; 
+    }
 }
 </style>
-</head>
+        <!--
+        <link href="./Backyard Landing Page_files/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="./Backyard Landing Page_files/font-awesome.min.css" rel="stylesheet">
+        <link href="./Backyard Landing Page_files/pe-icon-7-stroke.css" rel="stylesheet">
+        <link href="./Backyard Landing Page_files/animate.css" rel="stylesheet" media="screen">
+        <link href="./Backyard Landing Page_files/owl.theme.css" rel="stylesheet">
+        <link href="./Backyard Landing Page_files/owl.carousel.css" rel="stylesheet">
+-->
+        <!-- Colors
+        <link href="./Backyard Landing Page_files/css-index.css" rel="stylesheet" media="screen">-->
+        <!-- <link href="css/css-index-green.css" rel="stylesheet" media="screen"> -->
+        <!-- <link href="css/css-index-purple.css" rel="stylesheet" media="screen"> -->
+        <!-- <link href="css/css-index-red.css" rel="stylesheet" media="screen"> -->
+        <!-- <link href="css/css-index-orange.css" rel="stylesheet" media="screen"> -->
+        <!-- <link href="css/css-index-yellow.css" rel="stylesheet" media="screen"> -->
 
-<body id="page-top">
+        <!-- Google Fonts -->
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">BeePrinted</a>
-            </div>
+    </head>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#about">Sobre</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">Serviços</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#portfolio">Galeria</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contato</a>
-                    </li>
-                    <% if user_signed_in? %>
-                        <li>
-                            <%= link_to "Logout", destroy_user_session_path,:method => :delete %>
-                        </li>
-                        <li>
-                            <a class="page-scroll" style= "color:#F05F40; font-size:16px;" href=<%=new_user_registration_path %>>Dropdown</a>
-                        </li>
-                    <% else %>
-                        <li>
-                            <a class="page-scroll" href=<%=new_user_session_path%>>Entrar</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" style= "color:#F05F40; font-size:16px;" href=<%=new_user_registration_path %>>Registrar</a>
-                        </li>
-                    <% end %>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+    <body data-spy="scroll" data-target="#navbar-scroll">
+
+        <!-- /.preloader -->
+        
+        <div id="top"></div>
+
+        <!-- /.parallax full screen background image -->
+        <div class="fullscreen landing parallax" style="background-image: url(&quot;images/ligas.png&quot;); background-attachment: fixed; background-size: 1840px 1226.36px; background-position: 50% -178.317px;" data-img-width="2000" data-img-height="1333" data-diff="100">
+
+            <div class="overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+
+                            <!-- /.logo -->
+                            <div class="logo wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"> <a href=<%=root_path%>>BEEPRINTED</a></div>
+
+                            <!-- /.main title -->
+                            <h1 class="wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+                                Impressão e Exposição de Modelos 3D 
+                            </h1>
+
+                            <!-- /.header paragraph -->
+                            <div class="landing-text wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                                <p>Beeprinted é uma plataforma voltada à tecnologia de impressão e modelagem 3D. Faça parte da comunidade Bee e imprima projetos de outra pessoas. Também é possivel expor seus projetos e lucrar com eles.</p>
+                            </div>                
+
+                            <!-- /.header button -->
+                            <div class="head-btn wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+                            <div class="subscribe-form wow" style='margin:0px'>
+                                <%= form_tag search_path,class:"news-letter mailchimp", method: :get do %>
+                                        <%= text_field_tag :query, params[:query], class: 'form-control typeahead', autocomplete: "off", placeholder: "Pesquise Modelos e Designers", style:'background-color:white' %>
+            
+
+                                        <%= button_tag(type: "submit", class: "subscribe-btn btn") do %>
+            
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+
+                                        <% end %>
+                                <% end %>
+                            </div>
+                            </div>
+
+
+
+                        </div> 
+
+                        <!-- /.signup form -->
+                        <div class="col-md-5">
+
+                            <div class="signup-header wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+
+
+                                <bla id="criar">
+
+                                <div class="col-md-6 w3-round w3-center" style="background-color:#ccc;margin-bottom:5px;margin-top:5px;">
+                                    <a href='#' id=""><h4 class="w3-border">CRIE UMA CONTA</h4></a>
+                                </div>
+
+                                <div class="col-md-6 w3-center" style="margin-bottom:5px;margin-top:5px;">
+                                    <a href="#" id="Entrar"><h4 class="form-title">ENTRAR</h4></a>
+                                </div>
+
+
+                                <%= simple_form_for(resource,class: "form-header", as: resource_name, url: registration_path(resource_name)) do |f| %>
+                                    <%= f.error_notification %>
+                                    <div class="form-group">
+                                        <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'form-control input-lg' } %>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.input :name, required: true, label: false, placeholder: 'Nome', input_html: { class: 'form-control input-lg' } %>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.input :sobrenome, required: true, label: false, placeholder: 'Sobrenome', input_html: { class: 'form-control input-lg' } %>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.input :password, required: true, label: false, placeholder: 'Senha', input_html: { class: 'form-control input-lg' } %>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.input :password_confirmation, required: true, label: false, placeholder: 'Confirmar Senha', input_html: { class: 'form-control input-lg' } %>
+                                    </div>
+                                    <div class="form-group last">
+                                        <input type="submit" name="commit" value="Registrar" class="btn btn-warning btn-block btn-lg" style="background-color:#3eb0f7; border-color:#3eb0f7;">
+                                    </div>
+                                    <p class="privacy text-center">Não compartilharemos seu email. Leia nossa <a href="">política de privacidade</a>.</p>
+                                <% end %>
+                                </bla>
+                                <bla id="login" style="display: none">
+
+                                <div class="col-md-6 w3-center" style="margin-bottom:5px;margin-top:5px;">
+                                    <a href='#' id="Criar"><h4 class="form-title">CRIE UMA CONTA</h4></a>
+                                </div>
+                                <div class="col-md-6 w3-round w3-center" style="background-color:#ccc;margin-bottom:5px;margin-top:5px;">
+                                    <a href="#" id=""><h4 class="form-title">ENTRAR</h4></a>
+                                </div>
+
+
+
+                                <%= simple_form_for(resource,class:"form-header", as: resource_name, url: session_path(resource_name)) do |f| %>
+                                    <%= f.error_notification %>
+                                    <div class="form-group">
+                                        <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'form-control input-lg' } %>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.input :password, required: true, label: false, placeholder: 'Password', input_html: { class: 'form-control input-lg' } %>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+                                    </div>
+                                    <div class="form-group last">
+                                        <input type="submit" name="commit" value="Entrar" class="btn btn-warning btn-block btn-lg" style="background-color:#3eb0f7; border-color:#3eb0f7;">
+                                    </div>
+                                    <div class="w3-center">
+                                        <%= link_to "Login com Facebook", facebook_path %>
+                                    </div>
+                                    </div>
+                                <% end %>
+                                </bla>
+                                <!--<form class="form-header" action="http://moxdesign.us10.list-manage.com/subscribe/post" role="form" method="POST" id="#">
+                                    <input type="hidden" name="u" value="503bdae81fde8612ff4944435">
+                                    <input type="hidden" name="id" value="bfdba52708">
+                                    <div class="form-group">
+                                        <input class="form-control input-lg" name="MERGE1" id="name" type="text" placeholder="Your name" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control input-lg" name="MERGE0" id="email" type="email" placeholder="Email address" required="">
+                                    </div>
+                                    <div class="form-group last">
+                                        <input type="submit" class="btn btn-warning btn-block btn-lg" value="SUBSCRIBE">
+                                    </div>
+                                    <p class="privacy text-center">We will not share your email. Read our <a href="https://bootstrapthemes.co/demo/html/backyard/demo/privacy.html">privacy policy</a>.</p>
+                                </form>-->
+                            </div>              
+
+                        </div>
+                    </div>
+                </div> 
+            </div> 
         </div>
-        <!-- /.container-fluid -->
-    </nav>
 
-    <header>
-        <div class="header-content">
-            <div class="header-content-inner">
-                <h2 id="homeHeading" style="font-family: 'Open Sans'; font-size: 48px">Imprima suas Ideias</h2>
-                <hr>
-                <p style="font-family: 'Open Sans'; font-size:24px" >Faça ou encontre o projeto ideal e uma impressora para imprimi-los. Cadastre também sua impressora, e ganhe ajudando outros projetos!</p>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
-            </div>
-        </div>
-    </header>
+        <!-- NAVIGATION -->
+        <div id="menu-sticky-wrapper" class="sticky-wrapper" style="height: 50px;"><div id="menu">
+            <nav class="navbar-wrapper navbar-default" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-backyard">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand site-name" style='padding-top:15px' href=<%=root_path%>>BEEPRINTED</a>
+                    </div>
 
-    <section class="bg-primary" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">We've got what you need!</h2>
-                    <hr class="light">
-                    <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
-                    <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">At Your Service</h2>
-                    <hr class="primary">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
-                        <h3>Sturdy Templates</h3>
-                        <p class="text-muted">Our templates are updated regularly so they don't break.</p>
+                    <div id="navbar-scroll" class="collapse navbar-collapse navbar-backyard navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href=<%=galeria_path%>>Galeria</a></li>
+                            <li><a href=<%=browse_posts_path%>>Navegar</a></li>
+                            <li><a href=<%=learn_path%>>Tutoriais</a></li>
+                            <li><a href=<%=new_user_session_path%>>Entrar</a></li>
+                            <li><a href=<%=new_user_registration_path%>>Registrar</a></li>
+                            <li><a href="#contact">Contato</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
-                        <h3>Ready to Ship</h3>
-                        <p class="text-muted">You can use this theme as is, or you can make changes!</p>
+            </nav>
+        </div></div>
+
+        <!-- /.intro section -->
+        <div id="intro">
+            <div class="container">
+                <div class="row">
+
+                    <!-- /.intro image -->
+                    <div class="col-md-6 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: slideInLeft;">
+                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
+                    </div>  
+
+                    <!-- /.intro content -->
+                    <div class="col-md-6 wow slideInRight animated" style="visibility: visible; animation-name: slideInRight;">
+                        <h2>Modelos diferenciados disponíveis para impressão</h2>
+                        <p>Confira nossa <a href=<%=galeria_path%>>Galeria</a> de modelos. Nossa galeria de modelos cresce todos os dias. Cada usuário pode postar seus próprios projetos ou imprimir modelos já existentes. Vamos garantir para que autoria de seus projetos seja protegida.
+                        </p>
+
+                        <div class="btn-section"><a href=<%=galeria_path%> class="btn-default">Visite Nossa Galeria</a></div>
+
+                    </div>
+                </div>            
+            </div>
+        </div>
+
+        <!-- /.feature section -->
+        <div id="feature">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center feature-title">
+
+                        <!-- /.feature title -->
+                        <h2>Crie projetos e mostre seu portfolio</h2>
+                        <p>Você pode mostrar seu telanto como modelador e lucrar com projetos postados dentro do site.</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
-                        <h3>Up to Date</h3>
-                        <p class="text-muted">We update dependencies to keep things fresh.</p>
+                <div class="row row-feat">
+                    <div class="col-md-4 text-center">
+
+                        <!-- /.feature image -->
+                        <div class="feature-img">
+                            <img src="images/mascote.jpg" alt="image" class="img-responsive wow fadeInLeft" style="visibility: hidden; animation-name: none;">
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+
+                        <!-- /.feature 1 -->
+                        <div class="col-sm-6 feat-list">
+                            <i class="pe-7s-notebook pe-5x pe-va wow fadeInUp" style="visibility: hidden; animation-name: none;"></i>
+                            <div class="inner">
+                                <h4>Crie seu perfil</h4>
+                                <p>Postando seus projetos na comunidade Bee, você acumula reputação dentro do site. Vire nosso parceiro.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- /.feature 2 -->
+                        <div class="col-sm-6 feat-list">
+                            <i class="pe-7s-cash pe-5x pe-va wow fadeInUp" data-wow-delay="0.2s" style="visibility: hidden; animation-delay: 0.2s; animation-name: none;"></i>
+                            <div class="inner">
+                                <h4>Lucre com projetos.</h4>
+                                <p>Você pode atribuir um valor para seus modelos. Quando alguem imprimir seu projeto, a Beeprinted vai paga-lo pelo seu trabalho.</p>
+                            </div>
+                        </div>
+
+                        <!-- /.feature 3 -->
+                        <div class="col-sm-6 feat-list">
+                            <i class="pe-7s-cart pe-5x pe-va wow fadeInUp" data-wow-delay="0.4s" style="visibility: hidden; animation-delay: 0.4s; animation-name: none;"></i>
+                            <div class="inner">
+                                <h4>Aumente sua vendas</h4>
+                                <p>Melhore seu sua vizibilidade e lucre cada vez mais mostrando seus projetos para milhares de usuários.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- /.feature 4 -->
+                        <div class="col-sm-6 feat-list">
+                            <i class="pe-7s-users pe-5x pe-va wow fadeInUp" data-wow-delay="0.6s" style="visibility: hidden; animation-delay: 0.6s; animation-name: none;"></i>
+                            <div class="inner">
+                                <h4>Mostre seu trabalho</h4>
+                                <p>Milhares de pessoas vão visualizar seu trabalho. Mostre seu portifolio.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
-                        <h3>Made with Love</h3>
-                        <p class="text-muted">You have to make your websites with love these days!</p>
+            </div>
+        </div>
+
+        <!-- /.feature 2 section -->
+        <div id="feature-2">
+            <div class="container">
+                <div class="row">
+
+                    <!-- /.feature content -->
+                    <div class="col-md-6 wow fadeInLeft" style="visibility: hidden; animation-name: none;">
+                        <h2>Entenda melhor sobre as impressões 3D com nossos tutoriais</h2>
+                        <p> Em nossos <span class="highlight">Tutoriais</span>, você vai aprender sobre diversos temas dentro do universo da impressão 3D. Você vai aprender, por exemplo, sobre acabamento, material de impressão e modelagem 3D.
+                        </p>
+
+                        <div class="btn-section"><a href=<%=learn_path%> class="btn-default">Visite Nossos Tutoriais</a></div>
+
+                    </div>
+
+                    <!-- /.feature image -->
+                    <div class="col-md-6 feature-2-pic wow fadeInRight" style="visibility: hidden; animation-name: none;">
+                        <img src="images/varinha2.jpg" alt="macbook" class="img-responsive">
+                    </div>                
+                </div>            
+
+            </div>
+        </div>
+
+
+        <!-- /.download section -->
+        <div id="download">
+            <div class="action fullscreen parallax" style="background-image: url(&quot;images/varinha3.jpg&quot;); background-attachment: fixed; background-size: 1840px 1226.36px;" data-img-width="2000" data-img-height="1333" data-diff="100">
+                <div class="overlay">
+                    <div class="container">
+                        <div class="col-md-8 col-md-offset-2 col-sm-12 text-center">
+
+                            <!-- /.download title -->
+                            <h2 class="wow fadeInRight" style="visibility: hidden; animation-name: none;">Quer conhecer mais?</h2>
+                            <p class="download-text wow fadeInLeft" style="visibility: hidden; animation-name: none;">Faça seu cadastro e utilize todas as ferramentas que nossa plataforma oferece.</p>
+
+                            <!-- /.download button -->
+                            <div class="download-cta wow fadeInLeft" style="visibility: hidden; animation-name: none;">
+                                <a href=<%=new_user_registration_path%> class="btn-secondary">Cadastre-se</a>
+                            </div>
+                        </div>  
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <!-- /.pricing section -->
+
+        <!-- /.client section -->
+        <div id="client"> 
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <img alt="client" src="images/eu.jpg" class="wow fadeInUp" style="visibility: hidden; animation-name: none;">
+                        <img alt="client" src="images/eu.jpg" class="wow fadeInUp" data-wow-delay="0.2s" style="visibility: hidden; animation-delay: 0.2s; animation-name: none;">
+                        <img alt="client" src="images/eu.jpg" class="wow fadeInUp" data-wow-delay="0.4s" style="visibility: hidden; animation-delay: 0.4s; animation-name: none;">
+                        <img alt="client" src="images/eu.jpg" class="wow fadeInUp" data-wow-delay="0.6s" style="visibility: hidden; animation-delay: 0.6s; animation-name: none;">
+                    </div>
+                </div>
+            </div>  
+        </div>
+
+        <!-- /.testimonial section -->
+        <div id="testi">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="wow fadeInLeft" style="visibility: hidden; animation-name: none;">Depoimentos</h2>
+                    <div class="title-line wow fadeInRight" style="visibility: hidden; animation-name: none;"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1"> 
+                        <div id="owl-testi" class="owl-carousel owl-theme wow fadeInUp" style="opacity: 1; display: block; visibility: hidden; animation-name: none;">
+
+                            <!-- /.testimonial 1 -->
+                            <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 5670px; left: 0px; display: block;"><div class="owl-item" style="width: 945px;"><div class="testi-item">
+                                <div class="client-pic text-center">
+
+                                    <!-- /.client photo -->
+                                    <img src="images/eu.jpg" alt="client">
+                                </div>
+                                <div class="box">
+
+                                    <!-- /.testimonial content -->
+                                    <p class="message text-center">"We are very happy and satisfied with BeePrinted service. Our account manager is efficient and very knowledgeable. It was able to create a vast fan base within very short period of time. We would highly recommend BeePrinted App to anyone."</p>
+                                </div>
+                                <div class="client-info text-center">
+
+                                    <!-- /.client name -->
+                                    Lady Gaga, <span class="company">BEEPRINTED</span>  
+                                </div>
+                            </div></div><div class="owl-item" style="width: 945px;"><div class="testi-item">
+                                <div class="client-pic text-center">
+
+                                    <!-- /.client photo -->
+                                    <img src="images/eu.jpg" alt="client">
+                                </div>
+                                <div class="box">
+
+                                    <!-- /.testimonial content -->
+                                    <p class="message text-center">"Everything looks great... Thanks for the quick revision turn around. We were lucky to find you guys and will definitely be using some of your other services in the near future."</p>
+                                </div>
+                                <div class="client-info text-center">
+
+                                    <!-- /.client name -->
+                                    Mike Portnoy, <span class="company">Dream Theater</span>    
+                                </div>
+                            </div></div><div class="owl-item" style="width: 945px;"><div class="testi-item">
+                                <div class="client-pic text-center">
+
+                                    <!-- /.client photo -->
+                                    <img src="images/eu.jpg" alt="client">
+                                </div>
+                                <div class="box">
+
+                                    <!-- /.testimonial content -->
+                                    <p class="message text-center">"Overall, the two reports were very clear and helpful so thank you for the suggestion to do the focus group. We are currently working with our developer to implement some of these suggestions."</p>
+                                </div>
+                                <div class="client-info text-center">
+
+                                    <!-- /.client name -->
+                                    Jennifer Love Hewitt, <span class="company">Lead Vocal</span>   
+                                </div>
+                            </div></div></div></div>        
+
+                            <!-- /.testimonial 2 -->
+                                            
+
+                            <!-- /.testimonial 3 -->
+                                        
+
+                        <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div></div>
+                    </div>  
+                </div>  
+            </div>
+        </div>
+
+        <!-- /.contact section -->
+        <div id="contact">
+            <div class="contact fullscreen parallax" style="background-image: url(&quot;images/city.jpg&quot;); background-attachment: fixed; background-size: 1840px 1227.28px;" data-img-width="2000" data-img-height="1334" data-diff="100">
+                <div class="overlay">
+                    <div class="container">
+                        <div class="row contact-row">
+
+                            <!-- /.address and contact -->
+                            <div class="col-sm-5 contact-left wow fadeInUp" style="visibility: hidden; animation-name: none;">
+                                <h2><span class="highlight">Get</span> in touch</h2>
+                                <ul class="ul-address">
+                                    <li><i class="pe-7s-map-marker"></i>1600 Amphitheatre Parkway, Mountain View<br>
+                                        California 55000
+                                    </li>
+                                    <li><i class="pe-7s-phone"></i>+1 (123) 456-7890<br>
+                                        +2 (123) 456-7890
+                                    </li>
+                                    <li><i class="pe-7s-mail"></i><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
+                                    <li><i class="pe-7s-look"></i><a href="https://bootstrapthemes.co/demo/html/backyard/demo/index.html#">www.yoursite.com</a></li>
+                                </ul>   
+
+                            </div>
+
+                            <!-- /.contact form -->
+                            <div class="col-sm-7 contact-right">
+                                <form method="POST" id="contact-form" class="form-horizontal" action="https://bootstrapthemes.co/demo/html/backyard/demo/contactengine.php" onsubmit="alert( &#39;Thank you for your feedback!&#39; );">
+                                    <div class="form-group">
+                                        <input type="text" name="Name" id="Name" class="form-control wow fadeInUp" placeholder="Name" required="" style="visibility: hidden; animation-name: none;">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="Email" id="Email" class="form-control wow fadeInUp" placeholder="Email" required="" style="visibility: hidden; animation-name: none;">
+                                    </div>                  
+                                    <div class="form-group">
+                                        <textarea name="Message" rows="20" cols="20" id="Message" class="form-control input-message wow fadeInUp" placeholder="Message" required="" style="visibility: hidden; animation-name: none;"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" name="submit" value="Submit" class="btn btn-success wow fadeInUp" style="visibility: hidden; animation-name: none;">
+                                    </div>
+                                </form>     
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section class="no-padding" id="portfolio">
-        <div class="container-fluid">
-            <div class="row no-gutter popup-gallery">
-                <div class="col-lg-4 col-sm-6">
-                    <a href=<%= asset_path('1.jpg') %> class="portfolio-box">
-                        <img src=<%= asset_path('1.jpg') %> class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href=<%= asset_path('2.jpg') %> class="portfolio-box">
-                        <img src=<%= asset_path('2.jpg') %> class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href=<%= asset_path('3.jpg') %> class="portfolio-box">
-                        <img src=<%= asset_path('3.jpg') %> class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href=<%= asset_path('4.jpg') %> class="portfolio-box">
-                        <img src=<%= asset_path('4.jpg') %> class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href=<%= asset_path('5.jpg') %> class="portfolio-box">
-                        <img src=<%= asset_path('5.jpg') %> class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <a href=<%= asset_path('6.jpg') %> class="portfolio-box">
-                        <img src=<%= asset_path('6.jpg') %> class="img-responsive" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                                </div>
-                                <div class="project-name">
-                                    Project Name
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- /.footer -->
+        <footer id="footer">
+            <div class="container">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <!-- /.social links -->
+                    <div class="social text-center">
+                        <ul>
+                            <li><a class="wow fadeInUp" href="https://twitter.com/" style="visibility: hidden; animation-name: none;"><i class="fa fa-twitter"></i></a></li>
+                            <li><a class="wow fadeInUp" href="https://www.facebook.com/" data-wow-delay="0.2s" style="visibility: hidden; animation-delay: 0.2s; animation-name: none;"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="wow fadeInUp" href="https://plus.google.com/" data-wow-delay="0.4s" style="visibility: hidden; animation-delay: 0.4s; animation-name: none;"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a class="wow fadeInUp" href="https://instagram.com/" data-wow-delay="0.6s" style="visibility: hidden; animation-delay: 0.6s; animation-name: none;"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>  
+                    <div class="text-center wow fadeInUp" style="font-size: 14px; visibility: hidden; animation-name: none;">Copyright Beeprinted 2017 
+                    </div>
+                </div>  
+            </div>  
+        </footer>
 
-    <aside class="bg-dark">
-        <div class="container text-center">
-            <div class="call-to-action">
-                <h2>Destaques de Diferentes Categorias</h2>
-                <a href=<%= posts_path %> class="btn btn-default btn-xl sr-button">Galeria Completa</a>
-            </div>
-        </div>
-    </aside>
-
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Let's Get In Touch!</h2>
-                    <hr class="primary">
-                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
-                </div>
-                <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <i class="fa fa-phone fa-3x sr-contact"></i>
-                    <p>123-456-6789</p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                    <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- jQuery -->
-    <script src=<%= asset_path('jquery.min.js') %>></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src=<%= asset_path('bootstrap.min.js') %>></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src=<%= asset_path('scrollreveal.min.js') %>></script>
-    <script src=<%= asset_path('jquery.magnific-popup.min.js') %>></script>
-
-    <!-- Theme JavaScript -->
-    <script src=<%= asset_path('creative.min.js') %>></script>
-
-</body>
-
-</html>
+        <!-- /.javascript files -->
+        <%= javascript_include_tag 'jquery.js' %>
+        <%= javascript_include_tag 'bootstrap.min.js' %>
+        <%= javascript_include_tag 'custom.js' %>
+        <%= javascript_include_tag 'jquery.sticky.js' %>
+        <%= javascript_include_tag 'wow.min.js' %>
+        <%= javascript_include_tag 'owl.carousel.min.js' %>
+        <!--
+        <script src="./Backyard Landing Page_files/jquery.js"></script>
+        <script src="./Backyard Landing Page_files/bootstrap.min.js"></script>
+        <script src="./Backyard Landing Page_files/custom.js"></script>
+        <script src="./Backyard Landing Page_files/jquery.sticky.js"></script>
+        <script src="./Backyard Landing Page_files/wow.min.js"></script>
+        <script src="./Backyard Landing Page_files/owl.carousel.min.js"></script>-->
+        <script>
+                                    new WOW().init();
+        </script>
+        <style type="text/css">
+            .col-md-6{
+                border-radius: 5px !important;
+            }
+        </style>
+        <script>
+        $("#Entrar").click(function() {
+            console.log("blaaaaaa");
+            $("#criar").hide();
+            $("#login").show();
+        });
+        $("#Criar").click(function() {
+            console.log("blaaaaaa");
+            $("#login").hide();
+            $("#criar").show();
+        });
+        </script>
+</body></html>

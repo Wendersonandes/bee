@@ -1,7 +1,10 @@
-$("#order_<%=@order.id %>").hide();
+$(".order_<%=@order.id %>").hide();
 $("#preco_total").html("R$<%=@preco%>");
 $("#price").val("<%=@preco%>");
 if ("<%=@preco%>" == '0'){
 	$("#se_forzero").hide();
 }
-$("#quant_order").html("<%= current_user.carrinhos.find_by(status: 'criado').orders.count%>");
+$("#quant_order").html("<a href=<%=carrinho_path(current_user.user_name)%>><%= current_user.carrinhos.find_by(status: 'criado').orders.count%><span class='glyphicon glyphicon-shopping-cart'></span></a>");
+$("#order_foto").html("<%= j render 'carrinhos/principal', carrinho: @order.carrinho %>");
+var slideIndex = 1;
+showDivs(slideIndex);

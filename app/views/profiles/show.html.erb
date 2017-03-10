@@ -2,21 +2,48 @@
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 .w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
+
+.image-upload > input
+{
+    display: none;
+}
+label:hover .imageperfil {
+  opacity: 0.3;
+}
+
+label:hover .middle {
+  opacity: 1;
+}
+
+label.imageperfil {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  left:69%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+
+.w3-btn, .w3-btn-block{
+background-color: #6441a4;
+}
+
+
+
 </style>
 <!--<script type="text/javascript" src="../assets/show_profile.js"></script>-->
 <div id="perfil"></div>
 <div class="w3-light-grey w3-content" style="max-width:1600px; padding-top: 45px">
-<% flash.each do |key, value| %>
-  <% alert_class = case key
-                   when :notice then "success"
-                   when :alert then "danger"
-                   else key
-                   end %>
-  <%= content_tag :div, class: "text-center alert alert-#{alert_class}" do %>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <%= value %>
-  <% end %>
-<% end %>
 <!-- Sidenav/menu -->
 <nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
   <div class="w3-container foto">
@@ -25,21 +52,35 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </a>
       <div class="w3-card-2 w3-round w3-white">
         <div class="w3-container">
-        <%= form_for @user, url: "#{update_profile_path(@user.id)}" do |f| %>
-         <h4 class="w3-center"><%=@user.completo%></h4>
+        <% if @user == current_user %>
+          <%= form_for @user, url: "#{update_profile_path(@user.user_name)}" do |f| %>
+          <h4 class="w3-center" style="text-transform: capitalize;"><%=@user.completo%></h4>
 
 
-         <p class="w3-center">
+          <div class="image-upload w3-center">
+            <label for="file-input">
 
-        <%= link_to (image_tag @user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(current_user) %>
+             <%= image_tag @user.avatar.url(:medium),class: "w3-circle imageperfil", style: 'height:106px;width:106px;position:relative; cursor:pointer', id:'image-preview' %>
+             <div class="middle w3-center">
+                <span style="position:absolute; margin:-72px;">
+                <i class="fa fa-folder fa-3x" aria-hidden="true" style="color:#777; cursor:pointer"></i>
+                </span>
+                </div>
+                <div id='submit_avatar' style="display: none"><%= f.submit "Atualizar Foto" %></div>
 
-         </p>
 
-         <hr>
-         <p>
-         <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-         <%= f.text_field :prof, placeholder: 'Adicionar Profissao', class: 'edit_form w3-border-0'%>
-</p>
+            </label>
+
+            <%= f.file_field :avatar, class: 'edit_form_avatar',onChange: 'loadFile(event)', id:"file-input"%>
+            </div>
+            
+
+
+          <hr>
+          <p>
+          <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
+          <%= f.text_field :prof, placeholder: 'Adicionar Profissao', class: 'edit_form w3-border-0'%>
+          </p>
          <p>
          <i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>
          <%= f.text_field :city, placeholder: 'Adicionar Cidade', class: 'edit_form w3-border-0'%>
@@ -49,8 +90,26 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
          <%= f.text_field :niver, placeholder: 'Data de Aniversário', class: 'edit_form w3-border-0'%>
 </p>
         
-        <div id='submit' style="display: none"><%= f.submit %></div>
+        <div id='submit' style="display: none"><%= f.submit "Atualizar Perfil" %></div>
         <% end %>
+        <% else %>
+        <h4 class="w3-center"><%=@user.completo%></h4>
+        <p class="w3-center">
+
+          <%= link_to (image_tag @user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(@user.user_name) %>
+
+        </p>
+        <% if @user.prof && @user.prof!=''%>
+          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <%=@user.prof%></p>
+        <% end %>
+        <% if @user.city && @user.city!=''%>
+         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <%=@user.city%></p>
+        <% end %>
+        <% if @user.niver && @user.niver!=' '  %>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><%=@user.niver%></p>
+        <% end %>
+        <% end %>
+
         </div>
       </div>
 
@@ -64,7 +123,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div class="w3-accordion w3-white">
           <a href=''><button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.followers.count-1%> Seguidores</button></a>
           <a href=''><button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.following.count-1%> Seguindo</button></a>
-          <a href=<%=new_printer_path%>><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><i class="fa fa-print fa-fw w3-margin-right"></i> Adicionar impressora</button></a>
+          <a href=<%=new_printer_path%>><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.view%> Visualizações do Perfil</button></a>
         </div>      
       </div>
       <br>
@@ -72,57 +131,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <div class="w3-card-2 w3-round w3-white w3-hide-small">
         <div class="w3-container">
           <p>Descricao</p>
-        <%= form_for @user, url: "#{update_profile_path(@user.id)}" do |f| %>
-          <p class="w3-text-grey" style="font-size:15px;"><%= f.text_field :bio, placeholder: 'Descriçao', class: 'edit_form2 w3-border-0'%></p>
-          <div id='submit2' style="display: none"><%= f.submit %></div>
-          <% end %>
+            <% if @user == current_user %>
+              <%= form_for @user, url: "#{update_profile_path(@user.user_name)}" do |f| %>
+                <p class="w3-text-grey" style="font-size:15px;"><%= f.text_field :bio, placeholder: 'Descriçao', class: 'edit_form2 w3-border-0'%></p>
+                <div id='submit2' style="display: none"><%= f.submit %></div>
+            <% end %>
+            <% else %>
+              <p class="w3-text-grey" style="font-size:15px;"><%=@user.bio%></p>
+            <% end %>
         </div>
       </div>
       <br>
-
-
-
-
-<!--
-    <p class="w3-text-grey" style="font-size:13px;"><%=@user.followers.count-1%> SEGUIDORES <%=@user.posts.count%> DESIGNS</p>
-    <p class="w3-text-grey" style="font-size:15px;"><%= @user.bio %></p>
-  </div>
-  <% if @user == current_user %>
-    <a href=<%= update_profile_path(@user)%> onclick="w3_close()" class="w3-padding w3-text-teal" id="edit"><i class="fa fa-edit fa-fw w3-margin-right"></i>EDITAR</a>
-  <% else %>
-    <% if current_user_is_following(current_user.id, @user.id) %>
-      <script> $(document).ready(function (){
-    $('#coco1').hide(); 
-  })</script>
-      <a class="w3-padding w3-text-teal" id="unfollow-button" data-remote="true" rel="nofollow" data-method="post" href=<%=unfollow_user_path%>>
-      <div id="coco1"><i class="fa fa-th-large fa-fw w3-margin-right"></i>SEGUIR</div>
-      <div id="coco2"><i class="fa fa-th-large fa-fw w3-margin-right"></i>SEGUINDO</div>
-      </a>
-    <% else %>
-    <script> $(document).ready(function (){
-    $('#coco2').hide(); 
-  })</script>
-      <a class="w3-padding w3-text-teal" id="follow-button" data-remote="true" rel="nofollow" data-method="post" href=<%=follow_user_path%>>
-        <div id="coco1"><i class="fa fa-th-large fa-fw w3-margin-right"></i>SEGUIR</div>
-        <div id="coco2"><i class="fa fa-th-large fa-fw w3-margin-right"></i>SEGUINDO</div>
-      </a>
-    <% end %>
-  <% end %>
-  <% if @user == current_user %>
-   <a href=<%= new_printer_path%> class="w3-padding"><i class="fa fa-print fa-fw w3-margin-right"></i>ADD IMPRESSORA 3D</a>
-   <% end %>
-  <a href="#about" onclick="w3_close()" class="w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a>
-  <a href="#contact" onclick="w3_close()" class="w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CHAT</a>
-   
-  <div class="w3-section w3-padding-top w3-large">
-    <a href="#" class="w3-hover-white w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-facebook-official"></i></a>
-    <a href="#" class="w3-hover-white w3-hover-text-red w3-show-inline-block"><i class="fa fa-pinterest-p"></i></a>
-    <a href="#" class="w3-hover-white w3-hover-text-light-blue w3-show-inline-block"><i class="fa fa-twitter"></i></a>
-    <a href="#" class="w3-hover-white w3-hover-text-grey w3-show-inline-block"><i class="fa fa-flickr"></i></a>
-    <a href="#" class="w3-hover-white w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-linkedin"></i></a>
-  </div> -->
-
-
 
 </nav>
 
@@ -146,7 +165,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   </div>
   
   <div id="my-posts">
-    <div id="lady-gaga"><%= render 'projects', posts: @posts %></div>
+    <div id="lady-gaga">
+      <% if @posts.any? %>
+        <%= render 'projects', posts: @posts %>
+      <% else %>
+        <h1>Você ainda nao possui projetos</h1>
+      <% end %>
+    </div>
   </div>
   <!-- Pagination -->
   <div id="infinite-scrolling">
@@ -238,6 +263,10 @@ function w3_close() {
 $(".edit_form").click(function() {
   console.log("blaaaaaa");
   $("#submit").show();
+});
+$(".edit_form_avatar").click(function() {
+  console.log("blaaaaaa");
+  $("#submit_avatar").show();
 });
 $(".edit_form2").click(function() {
   console.log("blaaaaaa");

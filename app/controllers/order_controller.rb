@@ -6,20 +6,24 @@ class OrderController < ApplicationController
   # Gerar um Token de sessão para nosso pagamento
   def new
     @printer = Printer.last
-    @carrinho = Carrinho.find(params[:carrinho_id])
+    @user = User.find_by(user_name: params[:user_name])
+    @carrinho = @user.carrinhos.find_by(:status => 'criado')
 
     @session_id = (PagSeguro::Session.create).id
     @preco = 0
     @carrinho.orders.each do |order|
-      @preco = @preco + order.price
+      order.quantidade.times do
+        @preco = @preco + order.price
+      end
     end
-    @preco = @preco.round(2)
+    @preco = '%.2f' % @preco.round(2)
 	  #PagMailer.print_email(current_user).deliver
   end
  
   # Enviar nosso pagamento para o Pagseguro
   def create
-    @carrinho = Carrinho.find(params[:carrinho_id])
+    @user = User.find_by(user_name: params[:user_name])
+    @carrinho = @user.carrinhos.find_by(:status => 'criado')
 
  
     @payment = PagSeguro::CreditCardTransactionRequest.new
@@ -30,13 +34,16 @@ class OrderController < ApplicationController
     # em um carrinho altere aqui para incluir sua lista de itens
     @preco = 0
     @carrinho.orders.each do |order|
-      @preco = @preco + order.price
-      @payment.items << {
-        id: order.id,
-        description: order.post.caption,
-        amount: order.price,
-        weight: 0
-      }
+      order.quantidade.times do
+        @preco = @preco + order.price
+        @preco = '%.2f' % @preco.round(2)
+        @payment.items << {
+          id: order.id,
+          description: order.post.caption,
+          amount: order.price,
+          weight: 0
+        }
+      end
     end
  
     # Criando uma referencia para a nossa ORDER
@@ -103,7 +110,14 @@ class OrderController < ApplicationController
     @payment.create
  
     # Cria uma Order para registro das transações
-    @carrinho = @carrinho.update_attributes(:buyer_name => params[:name],
+    #PagMailer.print_email(@order).deliver
+    if @payment.errors.any?
+     puts "=> ERRORS"
+     puts @payment.errors.join("\n")
+     #render plain: "Erro No Pagamento #{payment.errors.join("\n")}"
+     render 'order/error'
+    else
+      @carrinho = @carrinho.update_attributes(:buyer_name => params[:name],
       :email => params[:email],
       :cpf => params[:cpf],
       :reference => reference,
@@ -117,13 +131,6 @@ class OrderController < ApplicationController
       :state => params[:state],
       :postal_code => params[:postal_code]
     )
-    #PagMailer.print_email(@order).deliver
-    if @payment.errors.any?
-     puts "=> ERRORS"
-     puts @payment.errors.join("\n")
-     #render plain: "Erro No Pagamento #{payment.errors.join("\n")}"
-     render 'order/error'
-    else
      puts "=> Transaction"
      puts "  code: #{@payment.code}"
      puts "  reference: #{@payment.reference}"
@@ -164,8 +171,11 @@ class OrderController < ApplicationController
       @order.delete
       @preco = 0
       @order.carrinho.orders.each do |order|
-        @preco = @preco + order.price
+        order.quantidade.times do
+          @preco = @preco + order.price
+        end
       end
+      @preco = '%.2f' % @preco.round(2)
       respond_to do |format|
         format.html {redirect_to carrinho_path(@order.carrinho.id)}
         format.js
@@ -174,7 +184,7 @@ class OrderController < ApplicationController
   end
   def notification
     transaction = PagSeguro::Transaction.find_by_notification_code(params[:notificationCode])
-    status = ['Aguardando Pagamento', 'Em análise', 'Paga', 'Disponível', 'Em disputa', 'Devolvida', 'Cancelada']
+    status = ['Aguardando Pagamento', 'Em análise', 'Pago', 'Disponível', 'Em disputa', 'Devolvido', 'Cancelado']
  
     if transaction.errors.empty?
       carrinho = Carrinho.where(reference: transaction.reference).last
@@ -189,5 +199,13 @@ class OrderController < ApplicationController
   end
   def index
     @carrinhos = Carrinho.all
+  end
+  private
+  def create_notification(carrinho)  
+    Notification.create(user_id: carrinho.user.id,
+                        notified_by_id: User.first.id,
+                        post_id: post.id,
+                        identifier: User.first.id,
+                        notice_type: "Seu pagamento de R$#{carrinho.price} está #{carrinho.status}")
   end
 end

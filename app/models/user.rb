@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   acts_as_voter
-  scope :starts_with, -> (completo) { where("lower(completo) like ?", "#{completo.downcase}%")}
+  scope :starts_with, -> (completo) { where("lower(completo) like ?", "%#{completo.downcase}%")}
   #searchkick autocomplete: ['completo']
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -31,6 +31,9 @@ class User < ActiveRecord::Base
   has_many :notifications, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :carrinhos, dependent: :destroy
+  has_many :car_comments, dependent: :destroy
+  has_many :ped_comments, dependent: :destroy
+  has_many :pedidos, dependent: :destroy
 
   has_attached_file :avatar, styles: { medium: '150x150#', :thumb => "100x100" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/

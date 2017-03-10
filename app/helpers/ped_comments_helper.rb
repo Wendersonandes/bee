@@ -1,0 +1,2 @@
+module PedCommentsHelper
+end

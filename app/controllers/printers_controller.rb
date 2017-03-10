@@ -12,7 +12,7 @@ class PrintersController < ApplicationController
 
    	if @printer.save
      	flash[:success] = "Impressora Adicionada!"
-     	redirect_to posts_path
+     	redirect_to browse_posts_path
     else
      	flash[:alert] = "Sua Impressora nao pôde ser adicionada!  Por favor, cheque o formulário."
      	render :new
@@ -33,7 +33,7 @@ class PrintersController < ApplicationController
     if @printer.user.id == current_user.id
       @printer.delete
       respond_to do |format|
-        format.html {redirect_to profile_path(@printer.user.id)}
+        format.html {redirect_to profile_path(@printer.user.user_name)}
         format.js
       end
     end
@@ -42,7 +42,7 @@ class PrintersController < ApplicationController
     @printer = Printer.find(params[:id])
     @printer.update_attribute(:active, "true")
     respond_to do |format|
-      format.html {redirect_to profile_path(@printer.user.id)}
+      format.html {redirect_to profile_path(@printer.user.user_name)}
       format.js
     end
   end
@@ -51,7 +51,7 @@ class PrintersController < ApplicationController
     @printer = Printer.find(params[:id])
     @printer.update_attribute(:active, "false")
     respond_to do |format|
-      format.html {redirect_to profile_path(@printer.user.id)}
+      format.html {redirect_to profile_path(@printer.user.user_name)}
       format.js
     end
   end

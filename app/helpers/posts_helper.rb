@@ -17,7 +17,7 @@ module PostsHelper
     unless votes.blank?
       votes.voters.each do |voter|
         user_names.push(link_to "#{voter.name} #{voter.sobrenome}",
-                                profile_path(voter.id),
+                                profile_path(voter.user_name),
                                 class: 'user-name')
       end
       user_names.to_sentence.html_safe + like_plural(votes)

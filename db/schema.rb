@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213224709) do
+ActiveRecord::Schema.define(version: 20170309140412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "car_comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "carrinho_id"
+    t.text     "content"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "car_comments", ["carrinho_id"], name: "index_car_comments_on_carrinho_id", using: :btree
+  add_index "car_comments", ["user_id"], name: "index_car_comments_on_user_id", using: :btree
 
   create_table "carrinhos", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -124,12 +135,30 @@ ActiveRecord::Schema.define(version: 20170213224709) do
     t.string   "preench"
     t.integer  "printer_id"
     t.integer  "carrinho_id"
+    t.integer  "quantidade"
+  end
+
+  create_table "ped_comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "pedido_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ped_comments", ["pedido_id"], name: "index_ped_comments_on_pedido_id", using: :btree
+  add_index "ped_comments", ["user_id"], name: "index_ped_comments_on_user_id", using: :btree
+
+  create_table "pedidos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.string   "caption"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -141,6 +170,9 @@ ActiveRecord::Schema.define(version: 20170213224709) do
     t.integer  "cached_votes_up",    default: 0
     t.integer  "cached_votes_down",  default: 0
     t.float    "volume"
+    t.integer  "view",               default: 0
+    t.float    "preco",              default: 0.0
+    t.integer  "status"
   end
 
   add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down", using: :btree
@@ -200,6 +232,17 @@ ActiveRecord::Schema.define(version: 20170213224709) do
     t.string   "prof"
     t.string   "city"
     t.string   "niver"
+    t.string   "user_name"
+    t.integer  "view",                   default: 0
+    t.string   "conta_pais"
+    t.string   "conta_nome"
+    t.string   "conta_sobrenome"
+    t.string   "conta_cpf"
+    t.string   "conta_banco"
+    t.string   "conta_agencia"
+    t.string   "conta_tipo"
+    t.string   "conta_num"
+    t.string   "tipo"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -220,12 +263,16 @@ ActiveRecord::Schema.define(version: 20170213224709) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
+  add_foreign_key "car_comments", "carrinhos"
+  add_foreign_key "car_comments", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "materials", "printers"
   add_foreign_key "notifications", "posts"
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "notified_by_id"
+  add_foreign_key "ped_comments", "pedidos"
+  add_foreign_key "ped_comments", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "printers", "users"
 end

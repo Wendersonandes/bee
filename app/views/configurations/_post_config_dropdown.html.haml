@@ -1,0 +1,8 @@
+.dropdown.notification-dropdown{style: 'margin:0px'}
+  %button.btn.btn-default.dropdown-toggle{style:'padding:0px 6px', type: 'button', id: 'dropdownMenu1', data: { toggle: 'dropdown' }, 'aria-haspopup': true, 'aria-expanded': true }
+    %i.fa.fa-cog{style: ' color:#A5A7AA'}
+    %span.glyphicon.glyphicon-chevron-down{style: ' color:#A5A7AA'}
+  %ul.dropdown-menu{ 'aria-labelledby': 'dropdownMenu1' }
+    %li.text-center= link_to "Editar Projeto", edit_post_path(post)
+    %li.divider{ role: 'separator' }
+    %li.text-center= link_to "Excluir",post_path(post), method: :delete, data: { confirm: "Tem certeza que deseja excluir esse Projeto?" }

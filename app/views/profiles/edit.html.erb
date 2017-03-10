@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="form-group text-center">
-            <%= link_to "cancel ", profile_path(@user.id) %>
+            <%= link_to "cancel ", profile_path(@user.user_name) %>
             <%= f.button :submit, 'Update Profile', class: 'btn btn-success' %>
           </div>
         <% end %>

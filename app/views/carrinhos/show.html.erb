@@ -1,0 +1,329 @@
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
+.mySlides {display:none}
+</style>
+
+<body class="w3-content">
+
+<!-- Sidenav/menu -->
+<br>
+<br>
+<nav class="w3-sidenav w3-light-grey w3-collapse w3-top w3-border-left" style="z-index:3;width:260px; " id="mySidenav">
+<br>
+<br>
+<br>
+  <div class="w3-container w3-padding-8">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-closebtn w3-hover-text-red"></i>
+    <p class="w3-center">
+
+      <%= image_tag "logo.jpg",class: "w3-circle", style: 'height:130px;width:130px' %>
+    </p>
+    <div class="w3-center"><strong>BEEPRINTED</strong></div>
+    <div class="w3-center">Brasília, Brasil</div>
+    <hr style="border-top: 1px solid #cccccc">
+    <div style="color:#555555; margin-bottom:20px; font-size:15px;"><strong>Pagamento</strong></div>
+
+    <div class='w3-container' style="border-bottom:3px solid #888888; padding-bottom:10px">
+      <ul>
+        <% @carrinho.orders.each do |order| %>
+          <div class="w3-container order_<%=order.id%>" style="padding:0px">
+            <li style="float:left; font-size:13px; color:#555555;"><%=order.post.caption%></li>
+            <li style="float:right;font-size:13px;color:#555555;">R$<%=order.price%></li>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+    <div class='w3-container'>
+      <ul>
+        <strong>
+          <li style="float:left; font-size:14px; color:#555555;">Total:</li>
+          <li id='preco_total' style="float:right;font-size:14px;color:#555555;">R$<%=@preco%></li>
+        </strong>
+      </ul>
+    </div>
+    <hr style="border-top: 1px solid #cccccc">
+    <div style="color:#555555; margin-bottom:20px; font-size:15px;"><strong>Detalhes do Pedido</strong></div>
+    <% @carrinho.orders.each do |order| %>
+      <div class="order_<%=order.id%>">
+      <h5 style="color:#555555"><strong><%=order.post.caption%></strong></h5>
+      <h5 style="color:#555555; margin-left:10px;">Material: <%=order.material%></h5>
+      <h5 style="color:#555555; margin-left:10px;">Cor: <%=order.color%></h5>
+      <h5 style="color:#555555; margin-left:10px;">Resolução: <%=order.resolution%></h5>
+      <h5 style="color:#555555; margin-left:10px;">Preenchimento: <%=order.preench%></h5>
+      </div>
+    <% end %>
+    <hr style="border-top: 1px solid #cccccc">
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-80">
+  <span class="w3-left">Pedido</span>
+  <a href="javascript:void(0)" class="w3-right w3-opennav" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-white w3-border-right" style="margin-left:260px">
+<br>
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:80px"></div>
+
+  <!-- Slideshow Header -->
+  <bla id='order_foto'>
+  <%= render 'principal', carrinho: @carrinho %>
+  </bla>
+  <hr style="margin-bottom:2px; border-top: 1px solid #dddddd">
+  <div style="color:#999999">Para cancelar algum pedido, clique no "x" no topo esquerdo da respectiva foto</div>
+
+  <hr style="margin-bottom:2px; border-top: 1px solid #dddddd">
+  <!-- Contact -->
+  <div class="w3-container" id="contact">
+    <h2 style="color:#777777">Consulta</h2>
+
+<a href="javascript:void(0)" class="w3-padding" onclick="document.getElementById('subscribe').style.display='block'">Pagamento</a>
+  </div>
+  
+  <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by <a href="" title="BEEPRINTED" target="_blank" class="w3-hover-text-green">BEEPRINTED</a></footer>
+
+<!-- End page content -->
+</div>
+<!-- Subscribe Modal -->
+<div id="subscribe" class="w3-modal" style="display:block">
+  <div class="w3-modal-content w3-animate-zoom w3-padding-large">
+    <div class="w3-container w3-white w3-center">
+      <i onclick="document.getElementById('subscribe').style.display='none'" class="fa fa-remove w3-closebtn w3-xlarge w3-hover-text-grey w3-margin"></i>
+      <% if @carrinho.orders.any? %>
+   <form id="se_forzero" class="form-horizontal" role="form" action="/order/create" method="POST">
+     <div id='payment-datas'>
+       <div>
+         <input type="hidden" name="carrinho_id" value="<%= @carrinho.id %>">
+         <input type="hidden" name="card_token" id="card_token" />
+         <input type="hidden" name="sender_hash" id="sender_hash" />
+         <input type="hidden" name="session_id" id="session_id" value="<%= @session_id %>" />
+         <%= csrf_meta_tag %>
+       </div>
+       <fieldset>
+         <legend>Dados Pessoais do Comprador</legend>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Nome</label>
+           <div class="col-sm-5">
+             <input type="text" class="form-control" name='name' placeholder="exp: José Paulo" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Email</label>
+           <div class="col-sm-5">
+             <input type="text" class="form-control" name='email' placeholder="exp: c56048717318@sandbox.pagseguro.com.br" required>
+           </div>
+           
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">CPF</label>
+           <div class="col-sm-3">
+             <input type="text" class="form-control" name='cpf' placeholder="39813476548" maxlength='11' required>
+           </div>
+           * Não use . ou - no CPF
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Telefone</label>
+           <div class="col-sm-1" style='width:80px'>
+             <input type="text" class="form-control" name='phone_code' placeholder="11" maxlength='2' required>
+           </div>
+           <div class="col-sm-2">
+             <input type="text" class="form-control" name='phone_number' placeholder="997874567" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Data de Nascimento</label>
+           <div class="col-sm-2">
+             <input type="text" class="form-control" name='birthday' placeholder="10/10/1991" maxlength='10' required>
+           </div>
+         </div>
+       </fieldset>
+       <fieldset>
+         <legend>Endereço do Comprador</legend>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Endereço</label>
+           <div class="col-sm-5">
+             <input type="text" class="form-control" name='street' placeholder="exp: SQS 215 Bloco K" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Número</label>
+           <div class="col-sm-1" style='width:80px'>
+             <input type="text" class="form-control" name='number' placeholder="999" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Complemento</label>
+           <div class="col-sm-5">
+             <input type="text" class="form-control" name='complement' placeholder="Setor Bancário">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Bairro</label>
+           <div class="col-sm-5">
+             <input type="text" class="form-control" name='district' placeholder="Asa Norte">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Cidade</label>
+           <div class="col-sm-5">
+             <input type="text" class="form-control" name='city' placeholder="Sobradinho">
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Estado</label>
+           <div class="col-sm-1" style='width:80px'>
+             <input type="text" class="form-control" name='state' placeholder="DF" required>
+           </div>
+           <div class="col-sm-3">
+             <input type="text" class="form-control" name='postal_code' placeholder="CEP" required>
+           </div>
+         </div>
+       </fieldset>
+       <fieldset>
+         <legend>Dados do Cartão</legend>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Nome no Cartão</label>
+           <div class="col-sm-5">
+             <input type="text" class="form-control" name='card_name' id='card-name' placeholder="Card Holder's Name" required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label" for="card-number">Número do Cartão</label>
+           <div class="col-sm-5">
+             <input type="text" class="form-control" name='card-number' id='card-number' placeholder="Debit/Credit Card Number" required>
+           </div>
+           <div class="col-sm-1">
+             <span id="card-flag"></span>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-sm-3 control-label">Validade</label>
+           <div class="col-sm-9">
+             <div class="row">
+               <div class="col-xs-3">
+                 <select class="form-control col-sm-2" name='card-month' id='card-month' required>
+                   <option>Mês</option>
+                   <option value="01">Jan (01)</option>
+                   <option value="02">Fev (02)</option>
+                   <option value="03">Mar (03)</option>
+                   <option value="04">Abr (04)</option>
+                   <option value="05">Mai (05)</option>
+                   <option value="06">Jun (06)</option>
+                   <option value="07">Jul (07)</option>
+                   <option value="08">Ago (08)</option>
+                   <option value="09">Set (09)</option>
+                   <option value="10">Out (10)</option>
+                   <option value="11">Nov (11)</option>
+                   <option value="12">Dez (12)</option>
+                 </select>
+               </div>
+               <div class="col-xs-3">
+                 <select class="form-control" name='card-year' id='card-year' required>
+                   <option value="2016">2016</option>
+                   <option value="2017">2017</option>
+                   <option value="2018">2018</option>
+                   <option value="2019">2019</option>
+                   <option value="2010">2020</option>
+                   <option value="2021">2021</option>
+                   <option value="2022">2022</option>
+                   <option value="2023">2023</option>
+                   <option value="2024">2024</option>
+                   <option value="2025">2025</option>
+                   <option value="2026">2026</option>
+                   <option value="2027">2027</option>
+                   <option value="2028">2028</option>
+                   <option value="2029">2029</option>
+                   <option value="2030">2030</option>
+                 </select>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="form-group" id="card-cvv-box" style="display: none">
+           <label class="col-sm-3 control-label">Card CVV</label>
+           <div class="col-sm-3">
+             <input type="text" class="form-control" name='card-cvv' id='card-cvv' placeholder="Security Code">
+           </div>
+         </div>
+         <div class="form-group" id="card-options-box" style="display: none">
+           <hr />
+           <label class="col-sm-3 control-label">Opções de Parcelamento</label>
+           <div class="col-sm-3">
+             <select class="form-control col-sm-2" id="card-options" name='parcelamento'>
+             </select>
+           </div>
+           <hr />
+         </div>
+         <div class="form-group">
+           <div class="col-sm-offset-3 col-sm-9">
+             <button type="button" class="btn btn-success" id="buy-button">Confirmar dados do cartão</button>
+           </div>
+         </div>
+       </fieldset>
+     </div>
+     <div id='finish-buy' style="display: none">
+       <fieldset>
+         <legend>Confirmar Pagamento</legend>
+         <div class="form-group">
+           <div class="col-sm-offset-3 col-sm-9">
+             <%= csrf_meta_tags %>
+             <button type="submit" class="btn btn-success" id="buy-button">Finalizar Compra</button>
+             <button type="button" class="btn btn-primary" id="edit-payment">Editar Meio de Pagamento</button>
+           </div>
+         </div>
+       </fieldset>
+     </div>
+   </form>
+   <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+// Script to open and close sidenav when on tablets and phones
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Slideshow Apartment Images
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-opacity-off";
+}
+</script>
+<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+</body>

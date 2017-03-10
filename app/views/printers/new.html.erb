@@ -21,7 +21,7 @@
 
          <p class="w3-center">
 
-<%= link_to (image_tag current_user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(current_user) %>
+<%= link_to (image_tag current_user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(current_user.user_name) %>
 
          </p>
 

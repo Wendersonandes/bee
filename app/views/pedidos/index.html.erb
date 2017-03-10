@@ -1,0 +1,143 @@
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
+.mySlides {display:none}
+</style>
+<body class="w3-content" style="max-width:1100px">
+
+<!-- Sidenav/menu -->
+<br>
+<br>
+<nav class="w3-sidenav w3-light-grey w3-collapse w3-top w3-border-left" style="z-index:3;width:260px; " id="mySidenav">
+<br>
+<br>
+<br>
+  <div class="w3-container w3-padding-8">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-closebtn w3-hover-text-red"></i>
+        <p> Seus Pedidos </p>
+        <ul>
+        <li style="float:right;">
+        <%= form_for current_user.pedidos.build, url: "#{pedidos_create_path}" do |f| %>
+            <% f.submit "Crie um Pedido" %>
+        <% end %>
+        </li>
+        <%if @pedidos.any? %>
+          <li style="float:left;"><%= render 'configurations/pedido_config_dropdown', pedido: @pedido, pedidos: @pedidos %></li>
+          </ul>
+          <br>
+          <% @pedidos.each do |pedido|%>
+            <a href=<%=pedido_path(pedido)%> class="media list-group-item pedido_<%=pedido.id%>" data-remote="true" id="pedido_<%=pedido.id%>">
+              <span class="pull-left">
+              <%= image_tag "logo.jpg", class: "media-object img-circle img-notification"%>
+              </span>
+              <span id="content_<%pedido.id%>" class="media-body">
+                <%if pedido.ped_comments.any?%>
+                  <p><%=pedido.ped_comments.last.content%></p>
+                <%else%>
+                  <p>Peça agora!</p>
+                <%end%>
+              <small class="text-muted">
+              <%if pedido.ped_comments.any?%>
+                <%= time_ago_in_words pedido.ped_comments.last.created_at%>
+              <%else%>
+                <%= time_ago_in_words pedido.created_at%>
+              <%end%>
+               </small>
+              </span>
+            </a>
+          <% end %>
+          <%end%>
+    
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-80">
+  <span class="w3-left">Pedido</span>
+  <a href="javascript:void(0)" class="w3-right w3-opennav" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-white w3-border-right" style="margin-left:260px;">
+<div style="overflow:auto; height:100%;">
+  <!-- Push down content on small screens -->
+
+  <!-- Slideshow Header -->
+
+  <!-- Contact -->
+  <%if @pedidos.any? %>
+  <div class="w3-container" id="contact" style="margin-top:15px; border-top: 2px solid #eeeeee">
+    <div class="post-bottom">
+    <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
+            <div class="w3-col s2 w3-right" style="width:12%">
+              <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
+            </div>
+              <div class="w3-col s8 w3-right" style="background-color:#eeeeee; border-radius:10px;padding:10px">
+                Olá :)
+            </div>
+    </div>
+    <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
+            <div class="w3-col s2 w3-right" style="width:12%">
+              <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
+            </div>
+              <div class="w3-col s8 w3-right" style="background-color:#eeeeee; border-radius:10px;padding:10px">
+                Por favor, descreva aqui seu projeto que tentaremos modelá-lo o mais rápido possível...
+            </div>
+    </div>
+    <div id='pedido'>
+      <%= render 'pedido', pedido: @pedido %>
+    </div>
+    <%else%>
+    <br>
+    <br>
+    <h2 class='w3-center'>Você ainda nao possui pedidos!</h2>
+    <%end%>
+  </div>
+
+</div>
+</div>
+<!-- Subscribe Modal -->
+
+<script>
+// Script to open and close sidenav when on tablets and phones
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Slideshow Apartment Images
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-opacity-off";
+}
+</script>
+</body>

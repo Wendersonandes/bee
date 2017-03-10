@@ -1,23 +1,88 @@
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src=<%= asset_path('pagination.js') %>></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 .w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
 </style>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <ul class="notification-index-list">
-      	<% unless @users.blank? %>
-      		<h1>Usuários</h1>
-        	<%= render 'home/user', users: @users %>
-        <% end %>
-        <% unless @posts.blank? %>
-      		<h1>Projetos</h1>
-        	<%= render 'home/post', posts: @posts %>
-        <% end %>
-      </ul>
+<!--<script type="text/javascript" src="../assets/show_profile.js"></script>-->
+
+<div class="w3-light-grey w3-content" style="max-width:1600px; padding-top: 45px">
+
+<!-- Sidenav/menu -->
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main">
+
+  <!-- Header -->
+  <div class="w3-container" id="portfolio">
+    <a href="#" onclick="w3_open()"></a>
+    <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i style='padding-top: 40px' class="fa fa-bars"></i></span>
+    <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc'>
+      <span class="w3-margin-right">Filtro:</span>
+      <button class="w3-btn menuNat" id="posts_search"><i class="fa fa-photo w3-margin-right"></i>Projetos <span style="color:red"><%=@posts.count%></span></button>
+      <button class="w3-btn w3-white menuNat" id="users_search" bla="#{posts_path}"><i class="fa fa-user w3-margin-right"></i>Usuários <span style="color:red"><%=@users.count%></span></button>
     </div>
   </div>
+  
+<bla id="posts">
+  <div id="my-posts">
+  <% if @posts.any? %>
+    <%= render 'projects', posts: @posts %>
+  <% else %>
+  <h2 class='w3-center'>Nao foram encontrados projetos para '<%=@query%>'
+  <% end %> 
+  </div>
+
+  <!-- Pagination -->
+  <!-- Footer -->
+</bla>
+
+<bla id="users" style='display: none'>
+  <div id="my-users">
+  <%if @users.any? %>
+    <%= render 'user', users: @users %>
+  <% else %>
+    <h2 class='w3-center'>Nao foram encontrados usuários para '<%=@query%>'
+  <% end %>
+  </div>
+
+  <!-- Pagination -->
+  <!-- Footer -->
+</bla>
+<!-- End page content -->
+</div>
+
+
+<script>
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+<script>
+$("#posts_search").click(function() {
+  console.log("blaaaaaa");
+  $('.w3-btn').addClass('w3-white');
+  $(this).removeClass('w3-white');
+  $("#users").hide();
+  $("#posts").show();
+});
+$("#users_search").click(function() {
+  $('.w3-btn').addClass('w3-white');
+  $(this).removeClass('w3-white');
+  console.log("blaaaaaa");
+  $("#posts").hide();
+  $("#users").show();
+});
+</script>
+
+
 </div>

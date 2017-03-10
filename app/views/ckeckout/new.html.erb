@@ -17,29 +17,114 @@ jQuery(function() {
 });
 </script>
 <%= form_for @order, url: "#{checkout_path(@post.id)}" do |f| %>
-	<div class="field">
-	<%= f.label :material, "Material:" %>
-  	<%= f.collection_select :material, Printer.last.materials.order(:name), :name, :name, include_blank: true %>
-  	</div>
-  	<div class="field">
-    <%= f.label :color, "Cor:" %>
-    <%= f.grouped_collection_select :color, Printer.last.materials.order(:name),:colors, :name, :name, :name, include_blank: true %>
-  	</div>
-  	<div class="field">
-	<%= f.label :resolution, "Resoluçao:" %>
-  	<%= f.select :resolution, options_for_select(['0,1', '0,2', '0,3', '0,4'], '0,2'),{} %>
-  	</div>
-  	<div class="field">
-	<%= f.label :preench, "Preenchimento:" %>
-  	<%= f.select :preench, options_for_select(['10%', '15%', '20%', '25%','30%','35%','40%','45%','50%','55%','60%','65%','70%','75%','80%','85%','90%','95%','100%'], '15%'),{} %>
-  	</div>
-
-  	<%= f.submit 'Finalizar Compra' %>
+<div style="">
+<hr>
+<ui style="list-style-type :none;">
+  <li>
+    <div class="field">
+        <div class="esquerda">
+        <%= f.label :quantidade, "Quantidade:" %>
+        </div>
+        <div class="direita">
+        <%= f.select :quantidade, options_for_select([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], 1),{} %>
+        </div>
+    </div>
+  </li>
+  <br>
+  <br>
+  <li>
+    <div class="field">
+        <div class="esquerda">
+       <%= f.label :material, "Material:" %>
+       </div>
+        <div class="direita">
+        <%= f.collection_select :material, Printer.last.materials.order(:name), :name, :name, include_blank: true %>
+        </div>
+    </div>
+  </li>
+  <br>
+  <br>
+  <li>
+    <div class="field">
+      <div class="esquerda">
+      <%= f.label :color, "Cor:" %>
+      </div>
+      <div class="direita">
+      <%= f.grouped_collection_select :color, Printer.last.materials.order(:name),:colors, :name, :name, :name, include_blank: true %>
+      </div>
+    </div>
+  </li>
+  <br>
+  <br>
+  <li>
+    <div class="field">
+        <div class="esquerda">
+       <%= f.label :resolution, "Resoluçao:" %>
+       </div>
+       <div class="direita">
+       <%= f.select :resolution, options_for_select(['0,1', '0,2', '0,3', '0,4'], '0,2'),{} %>
+       </div>
+    </div>
+  </li>
+  <br>
+  <br>
+  <li>
+    <div class="field" style="">
+       <div class="esquerda">
+       <%= f.label :preench, "Infill:"%>
+       </div>
+       <div class="direita">
+       <%= f.select :preench, options_for_select(['10%', '15%', '20%', '25%','30%','35%','40%','45%','50%','55%','60%','65%','70%','75%','80%','85%','90%','95%','100%'], '15%'),{} , class:"direita"%>
+       </div>
+    </div>
+  </li>
+  </ui>
+    <br>
+    <hr>
+    <%= f.submit 'Finalizar Compra' %>
+    <br>
+    <br>
     <%= f.submit 'Adicionar ao Carrinho', name: 'apenas_adicionar', id:'submit_add'%>
+    <br>
+    <br>
+</div>
 <% end  %>
+
+
 <script>
 $("#submit_add").click(function() {
   console.log("blaaaaaa");
   $("#new_order").data("remote","true");
 });
 </script>
+
+<style type="text/css">
+  .field {
+    text-align: left;
+    position: relative;
+
+  }
+
+
+    .field > .esquerda{
+      left: 0px;
+      display: inline-block;
+      position: absolute;
+
+    }
+
+
+
+    .field > .direita{
+      right: 0px!important;
+      display: inline-block;
+      position: absolute;
+      
+    }
+
+
+
+
+
+
+</style>

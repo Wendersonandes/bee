@@ -1,0 +1,10 @@
+.dropdown.notification-dropdown
+  %button.btn.btn-default.dropdown-toggle{ type: 'button', id: 'dropdownMenu1', data: { toggle: 'dropdown' }, 'aria-haspopup': true, 'aria-expanded': true }
+    %span.glyphicon.glyphicon-user
+    %span.glyphicon.glyphicon-chevron-down
+  %ul.dropdown-menu{ 'aria-labelledby': 'dropdownMenu1' }
+    %li.text-center= link_to "Editar Perfil", profile_path(current_user.user_name)
+    %li.text-center= link_to "Editar Conta", edit_user_registration_path
+    %li.text-center= link_to "Editar Conta Bancária", banco_path(current_user.user_name)
+    %li.divider{ role: 'separator' }
+    %li.text-center= link_to "Sair", destroy_user_session_path, method: :delete

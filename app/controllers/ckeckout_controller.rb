@@ -21,7 +21,7 @@ class CkeckoutController < ApplicationController
 		post = Post.find(params[:id])
 		material = Printer.last.materials.find_by(:name => @order.material)
 		volume = post.volume / 1000
-	  	preco = (material.preco*volume).round(2)
+	  	preco = (material.preco*volume + post.preco).round(2)
 
 	  	@order.price = preco
 	  	@order.post_id = post.id
@@ -34,7 +34,7 @@ class CkeckoutController < ApplicationController
         			format.js
         		end
         	else
-        		redirect_to new_order_path(carrinho_id: carrinho.id)
+        		redirect_to carrinho_path(current_user.user_name)
 			end
 		end 
 	end
@@ -49,6 +49,6 @@ class CkeckoutController < ApplicationController
 	end
 private
 def order_params
-    params.require(:order).permit(:color,:material,:resolution,:preench,:price)
+    params.require(:order).permit(:quantidade,:color,:material,:resolution,:preench,:price)
   end
 end
