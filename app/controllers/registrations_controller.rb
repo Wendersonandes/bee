@@ -5,7 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   def after_sign_up_path_for(users)
     current_user.update_attribute(:completo, "#{current_user.name} #{current_user.sobrenome}")
-    current_user.update_attribute(:tipo, "user")
+    current_user.update_attribute(:tipexi, "user")
     user_name = "#{current_user.name}_#{current_user.sobrenome}".downcase
     if user_name.include? ' '
       user_name.gsub!(' ', '_')
