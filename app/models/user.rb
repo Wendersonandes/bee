@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
   has_many :ped_comments, dependent: :destroy
   has_many :pedidos, dependent: :destroy
 
+  validates :name, presence: true
+  validates :sobrenome, presence: true
+  validates :email, presence: true
+  
   has_attached_file :avatar, styles: { medium: '150x150#', :thumb => "100x100" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
