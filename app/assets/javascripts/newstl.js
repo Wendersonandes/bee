@@ -181,11 +181,12 @@ window.addEventListener("load", function () {
         }
  
         var loadedObjectVolume = Math.abs(volumes);
-        var boundingboxVolume = box.size().x*box.size().y*box.size().z;
-
-        console.log(boundingboxVolume, loadedObjectVolume);
+        //var boundingboxVolume = box.size().x*box.size().y*box.size().z;
 
         $("#post_volume").val(loadedObjectVolume);
+        $("#post_x").val(box.size().x/10);
+        $("#post_y").val(box.size().y/10);
+        $("#post_z").val(box.size().z/10);
         //---------------------------------------------------------------------------------------------------
 
             if ((box.size().x>box.size().y)||(box.size().z>box.size().y)) {

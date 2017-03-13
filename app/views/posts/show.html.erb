@@ -46,27 +46,28 @@ background-color: #6441a4;
       <!-- Profile -->
       <div class="w3-card-2 w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center"><%=@user.completo%></h4>
-
+         <h4 class="w3-center"><%=@post.caption%></h4>
 
          <p class="w3-center">
 
-<%= link_to (image_tag @user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(@user.user_name) %>
+<%= link_to (image_tag @post.image.url(:medium),class: "w3-circle", style: 'height:106px;width:106px;'), profile_path(@user.user_name) %>
 
          </p>
 
 
 
          <hr>
-         <% if @user.prof && @user.prof != "" %>
-          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><%=@user.prof%></p>
-         <% end %>
-         <% if @user.city && @user.city != ""%>
-          <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i><%=@user.city%></p>
-         <% end %>
-         <% if @user.niver && @user.niver != ""%>
-          <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><%=@user.niver%></p>
-         <% end %>
+         <a href=<%=profile_path(@post.user.user_name)%> style='color:#555555'><p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
+            <bla style="color:#6441a4"><strong><%=@post.user.completo%></strong></bla>
+          </p>
+         </a>
+        <div style='color:#555555'>
+          <p><i class="fa fa-arrows fa-fw w3-margin-right w3-text-theme"></i><%=@post.x.round(1)%> x <%=@post.y.round(1)%> x <%=@post.z.round(1)%> cm </p>
+        </div>
+        <div style='color:#555555'>
+          <p><i class="fa fa-cube fa-fw w3-margin-right w3-text-theme"></i><%=(@post.volume/1000).round(1)%> cm&sup3;</p>
+        </div>
+
         </div>
       </div>
       <br>
@@ -74,9 +75,9 @@ background-color: #6441a4;
       <!-- Accordion -->
       <div class="w3-card-2 w3-round">
         <div class="w3-accordion w3-white">
-          <a href=''><button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.followers.count-1%> Seguidores</button></a>
-          <a href=''><button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.following.count-1%> Seguindo</button></a>
-          <a href=<%=new_printer_path%>><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.view%> Visualizações do Perfil</button></a>
+          <a href=''><button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.votes_for.up.by_type(User).size%> Curtidas</button></a>
+          <a href=''><button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.view%> Visualizações</button></a>
+          <a href=<%=new_printer_path%>><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.view%> Impressões</button></a>
         </div>      
       </div>
       <br>
@@ -166,7 +167,19 @@ background-color: #6441a4;
               </div>
 
             </div>
+            <hr style="margin:0px; border-top:1px solid #dddddd">
+            <div class="w3-container w3-padding">
+              <div class="w3-left">
+              <h5 class="w3-opacity">Imprima seu projeto sem precisar postá-lo
+              </h5>
+              </div>
+              <div class="w3-right" style="width: 107px;">
+              <a href=<%= importar_path %>>
+              <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-upload"></i>  Importar</button> 
+              </a>
+              </div>
 
+            </div>
 
           </div>
         </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309140412) do
+ActiveRecord::Schema.define(version: 20170313213802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,7 +172,10 @@ ActiveRecord::Schema.define(version: 20170309140412) do
     t.float    "volume"
     t.integer  "view",               default: 0
     t.float    "preco",              default: 0.0
-    t.integer  "status"
+    t.integer  "status",             default: 1
+    t.float    "x"
+    t.float    "y"
+    t.float    "z"
   end
 
   add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down", using: :btree

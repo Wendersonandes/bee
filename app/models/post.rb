@@ -14,6 +14,9 @@ class Post < ActiveRecord::Base
   validates :user_id, presence: true
   validates :caption, length: { minimum: 1, maximum: 300 }
   validates :volume, presence: true
+  validates :x, presence: true
+  validates :y, presence: true
+  validates :z, presence: true
 
   has_attached_file :image, styles: { :medium => "640x420#", :thumb => '273x182#' }, :default_url => "/images/:style/drogon.jpg"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/

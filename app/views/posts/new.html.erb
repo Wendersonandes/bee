@@ -6798,7 +6798,10 @@ button.close {
 </head>
 
 <body style="padding-top:20px;">
-
+    <div style="z-index: 1000; width: 100%; height:100%;background-color: #ccc;opacity: 0.9;position: absolute;overflow: hidden;display:none" id='uploading'>
+    <div class="loader" style="position: absolute; left:45%;top:45%;">
+    </div>
+    </div>
     <!-- Page Content -->
     <div class="container">
         <div class="row">
@@ -6859,7 +6862,15 @@ button.close {
                           <div class="form-group text-center" id="formgroup2" style="display: none;">
                             <%= f.input :volume, label: false, placeholder: 'Adicionar volume' %>
                           </div>
-                          
+                          <div class="form-group text-center" id="formgroup2" style="display:none">
+                            <%= f.input :x, label: false, placeholder: 'Adicionar volume' %>
+                          </div>
+                          <div class="form-group text-center" id="formgroup2" style="display:none">
+                            <%= f.input :y, label: false, placeholder: 'Adicionar volume' %>
+                          </div>
+                          <div class="form-group text-center" id="formgroup2" style="display:none">
+                            <%= f.input :z, label: false, placeholder: 'Adicionar volume' %>
+                          </div>
 
                           <div class="form-group text-center" >
                           <h4>Adicione uma imagem do modelo</h4>
@@ -6883,7 +6894,7 @@ button.close {
                           </div>
                           
                           <div class="form-group text-center" id="formgroup2" style="bottom:0px;">
-                            <%= f.button :submit, class: 'btn-success btn-block' %>
+                            <%= f.button :submit, class: 'btn-success btn-block', id: 'post_submit' %>
                           </div>
                         </div>
                       <% end %>
@@ -7077,4 +7088,27 @@ canvas{
 $(document).on('click','#conta_submit',function(){
   $('#subscribe').hide();
 });
+$(document).on('click','#post_submit',function(){
+  console.log("OIIIIIIII");
+  $('#uploading').fideIn('fast');
+});
+
 </script>
+<style type="text/css">
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #6441A4; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+    </style>
