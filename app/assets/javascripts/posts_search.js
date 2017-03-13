@@ -34,8 +34,17 @@ ready = function() {
     displayKey: 'completo',
     source: engine2.ttAdapter(),
     templates: {
-      header: '<h1>Usuários</h1>',
-      suggestion: Handlebars.compile('<a href={{url}} class="media list-group-item"><span class="pull-left"><img src={{image}} class= "media-object img-circle img-notification"/></span><span class="media-body"><strong>{{completo}}</strong><small class="text-muted"></small></span></a>')
+      header: '<h3 style="margin:5px;">Usuários</h3>',
+      suggestion: Handlebars.compile('\
+        <a href={{url}} class="media list-group-item">\
+          <span class="pull-left" style="border: 0px solid black;">\
+          <img src={{image}} class= "media-object img-circle img-notification"/>\
+          </span>\
+          <span class="media-body" style="text-align:left;padding-top:11px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">\
+          <strong>{{completo}}</strong>\
+          <small class="text-muted"></small>\
+          </span>\
+        </a>')
     }
   },
   {
@@ -43,8 +52,16 @@ ready = function() {
     displayKey: 'caption',
     source: engine.ttAdapter(),
     templates: {
-      header: '<h1>Projetos</h1>',
-      suggestion: Handlebars.compile('<a href={{url}} class="media list-group-item"><span class="pull-left"><img src={{image}} class= "media-object img-circle img-notification"/></span><span class="media-body"><strong>{{caption}}</strong><small class="text-muted">{{user}}</small></span></a>')
+      header: '<h3 style="margin:5px;">Projetos</h3>',
+      suggestion: Handlebars.compile('<a href={{url}} class="media list-group-item">\
+        <span class="pull-left">\
+        <img src={{image}} class= "media-object img-circle img-notification"/>\
+        </span>\
+        <span class="media-body" style="text-align:left;padding-top:11px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">\
+        <strong>{{caption}}</strong>\
+        <small class="text-muted">{{user}}</small>\
+        </span>\
+        </a>')
     }
     }
   );

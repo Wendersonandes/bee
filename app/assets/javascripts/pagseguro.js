@@ -44,14 +44,22 @@ $( document ).ready(function() {
 });
 
 //--------------------------------------------------- VERIFICACAO DINAMICA -------------------------------------------
+function bloqueio(){
+  var stringBloq = $('.erro_bloq').attr('class');
+  if (stringBloq == 'erro_bloq') {
+    $('#buy-button').prop( "disabled", true );
+  }else{
+    $('#buy-button').prop( "disabled", false );
+  };
+}
+
  function verificacao()
 {
   
   var stringAtual;
   var inputAtual;
   
-  
-  $(document).on('keyup', 'input:focus', function(){
+  $(document).on('keyup click', 'input:focus', function(){
     var erro = 0;
     inputAtual = $(this).attr('name');
     stringAtual = $(this).val();
@@ -121,6 +129,14 @@ $( document ).ready(function() {
       erro = apenasNum(stringAtual);
       msgDeErro(erro, 'erro_card-number', "*Utilize apenas numeros");
     }
+
+    bloqueio();
+  });
+  $(document).on('click', '#card-options', function(){
+    var parcela;
+    var valorParcela;
+    var valorTotal;
+    ParcelaCartao(parcela, valorParcela, valorTotal);
   });
 }
 
@@ -132,7 +148,7 @@ function apenasEmail(stringAtual)
   var pontoOrg = stringAtual.indexOf(".org");
   var pontoNet = stringAtual.indexOf(".net");
 
-  if ((arroba == -1)||((pontoCom == -1)&&(pontoOrg == -1)&&(pontoNet == -1))) {
+  if ((stringAtual.length >0)&&((arroba == -1)||((pontoCom == -1)&&(pontoOrg == -1)&&(pontoNet == -1)))) {
     erro = -1;
   };
 
@@ -142,14 +158,14 @@ function apenasEmail(stringAtual)
 function apenasData(stringAtual)
 {
   var erro = 0;
-  if ((stringAtual[0] >= 48)&&(stringAtual[0] <= 57)&&
-    (stringAtual[1] >= 48)&&(stringAtual[1] <= 57)&&
-    (stringAtual[3] >= 48)&&(stringAtual[3] <= 57)&&
-    (stringAtual[4] >= 48)&&(stringAtual[4] <= 57)&&
-    (stringAtual[6] >= 48)&&(stringAtual[6] <= 57)&&
-    (stringAtual[7] >= 48)&&(stringAtual[7] <= 57)&&
-    (stringAtual[8] >= 48)&&(stringAtual[8] <= 57)&&
-    (stringAtual[9] >= 48)&&(stringAtual[9] <= 57)&&
+  if ((stringAtual[0] >= '0')&&(stringAtual[0] <= '9')&&
+    (stringAtual[1] >= '0')&&(stringAtual[1] <= '9')&&
+    (stringAtual[3] >= '0')&&(stringAtual[3] <= '9')&&
+    (stringAtual[4] >= '0')&&(stringAtual[4] <= '9')&&
+    (stringAtual[6] >= '0')&&(stringAtual[6] <= '9')&&
+    (stringAtual[7] >= '0')&&(stringAtual[7] <= '9')&&
+    (stringAtual[8] >= '0')&&(stringAtual[8] <= '9')&&
+    (stringAtual[9] >= '0')&&(stringAtual[9] <= '9')&&
     (stringAtual[2] == '/')&&(stringAtual[5] == '/')) {
     //ok
   }else{
@@ -209,8 +225,52 @@ function msgDeErro(erro, id, texto)
 {
   $('#'+id).remove();
   if (erro < 0) {
-    $('input:focus').parent().after('<p1 id="'+id+'" style="color:red;">'+texto+'</p1>');
+    $('input:focus').parent().after('<p1 class="erro_bloq" id="'+id+'" style="color:red;">'+texto+'</p1>');
   }
+}
+
+function msgDeVazio(erro, campo, id, texto)
+{
+  $('#'+id).remove();
+  if (erro < 0) {
+    $(campo).parent().after('<p1 class="erro_bloq" id="'+id+'" style="color:red;">'+texto+'</p1>');
+  }
+}
+
+function getNumber(subString, stringCompleta)
+{
+  var local = 0;
+
+  local = stringCompleta.indexOf(subString);
+  local = local + subString.length;
+
+  console.log('teste:'+local);
+  if (local !== -1) {
+    var number = '';
+    console.log('LADY2');
+    while((((stringCompleta[local] >= '0')&&(stringCompleta[local] <= '9'))||(stringCompleta[local] == '.'))&&(local <= stringCompleta.length)){
+      number = number + stringCompleta[local];
+      local++;
+    }
+    console.log('testeN:'+number);
+  };
+  return number;
+}
+
+function ParcelaCartao(parcela, valorParcela, valorTotal)
+{
+  if ($('#card-options-box').css('display') != 'none') {
+    var string = $('#card-options :selected').text();
+    console.log('LADY GAGA'+string);
+    valorParcela = getNumber("$", string);
+    parcela = getNumber("x ", string);
+    valorTotal = getNumber(": $", string);
+
+    console.log(parcela, valorParcela);
+    $('#parcela').val(valorParcela);
+    $('#quantidade').val(parcela);
+    console.log($('#quantidade').val(), $('#parcela').val());
+  }; 
 }
 
 

@@ -2,6 +2,9 @@
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
+
+
+
 #bleee{
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
@@ -42,6 +45,16 @@ background-color: #6441a4;
   font-weight: bold;
   color: #F05F40;
   font-size: 15px;
+}
+
+ .button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #6441a4;
+}
+.button1:hover{
+  background-color: #6441a4;
+  color:white;
 }
 
 
@@ -109,9 +122,13 @@ background-color: #6441a4;
         <div class="w3-container">
           <p class="w3-center" style="font-weight: bold;">Quer um projeto personalizado?</p>
           <hr style="margin:2px;">
-          <p class="w3-center">Clique aqui e envie sua idéia para um de nossos modeladores.</p>
-          <a href=<%=pedidos_path%>>Peça aqui!</a>
-        
+          <p class="w3-center btncenter">Clique aqui e envie sua idéia para um de nossos modeladores.</p>
+          <a href=<%=pedidos_path(current_user.user_name)%>>
+          <div class="button1 w3-center w3-round">
+          Peça aqui!
+          </div>
+          </a>
+          <br>
         </div>
       </div>
       <br>
@@ -157,7 +174,7 @@ background-color: #6441a4;
               <h5 class="w3-opacity">Poste seus projetos e ajude a comunidade Bee
               </h5>
               </div>
-              <div class="w3-right">
+              <div class="w3-right" style="width: 107px;">
               <a href=<%= new_post_path %>>
               <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-pencil"></i>  Postar</button> 
               </a>
@@ -170,7 +187,7 @@ background-color: #6441a4;
               <h5 class="w3-opacity">Imprima seu projeto sem precisar postá-lo
               </h5>
               </div>
-              <div class="w3-right">
+              <div class="w3-right" style="width: 107px;">
               <a href=<%= importar_path %>>
               <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-upload"></i>  Importar</button> 
               </a>

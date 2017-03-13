@@ -25,7 +25,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
           </ul>
           <br>
           <% @pedidos.each do |pedido|%>
-            <a href=<%=pedido_path(pedido)%> class="media list-group-item pedido_<%=pedido.id%>" data-remote="true" id="pedido_<%=pedido.id%>">
+            <a href=<%=pedido_path(@user.user_name,pedido)%> class="media list-group-item pedido_<%=pedido.id%>" data-remote="true" id="pedido_<%=pedido.id%>">
               <span class="pull-left">
               <%= image_tag "logo.jpg", class: "media-object img-circle img-notification"%>
               </span>

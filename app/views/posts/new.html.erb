@@ -3137,21 +3137,30 @@ fieldset[disabled] .btn-default.focus {
   color: #fff;
   background-color: #333;
 }
-.btn-primary {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+.btn-primary{
+
+background-color: transparent;;
+border-color:#ccc;
+color: #ccc;
+border-width: 1px;
+height: 34px;
+bottom: 100px;
+}
+
+.btn-primary:hover{
+
+background-color: #6441a4;
+border-color:#ccc;
+color: white;
+border-width: 1px;
+height: 34px;
+bottom: 100px;
 }
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
   background-color: #286090;
   border-color: #122b40;
-}
-.btn-primary:hover {
-  color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -6797,6 +6806,10 @@ button.close {
                 <h1 class="page-header">Vizualize aqui seu modelo
                     <small>formato (.STL)</small>
                 </h1>
+                <div id="print-canvas-show" class="print-canvas">NÃO TENHO UMA IMAGEM</div>
+                <div id="print-canvas-back" class="print-canvas print-canvas-menu">VOLTAR</div>
+                <div id="print-canvas-config" class="print-canvas print-canvas-menu">PERSONALIZAR</div>
+                <div id="print-canvas-get" class="print-canvas print-canvas-menu">CAPTURAR TELA</div>
             </div>
         </div>
         <!-- 
@@ -6812,7 +6825,7 @@ button.close {
         <!-- Portfolio Item Row -->
         <div class="row" >
 
-            <div class="col-md-8 w3-border" style=" height:500px;">
+            <div class="col-md-8 w3-border" style=" height:500px; padding: 0px;">
             <div id="view_teste">
                       </div>
                 
@@ -6832,35 +6845,41 @@ button.close {
                             <%= f.error_notification %>
                           </div>
                         </div>
-                        <div class="container-fluid hellow">
+                        <div class="container-fluid hellow" style="">
                           <div class="form-group text-center ">
                             <h4>Adicione um modelo 3D</h4>
                             <%= f.input :attachment, label: false%>
                           </div>
-                          <hr>
+                          
                           <div class="form-group text-center" id="formgroup2">
                           <h4>Adicione descrição</h4>
                             <%= f.input :caption, label: false, placeholder: '' %>
                           </div>
                           
-                          <div class="form-group text-center" id="formgroup2">
+                          <div class="form-group text-center" id="formgroup2" style="display: none;">
                             <%= f.input :volume, label: false, placeholder: 'Adicionar volume' %>
                           </div>
-                          <hr>
+                          
 
                           <div class="form-group text-center" >
                           <h4>Adicione uma imagem do modelo</h4>
                             <%= f.input :image, label: false, placeholder: 'Adicionar uma Imagem:'%>
                           </div>
-                          <hr>
-                          <div class="form-group text-center">
+                          <div class="form-group text-center" >
+                          <h4>Adicione um preço por impressao:</h4>
+                            <%= f.input :preco, label: false, placeholder: 'Adicionar preco' %>
+                          <a href="javascript:void(0)" onclick="document.getElementById('subscribe').style.display='block'">Adicionar Conta Bancária</a>
+                          </div>
+                          <div class="form-group text-center pull-left">
                             <h4>Categoria</h4>
+                            <span style="font-weight: normal;">
                             <%= f.collection_check_boxes :type_ids, Type.all, :id, :name do |b| %>
                               <div class="collection-check-box">
                                   <%= b.check_box %>
                                   <%= b.label %>
                               </div>
                             <% end %>
+                            </span>
                           </div>
                           
                           <div class="form-group text-center" id="formgroup2" style="bottom:0px;">
@@ -6875,6 +6894,71 @@ button.close {
               </div>
             </div>
         </div>
+<div id="subscribe" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom w3-padding-large">
+    <div class="w3-container w3-white">
+      <i onclick="document.getElementById('subscribe').style.display='none'" class="fa fa-remove w3-closebtn w3-xlarge w3-hover-text-grey w3-margin"></i>
+<%= form_for current_user, url: "#{update_profile_path(current_user.user_name)}",class:"form-horizontal", remote: true do |f| %>
+  <fieldset style="padding-left:170px">
+  <legend class="w3-center">Dados da Conta Bancária</legend>
+  <div class="form-group form-custom">
+        <label class="col-sm-3 control-label">País do Banco</label>
+        <div class="col-sm-5">
+          <%= f.text_field :conta_pais, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group form-custom">
+        <label class="col-sm-3 control-label">Nome</label>
+        <div class="col-sm-5">
+          <%= f.text_field :conta_nome, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group form-custom">
+        <label class="col-sm-3 control-label">Sobrenome</label>
+        <div class="col-sm-5">
+          <%= f.text_field :conta_sobrenome, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group form-custom">
+        <label class="col-sm-3 control-label">CPF</label>
+        <div class="col-sm-5">
+          <%= f.text_field :conta_cpf, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group form-custom">
+        <label class="col-sm-3 control-label">Nome do Banco</label>
+        <div class="col-sm-5">
+          <%= f.text_field :conta_banco, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group form-custom">
+        <label class="col-sm-3 control-label">Número da Agência</label>
+        <div class="col-sm-5">
+          <%= f.text_field :conta_agencia, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group form-custom">
+        <label class="col-sm-3 control-label">Tipo da Conta</label>
+        <div class="col-sm-5">
+          <%= f.select :conta_tipo, options_for_select(['Conta Corrente', 'Poupança'], ),{},class:"form-control" %>
+        </div>
+    </div>
+    <div class="form-group form-custom">
+        <label class="col-sm-3 control-label">Número da Conta</label>
+        <div class="col-sm-5">
+          <%= f.text_field :conta_num, class:"form-control", required: true %>
+        </div>
+    </div>
+    <div class="form-group form-custom">
+        <div class="col-sm-5 w3-center">
+          <%= f.submit "Atualizar Conta Bancária", class:"w3-btn w3-green w3-section w3-round", id: "conta_submit" %>
+        </div>
+    </div>
+  </fieldset>
+<%end%>
+</div>
+</div>
+</div>
 
 <style type="text/css">
   
@@ -6930,7 +7014,11 @@ h4{
 }
 canvas{
   width: 100% !important;
+  height: 100% !important;
 
+}
+.print-canvas-menu{
+  display: none;
 }
 
 </style>
@@ -6985,3 +7073,8 @@ canvas{
 
     </div>
     <!-- /.container -->
+<script>
+$(document).on('click','#conta_submit',function(){
+  $('#subscribe').hide();
+});
+</script>

@@ -99,8 +99,8 @@ class OrderController < ApplicationController
     }
  
     @payment.installment = {
-     value: @preco,
-     quantity: params[:parcelamento]
+     value: params[:parcela],
+     quantity: params[:quantidade]
     }
  
     puts "=> REQUEST"

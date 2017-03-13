@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   resources :order
   get 'galeria/index'
 
-  post '/pedidos', to: 'pedidos#create', as: :pedidos_create
-  get '/pedidos', to: 'pedidos#index', as: :pedidos
-  get 'pedidos/:id', to: 'pedidos#show', as: :pedido
-  delete 'pedidos/:id/destroy', to: 'pedidos#destroy', as: :pedido_destroy
-  delete 'pedidos/destroy_all', to: 'pedidos#destroy_all', as: :pedido_destroy_all
+  post ':user_name/pedidos', to: 'pedidos#create', as: :pedidos_create
+  get ':user_name/pedidos', to: 'pedidos#index', as: :pedidos
+  get ':user_name/pedidos/:id', to: 'pedidos#show', as: :pedido
+  delete ':user_name/pedidos/:id/destroy', to: 'pedidos#destroy', as: :pedido_destroy
+  delete ':user_name/pedidos/destroy_all', to: 'pedidos#destroy_all', as: :pedido_destroy_all
   post '/pedidos/:id/ped_comments', to: 'ped_comments#create', as: :pedido_ped_comments
   delete'/pedidos/:id/ped_comments/:ped_id', to: 'ped_comments#destroy', as: :pedido_ped_comment
 

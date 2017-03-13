@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   end
 
   def search
-      @posts = Post.starts_with(params[:query]).order('created_at DESC')
+      @posts = Post.starts_with(params[:query]).where.not(status: 0).order('created_at DESC')
       @users = User.starts_with(params[:query]).order('created_at DESC')
       @query = params[:query]
   end

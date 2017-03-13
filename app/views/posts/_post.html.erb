@@ -1,9 +1,9 @@
-<div class="w3-container w3-card-2 w3-white w3-round w3-margin" >
+<div class="w3-container w3-card-2 w3-white w3-round w3-margin">
 <div class="">
   <div class="post" >
     <div class="post-head">
       <div class="thumb-img"></div>
-      <div class="user-name">
+      <div class="user-name" style="text-transform: capitalize;">
         <%= link_to "#{post.user.name} #{post.user.sobrenome}", profile_path(post.user.user_name) %>
       </div>
       <div class="time-ago">
@@ -22,7 +22,7 @@
       <%= render 'posts/likes', post: post %>
       <div class="caption">
         <div class="caption-content">
-          <div class="user-name">
+          <div class="user-name" style="text-transform: capitalize;">
             <%= link_to "#{post.user.name} #{post.user.sobrenome}", profile_path(post.user.user_name) %>
           </div>
           <%= post.caption %>

@@ -3,6 +3,6 @@
     %i.fa.fa-cog{style: ' color:#A5A7AA'}
     %span.glyphicon.glyphicon-chevron-down{style: ' color:#A5A7AA'}
   %ul.dropdown-menu{ 'aria-labelledby': 'dropdownMenu1',style: 'width:100px' }
-    %li.text-center= link_to "Excluir Pedido Atual",pedido_destroy_path(pedido), method: :delete, data: { confirm: "Tem certeza que deseja excluir esse Projeto?" }
+    %li.text-center= link_to "Excluir Pedido Atual",pedido_destroy_path(@user.user_name, pedido), method: :delete, data: { confirm: "Tem certeza que deseja excluir esse Projeto?" }
     %li.divider{ role: 'separator' }
-    %li.text-center= link_to "Excluir Todos",pedido_destroy_all_path(pedido), method: :delete, data: { confirm: "Tem certeza que deseja excluir esse Projeto?" }
+    %li.text-center= link_to "Excluir Todos",pedido_destroy_all_path(@user.user_name,pedido), method: :delete, data: { confirm: "Tem certeza que deseja excluir esse Projeto?" }

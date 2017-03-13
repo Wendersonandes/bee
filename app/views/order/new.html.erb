@@ -116,6 +116,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
         <%end%>
       </div>
     </div>
+    <%if @carrinho.user ==current_user %>
     <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
       <div class="w3-col s2" style="width:12%">
         <%= image_tag current_user.avatar.url(:medium),class: "w3-circle", style: 'height:50px;width:50px' %>
@@ -126,6 +127,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
         <% end %>
       </div>
     </div>
+    <%else%>
+    <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
+      <div class="w3-col s2 w3-right" style="width:12%">
+        <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
+      </div>
+      <div class="w3-col s8 w3-right" style="background-color:#eeeeee; border-radius:10px;padding:10px">
+        <%= form_for([@carrinho, @carrinho.car_comments.new], remote: true) do |f| %>
+          <%= f.text_field :content, placeholder: 'Pergunte aqui...', style: "width:100%;background-color:#eeeeee;border:none;size:30", id: 'comment_content_form' %>
+        <% end %>
+      </div>
+    </div>
+    <%end%>
 
   </div>
 <div class="w3-container" style="border-top:2px solid #eeeeee;margin-top:15px;padding-top:15px;">
@@ -152,6 +165,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
      <div id='payment-datas'>
        <div>
        	<input id="price" type="hidden" name="price" value="<%= @preco %>">
+       	<input id="parcela" type="hidden" name="parcela">
+       	<input id="quantidade" type="hidden" name="quantidade">
          <input type="hidden" name="carrinho_id" value="<%= @carrinho.id %>">
          <input type="hidden" name="card_token" id="card_token" />
          <input type="hidden" name="sender_hash" id="sender_hash" />

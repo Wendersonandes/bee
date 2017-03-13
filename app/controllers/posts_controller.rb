@@ -116,7 +116,7 @@ class PostsController < ApplicationController
     render json: users
   end
   def autocompletepre2
-      posts = Post.all.map do |post|
+      posts = Post.all.where.not(status: 0).map do |post|
     {
       caption: post.caption, 
       value: post.id, 
@@ -128,7 +128,7 @@ class PostsController < ApplicationController
     render json: posts
   end
   def autocomplete
-    posts = Post.starts_with(params[:query]).map do |post|
+    posts = Post.starts_with(params[:query]).where.not(status: 0).map do |post|
       {
         caption: post.caption,
         value: post.id,

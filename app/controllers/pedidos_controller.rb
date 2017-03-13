@@ -1,10 +1,11 @@
 class PedidosController < ApplicationController
+	before_action :set_user
 	def index
-		@pedidos = current_user.pedidos.order('created_at DESC')
-		@pedido = current_user.pedidos.last
+		@pedidos = @user.pedidos.order('created_at DESC')
+		@pedido = @user.pedidos.last
 	end
 	def show
-		@pedido = current_user.pedidos.find(params[:id])
+		@pedido = @user.pedidos.find(params[:id])
 		respond_to do |format|
         format.html
         format.js
@@ -15,7 +16,7 @@ class PedidosController < ApplicationController
 	end
 
 	def create
-		@pedido = current_user.pedidos.build
+		@pedido = @user.pedidos.build
 		if @pedido.save
       		flash[:success] = "Your post has been created!"
       		redirect_to pedidos_path
@@ -26,13 +27,22 @@ class PedidosController < ApplicationController
 	end
 
 	def destroy_all
-		current_user.pedidos.destroy_all
+		@user.pedidos.destroy_all
 		redirect_to pedidos_path
 	end
 
 	def destroy
-		@pedido = current_user.pedidos.find(params[:id])
+		@pedido = @user.pedidos.find(params[:id])
 		@pedido.destroy
 		redirect_to pedidos_path
+	end
+	private
+	def set_user
+		@user = User.find_by(user_name: params[:user_name])
+		if (@user != current_user)
+			if(@user.tipo=='admin')
+				redirect_to browse_posts_path
+			end
+		end
 	end
 end

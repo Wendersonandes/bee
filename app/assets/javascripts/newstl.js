@@ -1,6 +1,8 @@
+var stopRotation = false;
 window.addEventListener("load", function () {
     "use strict";
   $("#post_volume").hide();
+  //$(".print-canvas-menu").hide();
     //-------------------------------- VOLUME parte 1 ---------------------------------------------------------
         function volumeOfT(p1, p2, p3){
             var v321 = p3.x*p2.y*p1.z;
@@ -12,10 +14,84 @@ window.addEventListener("load", function () {
             return (-v321 + v231 + v312 - v132 - v213 + v123)/6.0;
         }
 
-    //-------------------------------------------------------------------------------------------------------
+    //----------------------------------- PRINT CANVAS --------------------------------------------------
     var w = 640, h = 550;
     
-    var renderer = new THREE.WebGLRenderer();
+    //var renderer = new THREE.WebGLRenderer();
+    var renderer = new THREE.WebGLRenderer({
+        preserveDrawingBuffer: true
+    });
+
+    var strDownloadMime = "image/octet-stream";
+
+    $(document).on('click', '.print-canvas', function(){
+        var id = $(this).attr('id');
+        console.log(id);
+        if (id == 'print-canvas-show') {
+            stopRotation = true;
+            $('#print-canvas-show').hide();
+            $('.print-canvas-menu').show();
+        };
+        if (id == 'print-canvas-back') {
+            stopRotation = false;
+            $('.print-canvas-menu').hide();
+            $('#print-canvas-show').show();
+        };
+        if (id == 'print-canvas-config') {
+            console.log('AEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
+            /*
+            corAtual = $('#order_color').val();
+            if (corAtual === "Vermelho") {
+                obj.material.color.setHex( 0xB22222 );
+            }else if (corAtual === "Azul") {
+                obj.material.color.setHex( 0x4682B4 );
+            }else if (corAtual === "Amarelo") {
+                obj.material.color.setHex( 0xFFD700 );
+            }else if (corAtual === "Verde") {
+                obj.material.color.setHex( 0x008000 );
+            };
+            */
+        };
+        if (id == 'print-canvas-get') {
+            saveAsImage();
+        };
+    });
+
+    function saveAsImage() {
+        //console.log('A BARCA PAI!!!');
+        var imgData, imgNode;
+
+        try {
+            var strMime = "image/jpeg";
+            imgData = renderer.domElement.toDataURL(strMime);
+            saveFile(imgData.replace(strMime, strDownloadMime), "test.jpg");
+
+        } catch (e) {
+            console.log(e);
+            return;
+        }
+        //console.log('A BARCA SENHOR LORD!!!');
+    }
+
+    var saveFile = function (strData, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            document.body.appendChild(link); //Firefox requires the link to be in the body
+            link.download = filename;
+            link.href = strData;
+            link.click();
+            document.body.removeChild(link); //remove the link when done
+        } else {
+            location.replace(uri);
+        }
+    }
+
+
+
+
+
+    //-----------------------------------------------------------------------------------------------------------
+
     if(document.getElementById("view_teste")){
     renderer.setSize(w, h);
     var view = document.getElementById("view_teste");
@@ -53,7 +129,9 @@ window.addEventListener("load", function () {
 
     var loop = function loop() {
         requestAnimationFrame(loop);
-        pivot.rotation.y += 0.002;
+        if (!stopRotation) {
+            pivot.rotation.y += 0.002;
+        };
         controls.update();
         renderer.clear();
         renderer.render(scene, camera);
