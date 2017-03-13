@@ -6789,7 +6789,10 @@ button.close {
 </head>
 
 <body style="padding-top:20px;">
-
+    <div style="z-index: 1000; width: 100%; height:100%;background-color: #ccc;opacity: 0.9;position: absolute;overflow: hidden;display:none" id='uploading'>
+    <div class="loader" style="position: absolute; left:45%;top:45%;">
+    </div>
+    </div>
     <!-- Page Content -->
     <div class="container">
         <div class="row">
@@ -6975,3 +6978,28 @@ canvas{
 
     </div>
     <!-- /.container -->
+<script>
+$(document).on('click','#post_submit',function(){
+  console.log("OIIIIIIII");
+  $('#uploading').fadeIn('fast');
+});
+
+</script>
+<style type="text/css">
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #6441A4; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+    </style>
