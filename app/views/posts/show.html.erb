@@ -57,8 +57,7 @@ background-color: #6441a4;
 
 
          <hr>
-         <a href=<%=profile_path(@post.user.user_name)%> style='color:#555555'><p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
-            <bla style="color:#6441a4"><strong><%=@post.user.completo%></strong></bla>
+         <a href=<%=profile_path(@post.user.user_name)%> style='color:#555555'><p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><bla style="color:#6441a4"><strong><%=@post.user.completo%></strong></bla>
           </p>
          </a>
         <div style='color:#555555'>
@@ -160,9 +159,9 @@ background-color: #6441a4;
               <h5 class="w3-opacity">Poste seus projetos e ajude a comunidade Bee
               </h5>
               </div>
-              <div class="w3-right">
+              <div class="w3-right" style="width: 107px;">
               <a href=<%= new_post_path %>>
-              <button type="button" class="w3-btn w3-theme"><i class="fa fa-pencil"></i>  Postar</button> 
+              <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-pencil"></i>  Postar</button> 
               </a>
               </div>
 
