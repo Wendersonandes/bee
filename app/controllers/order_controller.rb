@@ -17,7 +17,6 @@ class OrderController < ApplicationController
       end
     end
     @preco = '%.2f' % @preco.round(2)
-    PagMailer.print_email(@carrinho).deliver
 	  #PagMailer.print_email(current_user).deliver
   end
  
@@ -37,7 +36,6 @@ class OrderController < ApplicationController
     @carrinho.orders.each do |order|
       order.quantidade.times do
         @preco = @preco + order.price
-        @preco = '%.2f' % @preco.round(2)
         @payment.items << {
           id: order.id,
           description: order.post.caption,
@@ -132,10 +130,6 @@ class OrderController < ApplicationController
       :state => params[:state],
       :postal_code => params[:postal_code]
     )
-      @carrinho.orders.each do |order|
-        @prints = order.prints + 1
-        order.update_attribute(prints: @prints)
-      end
      puts "=> Transaction"
      puts "  code: #{@payment.code}"
      puts "  reference: #{@payment.reference}"
@@ -197,6 +191,17 @@ class OrderController < ApplicationController
       carrinho.save
       if transaction.status.id.to_i == 3
         PagMailer.print_email(carrinho).deliver
+
+        carrinho.orders.each do |order|
+          post = order.post
+          prints = post.prints + 1
+          post.update_attribute(:prints, prints)
+        end
+        
+      end
+      if transaction.status.id.to_i == 7
+      	carrinho.status = 'criado'
+      	carrinho.save
       end
       create_notification(carrinho)
     end
