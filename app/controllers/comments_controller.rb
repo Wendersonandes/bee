@@ -46,7 +46,9 @@ class CommentsController < ApplicationController
                         notified_by_id: current_user.id,
                         post_id: post.id,
                         identifier: comment.id,
-                        notice_type: "#{current_user.completo} comentou no seu Post")
+                        notice_type: "#{current_user.completo} comentou no seu Post",
+                        status: "post")
+
   end
   def create_notification_outros(post, comment)
   	users = User.joins("INNER JOIN comments ON Users.id = comments.user_id").distinct.where("comments.post_id" => post.id)
@@ -57,7 +59,8 @@ class CommentsController < ApplicationController
                         notified_by_id: current_user.id,
                         post_id: post.id,
                         identifier: comment.id,
-                        notice_type: "#{current_user.completo} também comentou no Post")
+                        notice_type: "#{current_user.completo} também comentou no Post",
+                        status: "post")
     end
   end
   def comment_params

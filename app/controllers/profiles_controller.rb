@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:show, :projetos, :destaques,:printers]
   layout :determine_layout
   before_action :set_user
   before_action :owned_profile, only: [:edit, :update]

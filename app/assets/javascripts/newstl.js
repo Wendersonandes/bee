@@ -135,6 +135,7 @@ window.addEventListener("load", function () {
         controls.update();
         renderer.clear();
         renderer.render(scene, camera);
+
     };
     loop();
     
@@ -168,7 +169,6 @@ window.addEventListener("load", function () {
         var volumes = 0.0;
         
         for(var i = 0; i < obj.geometry.faces.length; i++){
-            console.log("blablabla");
             var Pi = obj.geometry.faces[i].a;
             var Qi = obj.geometry.faces[i].b;
             var Ri = obj.geometry.faces[i].c;
@@ -184,9 +184,45 @@ window.addEventListener("load", function () {
         //var boundingboxVolume = box.size().x*box.size().y*box.size().z;
 
         $("#post_volume").val(loadedObjectVolume);
-        $("#post_x").val(box.size().x/10);
-        $("#post_y").val(box.size().y/10);
-        $("#post_z").val(box.size().z/10);
+        $("#post_x").val(box.size().x);
+        $("#post_y").val(box.size().y);
+        $("#post_z").val(box.size().z);
+        //-------------------------------------------------- Surface Area / PESO-----------------------------------------------------
+
+
+        var _len = obj.geometry.faces.length,
+            _area = 0.0;
+
+        if (!_len) return 0.0;
+
+        for (var i = 0; i < _len; i++) {
+            var va = obj.geometry.vertices[obj.geometry.faces[i].a];
+            var vb = obj.geometry.vertices[obj.geometry.faces[i].b];
+            var vc = obj.geometry.vertices[obj.geometry.faces[i].c];
+
+            var ab = vb.clone().sub(va);
+            var ac = vc.clone().sub(va);
+
+            var cross = new THREE.Vector3();
+            cross.crossVectors( ab, ac );
+
+            _area += cross.length() / 2;
+        }
+        //--------- PESO
+        var larguraShell = 0.8; // em mm
+        var fill = 0.1;
+
+        var percentShell = _area*larguraShell/loadedObjectVolume;
+        var peso = loadedObjectVolume*1.24*(percentShell+((1 - percentShell)*fill))/1000;
+
+
+
+        console.log('AREA:'+_area);
+        console.log('PESO:'+peso);
+        console.log('BOX: x:'+box.size().x+" y:"+box.size().y+" z:"+box.size().z);
+        var areaBox = 2*box.size().x*box.size().y + 2*box.size().z*box.size().y + 2*box.size().x*box.size().z;
+        console.log('AREA BOX:'+areaBox);
+
         //---------------------------------------------------------------------------------------------------
 
             if ((box.size().x>box.size().y)||(box.size().z>box.size().y)) {

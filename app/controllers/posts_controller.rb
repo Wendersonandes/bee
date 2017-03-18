@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:show, :autocompletepre, :autocompletepre2, :autocomplete, :autocomplete2]
   before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :unlike]
   before_action :owned_post, only: [:edit, :update, :destroy]
 
@@ -165,7 +166,8 @@ class PostsController < ApplicationController
                         notified_by_id: current_user.id,
                         post_id: post.id,
                         identifier: current_user.id,
-                        notice_type: "#{current_user.completo} gostou do seu Post")
+                        notice_type: "#{current_user.completo} gostou do seu Post",
+                        status: "post")
   end 
 
 

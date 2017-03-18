@@ -110,9 +110,40 @@ background-color: #6441a4;
         <% end %>
         <% end %>
 
+
+	   <% if user_signed_in? %>
+      	 <%if current_user != @user %>
+          <% if current_user_is_following(current_user.id, @user.id) %>
+            <div class="w3-center" style='padding-bottom:10px;'>
+              <a href=<%= unfollow_user_path %> data-remote="true" rel="nofollow" data-method="post" id="unfollow-button">
+              <button type="button" class="perfil_seguir w3-btn-block w3-theme" style='background-color:#aaaaaa'><i class="fa fa-pencil"></i>Seguindo</button> 
+              </a>
+              </div>
+
+          <%else%>
+            <div class="w3-center" style='padding-bottom:10px;'>
+              <a href=<%=follow_user_path %> data-remote="true" rel="nofollow" data-method="post" id="follow-button">
+              <button type="button" class="perfil_seguir w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
+              </a>
+              </div>
+
+          <%end%>
+          <%end%>
+          <%else%>
+            <div class="w3-center" style='padding-bottom:10px;'>
+              <a href=<%=new_user_session_path%> rel="nofollow">
+              <button type="button" class="perfil_seguir w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
+              </a>
+              </div>
+      <%end%>
+
         </div>
+
       </div>
 
+
+
+      
     
 
 

@@ -14,7 +14,19 @@ end
   	if session[:previous_url] == root_path
     	browse_posts_path
     else
-    	session[:previous_url]
+    	if session[:previous_url] == galeria_todos_path
+        galeria_path
+      elsif session[:previous_url] == galeria_engenharia_path
+        galeria_path
+      elsif session[:previous_url] == galeria_decoracao_path
+        galeria_path
+      elsif session[:previous_url] == galeria_moda_path
+        galeria_path
+      elsif session[:previous_url] == galeria_outros_path
+        galeria_path
+      else
+        session[:previous_url]
+      end
     end
   end
 end

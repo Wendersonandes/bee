@@ -1,8 +1,8 @@
 //$('#unfollow-button i').attr('class', 'fa fa-user fa-fw w3-margin-right');
 $('#unfollow-button')//.text('Seguir')
-                     .attr('class', 'w3-padding w3-text-teal')
-                     .attr('href', "/<%= @user.id %>/follow_user")
+                     //.attr('class', 'w3-padding w3-text-teal')
+                     .attr('href', "/<%= @user.user_name %>/follow_user")
                      .attr('id', 'follow-button');
-$('#coco2').hide();
-$('#coco1').show();
+$('.perfil_seguir').html('<i class="fa fa-pencil"></i>Seguir</button>')
+                   .css('background-color', '#6441a4');
 					//.children('.fa fa-envelope fa-fw w3-margin-right').toggleClass('class','fa fa-user fa-fw w3-margin-right');

@@ -70,7 +70,7 @@ background-color: #6441a4;
       <!-- Profile -->
       <div class="w3-card-2 w3-round w3-white" style="border: 1px solid#6441a4;">
         <div class="w3-container" style="padding-left: 0px;padding-right: 0px;">
-         <h4 class="w3-center" style="color: #6441a4;text-transform: capitalize;"><%=current_user.completo%></h4>
+         <h4 class="w3-center" style="font-weight: bold;text-transform: capitalize; color:#666;font-family: 'Antenna',Helvetica,Arial,sans-serif;"><%=current_user.completo%></h4>
 
 
          <p class="w3-center">
@@ -120,7 +120,7 @@ background-color: #6441a4;
       <!-- Interests --> 
       <div class="w3-card-2 w3-round w3-white w3-hide-small" style="">
         <div class="w3-container">
-          <p class="w3-center" style="font-weight: bold;">Quer um projeto personalizado?</p>
+          <p class="w3-center" style="font-weight: bold;color:#666;font-family: 'Antenna',Helvetica,Arial,sans-serif;">Quer um projeto personalizado?</p>
           <hr style="margin:2px;">
           <p class="w3-center btncenter">Clique aqui e envie sua idéia para um de nossos modeladores.</p>
           <a href=<%=pedidos_path(current_user.user_name)%>>
@@ -136,7 +136,7 @@ background-color: #6441a4;
       <!-- Alert Box -->
       <div class="w3-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small" style="">
 
-           <p style="font-weight: bold;">Outros projetos:</p>
+           <p style="font-weight: bold; color:#666;font-family: 'Antenna',Helvetica,Arial,sans-serif;">Outros projetos:</p>
 
                           <div class="wrapper" id="outrosprojetos">
                             <div class="scroll" id="scrolloutros">
@@ -226,7 +226,7 @@ background-color: #6441a4;
 
 
 
-                    <p style="font-weight: bold;">Sugestões para você:</p>
+                    <p style="font-weight: bold; color:#666;font-family: 'Antenna',Helvetica,Arial,sans-serif;">Sugestões para você:</p>
                     
                         <% @sugestoes.each do |item| %>
                                 <a href=<%=profile_path(item.user_name)%> class="media list-group-item" id="bleee">
@@ -257,7 +257,7 @@ background-color: #6441a4;
       
       <div class="w3-card-2 w3-round w3-white w3-center">
         <div class="w3-container">
-          <p style="font-weight: bold;">Confira nossos tutoriais sobre:</p>
+          <p style="font-weight: bold;color:#666;font-family: 'Antenna',Helvetica,Arial,sans-serif;">Confira nossos tutoriais sobre:</p>
           
           <p>Acabamento</p>
           <a href=<%=learn_acabamento_path%>>
@@ -300,7 +300,7 @@ background-color: #6441a4;
       <br>
       
       <div class="w3-card-2 w3-round w3-white w3-padding-16 w3-center">
-          <h4 class="w3-center">Entre em contato</h4>
+          <h4 class="w3-center" style="font-weight: bold; color:#666;font-family: 'Antenna',Helvetica,Arial,sans-serif;">Entre em contato</h4>
           <hr style="margin:2px;">
           <p class="w3-center">contato@beeprinted.com.br</p>
 

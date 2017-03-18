@@ -12,7 +12,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }
@@ -44,7 +44,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }
@@ -59,7 +59,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }
@@ -74,7 +74,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }
@@ -89,7 +89,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }
@@ -104,7 +104,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }
@@ -119,7 +119,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }
@@ -134,7 +134,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }
@@ -151,7 +151,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }
@@ -166,7 +166,7 @@ $(document).ready(function (){
 
           $.ajax({
           url: urlMain,
-          cache: false,
+          cache: true,
           success: function(html){
               $('#my-posts').append(html);
             }

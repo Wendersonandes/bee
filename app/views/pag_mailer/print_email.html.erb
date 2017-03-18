@@ -4,23 +4,24 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h3>Olá <%= @user.name %></h3>
+    <h3>Olá <%= User.first.name %></h3>
     <h5>
+    <% @carrinho.orders.each do |order| %> 
       Por favor imprima o modelo que está nesse link:
     </h5>
-      <%= link_to 'Clique aqui para baixar o arquivo .stl', "beeprinted.herokuapp.com/uploads/post/#{@post.id}/#{File.basename(@post.attachment.path, '.*')}-binary.stl" %>
+      <%= link_to 'Clique aqui para baixar o arquivo .stl', "beeprinted.herokuapp.com/uploads/post/#{order.post.id}/#{File.basename(order.post.attachment.path, '.*')}-binary.stl" %>
     <h5>Imprima com as seguintes especificações:</h5>
-      <p>Material: <%= @order.material %></p>
-      <p>Cor: <%= @order.color %></p>
-      <p>Resolution: <%= @order.resolution %></p>
-      <p>Preenchimento: <%= @order.preench %></p>
-
+      <p>Material: <%= order.material %></p>
+      <p>Cor: <%= order.color %></p>
+      <p>Resolution: <%= order.resolution %></p>
+      <p>Preenchimento: <%= order.preench %></p>
+      <%end%>
       <h5>Envie para:</h5>
-      <p><%= @order.buyer_name %></p>
-      <p><%= @order.street %> <%= @order.number %></p>
-      <p><%= @order.complement %></p>
-      <p><%= @order.district %></p>
-      <p><%= @order.city %></p>
-      <p><%= @order.state %> <%= @order.postal_code %></p>
+      <p><%= @carrinho.buyer_name %></p>
+      <p><%= @carrinho.street %> <%= @carrinho.number %></p>
+      <p><%= @carrinho.complement %></p>
+      <p><%= @carrinho.district %></p>
+      <p><%= @carrinho.city %></p>
+      <p><%= @carrinho.state %> <%= @carrinho.postal_code %></p>
   </body>
 </html>

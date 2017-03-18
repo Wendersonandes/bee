@@ -28,7 +28,16 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 background-color: #6441a4;
 }
 
+.user-name > a{
+  color: #6441a4;
+  font-weight: bold;
+}
 
+.post-bottom .user-name{
+  font-weight: bold;
+  color: #F05F40;
+  font-size: 15px;
+}
 
 
 </style>
@@ -50,7 +59,7 @@ background-color: #6441a4;
 
          <p class="w3-center">
 
-<%= link_to (image_tag @post.image.url(:medium),class: "w3-circle", style: 'height:106px;width:106px;'), profile_path(@user.user_name) %>
+<%= link_to (image_tag @post.image.url(:medium),class: "w3-circle", style: 'height:106px;width:106px;'), post_path(@post) %>
 
          </p>
 
@@ -76,7 +85,7 @@ background-color: #6441a4;
         <div class="w3-accordion w3-white">
           <a href=''><button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.votes_for.up.by_type(User).size%> Curtidas</button></a>
           <a href=''><button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.view%> Visualizações</button></a>
-          <a href=<%=new_printer_path%>><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@user.view%> Impressões</button></a>
+          <a href=''><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.prints%> Impressões</button></a>
         </div>      
       </div>
       <br>
@@ -191,7 +200,6 @@ background-color: #6441a4;
                             <div class="post-head">
                               <div class="thumb-img"></div>
                               <div class="user-name">
-                              Modelo enviado por:
                               
                                 <%= link_to "#{@post.user.name} #{@post.user.sobrenome}", profile_path(@post.user.user_name), style:"text-transform: capitalize;" %>
                                
@@ -230,15 +238,34 @@ background-color: #6441a4;
                               </div>
                             </div>
                             <div class="comment-like-form row">
-                              <div class="col-sm-1 like-button">
-                                <%= render 'posts/unlike', post: @post %>
-                              </div>
-                              <div class="comment-form col-sm-11">
-                                <%= form_for([@post, @post.comments.build], remote: true) do |f| %>
+                              <% if user_signed_in? %>
+                                <div class="col-sm-1 like-button">
+
+                                  <%= render 'posts/unlike', post: @post %>
+                                </div>
+                                <div class="comment-form col-sm-11">
+                                  <%= form_for([@post, @post.comments.build], remote: true) do |f| %>
                                   <%= f.text_field :content, placeholder: 'Comentar...', class: "comment_content", id: "comment_content_#{@post.id}",data: { post_id: "#{@post.id}",value: "#{@post.comments.count}" } %>
                                   <%= f.submit 'New Comment', class: 'comment-submit-button'%>
-                                <% end %>
-                              </div>
+                                  <% end %>
+                                </div>
+                              <% else %>
+                              <div class="col-sm-1 like-button">
+
+                                  <%=link_to '', new_user_session_path, class: "glyphicon glyphicon-heart-empty"%>
+                                </div>
+                                <div class="comment-form col-sm-11">
+                                  <div class="" style="width: 107px;">
+                                  <a href=<%= new_user_session_path %>>
+                                  <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-pencil"></i>  Comentar</button> 
+                                  </a>
+                                  </div>
+
+
+
+                                </div>
+                              <%end%>
+
                             </div>
                           </div>
 
@@ -274,7 +301,11 @@ background-color: #6441a4;
                                 -->
                                 <p>Compre agora:</p>
                                 <h2>R$<%= @preco %></h2>
-                            <button id="print" class="w3-btn w3-red w3-btn-block w3-section">Imprimir</button>
+                            <% if user_signed_in? %>
+                              <button id="print" class="w3-btn w3-red w3-btn-block w3-section">Imprimir</button>
+                            <%else%>
+                              <a href=<%=new_user_session_path%> class="w3-btn w3-red w3-btn-block w3-section">Imprimir</a>
+                            <%end%>
 
 
 

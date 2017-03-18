@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313213802) do
+ActiveRecord::Schema.define(version: 20170316133032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20170313213802) do
     t.boolean  "read",           default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "status"
   end
 
   add_index "notifications", ["notified_by_id"], name: "index_notifications_on_notified_by_id", using: :btree
@@ -176,6 +177,7 @@ ActiveRecord::Schema.define(version: 20170313213802) do
     t.float    "x"
     t.float    "y"
     t.float    "z"
+    t.integer  "prints",             default: 0
   end
 
   add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down", using: :btree

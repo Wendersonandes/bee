@@ -17,6 +17,7 @@ class OrderController < ApplicationController
       end
     end
     @preco = '%.2f' % @preco.round(2)
+    PagMailer.print_email(@carrinho).deliver
 	  #PagMailer.print_email(current_user).deliver
   end
  
@@ -131,6 +132,10 @@ class OrderController < ApplicationController
       :state => params[:state],
       :postal_code => params[:postal_code]
     )
+      @carrinho.orders.each do |order|
+        @prints = order.prints + 1
+        order.update_attribute(prints: @prints)
+      end
      puts "=> Transaction"
      puts "  code: #{@payment.code}"
      puts "  reference: #{@payment.reference}"
@@ -191,8 +196,9 @@ class OrderController < ApplicationController
       carrinho.status = status[transaction.status.id.to_i - 1]
       carrinho.save
       if transaction.status.id.to_i == 3
-        PagMailer.print_email(order).deliver
+        PagMailer.print_email(carrinho).deliver
       end
+      create_notification(carrinho)
     end
  
       render nothing: true, status: 200
@@ -204,8 +210,9 @@ class OrderController < ApplicationController
   def create_notification(carrinho)  
     Notification.create(user_id: carrinho.user.id,
                         notified_by_id: User.first.id,
-                        post_id: post.id,
+                        post_id: carrinho.id,
                         identifier: User.first.id,
-                        notice_type: "Seu pagamento de R$#{carrinho.price} está #{carrinho.status}")
+                        notice_type: "Seu pagamento de R$#{carrinho.price} está #{carrinho.status}",
+                        status: "pag_confirmation")
   end
 end
