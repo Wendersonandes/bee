@@ -199,7 +199,7 @@ class OrderController < ApplicationController
         end
         
       end
-      if transaction.status.id.to_i == 7
+      if transaction.status.id.to_i == 
       	carrinho.status = 'criado'
       	carrinho.save
       end
