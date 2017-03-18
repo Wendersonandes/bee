@@ -84,8 +84,8 @@ Rails.application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => "beeprinted.herokuapp.com",
-    :user_name            => ENV['gmail_username'],
-    :password             => ENV['gmail_password'],
+    :user_name            => 'lucasfneves14@gmail.com',
+    :password             => 'Saculf14/',
     :authentication       => "plain",
     :enable_starttls_auto => true,
     :openssl_verify_mode  => 'none'
