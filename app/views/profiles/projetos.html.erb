@@ -1,21 +1,28 @@
-<script src=<%= asset_path('pagination.js') %>></script>
+<%= render 'top_show', user: @user, footers: @footers, posts2: @posts2, posts: @posts, botao: @botao %> 
+  <div id="my-posts">
+    <script src=<%= asset_path('pagination.js') %>></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 .w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
 </style>
-	<div id="oir">
-    <% if @posts.any? %>
-    	<%= render 'projects', posts: @posts %>
+    <div id="my-posts">
+    <div id="lady-gaga">
+      <% if @posts.any? %>
+      <%= render 'projects', posts: @posts %>
     <% else %>
         <% if @user == current_user %>
-    	   <h2 class="w3-center">Você ainda nao possui projetos</h2>
-    	   <h3 class="w3-center"> Para postar, <%=link_to "clique aqui", new_post_path%>
+         <h2 class="w3-center">Você ainda nao possui projetos</h2>
+         <h3 class="w3-center"> Para postar, <%=link_to "clique aqui", new_post_path%>
         <% else %>
             <h2 class="w3-center"><%= @user.completo%> ainda nao possui projetos</h2>
         <% end %>
     <% end %>
     </div>
+  </div>
 
-   <div id="infinite-scrolling">
+  </div>
+     <div id="infinite-scrolling" class="w3-center">
      <%= will_paginate @posts%>
    </div>
+  <!-- Pagination -->
+<%= render 'footer_show', user: @user, footers: @footers, posts2: @posts2, posts: @posts, posts_all: @posts_all %>

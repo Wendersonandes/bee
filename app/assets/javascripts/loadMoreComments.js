@@ -4,6 +4,7 @@ function ClickableCommentsLink(){
   $('.more-comments').click( function() {
     $(this).on('ajax:success', function(event, data, status,xhr) {
       event.preventDefault();
+      console.log("bleg");
       var postId = $(this).data("post-id");
       $("#comments_" + postId).html(data);
       $("#comments-paginator-" + postId).html("<a id='more-comments' data-post-id=" + postId + "data-type='html' data-remote='true' href='/posts/" + postId + "/comments>show morecomments</a>");
@@ -23,6 +24,7 @@ function DestroyComments(){
 }
 
 $( document ).ready(function() {
+  console.log("bleg");
   ClickableCommentsLink();
   DestroyComments();
   $('.comment_content').click (function(){

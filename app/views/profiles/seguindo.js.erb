@@ -1,0 +1,5 @@
+$('.w3-btn').addClass('w3-white');
+$('#Seguindo').removeClass('w3-white');
+$('#my-posts').empty();
+$('#infinite-scrolling').empty();
+$('#my-posts').append("<%= j render 'seguidores', seguidores: @seguindo, user: @user %>")

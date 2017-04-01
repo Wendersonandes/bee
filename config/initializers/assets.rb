@@ -7,6 +7,7 @@ Rails.application.config.assets.precompile += %w(pe-icon-7-stroke.css)
 Rails.application.config.assets.precompile += %w(animate.css)
 Rails.application.config.assets.precompile += %w(owl.theme.css)
 Rails.application.config.assets.precompile += %w(owl.carousel.css)
+Rails.application.config.assets.precompile += %w(light-bootstrap-dashboard.css)
 # Rails.application.config.assets.precompile += %w(css-index.css)
 # Rails.application.config.assets.precompile += [/.*\.js/,/.*\.css/]
 # Add additional assets to the asset load path

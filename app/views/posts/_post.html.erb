@@ -1,5 +1,8 @@
 <div class="w3-container w3-card-2 w3-white w3-round w3-margin">
 <div class="">
+  <%if post_sugerido !=''%>
+      <div style='color:#aaaaaa;padding-top:15px;padding-left:5px;'><strong><%=post_sugerido%></strong></div>
+      <%end%>
   <div class="post" >
     <div class="post-head">
       <div class="thumb-img"></div>
@@ -26,16 +29,16 @@
             <%= link_to "#{post.user.name} #{post.user.sobrenome}", profile_path(post.user.user_name) %>
           </div>
           <%= post.caption %>
-          <div class="comments" id="comments_<%= post.id %>">
-            <% if post.comments.any? %>
-              <%= render post.comments.first(4), post: post %>
-              <% unless post.comments.count <= 4 %>
-                <div class="paginator" id="#comments-paginator-<%= post.id %>">
-                  <%= link_to "view all #{post.comments.count} comments", post_comments_path(post), remote: true, class: 'more-comments', id: "more_comments_#{post.id}", data: {post_id: "#{post.id}", type: "html", value: "#{post.comments.count}"} %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
+           <div class="comments" id="comments_<%= post.id %>">
+                                    <% if post.comments.any? %>
+                                      <%= render post.comments.first(4), post: post %>
+                                      <% unless post.comments.count <= 4 %>
+                                        <div class="paginator" id="#comments-paginator-<%= post.id %>">
+                                          <%= link_to "ver todos os #{post.comments.count} comentários", post_comments_path(post), remote: true, class: 'more-comments', id: "more_comments_#{post.id}", data: {post_id: "#{post.id}", type: "html", value: "#{post.comments.count}"} %>
+                                        </div>
+                                      <% end %>
+                                    <% end %>
+                                  </div>
         </div>
       </div>
     </div>

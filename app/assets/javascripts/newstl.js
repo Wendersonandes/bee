@@ -183,15 +183,12 @@ window.addEventListener("load", function () {
         var loadedObjectVolume = Math.abs(volumes);
         //var boundingboxVolume = box.size().x*box.size().y*box.size().z;
 
-        $("#post_volume").val(loadedObjectVolume);
-        $("#post_x").val(box.size().x);
-        $("#post_y").val(box.size().y);
-        $("#post_z").val(box.size().z);
+
         //-------------------------------------------------- Surface Area / PESO-----------------------------------------------------
 
 
         var _len = obj.geometry.faces.length,
-            _area = 0.0;
+            area = 0.0;
 
         if (!_len) return 0.0;
 
@@ -206,23 +203,27 @@ window.addEventListener("load", function () {
             var cross = new THREE.Vector3();
             cross.crossVectors( ab, ac );
 
-            _area += cross.length() / 2;
+            area += cross.length() / 2;
         }
         //--------- PESO
-        var larguraShell = 0.8; // em mm
-        var fill = 0.1;
+        var larguraShell = 0.08; // em cm
+        var fill = 0.2;
 
-        var percentShell = _area*larguraShell/loadedObjectVolume;
+        area = area/100;
+        loadedObjectVolume = loadedObjectVolume/1000;
+
+        var percentShell = area*larguraShell/loadedObjectVolume;
         var peso = loadedObjectVolume*1.24*(percentShell+((1 - percentShell)*fill))/1000;
 
 
 
-        console.log('AREA:'+_area);
+        console.log('AREA:'+area);
         console.log('PESO:'+peso);
-        console.log('BOX: x:'+box.size().x+" y:"+box.size().y+" z:"+box.size().z);
-        var areaBox = 2*box.size().x*box.size().y + 2*box.size().z*box.size().y + 2*box.size().x*box.size().z;
-        console.log('AREA BOX:'+areaBox);
-
+        $("#post_volume").val(loadedObjectVolume);
+        $("#post_area").val(area);
+        $("#post_x").val(box.size().x);
+        $("#post_y").val(box.size().y);
+        $("#post_z").val(box.size().z);
         //---------------------------------------------------------------------------------------------------
 
             if ((box.size().x>box.size().y)||(box.size().z>box.size().y)) {

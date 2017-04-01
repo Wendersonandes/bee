@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316133032) do
+ActiveRecord::Schema.define(version: 20170401215502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170316133032) do
     t.string   "city"
     t.string   "state"
     t.string   "postal_code"
+    t.float    "frete"
   end
 
   create_table "colors", force: :cascade do |t|
@@ -68,6 +69,14 @@ ActiveRecord::Schema.define(version: 20170316133032) do
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
+  create_table "contatos", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "mensagem"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "follows", force: :cascade do |t|
     t.integer  "following_id", null: false
     t.integer  "follower_id",  null: false
@@ -91,6 +100,8 @@ ActiveRecord::Schema.define(version: 20170316133032) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float    "preco"
+    t.float    "potencia"
+    t.float    "densidade"
   end
 
   add_index "materials", ["printer_id"], name: "index_materials_on_printer_id", using: :btree
@@ -99,6 +110,8 @@ ActiveRecord::Schema.define(version: 20170316133032) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float    "potencia"
+    t.float    "densidade"
   end
 
   create_table "modelos", force: :cascade do |t|
@@ -106,6 +119,7 @@ ActiveRecord::Schema.define(version: 20170316133032) do
     t.integer  "marca_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float    "desgaste"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -137,6 +151,8 @@ ActiveRecord::Schema.define(version: 20170316133032) do
     t.integer  "printer_id"
     t.integer  "carrinho_id"
     t.integer  "quantidade"
+    t.float    "scale"
+    t.float    "peso"
   end
 
   create_table "ped_comments", force: :cascade do |t|
@@ -178,6 +194,7 @@ ActiveRecord::Schema.define(version: 20170316133032) do
     t.float    "y"
     t.float    "z"
     t.integer  "prints",             default: 0
+    t.float    "area"
   end
 
   add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down", using: :btree
@@ -199,6 +216,8 @@ ActiveRecord::Schema.define(version: 20170316133032) do
     t.string   "marca"
     t.string   "modelo"
     t.string   "active"
+    t.float    "kwh"
+    t.float    "desgaste"
   end
 
   add_index "printers", ["user_id"], name: "index_printers_on_user_id", using: :btree
@@ -248,8 +267,23 @@ ActiveRecord::Schema.define(version: 20170316133032) do
     t.string   "conta_tipo"
     t.string   "conta_num"
     t.string   "tipo"
+    t.string   "cpf"
+    t.string   "phone_code"
+    t.string   "phone_number"
+    t.string   "birthday"
+    t.string   "street"
+    t.string   "number"
+    t.string   "complement"
+    t.string   "district"
+    t.string   "city_pag"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 

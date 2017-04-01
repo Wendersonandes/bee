@@ -1,3 +1,5 @@
-$("#pedido").html("<%=j render 'pedido', pedido: @pedido %>")
-$(".list-group-item").css('background-color', 'white');
+$("#comments").html("<%=j render @pedido.ped_comments, pedido: @pedido %>");
+$("#pedido_formu").html("<%=j render 'pedido', pedido: @pedido %>");
+$("#scroll").animate({ scrollTop: $('#comments').height() }, "slow");
+$(".lista_pedidos").css('background-color', 'white');
 $("#pedido_<%=@pedido.id%>").css('background-color', '#dddddd');

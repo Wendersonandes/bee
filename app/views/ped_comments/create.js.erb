@@ -1,6 +1,7 @@
 $('#comments').append("<%=j render 'ped_comments/ped_comment', pedido: @pedido, ped_comment: @ped_comment %>");
+$("#scroll").animate({ scrollTop: $('#comments').height() }, "slow");
 $('#ped_comment_content_form').val('');
-$('#content_<%@pedido.id%>').html("<%if @pedido.ped_comments.any?%>\
+$('#content_<%=@pedido.id%>').html("<%if @pedido.ped_comments.any?%>\
                   <p><%=@pedido.ped_comments.last.content%></p>\
                 <%else%>\
                   <p>Peça agora!</p>\

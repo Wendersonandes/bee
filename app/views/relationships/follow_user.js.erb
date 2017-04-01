@@ -1,8 +1,10 @@
 //$('#follow-button i').attr('class', 'fa fa-user fa-fw w3-margin-right');
-$('#follow-button')//.attr('class', 'w3-padding w3-text-teal')
+$('#follow-button_<%=@user.id%>')//.attr('class', 'w3-padding w3-text-teal')
                    //.text('SEGUINDO')
-                   .attr('href', "/<%= @user.user_name %>/unfollow_user")
-                   .attr('id', 'unfollow-button');
-$('.perfil_seguir').html('<i class="fa fa-pencil"></i>Seguindo</button>')
+                   .attr('href', "<%= unfollow_user_path(@user.user_name, user_pag: @user_pag) %>")
+                   .attr('id', 'unfollow-button_<%=@user.id%>');
+$('.perfil_seguir_<%=@user.id%>').html('<i class="fa fa-pencil"></i>Seguindo</button>')
                    .css('background-color', '#aaaaaa');
+$('#seguidores_button').html('<%=@user_pag.followers.count-1%> Seguidores');
+$('#seguindo_button').html('<%=@user_pag.following.count-1%> Seguindo');
 	//.children('.fa fa-envelope fa-fw w3-margin-right').toggleClass('class','fa fa-user fa-fw w3-margin-right');

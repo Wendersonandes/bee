@@ -7,29 +7,33 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
 <!-- Sidenav/menu -->
 <br>
 <br>
-<nav class="w3-sidenav w3-light-grey w3-collapse w3-top w3-border-left" style="z-index:3;width:260px; " id="mySidenav">
+<nav class="w3-sidenav w3-light-grey w3-collapse w3-top w3-border-left" style="z-index:3;width:260px; overflow: visible; " id="mySidenav">
 <br>
 <br>
 <br>
   <div class="w3-container w3-padding-8">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-closebtn w3-hover-text-red"></i>
-        <p> Seus Pedidos </p>
+        
+        <p style="font-weight:bold;color:#666; border-bottom: 2px solid #ccc;font-size:25px;margin:0px;"> Seus Pedidos </p>
+ 
+    <p style="font-style:italic;color:#666;font-size:13px;text-align: justify;">Descreva seu projeto e um de nossos modeladores vai trabalhar para que seu projeto se torne realidade</p>
+
         <ul>
-        <li style="float:right;">
+        <li style="float:left;">
         <%= form_for current_user.pedidos.build, url: "#{pedidos_create_path}" do |f| %>
             <% f.submit "Crie um Pedido" %>
         <% end %>
         </li>
         <%if @pedidos.any? %>
-          <li style="float:left;"><%= render 'configurations/pedido_config_dropdown', pedido: @pedido, pedidos: @pedidos %></li>
+          <li style="float:right;z-index: 1050; height:30px;"><%= render 'configurations/pedido_config_dropdown', pedido: @pedido, pedidos: @pedidos %></li>
           </ul>
           <br>
           <% @pedidos.each do |pedido|%>
-            <a href=<%=pedido_path(@user.user_name,pedido)%> class="media list-group-item pedido_<%=pedido.id%>" data-remote="true" id="pedido_<%=pedido.id%>">
+            <a href=<%=pedido_path(@user.user_name,pedido)%> class="media list-group-item lista_pedidos pedido_<%=pedido.id%>" data-remote="true" id="pedido_<%=pedido.id%>">
               <span class="pull-left">
               <%= image_tag "logo.jpg", class: "media-object img-circle img-notification"%>
               </span>
-              <span id="content_<%pedido.id%>" class="media-body">
+              <span id="content_<%=pedido.id%>" class="media-body">
                 <%if pedido.ped_comments.any?%>
                   <p><%=pedido.ped_comments.last.content%></p>
                 <%else%>
@@ -46,12 +50,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
             </a>
           <% end %>
           <%end%>
-    
+
+
   </div>
 </nav>
 
+
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-80">
+
   <span class="w3-left">Pedido</span>
   <a href="javascript:void(0)" class="w3-right w3-opennav" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
@@ -60,17 +67,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main w3-white w3-border-right" style="margin-left:260px;">
-<div style="overflow:auto; height:100%;">
+<div class="w3-main w3-white w3-border-right" style="margin-left:260px; height:95%">
+<div style="overflow:auto; height:80%;" id='scroll'>
   <!-- Push down content on small screens -->
 
   <!-- Slideshow Header -->
 
   <!-- Contact -->
   <%if @pedidos.any? %>
-  <div class="w3-container" id="contact" style="margin-top:15px; border-top: 2px solid #eeeeee">
+  <div class="w3-container" id="contact" style="margin-top:15px;">
     <div class="post-bottom">
-    <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
+    <div class="w3-row-padding w3-section" style="padding-top:40px;">
             <div class="w3-col s2 w3-right" style="width:12%">
               <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
             </div>
@@ -87,7 +94,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
             </div>
     </div>
     <div id='pedido'>
-      <%= render 'pedido', pedido: @pedido %>
+      <div id='comments'>
+        <%= render @pedido.ped_comments, pedido: @pedido %>
+      </div>
     </div>
     <%else%>
     <br>
@@ -98,8 +107,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
 
 </div>
 </div>
+<%if @pedidos.any? %>
+  <div id='pedido_formu'>
+    <%= render 'pedido', pedido: @pedido %>
+  </div>
+<% end%>
 <!-- Subscribe Modal -->
-
+<%if @pedidos.any? %>
+<script>
+$(".lista_pedidos").css('background-color', 'white');
+$("#pedido_<%=@pedido.id%>").css('background-color', '#dddddd');
+$("#scroll").animate({ scrollTop: $('#comments').height() }, "slow");
+</script>
+<%end%>
 <script>
 // Script to open and close sidenav when on tablets and phones
 function w3_open() {

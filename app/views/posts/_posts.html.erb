@@ -1,1 +1,11 @@
-<%= render @posts %>
+<% @posts.each_with_index do |post,index|%>
+	<% if params[:page]%>
+		<% index = index + (params[:page].to_i - 1)*6 %>
+	<%end%>
+	<%= render 'post', post: post, post_sugerido: '' %>
+	<%if (index%4) == 0%>
+		<%if @destaques[(index/4).to_i]%>
+			<%=render 'post', post: @destaques[(index/4).to_i], post_sugerido: 'Projeto recomendado' %>
+		<%end%>
+	<%end%>
+<%end%>

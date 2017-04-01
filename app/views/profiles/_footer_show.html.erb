@@ -1,0 +1,103 @@
+
+  <!-- Footer -->
+    <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc;padding-left: 14px;'>
+<!--conteudo do footer-->
+      <h4>Destaques da semana:</h4>
+      <div class="wrapper">
+        <div class="scroll">
+          <%= render 'footer', group: footers %>
+        </div>
+        </div>
+
+
+    </div>
+
+<!-- End page content -->
+</div>
+
+<script>
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</div>
+
+
+<style type="text/css">
+  
+.wrapper { 
+        width: 100%;
+        height: 180px;
+        background:#EFEFEF; 
+        box-shadow: 1px 1px 10px #999; 
+        margin: auto; 
+        text-align: center; 
+        position: relative;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding-top: 5px;
+    }
+
+
+    h4 {
+    font-family: "Antenna",Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    color: #666;
+    
+    font-weight: normal;
+    font-size: 18px;
+}
+    .scroll { 
+        overflow-x: scroll;
+        overflow-y: hidden;
+        height: 200px;
+        white-space:nowrap;
+    } 
+    
+    .scroll img { 
+        box-shadow: 1px 1px 10px #999; 
+        margin: 2px;
+        max-height: 150px;
+        cursor: pointer;
+        display:inline-block;
+        *display:inline;
+        *zoom:1;
+        vertical-align:top;
+    }
+    .foto a{
+    padding: 0px !important;
+}
+
+
+</style>
+<script>
+$(".edit_form").click(function() {
+  console.log("blaaaaaa");
+  $("#submit").show();
+});
+$(".edit_form_avatar").click(function() {
+  console.log("blaaaaaa");
+  $("#submit_avatar").show();
+});
+$(".edit_form2").click(function() {
+  console.log("blaaaaaa");
+  $("#submit2").show();
+});
+$("#Projetos").click(function() {
+  $('.w3-btn').addClass('w3-white');
+  $('#Projetos').removeClass('w3-white');
+  $('#my-posts').empty();
+  $('#my-posts').append('<%= j render 'projetos', posts: posts_all %>');
+});
+
+</script>

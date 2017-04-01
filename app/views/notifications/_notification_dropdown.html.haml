@@ -6,4 +6,4 @@
     %li.dropdown-header.text-center Notifications
     = render current_user.notifications.order('created_at DESC').limit(5)
     %li.divider{ role: 'separator' }
-    %li.text-center= link_to 'View All', notifications_path
+    %li.text-center= link_to 'Ver Todas', notifications_path

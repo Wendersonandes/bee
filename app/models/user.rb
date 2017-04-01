@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   #validates :sobrenome, presence: true, length: {minimum: 2, maximum: 16}
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         :recoverable, :confirmable,  :rememberable, :trackable, :validatable, :omniauthable
 
   def self.from_omniauth(auth)
     user = where(email: auth.info.email).first_or_create do |user|

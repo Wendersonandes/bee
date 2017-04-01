@@ -42,7 +42,14 @@ background-color: #6441a4;
 
 </style>
 <body class="w3-theme-l5">
-
+<% @materials.each do |material|%>
+  <input id="potencia_<%=material.name%>" type="hidden" name="potencia_<%=material.name%>" value="<%= material.potencia %>">
+  <input id="densidade_<%=material.name%>" type="hidden" name="densidade_<%=material.name%>" value="<%= material.densidade %>">
+  <input id="preco_<%=material.name%>" type="hidden" name="preco_<%=material.name%>" value="<%= material.preco %>">
+<%end%>
+<input id="area" type="hidden" name="area" value="<%=@area%>">
+<input id="kwh" type="hidden" name="kwh" value="<%=@kwh%>">
+<input id="desgaste" type="hidden" name="desgaste" value="<%=@desgaste%>">
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"> 
 <bla id="alerta_adicionar"> 
@@ -70,11 +77,16 @@ background-color: #6441a4;
           </p>
          </a>
         <div style='color:#555555'>
-          <p><i class="fa fa-arrows fa-fw w3-margin-right w3-text-theme"></i><%=@post.x.round(1)%> x <%=@post.y.round(1)%> x <%=@post.z.round(1)%> cm </p>
+          <p><i class="fa fa-arrows fa-fw w3-margin-right w3-text-theme"></i><bla id="bounding_box"><%=@post.x.round(1)%> x <%=@post.y.round(1)%> x <%=@post.z.round(1)%> cm</bla></p>
         </div>
         <div style='color:#555555'>
-          <p><i class="fa fa-cube fa-fw w3-margin-right w3-text-theme"></i><%=(@post.volume/1000).round(1)%> cm&sup3;</p>
+          <p><i class="fa fa-cube fa-fw w3-margin-right w3-text-theme"></i><bla id="volume"><%=(@post.volume).round(0)%> cm³<bla></p>
         </div>
+<div style='color:#555555'>
+          <p><i class="fa fa-balance-scale fa-fw w3-margin-right w3-text-theme"></i><bla id="peso"><%=@peso.round(0)%> g</bla><bla style='color:#888888'> *</bla></p>
+        </div>
+        <hr style="margin-bottom:0px">
+        <p style='font-size:12px; color:#888888'>* Apenas uma estimativa do peso final.</p>
 
         </div>
       </div>
@@ -160,42 +172,11 @@ background-color: #6441a4;
     <!-- Middle Column -->
     <div class="w3-col m7 w3-row ">
     
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card-2 w3-round w3-white">
-            <div class="w3-container w3-padding">
-              <div class="w3-left">
-              <h5 class="w3-opacity">Poste seus projetos e ajude a comunidade Bee
-              </h5>
-              </div>
-              <div class="w3-right" style="width: 107px;">
-              <a href=<%= new_post_path %>>
-              <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-pencil"></i>  Postar</button> 
-              </a>
-              </div>
-
-            </div>
-            <hr style="margin:0px; border-top:1px solid #dddddd">
-            <div class="w3-container w3-padding">
-              <div class="w3-left">
-              <h5 class="w3-opacity">Imprima seu projeto sem precisar postá-lo
-              </h5>
-              </div>
-              <div class="w3-right" style="width: 107px;">
-              <a href=<%= importar_path %>>
-              <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-upload"></i>  Importar</button> 
-              </a>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
+      
 
 
 
-                        <div class="w3-container w3-card-2 w3-white w3-round w3-margin">
+                        <div class="w3-container w3-card-2 w3-white w3-round w3-margin" style='margin-top:0px !important'>
                           <div class="post">
                             <div class="post-head">
                               <div class="thumb-img"></div>
@@ -300,7 +281,7 @@ background-color: #6441a4;
                                 </a>
                                 -->
                                 <p>Compre agora:</p>
-                                <h2>R$<%= @preco %></h2>
+                                <h2 id="preco_total">R$<%= @preco %></h2>
                             <% if user_signed_in? %>
                               <button id="print" class="w3-btn w3-red w3-btn-block w3-section">Imprimir</button>
                             <%else%>
@@ -506,6 +487,32 @@ canvas{
     "use strict";
     var corAtual;
     //--------------- IMPRIMIR -----------------------------
+      var volume = 0;
+      var area = 0;
+      var kwh = 0;
+      var quantidade = 0;
+      var escala = 0;
+      var material = 0;
+      var potencia = 0;
+      var densidade = 0;
+      var pM = 0;
+      var preenchN = 0;
+      var resolucao = 0;
+      var desgaste = 0;
+      var volScale3 = 0;
+      var peso = 0;
+      var precoMD = 0;
+      var precoE = 0;
+      var L = 0;
+      var shell = 0;
+      var percentShell = 0;
+      var precoTotal = 0;
+      var boundingBox = $('#bounding_box').text();
+      var volumeString = $('#volume').text();
+      var aux = volumeString.indexOf(' cm');
+      volumeString = volumeString.slice(0, aux);
+      volume = volumeString;
+
     $(document).on('click', '#print', function(){
         var urlMain = window.location.pathname;
         urlMain = urlMain + '/new';
@@ -521,10 +528,83 @@ canvas{
             }
         });
 
-        //$('#print').fadeOut('fast');
-
     });
-    //------------------------------------------------------
+    //------------------ PRECO DINAMICO ----------------------
+    $(document).on('change', 'select', function(){
+      area = $('#area').val();
+      kwh = $('#kwh').val();
+      quantidade = $('#order_quantidade').val();
+      escala = $('#order_scale').val();
+      material = $('#order_material').val();
+      potencia = $('#potencia_'+material).val();
+      densidade = $('#densidade_'+material).val();
+      pM = $('#preco_'+material).val();
+      resolucao = $('#order_resolution').val();
+      desgaste = $('#desgaste').val();
+
+      var preench = $('#order_preench').val();
+      var aux = preench.indexOf('%');
+      preench = preench.slice(0, aux);
+      preenchN = preench/100;
+
+      console.log('volume:'+volume);
+      console.log('area:'+area);
+      console.log('kwh:'+kwh);
+      console.log('quantidade:'+quantidade);
+      console.log('escala:'+escala);
+      console.log('material:'+material);
+      console.log('potencia:'+potencia);
+      console.log('densidade:'+densidade);
+      console.log('pM:'+pM);
+      console.log('resolucao:'+resolucao);
+      console.log('desgaste:'+desgaste);
+
+
+      shell = area*0.08;
+      percentShell = shell/(volume*escala);
+      if (percentShell > 1) {
+        percentShell = 1;
+      };
+      volScale3 = volume*escala*escala*escala;
+      peso = volScale3*densidade*(percentShell + ((1 - percentShell)*preenchN));
+      precoMD = peso*pM;
+      precoMD = precoMD + peso*desgaste*0.2/resolucao;
+      precoE = ((peso/(40*resolucao)) + 0.2)*potencia*kwh;
+      if ((volScale3 >= 0) && (volScale3 < 30)) {
+        L = 3 - (0.7/30)*volScale3;
+      }else if ((volScale3 >= 30) && (volScale3 < 100)) {
+        L = 2.47143 - (0.4/70)*volScale3;
+      }else if ((volScale3 >= 100) && (volScale3 < 600)) {
+        L = 1.94 - 0.0004*volScale3
+      }else if (volScale3 >= 600) {
+        L = 1.70;
+      };
+      var custo = (precoMD + precoE);
+      console.log('CUSTO:'+custo);
+      precoTotal = (precoMD + precoE)*(L+1);
+
+      precoTotal = Math.round(100*precoTotal)/100;
+      peso = Math.round(100*peso)/100;
+      var idName = $(this).attr('id');
+      console.log("ID: "+idName);
+      if (idName == 'order_scale') {
+        BoundingBoxVolume(boundingBox, volume, escala);
+      };
+      if ((idName == 'order_scale')||(idName == 'order_material')||(idName == 'order_preench')) {
+        $('#peso').hide();
+        $('#peso').text(peso.toFixed(0)+' g');
+        $('#peso').fadeIn(800);
+      };
+
+      $('#preco_total').hide();
+      $('#preco_total').text('R$ '+precoTotal.toFixed(2));
+      $('#preco_total').fadeIn(800);
+
+      console.log('L:'+L);
+    });
+
+
+    //--------------------------------------------------------
 
     var w = 640, h = 550;
     
@@ -644,4 +724,23 @@ canvas{
 
 }, false);
 });
+function BoundingBoxVolume(stringXYZ, volume, escala){
+  var x;
+  var y;
+  var z;
+  var aux1 = stringXYZ.indexOf(' x ');
+  x = escala*stringXYZ.slice(0, aux1);
+  var aux2 = stringXYZ.lastIndexOf(' x ');
+  y = escala*stringXYZ.slice(aux1+3, aux2);
+  var aux3 = stringXYZ.lastIndexOf(' cm');
+  z = escala*stringXYZ.slice(aux2+3, aux3);
+  volume = volume*escala*escala*escala;
+
+  $('#volume').hide();
+  $('#bounding_box').hide();
+  $('#volume').text(volume+' cm³');
+  $('#bounding_box').text(x+' x '+y+' x '+z+' cm');
+  $('#volume').fadeIn(800);
+  $('#bounding_box').fadeIn(800);
+}
 </script>

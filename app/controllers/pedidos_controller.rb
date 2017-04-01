@@ -2,7 +2,11 @@ class PedidosController < ApplicationController
 	before_action :set_user
 	def index
 		@pedidos = @user.pedidos.order('created_at DESC')
-		@pedido = @user.pedidos.last
+		if params[:identifier]
+			@pedido = @user.pedidos.find(params[:identifier])
+		else
+			@pedido = @user.pedidos.last
+		end
 	end
 	def show
 		@pedido = @user.pedidos.find(params[:id])
@@ -40,7 +44,7 @@ class PedidosController < ApplicationController
 	def set_user
 		@user = User.find_by(user_name: params[:user_name])
 		if (@user != current_user)
-			if(@user.tipo=='admin')
+			if(current_user.tipo!='admin')
 				redirect_to browse_posts_path
 			end
 		end

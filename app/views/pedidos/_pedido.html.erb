@@ -1,10 +1,5 @@
-
-      <div id="comments">
-          <%= render pedido.ped_comments, pedido: pedido %>
-
-      </div>
   <% if pedido.user == current_user %>
-    <div class="w3-row-padding w3-section " style="padding-top:25px; border-top:1px solid #eeeeee">
+    <div class="w3-row-padding w3-section " style="padding-top:35px; border-top:2px solid #eeeeee;">
       <div class="w3-col s2" style="width:12%">
         <%= image_tag current_user.avatar.url(:medium),class: "w3-circle", style: 'height:50px;width:50px' %>
       </div>
@@ -16,7 +11,7 @@
     </div>
 
   <% else %>
-  <div class="w3-row-padding w3-section " style="padding-top:25px; border-top:1px solid #eeeeee">
+  <div class="w3-row-padding w3-section " style="padding-top:35px; border-top:2px solid #eeeeee;">
       <div class="w3-col s2 w3-right" style="width:12%">
         <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
       </div>

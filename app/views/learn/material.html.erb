@@ -16,6 +16,9 @@ p {
   line-height: 1.5;
   margin: 30px 0;
 }
+
+
+
 p a {
   text-decoration: underline;
 }
@@ -497,50 +500,156 @@ body {
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <p>Hoje existe uma grande variedade de plásticos que podem ser utilizados em impressoras 3D. Existem filamentos que apresentam as mais diversas características. Podem ser flexíveis, duros, mudar de cor com calor etc. Porém, neste tutorial vamos focar nos mais comuns e que podem ser facilmente encontrados no Brasil. São eles o PLA e o ABS. Vale lembrar também que falaremos sobre os plásticos utilizados em impressoras FDM(Fluid Deposition Modeling), que são aquelas impressoras que “derretem” o filamento de plástico e depositam material sobre uma camada. Esse tipo de impressora é o mais comum(e mais barato também). Falamos sobre os diversos tipos de impressoras nesse outro tutorial.</p>
+                    <p>Hoje existe uma grande variedade de plásticos que podem ser utilizados em impressoras 3D. Existem filamentos que apresentam as mais diversas características. Podem ser flexíveis, duros, mudar de cor com calor etc. Porém, neste tutorial vamos focar nos mais comuns e que podem ser facilmente encontrados no Brasil. São eles o PLA e o ABS. Vale lembrar também que falaremos sobre os plásticos utilizados em impressoras FDM(Fluid Deposition Modeling), que são aquelas impressoras que “derretem” o filamento de plástico e depositam material sobre uma camada. Esse tipo de impressora é o mais comum(e mais barato também).</p>
 
                     
 
                     <h2 class="section-heading">O que é PLA? (Ácido polilático)</h2>
 
-                    <p>PLA é um plástico biodegradável derivado do milho ou de outra fonte renovável  de amido. Ele quase não tem cheiro, gera impressões de alta qualidade e pode ser usado para um grande variedade de funcões e é bem duro. Porém, saiba que o PLA não suporta temperaturas de trabalho elevadas(Ele começa a amolecer a partir dos 50°C) e que ele não é indicado para longa exposição ao ambiente aberto. Ou seja, não use PLA para imprimir uma peça que fica perto de motor do seu carro ou para construir um vaso de quintal.</p>
+                    <p>PLA é um plástico biodegradável derivado do milho ou de outra fonte renovável  de amido. Ele quase não tem cheiro, gera impressões de alta qualidade e pode ser usado para um grande variedade de funcões e é bem duro. Porém, saiba que o PLA não suporta temperaturas de trabalho elevadas(Ele começa a amolecer a partir dos 50°C) e que ele não é indicado para longa exposição ao ambiente aberto. Ou seja, não use PLA para imprimir uma peça que fica dentro do seu carro ou para construir um vaso de quintal.</p>
 
                   
 
                     <blockquote>
                     Parâmetros de impressão:<br>
-					Temperatura do bocal: 195-240°C<br>
-					Temperatura da mesa: 0-60°C<br>
-					Preparação da mesa: Spray de cabelo(o que mais utilizo), Fita azul, Cola bastão.</blockquote>
+          Temperatura do bocal: 195-240°C<br>
+          Temperatura da mesa: 0-60°C<br>
+          Preparação da mesa: Spray de cabelo(o que mais utilizo), Fita azul, Cola bastão.</blockquote>
 
-                    <p>Obs: Essas temperaturas variam de fabricante para fabricante. Note que para imprimir PLA não é necessário mesa aquecida.</p>
+                    <p>Obs: Essas temperaturas variam de fabricante para fabricante. Note que para imprimir PLA não é necessário mesa aquecida. Mas, com certeza, é melhor utilizar uma temperatura da mesa de 60°C para melhorar a adesão da primeira camada.</p>
 
                     <h2 class="section-heading">
                     O que é ABS?(Acrilonitrila-butadieno-estireno)</h2>
 
-                    <p>Sabe de que material é feito o Lego? Então, os bloquinhos de Lego são feitos de ABS. Ele é bem versátil, durável, levemente flexível e pode ser utilizado em temperaturas maiores do que o PLA. Além disso, no Brasil, o ABS custa em torno de 40% menos do que o PLA. Então quer dizer que o ABS pode ser utilizado para quase tudo e ainda é mais barato do que o PLA? Então porque não usar sempre ABS? Então, agora vou falar dos problemas que você vai enfrentar usando ABS. O problema do ABS começa já na preparação da mesa: Ela deve ser aquecida(100°C) e mesmo assim isso não evita um dos principais problemas que você pode ter imprimindo em 3D, o descolamento da primeira camada. Calma! Neste post nós ensinamos você  a driblar esse problema. Outro problema que o ABS apresenta é o chamado “warp”. Quando o ABS esfria, ele encolhe consideravelmente. Isso significa que, a medida que novas camadas são formadas, são criados esforços  que tende a “dobrar”as peças. Confira nas imagens e no exemplo abaixo. Neste post ensinamos você a resolver esse problema. Agora vem o pior do problemas: Dilatação de peças da impressora. Para imprimir em ABS, você precisa utilizar temperaturas maiores, o que também implica em maior dilatação de peças usadas na estrutura da impressora. Isso significa que porcas e parafusos vão ter uma tendencia maior a afrouxar durante o processo de impressão. O que significa falha na impressão e bastante tempo consertando e calibrando a impressora novamente.</p>
+                    <p>Sabe de que material é feito o Lego? Então, os bloquinhos de Lego são feitos de ABS. Ele é bem versátil, durável, levemente flexível e pode ser utilizado em temperaturas maiores do que o PLA. Além disso, no Brasil, o ABS custa em torno de 40% menos do que o PLA. Então quer dizer que o ABS pode ser utilizado para quase tudo e ainda é mais barato do que o PLA? Então porque não usar sempre ABS? Então, agora vou falar dos problemas que você vai enfrentar usando ABS. O problema do ABS começa já na preparação da mesa: Ela deve ser aquecida(100°C) e, mesmo assim, isso não evita um dos principais problemas que você pode ter imprimindo em 3D, o descolamento da primeira camada. Calma! Neste post nós ensinamos você  a driblar esse problema. Outro problema que o ABS apresenta é o chamado “warp”. Quando o ABS esfria, ele encolhe consideravelmente. Isso significa que, a medida que novas camadas são formadas, são criados esforços  que tendem a “dobrar”as peças. Confira a imagem:</p>
+
+                    <div style="width:900px;height:400px;overflow: hidden; ">
+                    <img src="http://i.imgur.com/h3fyXCp.jpg" style="">
+                    </div>
+
+                    <p> Neste <a href=<%=learn_primeira_path%>>post</a> ensinamos você a resolver esse problema. Agora vem o pior do problemas: Dilatação de peças da impressora. Para imprimir em ABS, você precisa utilizar temperaturas maiores, o que também implica em maior dilatação de peças usadas na estrutura da impressora. Isso significa que porcas e parafusos vão ter uma tendencia maior a afrouxar durante o processo de impressão. O que significa falha na impressão e bastante tempo consertando e calibrando a impressora novamente.</p>
 
                     <a href="#">
                         <img class="img-responsive" src="img/post-sample-image.jpg" alt="">
                     </a>
 
                     <blockquote>
-					Parâmetros de impressão:<br>
-					Temperatura do bocal: 240 - 260 ºC<br>
-					Temperatura da mesa: Maior que 80°C<br>
-					Preparação da mesa: “Suco de ABS”, Cola.
-					</blockquote>
+          Parâmetros de impressão:<br>
+          Temperatura do bocal: 240 - 260 ºC<br>
+          Temperatura da mesa: Maior que 80°C<br>
+          Preparação da mesa: “Suco de ABS”, Cola.
+          </blockquote>
 
-                    <p>Obs: Essas temperaturas variam de fabricante para fabricante. Note que para imprimir ABS é necessário mesa aquecida e para melhorar a adesão da primeira camada eu aconselho utilizar o “Suco de ABS”, que nada mais é do que ABS dissolvido em Acetona. Como a venda de acetona pura no Brasil é controlada, uma alternativa é utilizar Solução preparadora da marca Tigre(Custa em torno de 27 reais o litro em lojas de construção).</p>
+                    <p>Obs: Essas temperaturas variam de fabricante para fabricante. Note que para imprimir ABS é necessário mesa aquecida e ,para melhorar a adesão da primeira camada, eu aconselho utilizar o “Suco de ABS”, que nada mais é do que ABS dissolvido em Acetona. Como a venda de acetona pura no Brasil é controlada, uma alternativa é utilizar Solução preparadora da marca Tigre(Custa em torno de 27 reais o litro em lojas de construção).</p>
 
 
-					<h2 class="section-heading">
-                    Ou seja…</h2>
+          <h2 class="section-heading">
+                    Conclusão</h2>
 
-                    <p>Tirando os casos onde uma propriedade de um dos plásticos é fundamental(por exemplo rigidez no PLA e Resistencia a temperaturas maiores no ABS), se você não tem experiência com impressão 3D , eu aconselho utilizar o PLA. Ele vai evitar dor de cabeça e preocupação na hora de impressão. Agora se você já tem experiência e consegue evitar os problemas de imprimir em ABS, use-o. Com ele você consegue economizar um pouco e vai obter peças com propriedades mecânicas melhores, além de ter mais opções de acabamento das peças (confira este post).</p>
-                    <p>
-                    	Confira abaixo a tabela comparativa:
-                    </p>
+                    <p>Para tomar sua decisão, leve em consideração esses 3 fatores:</p>
+                  <blockquote>
+                          <table class="tablemateriais">
+                              <thead style="color:#666; font-weight: bold; ">
+                                  <tr>
+                                      <th></th>
+                                      <th>ABS</th>
+                                      <th>PLA</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      
+                                      <td>Facilidade de impressão</td>
+                                      <td>-</td>
+                                      <td>X</td>
+                                  </tr>
+                                  <tr>
+                                      
+                                      <td>Qualidade da peça</td>
+                                      <td>X</td>
+                                      <td>-</td>
+                                  </tr>
+                                  <tr>
+                                      
+                                      <td>Custo do material</td>
+                                      <td>X</td>
+                                      <td>-</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                  </blockquote>
+
+                  Ou seja...<br>
+
+                 se você não tem experiência com impressão 3D , eu aconselho utilizar o PLA. Ele vai evitar dor de cabeça e preocupação na hora de impressão. Agora se você já tem experiência e consegue evitar os problemas de imprimir em ABS, use-o. Com ele você consegue economizar um pouco e vai obter peças com propriedades mecânicas melhores, além de ter mais opções de acabamento das peças (confira este post).</p>
+
+                      
+          <h2 class="section-heading">
+                  Tabela comparativa</h2>
+
+<table class="tablemateriais">
+    <thead style="color:#666; font-weight: bold; ">
+
+        <tr>
+            <th></th>
+            <th>ABS</th>
+            <th>PLA</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr>
+            
+            <td>Produção</td>
+            <td>Derivado do Amido</td>
+            <td>Petróleo</td>
+        </tr>
+
+
+        <tr>
+            
+            <td>Propriedades</td>
+            <td>Muito duro<hr><br>Não flexível</td>
+            <td>Resistente a maiores temperaturas<hr>Levemente flexível</td>
+        </tr>
+
+        <tr>
+            
+            <td>Temperatura de extrusão</td>
+            <td>210 - 230 ºC</td>
+            <td>240 - 260 ºC</td>
+        </tr>
+
+
+
+        <tr>
+            
+            <td>Preparação da Mesa</td>
+            <td>Temperatura: 0-60°C <hr><br>Forro: Spray de cabelo ou Fita azul ou Cola bastão.</td>
+            <td>Temperatura: Maior que 80°C<hr>Forro: “Suco de ABS” ou Cola.</td>
+        </tr>
+
+        <tr>
+            <td>Prós</td>
+            <td>Biodegradável<hr>Fácil impressão<hr>Sem cheiro</td>
+            <td>Ótimas propriedades mecânicas<hr>Muito resistente<hr>Ótimo acabamento<hr>Resistente a altas,temperaturas(85ºC)</td>
+        </tr>
+
+        <tr>
+            <td>Contras</td>
+            <td>Não aconselhado utilização em ambiente aberto<hr>Baixa resistencia a altas temperaturas(Começa a se deformar a 50ºC).</td>
+            <td>Difícil preparação da impressora<hr>Não resistente a prolongada exposição à luz UV</td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
 
                   
                 </div>
@@ -603,5 +712,36 @@ body {
 </body>
 
 </html>
+<style>
+
+table {
+    
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr{
+  border-bottom: 3px solid #ccc;
+  border-collapse: 
+}
+
+td > hr {
+  margin:5px;
+}
 
 
+  
+p {
+    text-align: justify; 
+
+}
+
+
+
+
+
+</style>

@@ -1,0 +1,17 @@
+$("#correios_pac").next().html("<%=@frete_valor%>");
+$("#correios_sedex").next().html("<%=@frete_valor_sedex%>");
+$("#frete").hide();
+$("#frete").html("R$<%=@frete_valor%>");
+$("#frete").fadeIn(400);
+$("#cep").val("<%=@user.postal_code%>");
+if ($('#forma_entrega').val() == 'PAC') {
+	$("#preco_final").hide();
+	$("#preco_final").html("R$<%='%.2f' % (@preco + @frete_valor).round(2)%>");
+	$("#preco_final").fadeIn(400);
+	$('#price').val("<%='%.2f' % (@preco + @frete_valor).round(2)%>");
+}else if ($('#forma_entrega').val() == 'SEDEX') {
+	$("#preco_final").hide();
+	$("#preco_final").html("R$<%='%.2f' % (@preco + @frete_valor_sedex).round(2)%>");
+	$("#preco_final").fadeIn(400);
+	$('#price').val("<%='%.2f' % (@preco + @frete_valor_sedex).round(2)%>");
+};

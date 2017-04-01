@@ -1104,7 +1104,7 @@ and (orientation : landscape) {
                             <div class="head-btn wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
                             <div class="subscribe-form wow" style='margin:0px'>
                                 <%= form_tag search_path,class:"news-letter mailchimp", method: :get do %>
-                                        <%= text_field_tag :query, params[:query], class: 'form-control typeahead', autocomplete: "off", placeholder: "Pesquise Modelos e Designers", style:'background-color:white' %>
+                                        <%= text_field_tag :query, params[:query], class: 'form-control typeahead', autocomplete: "off", placeholder: "Pesquise Modelos e Designers", style:'background-color:white', required:"" %>
             
 
                                         <%= button_tag(type: "submit", class: "subscribe-btn btn") do %>
@@ -1140,19 +1140,19 @@ and (orientation : landscape) {
                                 <%= simple_form_for(resource,class: "form-header", as: resource_name, url: registration_path(resource_name)) do |f| %>
                                     <%= f.error_notification %>
                                     <div class="form-group">
-                                        <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'form-control input-lg' } %>
+                                        <%= f.input :email, required:"", autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'form-control input-lg' } %>
                                     </div>
                                     <div class="form-group">
-                                        <%= f.input :name, required: true, label: false, placeholder: 'Nome', input_html: { class: 'form-control input-lg' } %>
+                                        <%= f.input :name, required: 'required', label: false, placeholder: 'Nome', input_html: { class: 'form-control input-lg' } %>
                                     </div>
                                     <div class="form-group">
-                                        <%= f.input :sobrenome, required: true, label: false, placeholder: 'Sobrenome', input_html: { class: 'form-control input-lg' } %>
+                                        <%= f.input :sobrenome, required:'required', label: false, placeholder: 'Sobrenome', input_html: { class: 'form-control input-lg' } %>
                                     </div>
                                     <div class="form-group">
-                                        <%= f.input :password, required: true, label: false, placeholder: 'Senha', input_html: { class: 'form-control input-lg' } %>
+                                        <%= f.input :password, required:'required', label: false, placeholder: 'Senha', input_html: { class: 'form-control input-lg' } %>
                                     </div>
                                     <div class="form-group">
-                                        <%= f.input :password_confirmation, required: true, label: false, placeholder: 'Confirmar Senha', input_html: { class: 'form-control input-lg' } %>
+                                        <%= f.input :password_confirmation, required:"required", label: false, placeholder: 'Confirmar Senha', input_html: { class: 'form-control input-lg' } %>
                                     </div>
                                     <div class="form-group last">
                                         <input type="submit" name="commit" value="Registrar" class="btn btn-warning btn-block btn-lg" style="background-color:#3eb0f7; border-color:#3eb0f7;">
@@ -1473,34 +1473,35 @@ and (orientation : landscape) {
 
                             <!-- /.address and contact -->
                             <div class="col-sm-5 contact-left wow fadeInUp" style="visibility: hidden; animation-name: none;">
-                                <h2><span class="highlight">Get</span> in touch</h2>
+                                <h2><span class="highlight">Entre</span> em contato</h2>
                                 <ul class="ul-address">
-                                    <li><i class="pe-7s-map-marker"></i>1600 Amphitheatre Parkway, Mountain View<br>
-                                        California 55000
+                                    <li><i class="pe-7s-map-marker"></i>CLN 406 Bloco B sala 208<br>
+                                        Asa Norte, Brasília 7084-7520
                                     </li>
-                                    <li><i class="pe-7s-phone"></i>+1 (123) 456-7890<br>
-                                        +2 (123) 456-7890
+                                    <li><i class="pe-7s-phone"></i> (61) 3536-4358<br>
+                                        (61) 98235-1095<br>
+                                        (62) 99397-3989
                                     </li>
-                                    <li><i class="pe-7s-mail"></i><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-                                    <li><i class="pe-7s-look"></i><a href="https://bootstrapthemes.co/demo/html/backyard/demo/index.html#">www.yoursite.com</a></li>
+                                    <li><i class="pe-7s-mail"></i><a href="mailto:info@yoursite.com">contato@beeprinted.com.br</a></li>
+                                    <li><i class="pe-7s-look"></i><a href=<%=root_path%>>www.beeprinted.com.br</a></li>
                                 </ul>   
 
                             </div>
 
                             <!-- /.contact form -->
                             <div class="col-sm-7 contact-right">
-                                <form method="POST" id="contact-form" class="form-horizontal" action="https://bootstrapthemes.co/demo/html/backyard/demo/contactengine.php" onsubmit="alert( &#39;Thank you for your feedback!&#39; );">
+                                <form method="POST" id="contact-form" class="form-horizontal" action=<%=contatos_path%> onsubmit="alert( &#39;Obrigado pelo seu feedback!&#39; );">
                                     <div class="form-group">
-                                        <input type="text" name="Name" id="Name" class="form-control wow fadeInUp" placeholder="Name" required="" style="visibility: hidden; animation-name: none;">
+                                        <input type="text" name="contato[name]" id="contato_path" class="form-control wow fadeInUp" placeholder="Nome" required="" style="visibility: hidden; animation-name: none;">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="Email" id="Email" class="form-control wow fadeInUp" placeholder="Email" required="" style="visibility: hidden; animation-name: none;">
+                                        <input type="text" name="contato[email]" id="contato_email" class="form-control wow fadeInUp" placeholder="Email" required="" style="visibility: hidden; animation-name: none;">
                                     </div>                  
                                     <div class="form-group">
-                                        <textarea name="Message" rows="20" cols="20" id="Message" class="form-control input-message wow fadeInUp" placeholder="Message" required="" style="visibility: hidden; animation-name: none;"></textarea>
+                                        <textarea name="contato[mensagem]" rows="20" cols="20" id="Message" class="form-control input-message wow fadeInUp" placeholder="Mensagem" required="" style="visibility: hidden; animation-name: none;"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="submit" name="submit" value="Submit" class="btn btn-success wow fadeInUp" style="visibility: hidden; animation-name: none;">
+                                        <input type="submit" name="commit" value="Enviar Mensagem" id='contato_submit' class="btn btn-success wow fadeInUp" style="visibility: hidden; animation-name: none;">
                                     </div>
                                 </form>     
                             </div>

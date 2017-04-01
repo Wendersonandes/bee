@@ -1,5 +1,7 @@
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-.w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
-</style>
-    <%= render 'projects', posts: @posts %>
+<%= render 'top_show', user: @user, footers: @footers, posts2: @posts2, posts: @posts, botao: @botao %> 
+  <div id="my-posts">
+    <%= render 'profiles/destaques', posts: @posts %>
+  </div>
+  <!-- Pagination -->
+<%= render 'footer_show', user: @user, footers: @footers, posts2: @posts2, posts: @posts, posts_all: @posts_all %>
+

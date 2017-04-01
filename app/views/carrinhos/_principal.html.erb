@@ -1,5 +1,5 @@
 <div class="w3-container" id="apartment">
-    <h2 class="w3-text-green">Seu Pedido</h2>
+    <h2 class="w3-text-green">Seus Pedidos</h2>
 
     <% carrinho.orders.each do |order| %>
       <div class="w3-display-container mySlides">
@@ -11,7 +11,7 @@
             <p><%= order.post.caption %> <strong>x<%=order.quantidade%></strong></p>
           <% end %>
         </div>
-        <%= link_to order_path(order), method: :delete, data: { confirm: "Are you sure?" }, remote: true do %>
+        <%= link_to order_path(id: order, user_name: carrinho.user.user_name), method: :delete, data: { confirm: "Are you sure?" } do %>
         <div class="w3-display-topright w3-container w3-black">
           <span class="glyphicon glyphicon-remove delete-comment" style="color:gray; font-size:20px"></span>
         </div>
@@ -32,3 +32,32 @@
   </div>
   <% end %>
   <% end %>
+  <script>
+// Slideshow Apartment Images
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-opacity-off";
+}
+</script>

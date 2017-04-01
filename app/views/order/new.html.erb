@@ -25,7 +25,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
     <hr style="border-top: 1px solid #cccccc">
     <div style="color:#555555; margin-bottom:20px; font-size:15px;"><strong>Pagamento</strong></div>
 
-    <div class='w3-container' style="border-bottom:3px solid #888888; padding-bottom:10px">
+    <div class='w3-container' style="border-bottom:2px solid #888888; padding-bottom:10px">
       <ul>
         <% @carrinho.orders.each do |order| %>
           <div class="w3-container order_<%=order.id%>" style="padding:0px">
@@ -34,16 +34,37 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
             <%else%>
               <li style="float:left; font-size:13px; color:#555555;"><%=order.post.caption%> <strong>x<%=order.quantidade%></strong></li>
             <%end%>
-            <li style="float:right;font-size:13px;color:#555555;">R$<%=(order.price*order.quantidade).round(2)%></li>
+            <li style="float:right;font-size:13px;color:#555555;">R$<%='%.2f' % (order.price*order.quantidade).round(2)%></li>
           </div>
         <% end %>
       </ul>
     </div>
     <div class='w3-container'>
       <ul>
+          <li style="float:left; font-size:14px; color:#555555;">Subtotal:</li>
+          <li id='preco_total' style="float:right;font-size:14px;color:#555555;">R$<%='%.2f' % @preco.round(2)%></li>
+      </ul>
+    </div>
+    <div class='w3-container' style="border-bottom:3px solid #888888; padding-bottom:10px">
+          <ul>
+          <li style="float:left; font-size:14px; color:#555555;">Frete:</li>
+          <% if @frete_valor%>
+            <li id='frete' style="float:right;font-size:14px;color:#555555;">R$0.00</li>
+          <% else %>
+            <li id='frete' style="float:right;font-size:14px;color:#555555;">?</li>
+          <%end%>
+      </ul>
+    </div>
+    <div class='w3-container'>
+      <ul>
         <strong>
           <li style="float:left; font-size:14px; color:#555555;">Total:</li>
-          <li id='preco_total' style="float:right;font-size:14px;color:#555555;">R$<%=@preco%></li>
+          <%if @frete_valor %>
+            <li id='preco_final' style="float:right;font-size:14px;color:#555555;">R$<%='%.2f' % @preco.round(2)%></li>
+          <%else%>
+            <li id='preco_final' style="float:right;font-size:14px;color:#555555;"></li>
+          <%end%>
+
         </strong>
       </ul>
     </div>
@@ -88,6 +109,46 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
   </bla>
   <hr style="margin-bottom:2px; border-top: 1px solid #dddddd">
   <div class='w3-container' style="color:#999999">Para cancelar algum pedido, clique no "x" no topo esquerdo da respectiva foto</div>
+
+<div class="w3-container" id="contact" style="margin-top:15px; border-top: 2px solid #eeeeee">
+    <h2 style="color:#777777">Frete</h2>
+    <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
+      <form>
+        <p>
+        <input id="com_frete" type="radio" name="tipo_entrega"/> Entrega pelos correios (com frete)
+        </p>
+        <p>
+        <input id="sem_frete" type="radio" name="tipo_entrega"/> Retirada no escritório (sem frete)
+        </p>
+      </form>
+      <div class="w3-left">
+         <%= form_tag "/order/frete?carrinho_id=#{@carrinho.id}", id:"form_cep", style:"display:none;", remote: true do %>
+          <%= text_field_tag "CEP", "#{@user.postal_code}" %>
+          <%= submit_tag "CEP" %>
+        <% end %>
+      </div>
+      <br>
+    <br>
+    <%if @frete_valor %>
+    <form id="form_com_frete" style="display:none;">
+    <p>
+      <input id="correios_pac" type="radio" name="correios_tipo" checked='true' /> Pac - R$<bla><%=@frete_valor%></bla></p>
+    <p>
+      <input id="correios_sedex" type="radio" name="correios_tipo" /> Sedex - R$<bla><%=@frete_valor_sedex%></bla></p>
+    </form>
+    <%else%>
+    <form id="form_com_frete" style="display:none;">
+    <p>
+      <input id="correios_pac" type="radio" name="correios_tipo" checked='true' /> Pac - R$<bla>0.00</bla></p>
+    <p>
+      <input id="correios_sedex" type="radio" name="correios_tipo" /> Sedex - R$<bla>0.00</bla></p>
+    </form>
+    <%end%>
+    </div>
+
+</div>
+
+
 
   <!-- Contact -->
   <div class="w3-container" id="contact" style="margin-top:15px; border-top: 2px solid #eeeeee">
@@ -142,8 +203,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
 
   </div>
 <div class="w3-container" style="border-top:2px solid #eeeeee;margin-top:15px;padding-top:15px;">
+
   <div class="w3-center">
-<a href="javascript:void(0)" class="w3-btn w3-green w3-section" onclick="document.getElementById('subscribe').style.display='block'" style="border-radius:5px;">Ir para Pagamento</a>
+<button id="comprar" href="javascript:void(0)" title="Selecione o modo de entrega" class="w3-btn w3-green w3-section" onclick="document.getElementById('subscribe').style.display='block'" style="border-radius:5px;" disabled>Ir para Pagamento</button>
   </div>
   <div class="w3-center">
   Pagamento Seguro por
@@ -164,13 +226,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
    <form id="se_forzero" class="form-horizontal" role="form" action=<%=order_create_path(@user.user_name)%> method="POST">
      <div id='payment-datas'>
        <div>
-       	<input id="price" type="hidden" name="price" value="<%= @preco %>">
-       	<input id="parcela" type="hidden" name="parcela">
-       	<input id="quantidade" type="hidden" name="quantidade">
+        <input id="price" type="hidden" name="price" value="<%= @preco %>">
+        <input id="parcela" type="hidden" name="parcela">
+        <input id="quantidade" type="hidden" name="quantidade">
          <input type="hidden" name="carrinho_id" value="<%= @carrinho.id %>">
          <input type="hidden" name="card_token" id="card_token" />
          <input type="hidden" name="sender_hash" id="sender_hash" />
          <input type="hidden" name="session_id" id="session_id" value="<%= @session_id %>" />
+         <input type="hidden" name="forma_entrega" id="forma_entrega" value="" />
          <%= csrf_meta_tag %>
        </div>
        <fieldset>
@@ -178,36 +241,36 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
          <div class="form-group">
            <label class="col-sm-3 control-label">Nome</label>
            <div class="col-sm-5">
-             <input type="text" class="form-control" name='name' placeholder="exp: José Paulo" required>
+             <input type="text" class="form-control" name='name' placeholder="exp: José Paulo" value='<%=@user.completo%>' required>
            </div>
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Email</label>
            <div class="col-sm-5">
-             <input type="text" class="form-control" name='email' placeholder="exp: c56048717318@sandbox.pagseguro.com.br" required>
+             <input type="text" class="form-control" name='email' placeholder="exp: beeprinted@beeprinted.com" value='<%=@user.email%>' required>
            </div>
            
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">CPF</label>
            <div class="col-sm-3">
-             <input type="text" class="form-control" name='cpf' placeholder="39813476548" maxlength='11' required>
+             <input type="text" class="form-control" name='cpf' placeholder="39813476548" maxlength='11' value='<%=@user.cpf%>' required>
            </div>
            * Não use . ou - no CPF
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Telefone</label>
            <div class="col-sm-1" style='width:80px'>
-             <input type="text" class="form-control" name='phone_code' placeholder="11" maxlength='2' required>
+             <input type="text" class="form-control" name='phone_code' placeholder="11" maxlength='2' value='<%=@user.phone_code%>' required>
            </div>
            <div class="col-sm-2">
-             <input type="text" class="form-control" name='phone_number' placeholder="997874567" required>
+             <input type="text" class="form-control" name='phone_number' placeholder="997874567" value='<%=@user.phone_number%>' required>
            </div>
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Data de Nascimento</label>
            <div class="col-sm-2">
-             <input type="text" class="form-control" name='birthday' placeholder="10/10/1991" maxlength='10' required>
+             <input type="text" class="form-control" name='birthday' placeholder="10/10/1991" maxlength='10' value='<%=@user.birthday%>' required>
            </div>
          </div>
        </fieldset>
@@ -216,40 +279,40 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
          <div class="form-group">
            <label class="col-sm-3 control-label">Endereço</label>
            <div class="col-sm-5">
-             <input type="text" class="form-control" name='street' placeholder="exp: SQS 215 Bloco K" required>
+             <input type="text" class="form-control" name='street' placeholder="exp: SQS 215 Bloco K" value='<%=@user.street%>' required>
            </div>
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Número</label>
            <div class="col-sm-1" style='width:80px'>
-             <input type="text" class="form-control" name='number' placeholder="999" required>
+             <input type="text" class="form-control" name='number' placeholder="999" value='<%=@user.number%>' required>
            </div>
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Complemento</label>
            <div class="col-sm-5">
-             <input type="text" class="form-control" name='complement' placeholder="Setor Bancário">
+             <input type="text" class="form-control" name='complement' placeholder="Setor Bancário" value='<%=@user.complement%>'>
            </div>
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Bairro</label>
            <div class="col-sm-5">
-             <input type="text" class="form-control" name='district' placeholder="Asa Norte">
+             <input type="text" class="form-control" name='district' placeholder="Asa Norte" value='<%=@user.district%>'>
            </div>
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Cidade</label>
            <div class="col-sm-5">
-             <input type="text" class="form-control" name='city' placeholder="Sobradinho">
+             <input type="text" class="form-control" name='city' placeholder="Sobradinho" value='<%=@user.city_pag%>'>
            </div>
          </div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Estado</label>
            <div class="col-sm-1" style='width:80px'>
-             <input type="text" class="form-control" name='state' placeholder="DF" required>
+             <input type="text" class="form-control" name='state' placeholder="DF" value='<%=@user.state%>' required>
            </div>
            <div class="col-sm-3">
-             <input type="text" class="form-control" name='postal_code' placeholder="CEP" required>
+             <input id="cep" type="text" class="form-control" name='postal_code' placeholder="CEP" value='<%=@user.postal_code%>' required>
            </div>
          </div>
        </fieldset>
@@ -352,45 +415,53 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
     </div>
   </div>
 </div>
-
+</body>
 <script>
-// Script to open and close sidenav when on tablets and phones
-function w3_open() {
-    document.getElementById("mySidenav").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
- 
-function w3_close() {
-    document.getElementById("mySidenav").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
-
-// Slideshow Apartment Images
-var slideIndex = 1;
-showDivs(slideIndex);
-
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";
+$(document).on('click', 'input:radio', function() {
+  var frete = 0;
+  var tipoEntrega = $(this).attr('id');
+  $('#comprar').removeAttr("title");
+  if (tipoEntrega == 'com_frete') {
+    $('#form_cep').fadeIn(400);
+    $('#form_com_frete').fadeIn(400);
+    $('#correios_pac').prop("checked", true );
+    $('#forma_entrega').val('PAC');
+    frete = $('#correios_pac').next().text();
+    FreteFade(frete);
   }
-  for (i = 0; i < dots.length; i++) {
-     dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  else if (tipoEntrega == 'sem_frete') {
+    $('#form_cep').fadeOut(400);
+    $('#form_com_frete').fadeOut(400);
+    $('#forma_entrega').val('OFFICE');
+    frete = 0.00;
+    FreteFade(frete);
   }
-  x[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " w3-opacity-off";
+  else if (tipoEntrega == 'correios_pac') {
+    $('#forma_entrega').val('PAC');
+    frete = $('#correios_pac').next().text();
+    FreteFade(frete);
+  }
+  else if (tipoEntrega == 'correios_sedex') {
+    $('#forma_entrega').val('SEDEX');
+    frete = $('#correios_sedex').next().text();
+    FreteFade(frete);
+  };
+  $("#comprar").prop( "disabled", false );
+  var stringV = $('#preco_total').text();
+  var index1 = stringV.indexOf('$');
+  var index2 = stringV.indexOf('.');
+  var subTotal = Number(stringV.slice(index1+1, index2+3));
+  console.log(subTotal, frete);
+  var precoTotal = 0;
+  precoTotal = subTotal + Number(frete);
+  $('#price').val(precoTotal);
+  $('#preco_final').hide();
+  $('#preco_final').text('R$'+precoTotal.toFixed(2));
+  $('#preco_final').fadeIn(400);
+});
+function FreteFade(valor){
+  $('#frete').hide();
+  $('#frete').text('R$' + Number(valor).toFixed(2));
+  $('#frete').fadeIn(400);
 }
 </script>
-</body>

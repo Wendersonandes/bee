@@ -8,7 +8,6 @@ class CommentsController < ApplicationController
       format.html { render layout: !request.xhr? }
     end
   end
-
   def create
     @comment = @post.comments.build(comment_params)
     @comment.user_id = current_user.id
@@ -53,14 +52,14 @@ class CommentsController < ApplicationController
   def create_notification_outros(post, comment)
   	users = User.joins("INNER JOIN comments ON Users.id = comments.user_id").distinct.where("comments.post_id" => post.id)
   	users.each do |user|
-  		return if user.id == current_user.id
-  		return if user.id == post.user.id
-    	Notification.create(user_id: user.id,
+  		if ((user.id != current_user.id)&&(user.id != post.user.id))
+    	 Notification.create(user_id: user.id,
                         notified_by_id: current_user.id,
                         post_id: post.id,
                         identifier: comment.id,
                         notice_type: "#{current_user.completo} também comentou no Post",
                         status: "post")
+    end
     end
   end
   def comment_params

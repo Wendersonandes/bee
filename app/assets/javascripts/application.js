@@ -28,6 +28,7 @@
 //= require jquery.magnific-popup.min
 //= require printers
 //= require show_profile
+//= require loadMoreComments
 //  require pagination
 //= require handlebars
 //= require_tree .

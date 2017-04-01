@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: [:show, :projetos, :destaques,:printers]
-  layout :determine_layout
+  skip_before_action :authenticate_user!, only: [:show, :projetos, :destaques,:printers,:seguidores, :seguindo]
   before_action :set_user
   before_action :owned_profile, only: [:edit, :update]
 
@@ -12,7 +11,9 @@ class ProfilesController < ApplicationController
       #puts @user.avatar.url(:medium)
       @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)
       @posts2 = @user.posts.where.not(status: 0).limit(2);
-      @posts = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
+      @posts = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+      @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+      @botao = 'Projetos'
       respond_to do |format|
       format.html
       format.js
@@ -37,18 +38,57 @@ class ProfilesController < ApplicationController
   end
 
   def printers
+    @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)
     @printers = @user.printers.order('created_at DESC')
-  end
-
-  def destaques
-    @posts = @user.posts.where.not(status: 0).order('cached_votes_up DESC').first(5)
-  end
-  def projetos
-      @posts = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
-      respond_to do |format|
+    @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+    @botao = 'Printers'
+    respond_to do |format|
       format.html
       format.js
     end
+  end
+
+  def destaques
+    @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)
+    @posts = @user.posts.where.not(status: 0).order('cached_votes_up DESC').first(6)
+    @botao = 'Destaques'
+    @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  def projetos
+    @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)
+    @posts = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+    @botao = 'Projetos'
+    @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+    respond_to do |format|
+        format.html
+        format.js
+    end
+  end
+  def seguidores
+    @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)
+    @botao = 'Seguidores'
+    @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+    @seguidores = @user.followers
+    respond_to do |format|
+        format.html
+        format.js
+    end
+
+  end
+  def seguindo
+    @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)
+    @botao = 'Seguindo'
+    @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+    @seguindo = @user.following
+    respond_to do |format|
+        format.html
+        format.js
+    end
+
   end
 
   def banco

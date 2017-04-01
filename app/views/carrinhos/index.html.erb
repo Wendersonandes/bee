@@ -1,0 +1,135 @@
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
+.mySlides {display:none}
+</style>
+<body class="w3-content" style="max-width:1100px">
+
+<!-- Sidenav/menu -->
+<br>
+<br>
+<nav class="w3-sidenav w3-light-grey w3-collapse w3-top w3-border-left" style="z-index:3;width:260px; overflow: visible;" id="mySidenav">
+<br>
+<br>
+<br>
+  <div class="w3-container w3-padding-8">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-closebtn w3-hover-text-red"></i>
+    <p style="font-weight:bold;color:#666; border-bottom: 2px solid #ccc;font-size:25px;margin:0px;"> Suas Compras </p>
+    <p style="font-style:italic;color:#666;font-size:13px;text-align: justify;">Encontre aqui todos os seus carrinhos que passaram ou estão passando pelo processo de pagamento</p>
+        <%if @carrinhos.any? %>
+          <br>
+          <% @carrinhos.each do |carrinho|%>
+            <a href=<%=carrinho_feito_path(@user.user_name,carrinho)%> class="media list-group-item lista_carrinhos carrinho_<%=carrinho.id%>" data-remote="true" id="carrinho_<%=carrinho.id%>">
+              <span class="pull-left">
+               <%= image_tag carrinho.orders.first.post.image.url(:medium), class: "media-object img-circle img-notification"%>
+              </span>
+              <span id="content_<%carrinho.id%>" class="media-body">
+              <%if carrinho.orders.count != 1%>
+              	<p style='margin-bottom:0px;'><%=carrinho.orders.count%> Modelos</p>
+              <%else%>
+              	<p style='margin-bottom:0px;'><%=carrinho.orders.count%> Modelo</p>
+              <%end%>
+              <small class="text-muted">
+              	<p><%=carrinho.status%></p>
+              </small>
+              <small class="text-muted">
+                <%= time_ago_in_words carrinho.created_at%>
+               </small>
+              </span>
+            </a>
+          <% end %>
+          <% end %>
+    
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-80">
+  <span class="w3-left">Pedidos</span>
+  <a href="javascript:void(0)" class="w3-right w3-opennav" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-white w3-border-right" style="margin-left:260px;">
+<div style="overflow:auto;">
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:80px"></div>
+
+
+  <%if @carrinhos.any? %>
+<bla id='order_foto'>
+    <% if @carrinho.orders.any? %>
+    <div id='fotos_carrinho'>
+      <%= render 'carrinhos/principal', carrinho: @carrinho %>
+    </div>
+    <% else %>
+      <h3>Você nao possui nenhum pedido. Visite nossa galeria</h3>
+      <p class='w3-center btn'><%=link_to 'Galeria', galeria_path%></p>
+    <% end %>
+  </bla>
+  <hr style="margin-bottom:2px; border-top: 1px solid #dddddd">
+  <div class='w3-container' style="color:#999999">Para cancelar algum pedido, clique no "x" no topo esquerdo da respectiva foto</div>
+  <!-- Slideshow Header -->
+
+  <!-- Contact -->
+  <div class="w3-container" id="contact" style="margin-top:15px; border-top: 2px solid #eeeeee">
+    <div class="post-bottom">
+    <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
+            <div class="w3-col s2 w3-right" style="width:12%">
+              <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
+            </div>
+              <div class="w3-col s8 w3-right" style="background-color:#eeeeee; border-radius:10px;padding:10px">
+                Olá :)
+            </div>
+    </div>
+    <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
+            <div class="w3-col s2 w3-right" style="width:12%">
+              <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
+            </div>
+              <div class="w3-col s8 w3-right" style="background-color:#eeeeee; border-radius:10px;padding:10px">
+                Por favor, descreva aqui suas dúvidas sobre o processo de pagamento, modelagem, entrega ou sobre outras informaçoes relacionadas ao seu carrinho...
+            </div>
+    </div>
+    <div id='carrinho'>
+      <%= render 'carrinho', carrinho: @carrinho %>
+    </div>
+    <%else%>
+    <br>
+    <br>
+    <h2 class='w3-center'>Você ainda nao possui pedidos!</h2>
+    <%end%>
+  </div>
+<div class="w3-container" style="border-top:2px solid #eeeeee;margin-top:15px;padding-top:15px;">
+  <div class="w3-center">
+  Pagamento Seguro por
+  </div>
+  <div class="w3-center">
+   <img src="https://stc.pagseguro.uol.com.br/public/img/banners/pagamento/todos_estatico_550_100.gif" alt="Logotipos de meios de pagamento do PagSeguro" title="Este site aceita pagamentos com Visa, Mastercard, Diners, American Express, Hipercard, Aura, Elo, PLENOCard, PersonalCard, BrasilCard, FORTBRASIL, Cabal, Mais!, Avista, Grandcard, Sorocred, Bradesco, Itaú, Banco do Brasil, Banrisul, Banco HSBC, saldo em conta PagSeguro e boleto.">
+</div>
+  <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by <a href=<%=root_path%> title="BEEPRINTED" target="_blank" class="w3-hover-text-green">BEEPRINTED</a></footer>
+</div>
+</div>
+
+
+<!-- End page content -->
+</div>
+<!-- Subscribe Modal -->
+<script>
+$(".lista_carrinhos").css('background-color', 'white');
+$("#carrinho_<%=@carrinho.id%>").css('background-color', '#dddddd');
+</script>
+<script>
+// Script to open and close sidenav when on tablets and phones
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+</body>

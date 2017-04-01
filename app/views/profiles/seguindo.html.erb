@@ -1,0 +1,7 @@
+<%= render 'top_show', user: @user, footers: @footers, posts2: @posts2, posts: @posts, botao: @botao %> 
+  <div id="my-posts">
+  <%= render 'seguidores', seguidores: @seguindo, user: @user %>
+  </div>
+  <!-- Pagination -->
+<%= render 'footer_show', user: @user, footers: @footers, posts2: @posts2, posts: @posts, posts_all: @posts_all %>
+

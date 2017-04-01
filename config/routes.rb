@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
+
+  get 'dashboard', to: 'dashboard#index', as: :dashboard
+  get 'dashboard/usuarios', to: 'dashboard#usuarios', as: :dashboard_usuarios
+  get 'dashboard/carrinhos', to: 'dashboard#carrinhos', as: :dashboard_carrinhos
+  get 'dashboard/vendas', to: 'dashboard#vendas', as: :dashboard_vendas
   get 'order/new', to: 'order#new', as: :new_order
+  post 'order/frete', to: 'order#frete', as: :frete
 
   resources :order
   get 'galeria/index'
+
+  post 'contato', to: 'home#create', as: :contatos
 
   post ':user_name/pedidos', to: 'pedidos#create', as: :pedidos_create
   get ':user_name/pedidos', to: 'pedidos#index', as: :pedidos
@@ -72,7 +80,11 @@ Rails.application.routes.draw do
   get ':user_name/printers', to: 'profiles#printers', as: :printers_profile
   get ':user_name/destaques', to:'profiles#destaques', as: :destaques_profile
   get ':user_name/projetos', to:'profiles#projetos', as: :projetos_profile
+  get ':user_name/seguidores', to:'profiles#seguidores', as: :seguidores_profile
+  get ':user_name/seguindo', to:'profiles#seguindo', as: :seguindo_profile
   get ':user_name/carrinho', to:'order#new', as: :carrinho
+  get ':user_name/carrinhos', to:'carrinhos#index', as: :carrinhos
+  get ':user_name/carrinho_feito/:id', to: 'carrinhos#show', as: :carrinho_feito
   post ':user_name/order/create', to:'order#create', as: :order_create
   resources :posts do
     resources :comments

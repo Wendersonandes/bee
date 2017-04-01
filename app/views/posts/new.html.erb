@@ -6853,7 +6853,7 @@ button.close {
                         <div class="container-fluid hellow" style="">
                           <div class="form-group text-center ">
                             <h4>Adicione um modelo 3D</h4>
-                            <%= f.input :attachment, label: false%>
+                            <input type="file" name="post[attachment]" id='post_attachment' accept=".stl, .STL">
                           </div>
                           
                           <div class="form-group text-center" id="formgroup2">
@@ -6863,6 +6863,9 @@ button.close {
                           
                           <div class="form-group text-center" id="formgroup2" style="display: none;">
                             <%= f.input :volume, label: false, placeholder: 'Adicionar volume' %>
+                          </div>
+                          <div class="form-group text-center" id="formgroup2" style="display: none;">
+                            <%= f.input :area, label: false, placeholder: 'Adicionar área' %>
                           </div>
                           <div class="form-group text-center" id="formgroup2" style="display:none">
                             <%= f.input :x, label: false, placeholder: 'Adicionar volume' %>
@@ -6981,6 +6984,7 @@ button.close {
   top: 0px;
   width: 100%;
   padding: 0px;
+  z-index: 10;
 
 }
 

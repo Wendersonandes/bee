@@ -10,6 +10,11 @@ $( document ).ready(function() {
   $("#buy-button").click(function() {
     $('#sender_hash').val(PagSeguroDirectPayment.getSenderHash());
  
+    var parcela;
+    var valorParcela;
+    var valorTotal;
+    ParcelaCartao(parcela, valorParcela, valorTotal);
+
     var params = {
      cardNumber: $("#card-number").val(),
      cvv: $("#card-cvv").val(),
@@ -93,16 +98,14 @@ function bloqueio(){
     }
     //ENDERECO DO COMPRADOR
     else if (inputAtual == "street") {
-      erro = apenasNumLetra(stringAtual);
-      msgDeErro(erro, 'erro_street', "me fode!");
+
     }
     else if (inputAtual == "number") { //não obrigatorio
       erro = apenasNum(stringAtual);
       msgDeErro(erro, 'erro_number', "*Utilize apenas numeros");
     }
     else if (inputAtual == "complement") { //não obrigatorio
-      erro = apenasNumLetra(stringAtual);
-      msgDeErro(erro, 'erro_complement', "me fode!");
+
     }
     else if (inputAtual == "district") {
       erro = apenasLetras(stringAtual);
@@ -131,12 +134,6 @@ function bloqueio(){
     }
 
     bloqueio();
-  });
-  $(document).on('click', '#card-options', function(){
-    var parcela;
-    var valorParcela;
-    var valorTotal;
-    ParcelaCartao(parcela, valorParcela, valorTotal);
   });
 }
 
@@ -259,7 +256,6 @@ function getNumber(subString, stringCompleta)
 
 function ParcelaCartao(parcela, valorParcela, valorTotal)
 {
-  if ($('#card-options-box').css('display') != 'none') {
     var string = $('#card-options :selected').text();
     console.log('LADY GAGA'+string);
     valorParcela = getNumber("$", string);
@@ -270,7 +266,6 @@ function ParcelaCartao(parcela, valorParcela, valorTotal)
     $('#parcela').val(valorParcela);
     $('#quantidade').val(parcela);
     console.log($('#quantidade').val(), $('#parcela').val());
-  }; 
 }
 
 

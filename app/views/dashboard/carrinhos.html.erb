@@ -1,0 +1,145 @@
+ <%= render 'dashboard/navs'%>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Carrinhos (<%=@carrinhos.count%>)</h4>
+                                <p class="category">Encontre aqui as principais informações</p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover" style="margin-bottom:0px">
+                                    <thead>
+                                        <th>ID</th>
+                                    	<th>Nome Usuário</th>
+                                    	<th>Status</th>
+                                    	<th>Orders</th>
+                                        <th>Preço</th>
+                                        <th>Frete</th>
+
+                                    </thead>
+                                    <tbody>
+                                    <% @carrinhos.each_with_index  do |carrinho,index|%>
+                                        <tr onclick='show_details("<%=index%>")'>
+                                        	<td>
+                                             <%=carrinho.id%>
+                                                
+                                            </td>
+                                        	<td>
+                                            <a href=<%= profile_path(carrinho.user.user_name)%>><%=carrinho.user.completo%></a>
+                                                
+                                            </td>
+
+                                        	<td><%=carrinho.status%></td>
+                                            <td><%=carrinho.orders.count%></td>
+                                            <td><%=carrinho.price%></td>
+                                            <td></td>
+                                            </tr>
+                                            <tr>
+                                            <div>
+                                            <!--<table class="table table-hover" style="margin-bottom:0px; background-color:#eeeeee">-->
+                                                <thead id="head_<%=index%>" style='background-color:#eeeeee;display:none;'>
+                                                    <th>Order</th>
+                                                    <th>Post Nome</th>
+                                                    <th>Post ID</th>
+                                                    <th>Peso</th>
+                                                    <th>Quantidade</th>
+                                                    <th>Preço</th>
+                                                </thead>
+                                                <tbody id="body_<%=index%>"  style='background-color:#dddddd;display:none;'>
+                                                    <% carrinho.orders.each do |order|%>
+                                                    <tr style='background-color:#dddddd'>
+                                                        <td>
+                                                            <%=order.id%>
+                                                        </td>
+                                                        <td>
+                                                            <%=order.post.caption%>
+                                                        </td>
+                                                        <td>
+                                                            <%=order.post.id%>
+                                                        </td>
+                                                        
+                                                        <td>
+                                                            <%=order.peso%> g
+                                                        </td>
+                                                        <td>
+                                                            <%=order.quantidade%>
+                                                        </td>
+                                                        <td>
+                                                            R$<%=order.price%>
+                                                        </td>
+                                                    </tr>
+                                                    <%end%>
+                                                </tbody>
+                                            </div>
+                                            <!--</table>-->
+                                            </tr>
+                                    <%end%>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               Blog
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href=<%=root_path%>>BeePrinted</a>, Imprima em Comunidade
+                </p>
+            </div>
+        </footer>
+
+
+    </div>
+</div>
+
+
+</body>
+<script>
+function show_details(n){
+    var x = document.getElementById("head_"+n);
+    if(x.style.display === 'none'){
+        $("#head_"+n).show();
+        $("#body_"+n).show(); 
+    } 
+    else{
+        $("#head_"+n).hide();
+        $("#body_"+n).hide();
+    }
+    console.log("head_"+n);
+
+}
+</script>

@@ -1,27 +1,150 @@
+<!--
 <h2>
   Edit #{resource_name.to_s.humanize}
 </h2>
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+-->
+<div style="" class="w3-row">
+<div style="padding-top:80px;" class="w3-col s6 w3-center">
+
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
+
   <div class="form-inputs">
+  
+  <div class="w3-row" style="margin:0px !important;">
+    <div class="labels w3-col s3 labels" style="border: 1px solid #f1f1f1;"></div>
+    <div class="labels w3-col s9">
+    <h3 style="border-bottom: 1px solid #ccc;padding-bottom:15px;">Editar conta</h3>
+    </div>
+  </div>
+
+
+  <div class="w3-row" style="margin:0px !important;">
+    <div class="labels w3-col s3 labels">Email:</div>
+    <div class="labels w3-col s9">
     <%= f.input :email, required: true, autofocus: true %>
+    </div>
+  </div>
+
+  <div class="w3-row" style="margin:0px !important;">
+    <div class="labels w3-col s3 labels">Nome:</div>
+    <div class="labels w3-col s9">
     <%= f.input :name, required: true %>
+    </div>
+  </div>
+
+  <div class="w3-row" style="margin:0px !important;">
+    <div class="labels w3-col s3 labels">Sobrenome:</div>
+    <div class="labels w3-col s9">
     <%= f.input :sobrenome, required: true %>
+    </div>
+  </div>  
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>
         Currently waiting confirmation for: #{resource.unconfirmed_email}
       </p>
     <% end %>
+
+  <div class="w3-row" style="margin:0px !important;">
+    <div class="labels w3-col s3 labels">Nova Senha:</div>
+    <div class="labels w3-col s9">
     <%= f.input :password, autocomplete: "off", hint: "Deixe em branco se não quiser mudá-lo", required: false %>
-    <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "Precisamos de sua senha atual para confirmar as mudanças", required: true %>
+    </div>
   </div>
-  <div class="form-actions">
+
+  <div class="w3-row" style="margin:0px !important;">
+    <div class="labels w3-col s3 labels">Confirmação:</div>
+    <div class="labels w3-col s9"> 
+    <%= f.input :password_confirmation, required: false %>
+    </div>
+  </div>
+
+  <div class="w3-row" style="margin:0px !important;">
+    <div class="labels w3-col s3 labels">Senha atual:</div>
+    <div class="labels w3-col s9"> 
+    <%= f.input :current_password, hint: "Precisamos de sua senha atual para confirmar as mudanças", required: true %>
+    </div>
+  </div>
+  </div>
+
+  <div class="labels w3-col s3 labels" style="border: 1px solid #f1f1f1;"></div>
+  <div class="form-actions w3-center">
     <%= f.button :submit, "Atualizar" %>
   </div>
-<% end %>
-<h3>Cancelar minha Conta</h3>
-<p>
-  Não está satisfeito? <%=link_to "Cancelar minha Conta", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
-</p>
-<%= link_to "Voltar", :back %>
+
+  <% end %>
+
+</div>
+
+<div class="w3-col s6 w3-center" style="padding-top:80px;padding-left:50px;" >
+
+
+  <div class="w3-row" style="margin:0px !important;">
+
+  <div class="labels w3-col s9">
+    <h3 style="border-bottom: 1px solid #ccc;padding-bottom:15px;">Cancelar minha conta</h3>
+  </div>
+
+  <div class="w3-row" style="margin:0px !important;">
+    
+    <div class="labels w3-col s9">
+    <span class="links">
+        <p>Não está satisfeito?<br> <%=link_to "Cancelar minha Conta", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+        </p>
+        <%= link_to "Voltar", :back %>
+    </span>
+    </div>
+
+  </div>
+
+
+
+</div>
+</div>
+
+</div>
+
+
+<style type="text/css">
+  
+  .laguradentro{
+    width: 500px;
+  }
+
+.dentro {
+    top: 80px;
+    left: 160px;
+    width: 300px;
+    min-height: 500px;
+    height: auto;
+    position: relative;
+}
+
+.fora {
+    width: 650px;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+}
+label{
+ display: none;
+}
+
+.form-group{
+
+}
+.help-block{
+  font-style: oblique;
+}
+.labels{
+  font-size: 12px;
+  font-weight: bold;
+
+}
+.links a{
+
+}
+
+
+</style>

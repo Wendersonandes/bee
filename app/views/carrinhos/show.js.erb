@@ -1,0 +1,4 @@
+$("#carrinho").html("<%=j render 'carrinho', carrinho: @carrinho %>");
+$(".lista_carrinhos").css('background-color', 'white');
+$("#carrinho_<%=@carrinho.id%>").css('background-color', '#dddddd');
+$("#fotos_carrinho").html("<%=j render 'carrinhos/principal', carrinho: @carrinho %>");

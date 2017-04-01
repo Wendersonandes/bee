@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'correios-frete'
+gem 'stl'
 gem "figaro"
 gem 'rails_12factor', group: :production
 gem 'bootstrap-typeahead-rails'

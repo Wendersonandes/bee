@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: [:show, :autocompletepre, :autocompletepre2, :autocomplete, :autocomplete2]
+  skip_before_action :authenticate_user!, only: [:show,:browse, :autocompletepre, :autocompletepre2, :autocomplete, :autocomplete2]
   before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :unlike]
   before_action :owned_post, only: [:edit, :update, :destroy]
 
@@ -8,10 +8,17 @@ class PostsController < ApplicationController
     @posts = Post.of_followed_users(current_user.following).where.not(status: 1).order('created_at DESC')
   end
   def browse
+    @user = current_user
     @pedido = Pedido.new
     @sugestoes = (User.all.order('seguidores DESC') - current_user.following).first(4)
-    @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)  
-    @posts = Post.all.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
+    @footers = Post.of_not_followed_users(current_user.following).where.not(status: 0).order('cached_votes_up DESC').limit(8) 
+
+
+
+    @posts = Post.of_followed_users(current_user.following).where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+    @destaques = Post.of_not_followed_users(current_user.following).where.not(status: 0).order('cached_votes_up DESC')
+
+
     respond_to do |format|
       format.html
       format.js
@@ -22,12 +29,46 @@ class PostsController < ApplicationController
     if current_user != @post.user
       @post.update_attribute(:view, @post.view + 1)
     end
+    @materials = Printer.last.materials.order(:name)
     @user = @post.user
     @posts = @user.posts.where.not(id: @post.id, status: 0).order('cached_votes_up DESC').first(6)
     @footers = Post.all.where.not(id: @post.id, status: 0).order('cached_votes_up DESC').first(6)
     @printers = @user.printers.order('created_at DESC')
     @printers_all = Printer.all.order('created_at DESC')
-    @preco = ((@post.volume/1000) * Printer.last.materials[0].preco + @post.preco).round(2)
+    #@preco = ((@post.volume/1000) * Printer.last.materials[0].preco + @post.preco).round(2)
+    @post.volume = @post.volume.round(0)
+    printer = Printer.last
+    @area = @post.area
+    material = printer.materials.find_by(name: 'PLA')
+    @post.x = @post.x/10
+    @post.y = @post.y/10
+    @post.z = @post.z/10
+    #shell = (@post.volume - @post.volume*(((@post.x - 0.16)/@post.x)*((@post.y - 0.16)/@post.y)*((@post.z - 0.1z)/@post.z)))
+    @kwh = printer.kwh
+    @desgaste = printer.desgaste
+    #@peso = material.densidade*shell
+    shell = @post.area*0.08
+    percentShell = shell/@post.volume
+    if percentShell > 1
+      percentShell = 1
+    end
+    #shell = shell + 0.8*@post.area*0.04
+    @peso = @post.volume*material.densidade*(percentShell + (1 - percentShell)*0.20)
+    precoMatDesg = @peso*(0.13 + printer.desgaste*0.2/0.2)
+    precoEnerg = ((@peso/8) + 0.2)*material.potencia*@kwh
+    if ((@post.volume >= 0) && (@post.volume < 30))
+      lucro = 3 - (0.7/30)*@post.volume
+    elsif ((@post.volume >= 30) && (@post.volume < 100))
+      lucro = 2.47143 - (0.4/70)*@post.volume
+    elsif ((@post.volume >= 100) && (@post.volume < 600))
+      lucro = 1.94 - 0.0004*@post.volume
+    elsif @post.volume >= 600
+      lucro = 1.7
+    end
+    @preco = ((precoMatDesg + precoEnerg)*(lucro + 1)).round(2)
+    @preco = '%.2f' % @preco.round(2)
+
+
   end
 
   def new
@@ -174,7 +215,7 @@ class PostsController < ApplicationController
 
 
   def post_params
-    params.require(:post).permit(:attachment,:image, :caption, :volume, :x, :y, :z, :preco, type_ids:[])
+    params.require(:post).permit(:attachment,:image, :caption, :volume, :area, :x, :y, :z, :preco, type_ids:[])
   end
   def import_params
     params.require(:post).permit(:attachment,:volume, :x, :y, :z, :caption)

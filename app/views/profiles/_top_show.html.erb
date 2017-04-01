@@ -1,0 +1,247 @@
+<script src=<%= asset_path('pagination.js') %>></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+.w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
+
+.image-upload > input
+{
+    display: none;
+}
+label:hover .imageperfil {
+  opacity: 0.3;
+}
+
+label:hover .middle {
+  opacity: 1;
+}
+
+label.imageperfil {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  left:69%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+
+.w3-btn, .w3-btn-block{
+background-color: #6441a4;
+}
+
+#user_bio{
+  overflow: visible;
+}
+
+
+
+
+</style>
+<!--<script type="text/javascript" src="../assets/show_profile.js"></script>-->
+<!--<div id="perfil"></div>-->
+<div class="w3-light-grey w3-content" style="max-width:1600px; padding-top: 45px">
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
+  <div class="w3-container foto">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+      <div class="w3-card-2 w3-round w3-white">
+        <div class="w3-container">
+        <% if user == current_user %>
+          <%= form_for user, url: "#{update_profile_path(user.user_name)}" do |f| %>
+          <h4 class="w3-center" style="text-transform: capitalize;"><%=user.completo%></h4>
+
+
+          <div class="image-upload w3-center">
+            <label for="file-input">
+
+             <%= image_tag user.avatar.url(:medium),class: "w3-circle imageperfil", style: 'height:106px;width:106px;position:relative; cursor:pointer', id:'image-preview' %>
+             <div class="middle w3-center">
+                <span style="position:absolute; margin:-72px;">
+                <i class="fa fa-folder fa-3x" aria-hidden="true" style="color:#777; cursor:pointer"></i>
+                </span>
+                </div>
+                <div id='submit_avatar' style="display: none"><%= f.submit "Atualizar Foto",class:'w3-btn-block w3-theme' %></div>
+
+
+            </label>
+
+            <%= f.file_field :avatar, class: 'edit_form_avatar',onChange: 'loadFile(event)', id:"file-input"%>
+            </div>
+            
+
+
+          <hr>
+          <p>
+          <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
+          <%= f.text_field :prof, placeholder: 'Adicionar Profissao', class: 'edit_form w3-border-0'%>
+          </p>
+         <p>
+         <i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>
+         <%= f.text_field :city, placeholder: 'Adicionar Cidade', class: 'edit_form w3-border-0'%>
+</p>
+         <p>
+         <i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>
+         <%= f.text_field :niver, placeholder: 'Data de Aniversário', class: 'edit_form w3-border-0'%>
+</p>
+        
+        <div id='submit' style="display: none; margin-bottom:10px"><%= f.submit "Atualizar Perfil", class:'w3-btn-block w3-theme' %></div>
+        <% end %>
+        <% else %>
+        <h4 class="w3-center"><%=user.completo%></h4>
+        <p class="w3-center">
+
+          <%= link_to (image_tag user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(user.user_name) %>
+
+        </p>
+        <% if user.prof && user.prof!=''%>
+          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <%=user.prof%></p>
+        <% end %>
+        <% if user.city && user.city!=''%>
+         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <%=user.city%></p>
+        <% end %>
+        <% if user.niver && user.niver!=' '  %>
+         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><%=user.niver%></p>
+        <% end %>
+        <% end %>
+
+
+     <% if user_signed_in? %>
+         <%if current_user != user %>
+          <% if current_user_is_following(current_user.id, user.id) %>
+            <div class="w3-center" style='padding-bottom:10px;'>
+              <a href=<%= unfollow_user_path(user.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="unfollow-button_<%=user.id%>">
+              <button type="button" class="perfil_seguir_<%=user.id%> w3-btn-block w3-theme" style='background-color:#aaaaaa'><i class="fa fa-pencil"></i>Seguindo</button> 
+              </a>
+              </div>
+
+          <%else%>
+            <div class="w3-center" style='padding-bottom:10px;'>
+              <a href=<%=follow_user_path(user.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="follow-button_<%=user.id%>">
+              <button type="button" class="perfil_seguir_<%=user.id%> w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
+              </a>
+              </div>
+
+          <%end%>
+          <%end%>
+          <%else%>
+            <div class="w3-center" style='padding-bottom:10px;'>
+              <a href=<%=new_user_session_path%> rel="nofollow">
+              <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
+              </a>
+              </div>
+      <%end%>
+
+        </div>
+
+      </div>
+
+
+
+      
+    
+
+
+      <br>
+      
+      <!-- Accordion -->
+      <div class="w3-card-2 w3-round">
+        <div class="w3-accordion w3-white">
+          <a href=<%=seguidores_profile_path(@user.user_name)%>><button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align" id='seguidores_button'><%=user.followers.count-1%> Seguidores</button></a>
+          <a href=<%=seguindo_profile_path(@user.user_name)%>><button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align" id='seguindo_button'><%=user.following.count-1%> Seguindo</button></a>
+          <a href=''><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=user.view%> Visualizações do Perfil</button></a>
+        </div>      
+      </div>
+      <br>
+
+
+
+
+
+      <div class="w3-card-2 w3-round w3-white w3-hide-small">
+        <div class="w3-container">
+          <p class="w3-center">Descricao</p>
+            <% if user == current_user %>
+            <div style="width:100%;">
+              <%= form_for user, url: "#{update_profile_path(user.user_name)}" do |f| %>
+                <p class="w3-text-grey" style="font-size:15px;"><%= f.text_area :bio, placeholder: 'Adicione aqui sua descrição...', class: 'edit_form2 w3-border-0',style:'width:240px;height:110px;'%></p>
+                <div class="w3-center" id='submit2' style="display: none;margin-bottom:10px;"><%= f.submit 'Atualizar Descrição',class:'w3-btn-block w3-theme' %></div>
+            <% end %>
+            <% else %>
+              <p class="w3-text-grey" style="font-size:15px;"><%=user.bio%></p>
+            <% end %>
+            </div>
+        </div>
+      </div>
+      <br>
+
+</nav>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+
+  <!-- Header -->
+  <div class="w3-container" id="portfolio">
+    <a href="#" onclick="w3_open()"><%= image_tag user.avatar.url(:medium),class:"w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity", style: 'width:65px;' %></a>
+    <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i style='padding-top: 40px'class="fa fa-bars"></i></span>
+    <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc'>
+      <% if botao == 'Projetos'%>
+        <a href=<%=projetos_profile_path(user.user_name)%> data-remote="true">
+          <button class="w3-btn" id="Projetos"><i class="fa fa-photo w3-margin-right"></i>Projetos</button>
+        </a>
+      <%else%>
+        <a href=<%=projetos_profile_path(user.user_name)%> data-remote="true">
+          <button class="w3-btn w3-white menuNat" id="Projetos"><i class="fa fa-photo w3-margin-right"></i>Projetos</button>
+        </a>
+      <%end%>
+      <% if botao == 'Destaques'%>
+        <a href=<%=destaques_profile_path(user.user_name)%> data-remote="true">
+          <button class="w3-btn" id="Destaques"><i class="fa fa-diamond w3-margin-right"></i>Destaques</button>
+        </a>
+      <%else%>
+        <a href=<%=destaques_profile_path(user.user_name)%> data-remote="true">
+          <button class="w3-btn w3-white menuNat" id="Destaques"><i class="fa fa-diamond w3-margin-right"></i>Destaques</button>
+        </a>
+      <%end%>
+      <% if botao == 'Seguidores'%>
+        <a href=<%=seguidores_profile_path(user.user_name)%> data-remote="true" >
+          <button class="w3-btn" id="Seguidores" bla="#{posts_path}"><i class="fa fa-users w3-margin-right"></i>Seguidores</button>
+        </a>
+      <%else%>
+        <a href=<%=seguidores_profile_path(user.user_name)%> data-remote="true" >
+          <button class="w3-btn w3-white menuNat" id="Seguidores" bla="#{posts_path}"><i class="fa fa-users w3-margin-right"></i>Seguidores</button>
+        </a>
+      <%end%>
+      <% if botao == 'Seguindo'%>
+        <a href=<%=seguindo_profile_path(user.user_name)%> data-remote="true" >
+          <button class="w3-btn" id="Seguindo" bla="#{posts_path}"><i class="fa fa-user w3-margin-right"></i>Seguindo</button>
+        </a>
+      <%else%>
+        <a href=<%=seguindo_profile_path(user.user_name)%> data-remote="true" >
+          <button class="w3-btn w3-white menuNat" id="Seguindo" bla="#{posts_path}"><i class="fa fa-user w3-margin-right"></i>Seguindo</button>
+        </a>
+      <%end%>
+      <% if botao == 'Printers'%>
+        <a href=<%=printers_profile_path(user.user_name)%> data-remote="true" >
+          <button class="w3-btn" id="Impressoras" bla="#{posts_path}"><i class="fa fa-print w3-margin-right"></i>Impressoras</button>
+        </a>
+      <%else%>
+        <a href=<%=printers_profile_path(user.user_name)%> data-remote="true" >
+          <button class="w3-btn w3-white menuNat" id="Impressoras" bla="#{posts_path}"><i class="fa fa-print w3-margin-right"></i>Impressoras</button>
+        </a>
+      <%end%>
+    </div>
+  </div>

@@ -2,6 +2,7 @@ class OrderController < ApplicationController
   skip_before_filter :authenticate_user!, :only => :notification
   #protect_from_forgery with: :exception
  skip_before_action :verify_authenticity_token
+ before_filter :set_user, only: [:new, :create, :destroy]
 
   # Gerar um Token de sessão para nosso pagamento
   def new
@@ -10,16 +11,68 @@ class OrderController < ApplicationController
     @carrinho = @user.carrinhos.find_by(:status => 'criado')
 
     @session_id = (PagSeguro::Session.create).id
+
+
+    pacote = Correios::Frete::Pacote.new
     @preco = 0
     @carrinho.orders.each do |order|
       order.quantidade.times do
         @preco = @preco + order.price
+        item = Correios::Frete::PacoteItem.new :peso => order.peso/1000,
+                 :comprimento => ((order.post.x/10)*order.scale),
+                 :largura => ((order.post.y/10)*order.scale),
+                 :altura => ((order.post.z/10)*order.scale)
+        pacote.adicionar_item(item)
       end
     end
-    @preco = '%.2f' % @preco.round(2)
+    if @user.postal_code
+      frete = Correios::Frete::Calculador.new :cep_origem => "70847520",
+                                        :cep_destino => @user.postal_code,
+                                        :encomenda => pacote
+
+      servicos = frete.calcular :sedex, :pac
+      @frete_valor = servicos[:pac].valor
+      @frete_valor_sedex = servicos[:sedex].valor
+    end
+
 	  #PagMailer.print_email(current_user).deliver
+
   end
- 
+  
+  def frete
+  	pacote = Correios::Frete::Pacote.new
+
+  	@carrinho = Carrinho.find(params[:carrinho_id])
+    @user = @carrinho.user
+    @user.update_attribute(:postal_code, params[:CEP])
+    @preco = 0
+    @carrinho.orders.each do |order|
+      order.quantidade.times do
+        @preco = @preco + order.price
+      	item = Correios::Frete::PacoteItem.new :peso => order.peso/1000,
+      					 :comprimento => ((order.post.x/10)*order.scale),
+      					 :largura => ((order.post.y/10)*order.scale),
+      					 :altura => ((order.post.z/10)*order.scale)
+      	pacote.adicionar_item(item)
+
+      end
+    end
+    puts "#{pacote.comprimento}"
+    puts "#{pacote.largura}"
+    puts "#{pacote.altura}"
+    puts "#{pacote.peso}"
+    frete = Correios::Frete::Calculador.new :cep_origem => "70847520",
+                                        :cep_destino => params[:CEP],
+                                        :encomenda => pacote
+    servicos = frete.calcular :sedex, :pac
+    @frete_valor = servicos[:pac].valor
+    @frete_valor_sedex = servicos[:sedex].valor
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   # Enviar nosso pagamento para o Pagseguro
   def create
     @user = User.find_by(user_name: params[:user_name])
@@ -32,6 +85,31 @@ class OrderController < ApplicationController
  
     # Aqui vão os itens que serão cobrados na transação, caso você tenha multiplos itens
     # em um carrinho altere aqui para incluir sua lista de itens
+    pacote = Correios::Frete::Pacote.new
+    @carrinho.orders.each do |order|
+      order.quantidade.times do
+        item = Correios::Frete::PacoteItem.new :peso => order.peso/1000,
+                 :comprimento => ((order.post.x/10)*order.scale),
+                 :largura => ((order.post.y/10)*order.scale),
+                 :altura => ((order.post.z/10)*order.scale)
+        pacote.adicionar_item(item)
+
+      end
+    end
+    frete = Correios::Frete::Calculador.new :cep_origem => "70847520",
+                                        :cep_destino => params[:postal_code],
+                                        :encomenda => pacote
+    servicos = frete.calcular :sedex, :pac
+    if params[:forma_entrega] == 'SEDEX'
+      frete = servicos[:sedex].valor
+      tipo_entrega = 'sedex'
+    elsif params[:forma_entrega] == 'PAC'
+      frete = servicos[:pac].valor
+      tipo_entrega = 'pac'
+    elsif params[:forma_entrega] == 'OFFICE'
+      frete = 0
+      tipo_entrega = 'pac'
+    end
     @preco = 0
     @carrinho.orders.each do |order|
       order.quantidade.times do
@@ -44,6 +122,7 @@ class OrderController < ApplicationController
         }
       end
     end
+
  
     # Criando uma referencia para a nossa ORDER
     reference = "REF_#{(0...8).map { (65 + rand(26)).chr }.join}_#{@carrinho.id}"
@@ -59,8 +138,8 @@ class OrderController < ApplicationController
      }
     }
   @payment.shipping = {
-  type_name: "sedex",
-  cost: 0,
+  type_name: tipo_entrega,
+  cost: frete,
   address: {
     street: params[:street],
     number: params[:number],
@@ -107,7 +186,17 @@ class OrderController < ApplicationController
     puts
  
     @payment.create
- 
+    @user = @user.update_attributes(:cpf => params[:cpf],
+      :phone_code => params[:phone_code],
+      :phone_number => params[:phone_number],
+      :birthday => params[:birthday],
+      :street => params[:street],
+      :number => params[:number],
+      :complement => params[:complement],
+      :district => params[:district],
+      :city_pag => params[:city],
+      :state => params[:state],
+      :postal_code => params[:postal_code])
     # Cria uma Order para registro das transações
     #PagMailer.print_email(@order).deliver
     if @payment.errors.any?
@@ -120,8 +209,9 @@ class OrderController < ApplicationController
       :email => params[:email],
       :cpf => params[:cpf],
       :reference => reference,
-      :status => 'pending', 
+      :status => 'Aguardando Confirmação', 
       :price => @preco,
+      :frete => frete,
       :street => params[:street],
       :number => params[:number],
       :complement => params[:complement],
@@ -166,20 +256,8 @@ class OrderController < ApplicationController
   end
   def destroy
     @order = Order.find(params[:id])
-    if @order.user.id == current_user.id
       @order.delete
-      @preco = 0
-      @order.carrinho.orders.each do |order|
-        order.quantidade.times do
-          @preco = @preco + order.price
-        end
-      end
-      @preco = '%.2f' % @preco.round(2)
-      respond_to do |format|
-        format.html {redirect_to carrinho_path(@order.carrinho.id)}
-        format.js
-      end
-    end
+      redirect_to carrinho_path(@order.carrinho.user.user_name)
   end
   def notification
     transaction = PagSeguro::Transaction.find_by_notification_code(params[:notificationCode])
@@ -189,6 +267,8 @@ class OrderController < ApplicationController
       carrinho = Carrinho.where(reference: transaction.reference).last
       carrinho.status = status[transaction.status.id.to_i - 1]
       carrinho.save
+      create_notification(carrinho)
+      create_notification_admin(carrinho)
       if transaction.status.id.to_i == 3
         PagMailer.print_email(carrinho).deliver
 
@@ -203,7 +283,6 @@ class OrderController < ApplicationController
       	carrinho.status = 'criado'
       	carrinho.save
       end
-      create_notification(carrinho)
     end
  
       render nothing: true, status: 200
@@ -214,10 +293,33 @@ class OrderController < ApplicationController
   private
   def create_notification(carrinho)  
     Notification.create(user_id: carrinho.user.id,
-                        notified_by_id: User.first.id,
-                        post_id: carrinho.id,
-                        identifier: User.first.id,
-                        notice_type: "Seu pagamento de R$#{carrinho.price} está #{carrinho.status}",
+                        notified_by_id: Printer.last.user.id,
+                        identifier: carrinho.id,
+                        notice_type: "Seu pagamento de R$#{carrinho.price} está #{carrinho.status}... Clique aqui para mais informações",
                         status: "pag_confirmation")
+  end
+  def create_notification_admin(carrinho)
+  	users = User.all.where(tipo: 'admin')
+  	users.each do |user|
+  		Notification.create(user_id: user.id,
+                        notified_by_id: carrinho.user,
+                        identifier: carrinho.id,
+                        notice_type: "O carrinho do #{carrinho.user.completo} acabou de receber '#{carrinho.status}' como confirmação!",
+                        status: "pag_confirmation_admin")
+  	end
+  end
+
+
+
+
+
+  private
+  def set_user
+    @user = User.find_by(user_name: params[:user_name])
+    if (@user != current_user)
+      if(current_user.tipo!='admin')
+        redirect_to browse_posts_path
+      end
+    end
   end
 end

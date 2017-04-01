@@ -1,0 +1,92 @@
+ <%= render 'dashboard/navs'%>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                <h4 class="title" style='padding-left:20px'>Receita: R$<%='%.2f' % @receita.round(2)%></h4>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Vendas (<%= @vendas.count%>)</h4>
+                                <p class="category">Encontre aqui as principais informações</p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped" style="margin-bottom:0px">
+                                    <thead>
+                                        <th>Carrinho ID</th>
+                                    	<th>Nome do Usuário</th>
+                                    	<th>Email</th>
+                                    	<th>Carrinho Id</th>
+                                    	<th>Preço</th>
+                                        <th>Status</th>
+                                    </thead>
+                                    <tbody>
+                                    <% @vendas.each do |venda|%>
+                                        <tr>
+                                        	<td>
+                                             <%=venda.id%>
+                                                
+                                            </td>
+                                        	<td>
+                                            <a href=<%= profile_path(venda.user.user_name)%>><%=venda.user.completo%></a>
+                                                
+                                            </td>
+
+                                        	<td><%=venda.user.email%></td>
+                                            <td><%=venda.id%></td>
+                                        	<td><%=venda.price%></td>
+                                        	<td><%=venda.status%></td>
+
+                                        </tr>
+                                    <%end%>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               Blog
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href=<%=root_path%>>BeePrinted</a>, Imprima em Comunidade
+                </p>
+            </div>
+        </footer>
+
+
+    </div>
+</div>
+
+
+</body>
