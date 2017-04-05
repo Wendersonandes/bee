@@ -20,7 +20,7 @@ class CkeckoutController < ApplicationController
       @order = carrinho.orders.build(order_params)
 
     post = Post.find(params[:id])
-    post.volume = post.volume.round(0)
+    post.volume = post.volume
     material = Printer.last.materials.find_by(:name => @order.material)
     printer = Printer.last
 

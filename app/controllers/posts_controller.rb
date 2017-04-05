@@ -36,7 +36,7 @@ class PostsController < ApplicationController
     @printers = @user.printers.order('created_at DESC')
     @printers_all = Printer.all.order('created_at DESC')
     #@preco = ((@post.volume/1000) * Printer.last.materials[0].preco + @post.preco).round(2)
-    @post.volume = @post.volume.round(0)
+    @post.volume = @post.volume
     printer = Printer.last
     @area = @post.area
     material = printer.materials.find_by(name: 'PLA')

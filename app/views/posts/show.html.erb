@@ -78,9 +78,13 @@ background-color: #6441a4;
          </a>
         <div style='color:#555555'>
           <p><i class="fa fa-arrows fa-fw w3-margin-right w3-text-theme"></i><bla id="bounding_box"><%=@post.x.round(1)%> x <%=@post.y.round(1)%> x <%=@post.z.round(1)%> cm</bla></p>
+          <input id="x" type="hidden" name="<%=@post.x%>" value="<%= @post.x %>">
+          <input id="y" type="hidden" name="<%=@post.y%>" value="<%= @post.y %>">
+          <input id="z" type="hidden" name="<%=@post.z%>" value="<%= @post.z %>">
         </div>
         <div style='color:#555555'>
-          <p><i class="fa fa-cube fa-fw w3-margin-right w3-text-theme"></i><bla id="volume"><%=(@post.volume).round(0)%> cm³<bla></p>
+          <p><i class="fa fa-cube fa-fw w3-margin-right w3-text-theme"></i><bla id="volume"><%=@post.volume.round(0)%> cm³<bla></p>
+          <input id="volume_input" type="hidden" name="<%=@post.volume%>" value="<%= @post.volume %>">
         </div>
 <div style='color:#555555'>
           <p><i class="fa fa-balance-scale fa-fw w3-margin-right w3-text-theme"></i><bla id="peso"><%=@peso.round(0)%> g</bla><bla style='color:#888888'> *</bla></p>
@@ -280,8 +284,10 @@ background-color: #6441a4;
                                   <i class="fa fa-remove"></i>
                                 </a>
                                 -->
+                                <div style="height:80px;">
                                 <p>Compre agora:</p>
                                 <h2 id="preco_total">R$<%= @preco %></h2>
+                                </div>
                             <% if user_signed_in? %>
                               <button id="print" class="w3-btn w3-red w3-btn-block w3-section">Imprimir</button>
                             <%else%>
@@ -508,10 +514,10 @@ canvas{
       var percentShell = 0;
       var precoTotal = 0;
       var boundingBox = $('#bounding_box').text();
-      var volumeString = $('#volume').text();
-      var aux = volumeString.indexOf(' cm');
-      volumeString = volumeString.slice(0, aux);
-      volume = volumeString;
+      var x = $('#x').val();
+      var y = $('#y').val();
+      var z = $('#z').val();
+      volume = $('#volume_input').val();
 
     $(document).on('click', '#print', function(){
         var urlMain = window.location.pathname;
@@ -530,11 +536,17 @@ canvas{
 
     });
     //------------------ PRECO DINAMICO ----------------------
-    $(document).on('change', 'select', function(){
+    $(document).on('change keyup', '.config_order', function(e){
       area = $('#area').val();
       kwh = $('#kwh').val();
       quantidade = $('#order_quantidade').val();
       escala = $('#order_scale').val();
+      var auxEscala = escala.indexOf(',');
+      if (auxEscala != -1) {
+        escala = escala.replace(/,/g, '.');
+        console.log(escala);
+        $('#order_scale').val(escala);
+      };
       material = $('#order_material').val();
       potencia = $('#potencia_'+material).val();
       densidade = $('#densidade_'+material).val();
@@ -588,7 +600,7 @@ canvas{
       var idName = $(this).attr('id');
       console.log("ID: "+idName);
       if (idName == 'order_scale') {
-        BoundingBoxVolume(boundingBox, volume, escala);
+        BoundingBoxVolume(x, y, z, volume, escala);
       };
       if ((idName == 'order_scale')||(idName == 'order_material')||(idName == 'order_preench')) {
         $('#peso').hide();
@@ -724,22 +736,16 @@ canvas{
 
 }, false);
 });
-function BoundingBoxVolume(stringXYZ, volume, escala){
-  var x;
-  var y;
-  var z;
-  var aux1 = stringXYZ.indexOf(' x ');
-  x = escala*stringXYZ.slice(0, aux1);
-  var aux2 = stringXYZ.lastIndexOf(' x ');
-  y = escala*stringXYZ.slice(aux1+3, aux2);
-  var aux3 = stringXYZ.lastIndexOf(' cm');
-  z = escala*stringXYZ.slice(aux2+3, aux3);
+function BoundingBoxVolume(x, y, z, volume, escala){
+  x = x*escala;
+  y = y*escala;
+  z = z*escala;
   volume = volume*escala*escala*escala;
 
   $('#volume').hide();
   $('#bounding_box').hide();
-  $('#volume').text(volume+' cm³');
-  $('#bounding_box').text(x+' x '+y+' x '+z+' cm');
+  $('#volume').text(volume.toFixed(0)+' cm³');
+  $('#bounding_box').text(x.toFixed(1)+' x '+y.toFixed(1)+' x '+z.toFixed(1)+' cm');
   $('#volume').fadeIn(800);
   $('#bounding_box').fadeIn(800);
 }
