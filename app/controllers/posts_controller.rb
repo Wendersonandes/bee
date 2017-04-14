@@ -251,7 +251,13 @@ end
       outFile.write("\0" * 80) # 80 bit header - ignored
       outFile.write("FFFF")   # 4 bit integer # of triangles - filled later
       triCount = 0
+      puts "#{triCount}"
       while temp = original.gets
+      	puts "#{triCount}"
+      	#temp.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+      	if temp.invalid?
+      		return
+      	end
         next if temp =~ /^\s*$/ or temp.include? 'endsolid' # ignore whitespace
         temp.sub! /facet normal/, ''
         normal = temp.split(' ').map{ |num| Float.from_sn num }

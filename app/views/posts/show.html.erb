@@ -107,43 +107,9 @@ background-color: #6441a4;
       <br>
       
       <!-- Interests --> 
-      <div class="w3-card-2 w3-round w3-white w3-hide-small">
-        <div class="w3-container">
-          <p>Interests</p>
-          <p>
-            <span class="w3-tag w3-small w3-theme-d5">News</span>
-            <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
-            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
-            <span class="w3-tag w3-small w3-theme-d2">Games</span>
-            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
-            <span class="w3-tag w3-small w3-theme">Games</span>
-            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
-            <span class="w3-tag w3-small w3-theme-l2">Food</span>
-            <span class="w3-tag w3-small w3-theme-l3">Design</span>
-            <span class="w3-tag w3-small w3-theme-l4">Art</span>
-            <span class="w3-tag w3-small w3-theme-l5">Photos</span>
-          </p>
-        </div>
-      </div>
       <br>
       
       <!-- Alert Box -->
-      <div class="w3-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
-
-           <p>Outros projetos:</p>
-
-                          <div class="wrapper" id="outrosprojetos">
-                            <div class="scroll" id="scrolloutros">
-                                <div id="imgs">
-                                        <% @footers.each do |item| %>
-                                            <%= link_to (image_tag item.image.url(:medium),{:style=>'box-shadow: 1px 1px 10px #999; margin: 2px;   max-height: 60px;      cursor: pointer;       display:inline-block;        *display:inline;        *zoom:1;        vertical-align:top; padding: 0px;', :class =>"w3-hover-opacity"}), post_path(item) %>
-                                <% end %>
-                                </div>
-                            </div>
-                            </div>
-
-
-      </div>
 
 
 
