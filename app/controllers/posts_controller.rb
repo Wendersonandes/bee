@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: [:show,:browse, :autocompletepre, :autocompletepre2, :autocomplete, :autocomplete2]
+  skip_before_action :authenticate_user!, only: [:show, :autocompletepre, :autocompletepre2, :autocomplete, :autocomplete2]
   before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :unlike]
   before_action :owned_post, only: [:edit, :update, :destroy]
 
@@ -255,9 +255,6 @@ end
       while temp = original.gets
       	puts "#{triCount}"
       	#temp.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
-      	if temp.invalid?
-      		return
-      	end
         next if temp =~ /^\s*$/ or temp.include? 'endsolid' # ignore whitespace
         temp.sub! /facet normal/, ''
         normal = temp.split(' ').map{ |num| Float.from_sn num }
