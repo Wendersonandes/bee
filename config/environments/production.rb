@@ -80,10 +80,11 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.delivery_method = :smtp
 # SMTP settings for gmail
+  config.action_mailer.default_url_options = { host: 'cloud1075.configrapp.com' }
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :domain               => "beeprinted.herokuapp.com",
+    :domain               => "cloud1075.configrapp.com",
     :user_name            => 'lucasfneves14@gmail.com',
     :password             => 'Saculf14/',
     :authentication       => "plain",
