@@ -253,34 +253,40 @@ end
       triCount = 0
       puts "#{triCount}"
       while temp = original.gets
-      	puts "#{triCount}"
-      	#temp.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
-        next if temp =~ /^\s*$/ or temp.include? 'endsolid' # ignore whitespace
-        temp.sub! /facet normal/, ''
-        normal = temp.split(' ').map{ |num| Float.from_sn num }
-        triCount += 1
-        temp = original.gets # 'outer loop'
+        if temp.valid_encoding?
+      	 #temp.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+          next if temp =~ /^\s*$/ or temp.include? 'endsolid' # ignore whitespace
+          temp.sub! /facet normal/, ''
+          normal = temp.split(' ').map{ |num| Float.from_sn num }
+          triCount += 1
+          temp = original.gets # 'outer loop'
 
-        temp = original.gets
-        vertexA = temp.sub(/vertex/, '').split(' ').map{ |num| Float.from_sn num }
-        temp = original.gets
-        vertexB = temp.sub(/vertex/, '').split(' ').map{ |num| Float.from_sn num }
-        temp = original.gets
-        vertexC = temp.sub(/vertex/, '').split(' ').map{ |num| Float.from_sn num }
+          temp = original.gets
+          vertexA = temp.sub(/vertex/, '').split(' ').map{ |num| Float.from_sn num }
+          temp = original.gets
+          vertexB = temp.sub(/vertex/, '').split(' ').map{ |num| Float.from_sn num }
+          temp = original.gets
+          vertexC = temp.sub(/vertex/, '').split(' ').map{ |num| Float.from_sn num }
 
-        temp = original.gets # 'endsolid'
-        temp = original.gets # 'endfacet'
+          temp = original.gets # 'endsolid'
+          temp = original.gets # 'endfacet'
 
-        outFile.write(normal.pack("FFF"))
-        outFile.write(vertexA.pack("FFF"))
-        outFile.write(vertexB.pack("FFF"))
-        outFile.write(vertexC.pack("FFF"))
-        outFile.write("\0\0")
+          outFile.write(normal.pack("FFF"))
+          outFile.write(vertexA.pack("FFF"))
+          outFile.write(vertexB.pack("FFF"))
+          outFile.write(vertexC.pack("FFF"))
+          outFile.write("\0\0")
+        else
+          File.rename(name,"#{Rails.root}/public/uploads/post/#{post.id}/#{File.basename(post.attachment.path, ".*")}-binary.stl" ) 
+          break
+        end
       end
-      outFile.seek(80, IO::SEEK_SET)
-      outFile.write([ triCount ].pack("V"))
-      outFile.close
-      File.delete(name)
+      if temp.valid_encoding?
+        outFile.seek(80, IO::SEEK_SET)
+        outFile.write([ triCount ].pack("V"))
+        outFile.close
+        File.delete(name)
+      end
     else
       File.rename(name,"#{Rails.root}/public/uploads/post/#{post.id}/#{File.basename(post.attachment.path, ".*")}-binary.stl" )
     end
