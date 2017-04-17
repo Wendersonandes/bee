@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'unicorn'
 gem 'correios-frete'
 gem 'stl'
 gem "figaro"
