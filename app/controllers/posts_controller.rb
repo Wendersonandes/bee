@@ -241,7 +241,7 @@ class Float
   end
 end
   def converter(post)
-    name ||= "#{Rails.root}/public/uploads/post/#{post.id}/#{File.basename(post.attachment.path)}"
+    name ||= "#{Rails.root}/public/uploads/bleh/#{post.id}/#{File.basename(post.attachment.path)}"
     original = File.new(name, "r")
     tempLine = original.gets
     if tempLine.include? "solid"
