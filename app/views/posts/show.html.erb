@@ -624,7 +624,7 @@ canvas{
 
       // file load
     var oStlLoader = new THREE.STLLoader();  //----------------------------------------------------------------------------------------
-    oStlLoader.load('../uploads/post/<%= @post.id %>/<%= File.basename(@post.attachment.path, ".*")%>-binary.stl', function(geometry) {
+    oStlLoader.load('<%=@post.attachment.url%>', function(geometry) {
 
         var material = new THREE.MeshPhongMaterial({
         color: 0xcccccc, ambient: 0xcccccc, specular: 0x030303,

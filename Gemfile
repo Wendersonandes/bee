@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "mini_magick"
+gem "fog"
 gem 'unicorn'
 gem 'correios-frete'
 gem 'stl'

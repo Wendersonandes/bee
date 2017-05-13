@@ -98,7 +98,7 @@ class PostsController < ApplicationController
     @post.status = 1
 
     if @post.save
-      converter @post
+      #converter @post
       flash[:success] = "Your post has been created!"
       redirect_to browse_posts_path
     else
