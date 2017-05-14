@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'aws-sdk', '< 2.0'
 gem "mini_magick"
 gem 'fog-aws'
 gem 'unicorn'
