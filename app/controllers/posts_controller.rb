@@ -96,9 +96,8 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     @post.status = 1
-
+    #converter @post
     if @post.save
-      #converter @post
       flash[:success] = "Your post has been created!"
       redirect_to browse_posts_path
     else
@@ -241,11 +240,13 @@ class Float
   end
 end
   def converter(post)
-    name ||= "#{Rails.root}/public/uploads/bleh/#{post.id}/#{File.basename(post.attachment.path)}"
-    original = File.new(name, "r")
+    name ||= "#{post.attachment.url}"
+    originalname = name.sub(/\.stl/i, '-original.stl')
+    File.rename(name, "#{originalname}" )
+    original = File.new(originalname, "r")
     tempLine = original.gets
     if tempLine.include? "solid"
-      outFilename = name.sub(/\.stl/i, '-binary.stl')
+      outFilename = name
       puts "#{name} is in ASCII format, converting to BINARY: #{outFilename}"
       outFile = File.new(outFilename, "w+b")
       outFile.write("\0" * 80) # 80 bit header - ignored
@@ -277,7 +278,7 @@ end
           outFile.write(vertexC.pack("FFF"))
           outFile.write("\0\0")
         else
-          File.rename(name,"#{Rails.root}/public/uploads/post/#{post.id}/#{File.basename(post.attachment.path, ".*")}-binary.stl" ) 
+          #File.rename(name,"#{Rails.root}/public/uploads/post/#{post.id}/#{File.basename(post.attachment.path, ".*")}-binary.stl" ) 
           break
         end
       end
@@ -285,10 +286,10 @@ end
         outFile.seek(80, IO::SEEK_SET)
         outFile.write([ triCount ].pack("V"))
         outFile.close
-        File.delete(name)
+        File.delete(originalname)
       end
     else
-      File.rename(name,"#{Rails.root}/public/uploads/post/#{post.id}/#{File.basename(post.attachment.path, ".*")}-binary.stl" )
+      File.rename(originalname,name)
     end
     original.close
   end
