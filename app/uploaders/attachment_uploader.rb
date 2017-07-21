@@ -93,7 +93,7 @@ end
           break
         end
       end
-        if bosta = 0
+        if bosta == 0
           outFile.seek(80, IO::SEEK_SET)
           outFile.write([ triCount ].pack("V"))
           outFile.close

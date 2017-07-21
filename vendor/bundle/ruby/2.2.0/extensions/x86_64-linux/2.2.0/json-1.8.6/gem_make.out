@@ -1,0 +1,13 @@
+current directory: /home/lucas/Sites/2.1_Bee/vendor/bundle/ruby/2.2.0/gems/json-1.8.6/ext/json
+/home/lucas/.rvm/rubies/ruby-2.2.5/bin/ruby -r ./siteconf20170721-7309-19djdzh.rb extconf.rb 
+creating Makefile
+
+current directory: /home/lucas/Sites/2.1_Bee/vendor/bundle/ruby/2.2.0/gems/json-1.8.6/ext/json
+make "DESTDIR=" clean
+
+current directory: /home/lucas/Sites/2.1_Bee/vendor/bundle/ruby/2.2.0/gems/json-1.8.6/ext/json
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+current directory: /home/lucas/Sites/2.1_Bee/vendor/bundle/ruby/2.2.0/gems/json-1.8.6/ext/json
+make "DESTDIR=" install

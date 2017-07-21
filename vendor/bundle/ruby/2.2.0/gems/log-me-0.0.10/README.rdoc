@@ -1,0 +1,152 @@
+= LogMe
+
+A simple way to configure log in your gem.
+
+LogMe is especially useful when you need to log Web Service calls or HTTP requests and responses, using Net::HTTP or RestClient.
+
+{<img src="https://badge.fury.io/rb/log-me.png" alt="Gem Version" />}[http://badge.fury.io/rb/log-me]
+{<img src="https://travis-ci.org/prodis/log-me.png?branch=master" alt="Build Status" />}[https://travis-ci.org/prodis/log-me]
+{<img src="https://coveralls.io/repos/prodis/log-me/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/prodis/log-me]
+{<img src="https://codeclimate.com/github/prodis/log-me.png" alt="Code Climate" />}[https://codeclimate.com/github/prodis/log-me]
+{<img src="https://gemnasium.com/prodis/log-me.png" alt="Dependency Status" />}[https://gemnasium.com/prodis/log-me]
+
+
+== Instalation
+
+=== Gemfile
+  gem 'log-me'
+
+=== Command line
+  $ gem install log-me
+
+== Usage
+
+In your gem:
+  require 'log-me'
+
+  module CoolGem
+    extend LogMe
+  end
+
+  module CoolGem
+    class SomeClass
+      def do_something
+        # Do something and log
+        CoolGem.log "I am logging something here."
+      end
+    end
+  end
+
+Using your gem:
+  some = CoolGem::SomeClass.new
+  some.do_something
+
+By default will be logged in STDOUT using log level :info:
+  I, [2011-08-24T01:22:52.677395 #3026]  INFO -- : [CoolGem] I am logging something here.
+
+Logging Net::HTTP requests and responses:
+  module CoolGem
+    class WebService
+      def do_something
+        url = "http://prodis.blog.br"
+
+        # Some logic to create a Net::HTTP request class.
+        request = create_request
+        CoolGem.log_request request, url
+
+        # Some logic to obtain a Net::HTTP response.
+        response = do_request(request, url)
+        CoolGem.log_response response
+
+        response
+      end
+    end
+  end
+
+  ws = CoolGem::WebService.new
+  ws.do_something
+
+Logging RestClient requests and responses:
+  module CoolGem
+    class WebService
+      def do_something
+        args = {
+          method: :post,
+          url: "http://prodis.blog.br",
+          payload: 'param1=value1&param2=value2'
+        }
+
+        RestClient::Request.execute(args) do |response, request, result|
+          CoolGem.log_request request, args[:url]
+          CoolGem.log_response result
+          response
+        end
+      end
+    end
+  end
+
+  ws = CoolGem::WebService.new
+  ws.do_something
+
+In the log:
+  [CoolGem] Request:
+  POST http://prodis.blog.br/some_resource
+  param1=value1&param2=value2
+
+  [CoolGem] Response:
+  HTTP/1.1 201 Created
+
+Your gem consumer can configure the logger:
+  CoolGem.configure do |config|
+    config.log_enabled = false     # Disable log
+    config.log_level = :debug      # Change the log level
+    config.log_label = "CoolLabel" # Change label to log messages
+    config.logger = Rails.logger   # Use the Rails logger
+  end
+
+
+== Author
+- {Fernando Hamasaki de Amorim (prodis)}[http://prodis.blog.br]
+
+
+== Contributing to log-me
+
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
+* Fork the project.
+* Start a feature/bugfix branch.
+* Commit and push until you are happy with your contribution.
+* Don't forget to rebase with branch master in main project before submit the pull request.
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+
+== Copyright
+
+(The MIT License)
+
+{Prodis a.k.a. Fernando Hamasaki de Amorim}[http://prodis.blog.br]
+
+http://prodis.net.br/images/prodis_150.gif
+
+Copyright (c) 2011-2015 Prodis
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
