@@ -16,6 +16,8 @@ class HomeController < ApplicationController
       redirect_to root_path
     end
   end
+  def godaddy
+  end
 
   private
 
@@ -24,7 +26,7 @@ class HomeController < ApplicationController
   end
   def determine_layout
   		case action_name
-  		when "index"
+  		when "index", "godaddy"
     		false
     	end
   end

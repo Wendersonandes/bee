@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get '/.well-known/pki-validation/godaddy.html', to: 'home#godaddy', as: :godaddy
   get 'dashboard', to: 'dashboard#index', as: :dashboard
   get 'dashboard/usuarios', to: 'dashboard#usuarios', as: :dashboard_usuarios
   get 'dashboard/carrinhos', to: 'dashboard#carrinhos', as: :dashboard_carrinhos
