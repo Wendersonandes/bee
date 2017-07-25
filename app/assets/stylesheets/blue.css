@@ -14,14 +14,14 @@
 .navbar-header,
 #style-switcher h2,
 #style-switcher h2 a {
-	color: #2DAFF0;
+	color: #009FAB;
 }
 
 .slides-navigation a.next:hover,
 .slides-navigation a.prev:hover,
 .social-links li a:hover {
-  background-color: #2DAFF0;
-  border-color: #2DAFF0;
+  background-color: #009FAB;
+  border-color: #009FAB;
 }
 
 .btn-store,
@@ -37,7 +37,7 @@
 .btn-store.outline:focus,
 .btn-store.outline:active,
 .owl-theme .owl-nav [class*=owl-]:hover  {
-	background-color: #2DAFF0;
+	background-color: #009FAB;
 }
 
 .btn-store:hover,
@@ -47,18 +47,18 @@
 }
 
 .btn-store.outline  {
-	color:#2DAFF0;
-	border-color: #2DAFF0;
+	color:#009FAB;
+	border-color: #009FAB;
 }
 
 #contact-form .form-control:focus, 
 #order-form .form-control:focus,
 .input-group .form-control:focus {
-	border:2px solid #2DAFF0;
+	border:2px solid #009FAB;
 }
 
 .social-profiles li a {
-	border:2px solid #2DAFF0;
-	color:#2DAFF0;
+	border:2px solid #009FAB;
+	color:#009FAB;
 }
 
