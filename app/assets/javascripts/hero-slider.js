@@ -30,7 +30,7 @@ $(document).ready(function() {
 					   items : 1, 
 						loop: true,
 						autoplay:true,
-    					autoplayTimeout:7000, 
+    					autoplayTimeout:6000, 
 						dots: dots || false,
 						nav: navigation || false,
 						navText: ['<i class="icon-arrow-left"></i>','<i class="icon-arrow-right"></i>'],
