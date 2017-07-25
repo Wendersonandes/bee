@@ -29,7 +29,8 @@ $(document).ready(function() {
 					$this.owlCarousel({
 					   items : 1, 
 						loop: true,
-						autoplayTimeout: autoplay || false,
+						autoplay:true,
+    					autoplayTimeout:7000, 
 						dots: dots || false,
 						nav: navigation || false,
 						navText: ['<i class="icon-arrow-left"></i>','<i class="icon-arrow-right"></i>'],
