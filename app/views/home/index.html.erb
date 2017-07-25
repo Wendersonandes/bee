@@ -1,1607 +1,655 @@
-<!DOCTYPE html>
-<!-- saved from url=(0061)https://bootstrapthemes.co/demo/html/backyard/demo/index.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-
-        <!-- /.website title -->
-        <title>BEEPRINTED - BETA</title>
-        <link rel="shortcut icon" style="border-radius:50%!important" href="images/logo.jpg"/> 
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-        <!-- CSS Files -->
+<!doctype html>
+<html ng-app="storeApp">
+    <head>
+        <title>MicroStore - Responsive One Page shop</title>
+        <meta charset="utf-8">
+        <meta name="description" content="MicroStore Responsive HTML5/CSS3 Template from angelostudio.net">
+        <meta name="author" content="ANGELOSTUDIO.NET">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <%= stylesheet_link_tag "bootstrap.min"%>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        
-        <%= stylesheet_link_tag "pe-icon-7-stroke"%>
-        <%= stylesheet_link_tag "animate"%>
-        <%= stylesheet_link_tag "owl.theme"%>
         <%= stylesheet_link_tag "owl.carousel"%>
-        <style>
-/**
-* Backyard
-* Landing Page Template
-* Author: MoxDesign - http://www.moxdesign.com
-**/
-
-html, body {
-    width: 100%;
-    overflow-x: hidden;
-}
-body {
-    height:100%;
-    font-family: "Lato", "Serif";
-    font-weight: 300;
-    padding:0;
-    margin:0;
-    font-size:16px;
-    line-height: 28px;
-    color: #777; 
-    background: #fff;
-    overflow-x:hidden;
-    position: relative;
-}
-h1 { font-size: 3em; line-height:1.2em; margin:0 0 .3em; }
-h2 { font-size: 1.8em; line-height:1.4em; margin:0 0 .3em;  }
-h3 { font-size: 1.4em; line-height:1.4em; }
-h4 { font-size: 1.25em; line-height:1.4em;}
-h5 { font-size: 1.1em; line-height:1.4em; }
-h6 { font-size: 1em; line-height:1.2em; }
-
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-    text-decoration: none
-}    
-p { 
-    padding: 0 0 1em;
-    margin:0;
-}
-a {
-    color: #3eb0f7;
-    outline: 0;
-    font-weight: bold;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-} 
-a:hover {
-    text-decoration: none;
-    color: #1f2222;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-.highlight {
-    color: #3eb0f7;
-}
-#preloader { 
-    position: fixed; 
-    left: 0; 
-    top: 0; 
-    z-index: 999; 
-    width: 100%; 
-    height: 100%; 
-    overflow: visible; 
-    background: #fff url(../images/loading.gif) no-repeat center center;
-}
-.fullscreen {
-    width:100%;
-    min-height:100%;
-    background-repeat:no-repeat;
-    background-position:50% 50%;
-    background-position:50% 50%\9 !important;
-}
-.overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-#menu {
-    z-index: 99;
-}
-.navbar-default {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0px 0.5px 2px #cecece;
-}
-.navbar-default .navbar-brand {
-    padding: 7px;
-}
-.navbar-default .navbar-nav > li > a {
-    color: #777;
-    font-weight: 500;
-}
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-    color: #3eb0f7;
-}
-.navbar-default .navbar-nav > .active > a, 
-.navbar-default .navbar-nav > .active > a:hover, 
-.navbar-default .navbar-nav > .active > a:focus {
-    background: transparent;
-    color: #3eb0f7;
-}
-.btn-default {
-    font-size: 17px;
-    margin: 30px 0 10px;
-    margin-right: 10px;
-    line-height: 20px;
-    padding: 15px 35px;
-    height: 50px;
-    border: 2px solid #3eb0f7;
-    background: transparent;
-    transition: all 0.4s;
-    color: #3eb0f7;
-    border-radius: 100px;
-}
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
-    border: 2px solid #3eb0f7;
-    background: #3eb0f7;
-    color: white;
-}
-.btn-primary {
-    font-size: 17px;
-    margin: 30px 0 10px;
-    margin-right: 10px;
-    line-height: 20px;
-    padding: 15px 35px;
-    height: 50px;
-    border: 2px solid #3eb0f7;
-    background: #3eb0f7;
-    transition: all 0.4s;
-    color: white;
-    border-radius: 100px;
-}
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    border: 2px solid #3eb0f7;
-    background: transparent;
-    color: #3eb0f7;
-}
-.btn-secondary {
-    font-size: 20px;
-    font-weight: 300;
-    line-height: 20px;
-    padding: 20px 50px;
-    height: 65px;
-    border: none;
-    background: #3eb0f7;
-    transition: all 0.4s;
-    color: white;
-    border-radius: 4px;
-}
-.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open > .dropdown-toggle.btn-secondary {
-    background: #1f96e0;
-    color: white
-}
-
-.site-name img {
-    width: 150px; 
-    height: 37px
-}
-.logo {
-    margin: 100px 0 40px 0;
-}
-.logo img{
-    width: 150px; 
-    height: 37px
-}
-.landing h1{
-    font-size: 56px;
-    font-weight: 300;
-    color: #fff;
-    margin: 30px 0 30px 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
-}
-.landing p, .landing h2 {
-    color: #fff;
-}
-.landing-text {
-    margin-bottom: 20px;
-}
-.landing-text p {
-    font-size: 17px !important; 
-}
-.head-btn {
-    margin-bottom: 150px;
-}
-.option {
-    text-transform: uppercase;
-    padding: 5px;
-    min-width: 80px;
-    margin-right: 5px;
-    transition: all 0.4s;
-    font-size: 14px;
-    color: #fff;
-}
-.signup-header {
-    margin: 150px 0 100px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 4px;
-    padding-left: 20px;
-    padding-right: 20px;    
-}
-.signup-header h3{
-    padding: 20px 0 10px;
-    color: white;
-    font-weight: 300;
-}
-.form-header input {
-    position: relative;
-    padding: 5px 15px;
-}
-.form-header .form-control {
-    border-radius: 0;
-    border: solid 1px #dadada;
-    background-color: #fff;
-    color: #333;
-    height: 55px;
-}
-.form-header .btn {
-    border-radius: 0;
-    height: 55px;
-    width: 100%;
-    background-color: #3eb0f7;
-    color: white;
-    font-size: 17px !important;
-    padding: 0 33px;
-    border: none;
-    margin: 0;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-.form-header .btn:hover {
-    background-color: #1f96e0;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-.privacy {
-    padding-top: 0;
-    font-size: 13px;
-}
-.signup-header p {
-    color: white;
-}
-.privacy a {
-    text-decoration: underline;
-    color: white;
-    font-weight: 300;
-}
-#policy {
-    padding: 100px 0 70px;
-}
-#intro {
-    padding: 100px 0 70px;
-    padding-top: 50px;
-}
-#intro h2 {
-    font-size: 40px;
-    font-weight: 300;
-    margin: 15px 0 15px 0;
-}
-.intro-pic {
-    margin-top: 20px;
-}
-.btn-section {
-    padding-top: 20px;
-}
-#feature {
-    padding-top: 100px;
-    background: #f6f6f6;
-}
-#feature h2 {
-    margin: 15px 0 15px 0;
-    font-size: 40px;
-    font-weight: 300;
-}
-#feature .feature-title p {
-    font-size: 18px;
-}
-.row-feat {
-    padding-top: 50px;
-}
-.feat-list {
-    margin-top: 40px;
-}
-.feat-list i {
-    font-size: 48px;
-    float: left;
-    width: 20%;
-    color: #555;
-    height: 100%;
-    position: relative;
-    opacity: 0.6;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-.feat-list:hover i {
-    color: #3eb0f7;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-#feature .inner {
-    float: left;
-    display: inline-block;
-    width: 80%;
-}
-#feature-2 {
-    padding: 100px 0 100px;
-}
-#feature-2 h2 {
-    font-size: 40px;
-    font-weight: 300;
-    margin: 15px 0 15px 0;
-}
-.feature-2-pic {
-    margin-top: 20px;
-}
-.subscribe {
-    color: #fff;
-}
-.subscribe p {
-    margin: 30px auto 30px;
-}
-.subscribe-form {
-    max-width: 400px;
-    margin: 50px auto 150px;
-    text-align: center;
-    overflow: hidden;
-}
-.subscribe-form form {
-    position: relative;
-}
-.subscribe-form input {
-    max-width: 85%;
-    position: relative;
-    padding: 5px 25px;
-}
-.subscribe-form .form-control {
-    border-radius: 4px 0 0 4px;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.6);
-    color: #333;
-    font-size: 1.2em;
-    height: 55px;
-}
-.subscribe-form button {
-    border-radius: 0 4px 4px 0;
-    background-color: #3eb0f7;
-    color: #ffffff;
-    font-size: 1em;
-    line-height: 52px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: 0 30px;
-    margin: 0;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-.subscribe-form .btn {
-    height: 55px;
-}
-.subscribe-form .btn:hover {
-    background-color: #1f96e0;
-    color: #fff;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-.subscribe-form .form-control::-webkit-input-placeholder {
-    color: #333;
-}
-.subscribe-form .form-control:-moz-placeholder { 
-    color: #333;  
-}
-.subscribe-form .form-control::-moz-placeholder { 
-    color: #333;  
-}
-.subscribe-form .form-control:-ms-input-placeholder {  
-    color: #333;  
-}
-#package {
-    padding-top: 100px;
-}
-.title-line {
-    width: 100px;
-    height: 3px;
-    margin: 0 auto;
-    background: #3eb0f7;
-}
-.price-box {
-    border: solid 1px #d1d1d1;
-}
-.package-option {
-    padding: 50px 0 100px;
-}
-.package-option ul {
-    padding: 0;
-}
-.price-heading h3 {
-    margin-top: 0;
-}
-.price-heading i {
-    color: #d1d1d1;
-    font-size: 75px;
-    margin-top: 20px;
-}
-.price-group {
-    padding: 30px 0 10px;
-}
-.price-group .dollar {
-    font-size: 20px;
-    position: relative;
-    bottom: 48px;
-}
-.price-group .price {
-    color: #3eb0f7;
-    font-size: 90px;
-    font-weight: 500;
-}
-.price-group .time {
-    font-size: 18px;
-}
-.price-feature li {
-    margin-left: 30px;
-    margin-right: 30px;
-    list-style: none;
-    border-bottom: solid 1px #d1d1d1;
-    line-height: 40px;
-}
-.btn-price {
-    margin: 5px 0 15px;
-    font-size: 17px;
-    padding: 7px 35px;
-    height: 40px;
-    background: #3eb0f7;
-    transition: all 0.4s;
-    color: white;
-    border-radius: 4px; 
-}
-.btn-price:hover {
-    background: #1f96e0;
-    color: white;
-}
-#client {
-    background: #f6f6f6;
-    padding: 70px 0 70px;
-}
-#client img {
-    max-height: 80px;
-    margin: 0 20px;
-    opacity: 1;
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-}
-#client img:hover {
-    opacity: 0.7;
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-}
-#testi {
-    padding: 100px 0 100px;
-}
-.testi-item {
-    display: block;
-    width: 100%;
-    height: auto;
-    position: relative;
-    margin-top: 30px;
-}
-.testi-item .box {
-    margin-right: 15px;
-    margin-left: 15px;
-}
-.testi-item .box .message {
-    padding: 20px;
-    font-style: italic;
-    line-height: 30px;
-    font-weight: 300;
-    font-size: 20px;
-}
-.testi-item .client-pic img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    max-width: 100%;
-}
-.testi-item .client-info .client-name {
-    margin-top: 10px;
-    font-size: 16px;
-}
-.testi-item .client-info .company {
-    font-style: italic;
-    color: #3eb0f7;
-}
-.owl-theme .owl-controls .owl-page span{
-    background: #3eb0f7;
-}
-.video-header {
-    margin: 40px 0 30px;
-}
-.video-embed {
-    position: relative;
-    padding-top: 56.25%; 
-    height: 0;
-    background-color: #000000;
-    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-.video-embed iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-.action {
-    color: #fff;
-}
-.action h2 {
-    margin-top: 100px;
-    font-size: 40px;
-    font-weight: 300;
-}
-.download-cta {
-    padding: 50px 0 160px;
-}
-#contact {
-    width: 100%;
-    min-height: 100%;
-}
-#contact  h2{
-    color: white;
-}
-.ul-address a {
-    font-weight: normal;
-}
-.ul-address a:hover {
-    color: white;
-}
-.ul-address li {
-    padding-right: 20px; 
-    margin-bottom: 8px; 
-    list-style: none;
-    color: white;
-}
-.ul-address i {
-    margin-left: 15px;
-    position: absolute; 
-    left: 0;
-    color: #3eb0f7; 
-    font-size: 25px;
-    line-height: 30px;
-}
-.contact-row {
-    margin: 100px 0 100px;
-}
-#contact-form {
-    margin: 0 auto;
-}
-#contact-form input {
-    position: relative;
-    padding: 5px 25px;
-    width: 100%;
-}
-#contact-form textarea {
-    position: relative;
-    padding: 10px 25px;
-    width: 100%;
-    height: 120px !important;
-}
-#contact-form .form-control {
-    border-radius: 0;
-    border: solid 1px #dadada;
-    background-color: #fff;
-    color: #333;
-    font-size: 1.2em;
-    height: 55px;
-}
-#contact-form .btn {
-    height: 55px;
-    width: 100%;
-    background-color: #3eb0f7;
-    color: #ffffff;
-    font-size: 17px !important;
-    line-height: 18px;
-    padding: 0 33px;
-    border: none;
-    border-radius: 0;
-    margin: 0;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-#contact-form .btn:hover {
-    background-color: #1f96e0;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-#footer {
-    background: #fff;
-    padding: 50px 0 50px;
-}
-.social ul {
-    padding: 0;
-    list-style: none;
-}
-.social li {
-    display: inline-block;
-    padding-right: .3em;
-    padding-bottom: .3em;
-}
-.social li a {
-    display: block;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    color: #3eb0f7;
-    border-radius: 50%;
-    background: #fff;
-    border: solid 1px #3eb0f7;
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-.social li a:hover {
-    color: #fff;
-    background: #3eb0f7;
-}
-#shortcode-basic {
-    padding: 70px 0 10px;
-}
-#shortcode-button {
-    padding: 50px 0 10px;
-    width: 100%;
-    min-height: 100%;
-}
-#shortcode-button .form-horizontal {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-#shortcode-icon {
-    padding: 70px 0 10px;
-}
-#shortcode-alert {
-    padding: 70px 0 10px;
-}
-#shortcode-table {
-    padding: 70px 0 10px;
-}
-#shortcode-column {
-    padding: 50px 0 10px;
-}
-.social-icons i {
-    color: #3eb0f7;
-    font-size: 30px;
-    line-height: 40px
-}
-#shortcode-alert {
-    padding: 70px 0 30px;
-}
-.alert { 
-    border: none; 
-    border-radius: 0; 
-    position: relative; 
-    font-size: 17px; 
-    line-height: 22px; 
-    padding: 16px; 
-    padding-left: 60px; 
-}
-.alert i { 
-    font-size: 28px; 
-    position: absolute; 
-    left: 15px; 
-    top: 13px; 
-} 
-.icon-demo i {
-    font-size: 70px;
-    margin-right: 20px;
-}
-.table > thead > tr > th { 
-    background: #3eb0f7; 
-    color: #fff; 
-    border-bottom: 0; 
-    text-transform: uppercase; 
-}
-.table > thead > tr > th, 
-.table > tbody > tr > td { 
-    font-size: 15px; 
-    font-weight: 300; 
-    padding: 20px 20px; 
-}
-.table-bg > tbody > tr:nth-child(odd) > td, 
-.table-bg > tbody > tr:nth-child(odd) > th { 
-    background: #fff; 
-}
-.table-bg > tbody > tr:nth-child(even) > td, 
-.table-bg > tbody > tr:nth-child(even) > th { 
-    background: #f6f6f6; 
-}
-.scrollToTop{
-    width: 40px; 
-    height: 40px;
-    padding: 5px;
-    font-size: 30px;
-    text-align: center; 
-    background: rgba(0, 0, 0, 0.2);
-    color: white;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    border-radius: 50%;
-    display: none;
-}
-.scrollToTop:hover{
-    color: #3eb0f7;
-}
-.control-group .controls {
-    overflow-x: hidden;
-}
-/* iPads (portrait) ----------- */
-@media only screen 
-and (min-width : 768px) 
-and (max-width : 1024px) 
-and (orientation : portrait) {
-    .head-btn {
-        margin: 50px 0 100px;
-    }
-    .signup-header {
-        margin: 50px 0 100px;
-    }
-    .price-feature li {
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-    .btn-price {
-        padding: 7px 25px;
-    }
-    #intro {
-        padding: 30px 0 50px;
-    }
-    #policy {
-        padding: 30px 0 50px;
-    }
-    #intro h2, #feature-2 h2 {
-        text-align: center;
-    }
-    #intro p, #feature-2 p {
-        text-align: center;
-    }
-    .btn-section {
-        text-align: center;
-    }
-    #feature {
-        padding-top: 75px;
-    }
-    .feature-img {
-        margin-top: 0;
-    }   
-    .row-feat {
-        padding-top: 10px;
-        padding-bottom: 40px;
-    }
-    #feature-2 {
-        padding: 80px 0 80px;
-    }
-    .feature-2-pic {
-        margin-top: 40px;
-    }
-    #client img {
-        margin: 10px 0 10px;
-        max-height: 40px;
-    }   
-    .video-header {
-        margin: 50px 0 30px;
-    }
-    #bottom-action {
-        text-align: center;
-    }
-    .button-demo li {
-        padding-bottom: 50px;
-    }
-}
-
-/* iPads (landscape) ----------- */
-@media only screen 
-and (min-width : 768px) 
-and (max-width : 1024px) 
-and (orientation : landscape) {
-    .logo {
-        margin: 100px 0 30px 0;
-    }
-    .landing h1{
-        margin: 60px 0 60px 0;
-    }   
-    .landing-text {
-        margin: 60px 0 40px 0;
-    }
-    .signup-header {
-        margin-top: 250px;
-    }
-    .intro-pic {
-        margin-top: 100px;
-    }
-    .feature-img {
-        margin-top: 30px;
-    }   
-    .feat-list {
-        margin-top: 10px;
-    }
-    .feat-list p {
-        font-size: 15px;
-    }
-    .feature-2-pic {
-        margin-top: 50px;
-    }
-    #client img {
-        max-height: 45px;
-    }   
-    .video-header {
-        margin: 50px 0 30px;
-    }
-}
-
-/* smart-phone ----------- */
-@media (max-width: 767px) {
-    .logo {
-        margin: 40px 0 30px 0;
-    }
-    .head-btn {
-        margin: 30px 0 80px;
-    }
-    .signup-header {
-        margin: 70px 0 80px;
-    }
-    #intro {
-        padding: 70px 0 70px;
-    }
-    #policy {
-        padding: 70px 0 70px;
-    }
-    #intro h2, #feature-2 h2 {
-        font-weight: 150;
-        text-align: center;
-    }
-    #intro p, #feature-2 p {
-        text-align: center;
-    }
-    .btn-section {
-        text-align: center;
-    }
-    #feature {
-        padding-top: 50px;
-    }
-    .row-feat {
-        padding-top: 10px;
-        padding-bottom: 40px;
-    }
-    .feat-list i {
-        padding-left: 40px;
-    }
-    #feature-2 {
-        padding: 40px 0 50px;
-    }
-    .feature-2-pic {
-        margin-top: 50px;
-    }
-    #package {
-        padding-top: 80px;
-    }
-    .package-option {
-        padding: 50px 0 50px;
-    }
-    .price-box {
-        margin-bottom: 30px;
-    }
-    #client img {
-        margin: 10px 0 10px;
-    }   
-    .contact-left {
-        margin-bottom: 50px;
-    }
-    .video-header {
-        margin: 50px 0 30px;
-    }
-    #bottom-action {
-        text-align: center;
-    }
-}   
-/* iPhone 6Plus (landscape) ----------- */
-@media (max-width: 736px) {
-    .feature-img {
-        margin-top: 0;
-    }
-}
-
-/* iPhone 6 (landscape) ----------- */
-@media (max-width: 667px) {
-    .logo {
-        margin: 30px 0 30px 0;
-    }
-    .landing h1{
-        font-size: 50px;
-        margin: 10px 0 25px 0;
-    }
-    .landing-text {
-        margin-top: 20px;
-    }
-    .subscribe p {
-        margin: 25px auto 15px;
-    }
-    .subscribe-form {
-        margin: 20px auto 100px;
-    }
-    .action h2 {
-        margin-top: 70px;
-    }
-    .download-cta {
-        padding: 50px 0 100px;
-    }
-}
-
-/* iPhone 5 (landscape) ----------- */
-@media (max-width: 568px){
-    .logo {
-        margin: 15px 0 15px 0;
-    }
-    .landing h1{
-        font-size: 40px;
-        margin: 20px 0 10px 0;
-    }
-    .landing-text p {
-        font-size: 16px !important; 
-    }
-    #intro {
-        padding-top: 50px;
-    }
-    #policy {
-        padding-top: 50px;
-    }
-    #feature {
-        padding-top: 50px;
-    }
-    .feat-list i {
-        padding-left: 20px;
-    }
-    #feature-2 {
-        padding: 50px 0 70px;
-    }
-    #screenshot {
-        padding-top: 70px;
-    }   
-    .screenshots {
-        padding-top: 30px;
-        padding-bottom: 70px;
-    }
-    #testi {
-        padding: 70px 0 70px;
-    }
-    .testi-item .box .message {
-        line-height: 25px;
-        font-size: 18px;
-    }
-    .action h2 {
-        margin: 50px 0 20px;
-    }
-    .download-text p {
-        line-height: 1.5;   
-    }   
-}
-
-/* iPhone 4 (landscape) ----------- */
-@media (max-width: 480px) {
-    .feat-list i {
-        padding-left: 5px;
-    }
-    .action h2 {
-        font-size: 30px;
-    }
-    .button-demo li {
-        padding-bottom: 50px;
-    }
-}
-
-/* smart phone width: 360px ----------- */
-@media (max-width: 360px) {
-    #intro h2, #feature h2, #feature-2 h2 {
-        font-size: 30px;
-    }
-    .feat-list i {
-        padding-left: 0;
-    }
-    #feature .inner {
-        padding-left: 15px;
-    }
-    .video-header {
-        margin: 30px 0 30px;
-    }
-}
-
-/* iPhone 4/5 (portrait) ----------- */
-@media (max-width: 320px) {
-    .logo {
-        margin: 30px 0 20px 0;
-    }
-    .landing h1{
-        margin: 20px 0 35px 0;
-    }
-    .btn-default {
-        font-size: 16px;
-        margin: 30px 0 10px;
-        padding: 15px 30px;
-        height: 35px;
-        border-radius: 80px;
-    }
-    .btn-primary {
-        font-size: 16px;
-        margin: 30px 0 10px;
-        margin-right: 15px;
-        padding: 15px 30px;
-        height: 35px;
-        border-radius: 80px;
-    }
-    .subscribe-form {
-        margin: 50px auto 110px;
-    }
-    .subscribe-form input {
-        padding: 5px 15px;
-    }
-    .subscribe-form button {
-        padding: 0 15px;
-    }
-    .action h2 {
-        margin: 70px 0 20px;
-    }
-    .table > thead > tr > th, 
-    .table > tbody > tr > td { 
-        padding: 20px 10px; 
-    }
-}
-</style>
-        <!--
-        <link href="./Backyard Landing Page_files/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="./Backyard Landing Page_files/font-awesome.min.css" rel="stylesheet">
-        <link href="./Backyard Landing Page_files/pe-icon-7-stroke.css" rel="stylesheet">
-        <link href="./Backyard Landing Page_files/animate.css" rel="stylesheet" media="screen">
-        <link href="./Backyard Landing Page_files/owl.theme.css" rel="stylesheet">
-        <link href="./Backyard Landing Page_files/owl.carousel.css" rel="stylesheet">
--->
-        <!-- Colors
-        <link href="./Backyard Landing Page_files/css-index.css" rel="stylesheet" media="screen">-->
-        <!-- <link href="css/css-index-green.css" rel="stylesheet" media="screen"> -->
-        <!-- <link href="css/css-index-purple.css" rel="stylesheet" media="screen"> -->
-        <!-- <link href="css/css-index-red.css" rel="stylesheet" media="screen"> -->
-        <!-- <link href="css/css-index-orange.css" rel="stylesheet" media="screen"> -->
-        <!-- <link href="css/css-index-yellow.css" rel="stylesheet" media="screen"> -->
-
-        <!-- Google Fonts -->
-
+        <%= stylesheet_link_tag "anima"%>
+        <%= stylesheet_link_tag "icons"%>
+        <%= stylesheet_link_tag "style_micro"%>
+        <%= stylesheet_link_tag "sliders"%>
+        <%= stylesheet_link_tag "hero-slider"%>
+        <%= stylesheet_link_tag "project-slider"%>
+        <%= stylesheet_link_tag "blue"%>
+        <!--<link rel="stylesheet" href="plugins/anima/anima.css">
+        <link rel="stylesheet" href="css/icons.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/sliders.css">
+        <link rel="stylesheet" href="css/hero-slider.css">
+        <link rel="stylesheet" href="css/project-slider.css">
+        <link rel="stylesheet" href="css/blue.css" class="colors">-->
+        <link rel="shortcut icon" href="img/ico/32.png" sizes="32x32" type="image/png"/>
+        <link rel="apple-touch-icon-precomposed" href="img/ico/60.png" type="image/png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/72.png" type="image/png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="img/ico/120.png" type="image/png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="img/ico/152.png" type="image/png"/>
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
 
-    <body data-spy="scroll" data-target="#navbar-scroll">
+    <body id="home">
+        <div id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#home">
+                        <img id="navlogo" src="img/navlogo-blue.png" alt="microstore" width="122" height="45">
+                    </a>
 
-        <!-- /.preloader -->
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul id="navigation" class="nav navbar-nav navbar-right text-center">
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About</a></li>
+                        <!-- <li><a href="#testimonial">Testimonials</a></li> -->
+                        <li><a href="#orderform">Order</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="http://demo.angelostudio.net" class="external">External link</a></li>
+                        <li class="dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">UK</button>
+                            <ul class="dropdown-menu">
+                            <li><a href="#">English</a></li>
+                            <li><a href="#">Deutsch</a></li>
+                            <li><a href="#">France</a></li>
+                            <li><a href="#">Slovak</a></li>
+                          </ul>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <section id="hero" class="hero-slider light-typo full-height" data-height="600" >
+            <div id="hero-slider" class="owl-carousel owl-theme" data-autoplay="4000" data-navigation="false" data-dots="true" data-transition="fadeOut">
+                    
+                <div class="item m-center" style="background-image: url(img/01.jpg);">
+                    <div class="center-box">
+                        <span class="overlay-bg"></span>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center anima fade-up">
+                                    <div class="hero-unit">
+                                        <img id="logo" src="img/logo-blue.png" class="img-responsive text-center" alt="shop logo" width="300">
+                                        <p>If you have 1-3  or more products for sale microStore is perfect template for you! MicroStore is a simple modern One page 100% responsive template.</p>
+                                        <ul class="social-links text-center">
+                                            <li><a href="#link"><i class="icon-twitter"></i></a></li>
+                                            <li><a href="#link"><i class="icon-facebook"></i></a></li>
+                                            <li><a href="#link"><i class="icon-vimeo"></i></a></li>
+                                        </ul>
+                                        <a class="btn btn-store smooth-scroll" href="#products">browse the goods</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item m-center" style="background-image: url(img/06.jpg);">
+                    <div class="center-box">
+                        <span class="overlay-bg"></span>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center anima fade-up">
+                                    <div class="hero-unit">
+                                        <h2>Nightstand</h2>
+                                        <p>Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                                        <a class="btn btn-store outline smooth-scroll" href="#products">buy $400</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item m-center" style="background-image: url(img/10.jpg);">
+                    <div class="center-box">
+                        <span class="overlay-bg"></span>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center anima fade-up">
+                                    <div class="hero-unit">
+                                        <h2>Hammock</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                                        <a class="btn btn-store outline smooth-scroll" href="#products">buy now $600</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <div id="top"></div>
+            
+        
+        <section id="products" class=" padding-top-bottom" ng-controller="productsController">
+            <div class="container">
+                <header class="section-header text-center anima fade-up">
+                    <h2>Products</h2>
+                </header>
+            </div>
+            <div class="container">
+                <div id="projects-container" class="row">
+                    <article class="design product col-xs-12 col-sm-6 col-md-4 anima fade-up">
+                        <div class="img-box">
+                            <div class="hover-mask2"></div>
+                            <span class="product-icon icon-eye"></span>
+                            <img class="img-responsive project-image" src="img/product1.jpg" alt="">
+                        </div>
+                        <div class="product-info col-md-12">
+                            <p class="project-price">$700</p>
+                            <div>
+                                <h4 class="project-title">{{items[0]['name']}}</h4>
+                            </div>
+                        </div>
+                        <div class="sr-only project-description"  data-oldprice="$800" data-images="img/01.jpg,img/02.jpg,img/03.jpg,img/04.jpg,img/05.jpg">
+                            <p>1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                        </div>
+                    </article>
+                    
+                    <article class="mock-up product col-xs-12 col-sm-6 col-md-4 anima fade-up d1">
+                        <div class="img-box">
+                            <div class="hover-mask2"></div>
+                            <span class="product-icon icon-eye"></span>
+                            <img class="img-responsive project-image" src="img/product2.jpg" alt="">
+                        </div>
+                        <div class="product-info col-md-12">
+                            <p class="project-price">$400</p>
+                            <div>
+                                <h4 class="project-title">Nightstand</h4>
+                            </div>  
+                        </div>
+                        <div class="sr-only project-description" data-images="img/06.jpg,img/07.jpg,img/08.jpg,img/09.jpg">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                            <p>Phasellus porta eros vel lacus euismod consequat. Phasellus eleifend, nibh non feugiat hendrerit, lacus enim adipiscing eros, a pharetra erat neque eget est. Quisque vitae aliquet urna. Integer suscipit lectus eu enim porttitor fringilla. Ut blandit, urna in auctor euismod, arcu eros pharetra metus, a porta purus libero a nibh.</p>
+                        </div>
+                    </article>
+                    
+                    <article class=" icons product col-xs-12 col-sm-6 col-md-4 anima fade-up d2">
+                        <div class="img-box">
+                            <div class="hover-mask2"></div>
+                            <span class="product-icon icon-eye"></span>
+                            <img class="img-responsive project-image" src="img/product3.jpg" alt="">
+                        </div>
+                        <div class="product-info col-md-12">
+                            <p class="project-price">$600</p>
+                            <div>
+                                <h4 class="project-title">Hammock</h4>
+                            </div>  
+                        </div>
+                        <div class="sr-only project-description" data-oldprice="$700" data-images="img/10.jpg,img/11.jpg,img/12.jpg">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                            <p>Nam eget urna pellentesque nisl ultrices dapibus. Mauris accumsan vehicula nisl, sed tempus mauris facilisis eu. Donec a iaculis nisi, quis malesuada justo. Pellentesque ut enim sit amet ipsum dignissim egestas. Morbi tincidunt rhoncus urna eget placerat.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
 
-        <!-- /.parallax full screen background image -->
-        <div class="fullscreen landing parallax" style="background-image: url(&quot;images/ligas.png&quot;); background-attachment: fixed; background-size: 1840px 1226.36px; background-position: 50% -178.317px;" data-img-width="2000" data-img-height="1333" data-diff="100">
+            <div id="project-modal" class="modal " style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a class="close" href="#" data-dismiss="modal" ><i class="icon-close"></i></a>
+                            <div id="project-slider" class="owl-carousel owl-theme" data-navigation="true" data-dots="true" >
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div id="project-sidebar" class="col-md-4 ">
+                                        <h2 id="sdbr-title">Flat UI-Kit</h2>    
+                                        <div>
+                                            <div id="sdbr-price">200</div>
+                                            <div id="sdbr-oldprice">500</div>
+                                        </div>
+                                    </div>
+                                    <div id="project-content" class="col-md-8 ">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <div class="overlay">
-                <div class="container">
+        <section class="gray-bg padding-top-bottom ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 anima fade-right">
+                        <h3 class="center cta-message">Free international shipping only  <strong><span id="countdown"></span></strong></h3>
+
+                    </div>
+                    <div class="col-md-4 text-center anima fade-left d1">
+                        <a class="btn btn-store cta-button smooth-scroll" href="#orderform" >Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" class="padding-top-bottom ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 anima fadeInLeft">
+                        <header class="section-header cta-message">
+                            <h2>About company</h2>
+                            <h4>Pellentesque interdum eget</h4>
+                        </header>
+                    </div>
+                    <div class="col-md-8 cta-message anima fade-up">
+                        <p>Pellentesque interdum eget odio eu rutrum. Nunc tempus massa a tellus aliquet sodales. Nunc urna tortor, rhoncus accumsan vestibulum non, feugiat a mauris. In hac habitasse platea dictumst. In sagittis orci nec aliquet tristique.</p>
+                        <p style="display:none;" id="showme">Phasellus porta eros vel lacus euismod consequat. Phasellus eleifend, nibh non feugiat hendrerit, lacus enim adipiscing eros, a pharetra erat neque eget est. Quisque vitae aliquet urna. Integer suscipit lectus eu enim porttitor fringilla. Ut blandit, urna in auctor euismod, arcu eros pharetra metus, a porta purus libero a nibh.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
+                        <a class="btn btn-store outline" id="show-btn" href="#">Read more</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="testimonial" class="padding-top-bottom image-bg light-typo">
+            <div class="container">
+                
+                <div class="testimonial">
+                    <div id="carousel-example-generic" class="carousel slide bs-docs-carousel-example" data-interval="10000">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <h1>This is one of the most beautiful site I have ever seen in my life. <br>Your site is great!</h1>
+                                <br>
+                                <h3>Brad Cooper</h3>
+                            </div>
+                            <div class="item">
+                                <h1>The Difference between ordinary and extraordinary <br>is just that little extra.</h1>
+                                <br>
+                                <h3>Albert Einstein</h3>
+                            </div>
+                            <div class="item">
+                                <h1>Hugely thought out! <br>Trying it now.I like the use of shape and background image!</h1>
+                                <br>
+                                <h3>John Doe</h3>
+                            </div>
+                        </div>
+                        <br><br><br>
+                    </div>
+                </div>
+                <div class="overlay-bg"></div>
+            </div>
+        </section>
+
+        <section id="newsletter" class="light-typo dark-bg padding-top-bottom">
+            <div class="container ">
+                <header class="section-header text-center">
+                    <h2>Stay in touch</h2>
+                    <h4>Sign Up for Email Updates on on News & Offers</h4>
+                </header>
+                <div class="row">
+                    <form id="newsletter-form" action="index.html" method="POST" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 ">
+                        <div class="input-group">
+                            <input id="newsletter-mail" name="email" placeholder="Enter your email" class="form-control input-lg" type="email" >
+                            <span class="input-group-btn">
+                                <button name="submit" type="submit" class="btn btn-store">Subscribe!</button>
+                            </span>
+                        </div>
+                        <input type="hidden" name="submitted" id="submitted2" value="true">
+                    </form>
+                </div>
+            </div>
+        </section>  
+
+        <section id="orderform" class="gray-bg padding-top-bottom" ng-controller="orderController">
+            <div class="container">
+                <header class="section-header text-center">
+                    <h2>Order Form</h2>
+                </header>
+                <form action="index.html" method="post" novalidate id="order-form">
                     <div class="row">
-                        <div class="col-md-7">
-
-                            <!-- /.logo -->
-                            <div class="logo wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"> <a href=<%=root_path%>>BEEPRINTED - BETA</a></div>
-
-                            <!-- /.main title -->
-                            <h1 class="wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-                                Impressão e Exposição de Modelos 3D 
-                            </h1>
-
-                            <!-- /.header paragraph -->
-                            <div class="landing-text wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-                                <p>Beeprinted é uma plataforma voltada à tecnologia de impressão e modelagem 3D. Faça parte da comunidade Bee e imprima projetos de outra pessoas. Também é possivel expor seus projetos e lucrar com eles.</p>
-                            </div>                
-
-                            <!-- /.header button -->
-                            <div class="head-btn wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-                            <div class="subscribe-form wow" style='margin:0px'>
-                                <%= form_tag search_path,class:"news-letter mailchimp", method: :get do %>
-                                        <%= text_field_tag :query, params[:query], class: 'form-control typeahead', autocomplete: "off", placeholder: "Pesquise Modelos e Designers", style:'background-color:white', required:"" %>
-            
-
-                                        <%= button_tag(type: "submit", class: "subscribe-btn btn") do %>
-            
-                                            <i class="fa fa-search" aria-hidden="true"></i>
-
-                                        <% end %>
-                                <% end %>
-                            </div>
-                            </div>
-
-
-
-                        </div> 
-
-                        <!-- /.signup form -->
-                        <div class="col-md-5">
-
-                            <div class="signup-header wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-
-
-                                <bla id="criar">
-
-                                <div class="col-md-6 w3-round w3-center" style="background-color:#ccc;margin-bottom:5px;margin-top:5px;">
-                                    <a href='#' id=""><h4 class="w3-border">CRIE UMA CONTA</h4></a>
-                                </div>
-
-                                <div class="col-md-6 w3-center" style="margin-bottom:5px;margin-top:5px;">
-                                    <a href="#" id="Entrar"><h4 class="form-title">ENTRAR</h4></a>
-                                </div>
-
-
-                                <%= simple_form_for(resource,class: "form-header", as: resource_name, url: registration_path(resource_name)) do |f| %>
-                                    <%= f.error_notification %>
-                                    <div class="form-group">
-                                        <%= f.input :email, required:"", autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'form-control input-lg' } %>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.input :name, required: 'required', label: false, placeholder: 'Nome', input_html: { class: 'form-control input-lg' } %>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.input :sobrenome, required:'required', label: false, placeholder: 'Sobrenome', input_html: { class: 'form-control input-lg' } %>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.input :password, required:'required', label: false, placeholder: 'Senha', input_html: { class: 'form-control input-lg' } %>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.input :password_confirmation, required:"required", label: false, placeholder: 'Confirmar Senha', input_html: { class: 'form-control input-lg' } %>
-                                    </div>
-                                    <div class="form-group last">
-                                        <input type="submit" name="commit" value="Registrar" class="btn btn-warning btn-block btn-lg" style="background-color:#3eb0f7; border-color:#3eb0f7;">
-                                    </div>
-                                    <p class="privacy text-center">Não compartilharemos seu email. Leia nossa <a href="">política de privacidade</a>.</p>
-                                <% end %>
-                                </bla>
-                                <bla id="login" style="display: none">
-
-                                <div class="col-md-6 w3-center" style="margin-bottom:5px;margin-top:5px;">
-                                    <a href='#' id="Criar"><h4 class="form-title">CRIE UMA CONTA</h4></a>
-                                </div>
-                                <div class="col-md-6 w3-round w3-center" style="background-color:#ccc;margin-bottom:5px;margin-top:5px;">
-                                    <a href="#" id=""><h4 class="form-title">ENTRAR</h4></a>
-                                </div>
-
-
-
-                                <%= simple_form_for(resource,class:"form-header", as: resource_name, url: session_path(resource_name)) do |f| %>
-                                    <%= f.error_notification %>
-                                    <div class="form-group">
-                                        <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'form-control input-lg' } %>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.input :password, required: true, label: false, placeholder: 'Password', input_html: { class: 'form-control input-lg' } %>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-                                    </div>
-                                    <div class="form-group last">
-                                        <input type="submit" name="commit" value="Entrar" class="btn btn-warning btn-block btn-lg" style="background-color:#3eb0f7; border-color:#3eb0f7;">
-                                    </div>
-                                    <div class="w3-center">
-                                        <%= link_to "Login com Facebook", facebook_path %>
-                                    </div>
-                                    </div>
-                                <% end %>
-                                </bla>
-                                <!--<form class="form-header" action="http://moxdesign.us10.list-manage.com/subscribe/post" role="form" method="POST" id="#">
-                                    <input type="hidden" name="u" value="503bdae81fde8612ff4944435">
-                                    <input type="hidden" name="id" value="bfdba52708">
-                                    <div class="form-group">
-                                        <input class="form-control input-lg" name="MERGE1" id="name" type="text" placeholder="Your name" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="form-control input-lg" name="MERGE0" id="email" type="email" placeholder="Email address" required="">
-                                    </div>
-                                    <div class="form-group last">
-                                        <input type="submit" class="btn btn-warning btn-block btn-lg" value="SUBSCRIBE">
-                                    </div>
-                                    <p class="privacy text-center">We will not share your email. Read our <a href="https://bootstrapthemes.co/demo/html/backyard/demo/privacy.html">privacy policy</a>.</p>
-                                </form>-->
-                            </div>              
-
-                        </div>
-                    </div>
-                </div> 
-            </div> 
-        </div>
-
-        <!-- NAVIGATION -->
-        <div id="menu-sticky-wrapper" class="sticky-wrapper" style="height: 50px;"><div id="menu">
-            <nav class="navbar-wrapper navbar-default" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-backyard">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand site-name" style='padding-top:15px' href=<%=root_path%>>BEEPRINTED</a>
-                    </div>
-
-                    <div id="navbar-scroll" class="collapse navbar-collapse navbar-backyard navbar-right">
-                        <ul class="nav navbar-nav">
-                            <li><a href=<%=galeria_path%>>Galeria</a></li>
-                            <li><a href=<%=browse_posts_path%>>Navegar</a></li>
-                            <li><a href=<%=learn_path%>>Tutoriais</a></li>
-                            <li><a href=<%=new_user_session_path%>>Entrar</a></li>
-                            <li><a href=<%=new_user_registration_path%>>Registrar</a></li>
-                            <li><a href="#contact">Contato</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div></div>
-
-        <!-- /.intro section -->
-        <div id="intro">
-            <div class="container text-center">
-                <h2>Modelos disponíveis para impressão</h2>
-
-            </div>
-            <div class="container" style='padding-top: 20px;'>
-                <div class="row">
-
-                    <!-- /.intro image -->
-                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </a>  
-
-                    <!-- /.intro content -->
-                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </a>
-                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </a>
-                </div>  
-                <div class="row">
-
-                    <!-- /.intro image -->
-                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInRight;">
-                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </a>  
-
-                    <!-- /.intro content -->
-                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInRight;">
-                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </a>
-                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInRight;">
-                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </a>
-                </div> 
-                <div class="row">
-
-                    <!-- /.intro image -->
-                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </a>  
-
-                    <!-- /.intro content -->
-                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </a>
-                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </a>
-                </div>           
-            </div>
-            <div class="container text-center" style='padding-top:50px;'>
-                <h3>Confira outros Modelos</h3>
-                <div class="wow fadeInUp" style="visibility: hidden; animation-name: none; padding-top: 20px;">
-                    <a href=<%=new_user_registration_path%> class="btn-secondary" style='padding:10px 30px;'><strong>Galeria</strong></a>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- /.feature section -->
-        <div id="feature">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center feature-title">
-
-                        <!-- /.feature title -->
-                        <h2>Crie projetos e mostre seu portfolio</h2>
-                        <p>Você pode mostrar seu telanto como modelador e lucrar com projetos postados dentro do site.</p>
-                    </div>
-                </div>
-                <div class="row row-feat">
-                    <div class="col-md-4 text-center">
-
-                        <!-- /.feature image -->
-                        <div class="feature-img">
-                            <img src="images/mascote.jpg" alt="image" class="img-responsive wow fadeInLeft" style="visibility: hidden; animation-name: none;">
-                        </div>
-                    </div>
-
-                    <div class="col-md-8">
-
-                        <!-- /.feature 1 -->
-                        <div class="col-sm-6 feat-list">
-                            <i class="pe-7s-notebook pe-5x pe-va wow fadeInUp" style="visibility: hidden; animation-name: none;"></i>
-                            <div class="inner">
-                                <h4>Crie seu perfil</h4>
-                                <p>Postando seus projetos na comunidade Bee, você acumula reputação dentro do site. Vire nosso parceiro.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- /.feature 2 -->
-                        <div class="col-sm-6 feat-list">
-                            <i class="pe-7s-cash pe-5x pe-va wow fadeInUp" data-wow-delay="0.2s" style="visibility: hidden; animation-delay: 0.2s; animation-name: none;"></i>
-                            <div class="inner">
-                                <h4>Lucre com projetos.</h4>
-                                <p>Você pode atribuir um valor para seus modelos. Quando alguem imprimir seu projeto, a Beeprinted vai paga-lo pelo seu trabalho.</p>
-                            </div>
-                        </div>
-
-                        <!-- /.feature 3 -->
-                        <div class="col-sm-6 feat-list">
-                            <i class="pe-7s-cart pe-5x pe-va wow fadeInUp" data-wow-delay="0.4s" style="visibility: hidden; animation-delay: 0.4s; animation-name: none;"></i>
-                            <div class="inner">
-                                <h4>Aumente sua vendas</h4>
-                                <p>Melhore seu sua vizibilidade e lucre cada vez mais mostrando seus projetos para milhares de usuários.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- /.feature 4 -->
-                        <div class="col-sm-6 feat-list">
-                            <i class="pe-7s-users pe-5x pe-va wow fadeInUp" data-wow-delay="0.6s" style="visibility: hidden; animation-delay: 0.6s; animation-name: none;"></i>
-                            <div class="inner">
-                                <h4>Mostre seu trabalho</h4>
-                                <p>Milhares de pessoas vão visualizar seu trabalho. Mostre seu portifolio.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- /.feature 2 section -->
-        <div id="feature-2">
-            <div class="container">
-                <div class="row">
-
-                    <!-- /.feature content -->
-                    <div class="col-md-6 wow fadeInLeft" style="visibility: hidden; animation-name: none;">
-                        <h2>Entenda melhor sobre as impressões 3D com nossos tutoriais</h2>
-                        <p> Em nossos <span class="highlight">Tutoriais</span>, você vai aprender sobre diversos temas dentro do universo da impressão 3D. Você vai aprender, por exemplo, sobre acabamento, material de impressão e modelagem 3D.
-                        </p>
-
-                        <div class="btn-section"><a href=<%=learn_path%> class="btn-default">Visite Nossos Tutoriais</a></div>
-
-                    </div>
-
-                    <!-- /.feature image -->
-                    <div class="col-md-6 feature-2-pic wow fadeInRight" style="visibility: hidden; animation-name: none;">
-                        <img src="images/varinha2.jpg" alt="macbook" class="img-responsive">
-                    </div>                
-                </div>            
-
-            </div>
-        </div>
-
-
-        <!-- /.download section -->
-        <div id="download">
-            <div class="action fullscreen parallax" style="background-image: url(&quot;images/varinha3.jpg&quot;); background-attachment: fixed; background-size: 1840px 1226.36px;" data-img-width="2000" data-img-height="1333" data-diff="100">
-                <div class="overlay">
-                    <div class="container">
-                        <div class="col-md-8 col-md-offset-2 col-sm-12 text-center">
-
-                            <!-- /.download title -->
-                            <h2 class="wow fadeInRight" style="visibility: hidden; animation-name: none;">Quer conhecer mais?</h2>
-                            <p class="download-text wow fadeInLeft" style="visibility: hidden; animation-name: none;">Faça seu cadastro e utilize todas as ferramentas que nossa plataforma oferece.</p>
-
-                            <!-- /.download button -->
-                            <div class="download-cta wow fadeInLeft" style="visibility: hidden; animation-name: none;">
-                                <a href=<%=new_user_registration_path%> class="btn-secondary">Cadastre-se</a>
-                            </div>
+                        <div class="col-sm-12 col-md-12">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Product</th>
+                              <th>Unit Cost</th>
+                              <th class="text-center">
+                              <span class="hidden-xs">Quantity</span>
+                              <span class="visible-xs">QNT</span>
+                              </th>
+                              <th class="text-right">Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="vert-align">Bed</td>
+                              <td class="vert-align">{{ 700 | currency:"$":0 }}</td>
+                              <td class="text-center">
+                                <select class="form-control form-control-inline" ng-model="myBed" ng-options="opt as opt.label for opt in options"></select>
+                              </td>
+                              <td class="text-right vert-align">{{ myBed.value * 700 | currency:"$":0  }}</td>
+                            </tr>                           
+                            <tr>
+                              <td class="vert-align">Nightstand</td>
+                              <td class="vert-align">{{ 400 | currency:"$":0  }}</td>
+                              <td class="text-center">
+                                <select class="form-control form-control-inline" ng-model="myNightstand" ng-options="opt as opt.label for opt in options"></select>
+                              </td>
+                              <td class="text-right vert-align">{{ myNightstand.value * 400 | currency:"$":0  }}</td>
+                            </tr>                           
+                            <tr>
+                              <td class="vert-align">Hammock</td>
+                              <td class="vert-align">{{ 600 | currency:"$":0  }}</td>
+                              <td class="text-center">
+                                <select class="form-control form-control-inline" ng-model="myHammock" ng-options="opt as opt.label for opt in options"></select>
+                              </td>
+                              <td class="text-right vert-align">{{ myHammock.value * 600 | currency:"$":0  }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
                         </div>  
-                    </div>  
-                </div>
-            </div>
-        </div>
 
-        <!-- /.pricing section -->
-
-        <!-- /.client section -->
-        <div id="client"> 
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <img alt="client" src="images/eu.jpg" class="wow fadeInUp" style="visibility: hidden; animation-name: none;">
-                        <img alt="client" src="images/eu.jpg" class="wow fadeInUp" data-wow-delay="0.2s" style="visibility: hidden; animation-delay: 0.2s; animation-name: none;">
-                        <img alt="client" src="images/eu.jpg" class="wow fadeInUp" data-wow-delay="0.4s" style="visibility: hidden; animation-delay: 0.4s; animation-name: none;">
-                        <img alt="client" src="images/eu.jpg" class="wow fadeInUp" data-wow-delay="0.6s" style="visibility: hidden; animation-delay: 0.6s; animation-name: none;">
-                    </div>
-                </div>
-            </div>  
-        </div>
-
-        <!-- /.testimonial section -->
-        <div id="testi">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="wow fadeInLeft" style="visibility: hidden; animation-name: none;">Depoimentos</h2>
-                    <div class="title-line wow fadeInRight" style="visibility: hidden; animation-name: none;"></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1"> 
-                        <div id="owl-testi" class="owl-carousel owl-theme wow fadeInUp" style="opacity: 1; display: block; visibility: hidden; animation-name: none;">
-
-                            <!-- /.testimonial 1 -->
-                            <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 5670px; left: 0px; display: block;"><div class="owl-item" style="width: 945px;"><div class="testi-item">
-                                <div class="client-pic text-center">
-
-                                    <!-- /.client photo -->
-                                    <img src="images/eu.jpg" alt="client">
+                    <div class="col-sm-6 col-md-6 contact-info">
+                        <p class="text-center"><strong>Payment Method</strong></p>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label">Name</label>
+                                    <input name="Card number" placeholder="Card number" class="form-control input-lg" type="text">
                                 </div>
-                                <div class="box">
-
-                                    <!-- /.testimonial content -->
-                                    <p class="message text-center">"We are very happy and satisfied with BeePrinted service. Our account manager is efficient and very knowledgeable. It was able to create a vast fan base within very short period of time. We would highly recommend BeePrinted App to anyone."</p>
-                                </div>
-                                <div class="client-info text-center">
-
-                                    <!-- /.client name -->
-                                    Lady Gaga, <span class="company">BEEPRINTED</span>  
-                                </div>
-                            </div></div><div class="owl-item" style="width: 945px;"><div class="testi-item">
-                                <div class="client-pic text-center">
-
-                                    <!-- /.client photo -->
-                                    <img src="images/eu.jpg" alt="client">
-                                </div>
-                                <div class="box">
-
-                                    <!-- /.testimonial content -->
-                                    <p class="message text-center">"Everything looks great... Thanks for the quick revision turn around. We were lucky to find you guys and will definitely be using some of your other services in the near future."</p>
-                                </div>
-                                <div class="client-info text-center">
-
-                                    <!-- /.client name -->
-                                    Mike Portnoy, <span class="company">Dream Theater</span>    
-                                </div>
-                            </div></div><div class="owl-item" style="width: 945px;"><div class="testi-item">
-                                <div class="client-pic text-center">
-
-                                    <!-- /.client photo -->
-                                    <img src="images/eu.jpg" alt="client">
-                                </div>
-                                <div class="box">
-
-                                    <!-- /.testimonial content -->
-                                    <p class="message text-center">"Overall, the two reports were very clear and helpful so thank you for the suggestion to do the focus group. We are currently working with our developer to implement some of these suggestions."</p>
-                                </div>
-                                <div class="client-info text-center">
-
-                                    <!-- /.client name -->
-                                    Jennifer Love Hewitt, <span class="company">Lead Vocal</span>   
-                                </div>
-                            </div></div></div></div>        
-
-                            <!-- /.testimonial 2 -->
-                                            
-
-                            <!-- /.testimonial 3 -->
-                                        
-
-                        <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div></div>
-                    </div>  
-                </div>  
-            </div>
-        </div>
-
-        <!-- /.contact section -->
-        <div id="contact">
-            <div class="contact fullscreen parallax" style="background-image: url(&quot;images/city.jpg&quot;); background-attachment: fixed; background-size: 1840px 1227.28px;" data-img-width="2000" data-img-height="1334" data-diff="100">
-                <div class="overlay">
-                    <div class="container">
-                        <div class="row contact-row">
-
-                            <!-- /.address and contact -->
-                            <div class="col-sm-5 contact-left wow fadeInUp" style="visibility: hidden; animation-name: none;">
-                                <h2><span class="highlight">Entre</span> em contato</h2>
-                                <ul class="ul-address">
-                                    <li><i class="pe-7s-map-marker"></i>CLN 406 Bloco B sala 208<br>
-                                        Asa Norte, Brasília 7084-7520
-                                    </li>
-                                    <li><i class="pe-7s-phone"></i> (61) 3536-4358<br>
-                                        (61) 98235-1095<br>
-                                        (62) 99397-3989
-                                    </li>
-                                    <li><i class="pe-7s-mail"></i><a href="mailto:info@yoursite.com">contato@beeprinted.com.br</a></li>
-                                    <li><i class="pe-7s-look"></i><a href=<%=root_path%>>www.beeprinted.com.br</a></li>
-                                </ul>   
-
                             </div>
-
-                            <!-- /.contact form -->
-                            <div class="col-sm-7 contact-right">
-                                <form method="POST" id="contact-form" class="form-horizontal" action=<%=contatos_path%> onsubmit="alert( &#39;Obrigado pelo seu feedback!&#39; );">
-                                    <div class="form-group">
-                                        <input type="text" name="contato[name]" id="contato_path" class="form-control wow fadeInUp" placeholder="Nome" required="" style="visibility: hidden; animation-name: none;">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="contato[email]" id="contato_email" class="form-control wow fadeInUp" placeholder="Email" required="" style="visibility: hidden; animation-name: none;">
-                                    </div>                  
-                                    <div class="form-group">
-                                        <textarea name="contato[mensagem]" rows="20" cols="20" id="Message" class="form-control input-message wow fadeInUp" placeholder="Mensagem" required="" style="visibility: hidden; animation-name: none;"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" name="commit" value="Enviar Mensagem" id='contato_submit' class="btn btn-success wow fadeInUp" style="visibility: hidden; animation-name: none;">
-                                    </div>
-                                </form>     
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Code</label>
+                                    <input name="Code" placeholder="Code" class="form-control input-lg" type="text" >
+                                </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="contact-mail">month</label>
+                                    <div class=" controls">
+                                        <select class="form-control">
+                                          <option>January</option>
+                                          <option>February</option>
+                                          <option>March</option>
+                                        </select>
+                                    </div>
+                                </div>  
+                            </div>  
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="contact-mail">year</label>
+                                    <div class=" controls">
+                                        <select class="form-control">
+                                          <option>2014</option>
+                                          <option>2015</option>
+                                          <option>2016</option>
+                                          <option>2017</option>
+                                          <option>2018</option>
+                                        </select>
+                                    </div>
+                                </div>  
+                            </div>  
+                        </div>  
+
+                        <p class="text-center"><strong>Information</strong></p>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Name</label>
+                                    <input name="First name" placeholder="First name" class="form-control input-lg" type="text">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Last Name</label>
+                                    <input name="Last name" placeholder="Last name" class="form-control input-lg" type="text" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" >Email</label>
+                            <input name="email" placeholder="Your email" class="form-control input-lg" type="email">
+                        </div>  
+                        <p class="text-center"><strong>If you have Coupon code</strong></p>
+                        <div class="input-group ">
+                            <input placeholder="Coupon code" class="form-control input-lg" type="text" >
+                            <span class="input-group-btn">
+                                <button name="submit" type="submit" class="btn btn-store">Check!</button>
+                            </span>
+                        </div>
+
+                    </div>
+                    
+                    <div class="col-sm-6 col-md-6">
+                        <p class="text-center"><strong>Delivery address</strong></p>
+                        <div class="form-group">
+                            <label class="control-label">Street</label>
+                            <input name="street" placeholder="Street address" class="form-control" type="text">
+                        </div>  
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <input name="city" placeholder="City" class="form-control" type="text">
+                        </div>  
+                        <div class="form-group">
+                            <label class="control-label">Country</label>
+                            <input name="Country" placeholder="Country" class="form-control" type="text">
+                        </div>                          
+                        <div class="form-group">
+                            <label class="control-label">postcode</label>
+                            <input name="postcode" placeholder="Post code" class="form-control" type="text">
+                        </div>                  
+
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th colspan="3" class="text-center">Order sumary</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Shipping cost:</td>
+                              <td></td>
+                              <td class="text-right">Free</td>
+                            </tr>
+                            <tr>
+                              <td>Total:</td>
+                              <td></td>
+                              <td id="total" class="text-right">{{ (myBed.value * 700) +  (myNightstand.value * 400) + (myHammock.value * 600) | currency }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <p>
+                            <button name="submit" type="submit" class="btn btn-store btn-block">Order Product</button>
+                        </p>
+                        <input type="hidden" name="submitted" id="submitted" value="true">
+                    </div>
+
+                </div>
+                    </form>
+
+            </div>
+        </section>
+
+        <section id="cta" class="padding-top-bottom color-bg light-typo">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-4 col-sm-4 news anima fade-up">
+                        <i class="icon-trophy iconBig"></i>
+                        <h3>Quality guaranteed</h3>
+                    </div>
+                    <div class="col-md-4 col-sm-4 news anima fade-up d1">
+                        <i class="icon-truck iconBig"></i>
+                        <h3>Home delivery</h3>
+                    </div>
+                    <div class="col-md-4 col-sm-4 anima fade-up d2">
+                        <i class="icon-lock iconBig"></i>
+                        <h3>Secure payment</h3>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- /.footer -->
-        <footer id="footer">
+        <section id="contact" class="gray-bg padding-top-bottom">
             <div class="container">
-                <div class="col-sm-4 col-sm-offset-4">
-                    <!-- /.social links -->
-                    <div class="social text-center">
-                        <ul>
-                            <li><a class="wow fadeInUp" href="https://twitter.com/" style="visibility: hidden; animation-name: none;"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="wow fadeInUp" href="https://www.facebook.com/" data-wow-delay="0.2s" style="visibility: hidden; animation-delay: 0.2s; animation-name: none;"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="wow fadeInUp" href="https://plus.google.com/" data-wow-delay="0.4s" style="visibility: hidden; animation-delay: 0.4s; animation-name: none;"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a class="wow fadeInUp" href="https://instagram.com/" data-wow-delay="0.6s" style="visibility: hidden; animation-delay: 0.6s; animation-name: none;"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                    </div>  
-                    <div class="text-center wow fadeInUp" style="font-size: 14px; visibility: hidden; animation-name: none;">Copyright Beeprinted 2017 
+                <header class="section-header text-center">
+                    <h1><strong>Contact</strong></h1>
+                    <p>Do you have some kind of problem with our products?</p>
+                </header>
+                <form action="index.html" method="post" novalidate id="contact-form">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 contact-info cta-message anima fade-right">
+                            <address>
+                                <strong>microStore</strong><br>
+                                84 State Road 123<br>
+                                City, State 24813<br>
+                                (123) 456 - 7890<br>
+                                contact@companyname.com
+                            </address>
+                        </div>  
+
+                        <div class="col-xs-12 col-sm-12 col-md-8 anima fade-up d1" >
+                            <div class="form-group">
+                                <label class="control-label" for="contact-name">Name</label>
+                                <div class="controls">
+                                    <input id="contact-name" name="contactName" placeholder="Your name" class="form-control input-lg requiredField" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="contact-mail">Email</label>
+                                <div class=" controls">
+                                    <input id="contact-mail" name="email" placeholder="Your email" class="form-control input-lg requiredField" type="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="contact-message">Message</label>
+                                <div class="controls">
+                                    <textarea id="contact-message" name="comments" placeholder="Your message" class="form-control input-lg requiredField" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <p>
+                                <button name="submit" type="submit" class="btn btn-store btn-block">Send Message</button></p>
+                            <input type="hidden" name="submitted" id="submitted3" value="true">
+                        </div>
                     </div>
-                </div>  
-            </div>  
+                </form>
+            </div>
+        </section>
+
+        <footer id="main-footer" class="dark-bg light-typo">
+            <div class="container">
+                <p class="pull-left copyright">&copy; MicroStore 2014. <br> Designed by <a href="http://demo.angelostudio.net" target="_blank">Angelo Studio</a>.<br>
+                </p>
+
+                <div class="pull-right paymentMethodImg copyright">
+                    <a class="btn btn-store outline" href="#" data-toggle="modal" data-target=".text-modal">Terms & conditions</a>
+                </div>
+            </div>
         </footer>
 
-        <!-- /.javascript files -->
-        <%= javascript_include_tag 'jquery.js' %>
-        <%= javascript_include_tag 'bootstrap.min.js' %>
-        <%= javascript_include_tag 'custom.js' %>
-        <%= javascript_include_tag 'jquery.sticky.js' %>
-        <%= javascript_include_tag 'wow.min.js' %>
-        <%= javascript_include_tag 'owl.carousel.min.js' %>
-        <!--
-        <script src="./Backyard Landing Page_files/jquery.js"></script>
-        <script src="./Backyard Landing Page_files/bootstrap.min.js"></script>
-        <script src="./Backyard Landing Page_files/custom.js"></script>
-        <script src="./Backyard Landing Page_files/jquery.sticky.js"></script>
-        <script src="./Backyard Landing Page_files/wow.min.js"></script>
-        <script src="./Backyard Landing Page_files/owl.carousel.min.js"></script>-->
-        <script>
-                                    new WOW().init();
-        </script>
-        <style type="text/css">
-            .col-md-6{
-                border-radius: 5px !important;
-            }
-        </style>
-        <script>
-        $("#Entrar").click(function() {
-            console.log("blaaaaaa");
-            $("#criar").hide();
-            $("#login").show();
-        });
-        $("#Criar").click(function() {
-            console.log("blaaaaaa");
-            $("#login").hide();
-            $("#criar").show();
-        });
-        </script>
-</body></html>
+        <div class="modal fade text-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="color-bg">  
+                        <div class="container">
+                            <div class="row ">
+                                <div class="col-xs-12 col-sm-12 col-md-12 color-bg light-typo" id="9modal-bar">
+                                    <h2 class="pull-left">TERMS & CONDITIONS</h2>
+                                    <a class="close pull-right" href="#" data-dismiss="modal" ><i class="icon-close"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-xs-12 col-sm-6 col-md-6" >  
+                                <h3>Pricing policy</h3>
+                                <p>Prices are shown in € (EURO). All prices include Danish VAT of 25%. Prices do not include service, payment and delivery charges. Orders may be subjected to local taxes and/or import duties at your own expense.
+                                Tax-free shopping on microStore.com is not available.
+                                micro Store the right to change prices of the products. The prices of the products will, during the time of placing an order, be valid throughout the process. We however take reservations for typing errors.</p>
+                                <h3>Payment</h3>
+                                <p>We accept the following credit- and debit cards: Visa, Mastercard, Maestro, Visa Electron, JCB, UnionPay and American Express.The amount for your order will not be charged until your order is shipped from microStore.
+                                We also accept microStore online gift cards.</p>
+                                <h3>Order confirmation</h3>
+                                <p>You will receive an order confirmation by e-mail shortly after placing your order. On rare occasions an item can be out of stock. Then you will be informed by e-mail.</p>
+                                <h3>Shipping</h3>
+                                <p>We know that you can’t wait to get your order so we do our best to ship your order on the following working day. To follow the goods way to your closet you can track your order with the tracking number included in your shipping confirmation, which you get by e-mail as soon as we dispatch your order.
+                                Your order will be dispatched within 1-3 workdays from the time you place your order. When your order is dispatched, you will receive a shipping confirmation by e-mail. Orders to Denmark above 200€ and all international orders will include a tracking number to your shipping confirmation. All orders within EU are shipped via GLS and outside Europe orders are shipped via TNT, UPS and FedEx.
+                                The following shipping charges will be added to your order:<br>
+                                Denmark: 4 EUR <br>
+                                 Europe: 8 EUR <br>
+                                 Rest of the world: 16 EUR <br>
+                                Danish orders will be delivered within 1-3 days from the day you received your shipping confirmation.
+                                International orders will be delivered within 1-10 days from the day you received your shipping confirmation.
+                                Orders are not shipped or delivered on weekends and holidays. If a delivery suffers a delay or an item happens to be out of stock, you will be informed by e-mail as quick as possible and latest 30 days after the order was placed. Some delays may occur during sales, very busy periods, public holidays and severe weather conditions.
+                                Please notice that we are unable to deliver to P.O. box adresses.</p>
+                                <h3>Returns</h3>
+                                <p>If you change your mind about an item you must notify us within 14 days after having received your purchase and ship it to microStore within the following 14 days from having notified us. To return an order please contact shop@microStore.com and await our return confirmation. When received, you can return your order by the following procedure:
+                                Make sure that the product is still in perfect condition with undamaged packaging and tags still attached. We reserve the right to refuse any returns that do not match with these critetia:</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6" >
+                                <p><br><br>Place the product in a shipping box or plastic bag. Hats and caps must be returned in a box so they do not get squashed out of shape.
+                                Enclose the original sales receipt to the product.
+                                Write RETURN on the package to ensure a faster expedition.
+                                Send the package to: microStore, 84 State Road 123, City, State 24813
+                                The return and financial responsibility is yours until it reaches microStore and are confirmed by a delivery confirmation. Please notice that we can exchange your items to another size or color if available in stock.</p>
+                                <h3>Warranty claims</h3>
+                                <p>There is a 2 years warranty on all products sold on www.microStore.com. This warranty covers manufacturing faults only, not wear and tear from regular use. Please contact us at shop@microStore.com if you have a warranty claim, including order number, photos of the claim area and a description of the claim.</p>
+                                <h3>Disclaimer</h3>
+                                <p>microStore does not guarantee that all items shown are in stock at the time of your order. In the event that an item is unavailable for whatever reason, microStore will contact you by e-mail. Although we do our best to display correct images, correct colours, info and prices, errors may occur.</p>
+                                <h3>Privacy policy</h3>
+                                <p>All your personal information is handled under strict confidence. microStore.com will never give any of your personal information to 3rd parties.All information is encrypted for safety.</p>
+                                <h3>Security</h3>
+                                <p>For the safety of your personal information, we use SLL encryption on all data to and from the site. When placing an order, you can immediately check the security validity by clicking the padlock icon that appears in the URL line of your browser when SSL is activated.</p>
+                                <h3>Cookies</h3>
+                                <p>Cookies are used by microStore.com in order to improve your experience when browsing and using the website. The cookie identifies your computer and allows the site to remember your personal settings. microStore.com may not operate properly when cookies are disabled in your web browser.</p>
+                                <h3>Measurements</h3>
+                                <p>All measurements are approximate and variance may occur. We have done our best but please have average sizing in mind and note that +/- 1cm on each measurement may occur.</p>
+                                <h3>Age restrictions</h3>
+                                <p>Parental or guardian consent is required for customers under the age of 18.</p>
+                                <h3>Governing law</h3>
+                                <p>The terms of use are complied in accordance with Danish law and the Danish courts will have exclusive jurisdiction.
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 text-center" >    
+                                <a class="btn btn-store" href="#" data-dismiss="modal">Back to shop</a><br><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="plugins/jquery/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="plugins/waypoints/jquery.waypoints.min.js"></script>
+        <script type="text/javascript" src="plugins/angular/angular.min.js"></script>
+        <script type="text/javascript" src="plugins/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="plugins/singlepagenav/jquery.singlePageNav.min.js"></script>
+        <script type="text/javascript" src="plugins/countdown/jquery.countdown.min.js"></script>
+        <script type="text/javascript" src="plugins/owlcarousel/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="plugins/waitforimages/jquery.waitforimages.min.js"></script> 
+    
+        <script type="text/javascript" src="js/hero-slider.js"></script>
+        <script type="text/javascript" src="js/project-slider.js"></script>
+        <script type="text/javascript" src="js/custom.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </body>
+</html>

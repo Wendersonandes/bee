@@ -1,0 +1,1 @@
+!function(i){i.fn.bindWithDelay=function(n,u,t,e,d){return i.isFunction(u)&&(d=e,e=t,t=u,u=undefined),t.guid=t.guid||i.guid&&i.guid++,this.each(function(){function l(){var n=i.extend(!0,{},arguments[0]),u=this,l=function(){c=null,t.apply(u,[n])};d||(clearTimeout(c),c=null),c||(c=setTimeout(l,e))}var c=null;l.guid=t.guid,i(this).bind(n,u,l)})}}(jQuery);

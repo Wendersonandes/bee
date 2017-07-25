@@ -268,6 +268,7 @@ a:hover {
 }
 #intro {
     padding: 100px 0 70px;
+    padding-top: 50px;
 }
 #intro h2 {
     font-size: 40px;
@@ -1243,24 +1244,63 @@ and (orientation : landscape) {
 
         <!-- /.intro section -->
         <div id="intro">
-            <div class="container">
+            <div class="container text-center">
+                <h2>Modelos disponíveis para impressão</h2>
+
+            </div>
+            <div class="container" style='padding-top: 20px;'>
                 <div class="row">
 
                     <!-- /.intro image -->
-                    <div class="col-md-6 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: slideInLeft;">
+                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
                         <img src="images/drogon.jpg" alt="image" class="img-responsive">
-                    </div>  
+                    </a>  
 
                     <!-- /.intro content -->
-                    <div class="col-md-6 wow slideInRight animated" style="visibility: visible; animation-name: slideInRight;">
-                        <h2>Modelos diferenciados disponíveis para impressão</h2>
-                        <p>Confira nossa <a href=<%=galeria_path%>>Galeria</a> de modelos. Nossa galeria de modelos cresce todos os dias. Cada usuário pode postar seus próprios projetos ou imprimir modelos já existentes. Vamos garantir para que autoria de seus projetos seja protegida.
-                        </p>
+                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
+                    </a>
+                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
+                    </a>
+                </div>  
+                <div class="row">
 
-                        <div class="btn-section"><a href=<%=galeria_path%> class="btn-default">Visite Nossa Galeria</a></div>
+                    <!-- /.intro image -->
+                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInRight;">
+                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
+                    </a>  
 
-                    </div>
-                </div>            
+                    <!-- /.intro content -->
+                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInRight;">
+                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
+                    </a>
+                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInRight;">
+                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
+                    </a>
+                </div> 
+                <div class="row">
+
+                    <!-- /.intro image -->
+                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
+                    </a>  
+
+                    <!-- /.intro content -->
+                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
+                    </a>
+                    <a href=<%=galeria_path%> class="col-md-4 intro-pic wow slideInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
+                        <img src="images/drogon.jpg" alt="image" class="img-responsive">
+                    </a>
+                </div>           
+            </div>
+            <div class="container text-center" style='padding-top:50px;'>
+                <h3>Confira outros Modelos</h3>
+                <div class="wow fadeInUp" style="visibility: hidden; animation-name: none; padding-top: 20px;">
+                    <a href=<%=new_user_registration_path%> class="btn-secondary" style='padding:10px 30px;'><strong>Galeria</strong></a>
+                </div>
+
             </div>
         </div>
 

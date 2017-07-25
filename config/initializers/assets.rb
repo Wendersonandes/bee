@@ -8,6 +8,15 @@ Rails.application.config.assets.precompile += %w(animate.css)
 Rails.application.config.assets.precompile += %w(owl.theme.css)
 Rails.application.config.assets.precompile += %w(owl.carousel.css)
 Rails.application.config.assets.precompile += %w(light-bootstrap-dashboard.css)
+Rails.application.config.assets.precompile += %w(anima.css)
+Rails.application.config.assets.precompile += %w(icons.css)
+Rails.application.config.assets.precompile += %w(style_micro.css)
+Rails.application.config.assets.precompile += %w(sliders.css)
+Rails.application.config.assets.precompile += %w(hero-slider.css)
+Rails.application.config.assets.precompile += %w(project-slider.css)
+Rails.application.config.assets.precompile += %w(blue.css)
+
+
 # Rails.application.config.assets.precompile += %w(css-index.css)
 # Rails.application.config.assets.precompile += [/.*\.js/,/.*\.css/]
 # Add additional assets to the asset load path
