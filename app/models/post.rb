@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
   validates :y, presence: true
   validates :z, presence: true
 
-  has_attached_file :image, styles: { :medium => "640x420", :thumb => '273x182' }, :default_url => "/images/:style/drogon.jpg"
+  has_attached_file :image, styles: { :medium => "640x420#", :thumb => '273x182#' }, :default_url => "/images/:style/drogon.jpg"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   scope :of_followed_users, -> (following_users) { where user_id: following_users }
   scope :of_not_followed_users, -> (following_users) { where.not user_id: following_users }  
