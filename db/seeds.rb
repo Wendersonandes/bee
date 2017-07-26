@@ -30,16 +30,22 @@ Modelo.create(name: "5", marca_id: Marca.find_by(name: "Afinia").id, desgaste: 0
 
 Mat.create(name: "PLA", potencia: 0.36, densidade: 1.24)
 Mat.create(name: "ABS", potencia: 0.36, densidade: 1.03)
-Mat.create(name: "COBRE", potencia: 0.36, densidade: 2)
-Mat.create(name: "OUTRO", potencia: 0.36, densidade: 2)
 
 Color.create(name: "Vermelho")
 Color.create(name: "Amarelo")
 Color.create(name: "Azul")
 Color.create(name: "Verde")
+Color.create(name: "Preto")
+Color.create(name: "Branco")
+Color.create(name: "Prata")
 
-Type.create(name: "Engenharia")
-Type.create(name: "Decoracao")
-Type.create(name: "Moda")
-Type.create(name: "Outros")
+Type.create(name: "Arte")
+Type.create(name: "Fashion")
+Type.create(name: "Gadgets")
+Type.create(name: "Hobby")
+Type.create(name: "Para casa")
+Type.create(name: "Aprendizado")
+Type.create(name: "Modelos")
+Type.create(name: "Ferramentas")
+Type.create(name: "Brinquedos e Jogos")
 
