@@ -134,7 +134,7 @@
             </div>
             <div class="container">
                 <%@posts.in_groups_of(3, false).each do |group| %>
-                <div id="projects-container" class="row">
+                <div id="projects-container" style='width:33%; float:left;'>
                     <% group.each_with_index do |item, index| %>
                     <% if index == 0%>
                         <article class="design product col-xs-12 col-sm-6 col-md-4 anima fade-up">
