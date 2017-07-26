@@ -133,10 +133,16 @@
                 </header>
             </div>
             <div class="container">
-                <%@posts.in_groups_of(3, false).each do |group| %>
+                <%@posts.in_groups_of(3, false).each do |group, index| %>
                 <div id="projects-container" class="row">
-                    <% group.each do |item| %>
-                    <article class="design product col-xs-12 col-sm-6 col-md-4 anima fade-up">
+                    <% group.each_with_index do |item| %>
+                    <% if index == 0%>
+                        <article class="design product col-xs-12 col-sm-6 col-md-4 anima fade-up">
+                    <% elsif index == 1%>
+                        <article class="mock-up product col-xs-12 col-sm-6 col-md-4 anima fade-up d1">
+                    <% else %>
+                        <article class=" icons product col-xs-12 col-sm-6 col-md-4 anima fade-up d2">
+                    <% end %>
                         <div class="img-box">
                             <div class="hover-mask2"></div>
                             <span class="product-icon icon-eye"></span>
