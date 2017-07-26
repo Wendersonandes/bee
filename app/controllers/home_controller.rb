@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   skip_before_action :verify_authenticity_token
   def index
     @contato = Contato.new
+    @posts = Post.all.where.not(status: 0).order('cached_votes_up DESC').limit(9)
   end
 
   def search
