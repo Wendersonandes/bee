@@ -44,7 +44,6 @@
                     <a class="navbar-brand" href="#home">
                         <img id="navlogo" src="images/MARCA-fundoEscuro.png" alt="microstore" height="45">
                     </a>
-
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul id="navigation" class="nav navbar-nav navbar-right text-center">
@@ -78,7 +77,7 @@
                                         <ul class="social-links text-center">
                                             <li><a href="https://www.instagram.com/beeprinted/"><i class="fa fa-instagram" style='font-size:22px'></i></a></li>
                                             <li><a href="https://www.facebook.com/beeprinted"><i class="icon-facebook"></i></a></li>
-                                            <li><a href="#link"><i class="icon-vimeo"></i></a></li>
+                                            <li><a href="#contact"><i class="fa fa-phone" style='font-size:20px'></i></a></li>
                                         </ul>
                                         <a href=<%=galeria_path%> class="btn btn-store smooth-scroll" href="#products">Galeria</a>
                                     </div>
@@ -134,7 +133,7 @@
             </div>
             <div class="container">
                 <%@posts.in_groups_of(3, false).each do |group| %>
-                <div id="projects-container" style='width:33%; float:left;'>
+                <div id="projects-container" style='width:33.33333333333333333333%; float:left;'>
                     <% group.each_with_index do |item, index| %>
                     <% if index == 0%>
                         <article class="design product anima fade-up" style='width:95%; margin: auto; padding-bottom: 10px;'>
