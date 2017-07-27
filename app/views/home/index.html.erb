@@ -144,7 +144,7 @@
                         <article class=" icons product anima fade-up d2" style='width:95%; margin: auto; padding-bottom: 10px;'>
                     <% end %>
                         <div class="img-box">
-                            <a href='bla'><div class="hover-mask2"></div></a>
+                            <a href=<%=post_path(item)%>><div class="hover-mask2"></div></a>
                             <span class="product-icon icon-eye"></span>
                             <%= link_to (image_tag item.image.url(:medium), class:"img-responsive project-image",alt:''), post_path(item) %>
                         </div>
@@ -153,9 +153,6 @@
                             <div>
                                 <h4 class="project-title"><%=item.caption%></h4>
                             </div>
-                        </div>
-                        <div class="sr-only project-description"  data-oldprice="$800" data-images="images/beeoffice.jpg,images/drogon.jpg,images/elderwand.jpg,images/elderwand2.jpg,images/elderwand3.jpg">
-                            <p>1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sapien risus, blandit at fringilla ac, varius sed dolor. Donec augue lacus, vulputate sed consectetur facilisis, interdum pharetra ligula. Nulla suscipit erat nibh, ut porttitor nisl dapibus eu.</p>
                         </div>
                     </article>
                 <%end%>
