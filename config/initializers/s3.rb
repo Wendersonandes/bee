@@ -7,5 +7,5 @@ CarrierWave.configure do |config|
   }
   config.fog_directory  = ENV["AWS_BUCKET"]
   config.fog_directory = 'beeprinted-stls'
-  config.asset_host = 'https://#{config.fog_directory}.s3.amazonaws.com'            # required
+  config.asset_host = 'https://beeprinted-stls.s3.amazonaws.com'            # required
 end
