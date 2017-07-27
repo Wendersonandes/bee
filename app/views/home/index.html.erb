@@ -132,7 +132,33 @@
                     <h2>Modelos</h2>
                 </header>
             </div>
-            
+            <div class="container">
+                <%@posts.in_groups_of(3, false).each do |group| %>
+                <div id="projects-container" style='width:30%; float:left;'>
+                    <% group.each_with_index do |item, index| %>
+                    <% if index == 0%>
+                        <article class="design product anima fade-up" style='width:95%; margin: auto; padding-bottom: 10px;'>
+                    <% elsif index == 1%>
+                        <article class="mock-up product anima fade-up d1" style='width:95%; margin: auto; padding-bottom: 10px;'>
+                    <% else %>
+                        <article class=" icons product anima fade-up d2" style='width:95%; margin: auto; padding-bottom: 10px;'>
+                    <% end %>
+                        <div class="img-box">
+                            <a href=<%=post_path(item)%>><div class="hover-mask2"></div></a>
+                            <span class="product-icon icon-eye"></span>
+                            <%= link_to (image_tag item.image.url(:medium), class:"img-responsive project-image",alt:''), post_path(item) %>
+                        </div>
+                        <div class="product-info col-md-12">
+                            <p class="project-price">$700</p>
+                            <div>
+                                <h4 class="project-title"><%=item.caption%></h4>
+                            </div>
+                        </div>
+                    </article>
+                <%end%>
+                </div>
+                <%end%>
+            </div>
             <div class="container">
                 <header class="section-header text-center anima fade-up">
                     <br>
