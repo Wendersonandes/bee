@@ -16,6 +16,7 @@ Rails.application.config.assets.precompile += %w(sliders.css)
 Rails.application.config.assets.precompile += %w(hero-slider.css)
 Rails.application.config.assets.precompile += %w(project-slider.css)
 Rails.application.config.assets.precompile += %w(blue.css)
+Rails.application.config.assets.precompile += %w(w3.css)
 
 
 # Rails.application.config.assets.precompile += %w(css-index.css)
