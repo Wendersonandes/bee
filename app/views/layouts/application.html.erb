@@ -1,20 +1,40 @@
-<html>
-  <head>
-    <title>BeePrinted</title>
-    <link rel="shortcut icon" style="border-radius:50%!important" href="images/logo.jpg"/> 
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta charset="utf-8"/>
-    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
-</html>
-<body>
+<!doctype html>
+<html ng-app="storeApp">
+    <head>
+        <title>BEEPRINTED - Imprima suas Ideias</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Impressao 3D de ideias e projetos por beeprinted.com.br">
+        <meta name="author" content="BEEPRINTED.COM.BR">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <%= stylesheet_link_tag "bootstrap.min"%>
+        <%= stylesheet_link_tag "owl.carousel_micro"%>
+        <%= stylesheet_link_tag "anima"%>
+        <%= stylesheet_link_tag "icons"%>
+        <%= stylesheet_link_tag "style_micro"%>
+        <%= stylesheet_link_tag "sliders"%>
+        <%= stylesheet_link_tag "hero-slider"%>
+        <%= stylesheet_link_tag "project-slider"%>
+        <%= stylesheet_link_tag "blue"%>
+        <!--<link rel="stylesheet" href="plugins/anima/anima.css">
+        <link rel="stylesheet" href="css/icons.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/sliders.css">
+        <link rel="stylesheet" href="css/hero-slider.css">
+        <link rel="stylesheet" href="css/project-slider.css">
+        <link rel="stylesheet" href="css/blue.css" class="colors">-->
+        <link rel="shortcut icon" href="images/LOGO-claro.png" sizes="32x32" type="image/png"/>
+        <link rel="apple-touch-icon-precomposed" href="images/LOGO-claro.png" type="image/png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/LOGO-claro.png" type="image/png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="images/LOGO-claro.png" type="image/png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/LOGO-claro.png" type="image/png"/>
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+<body id='home'>
   <%= render 'layouts/navbar' %>
   <%= yield %>
 </body>
+</html>

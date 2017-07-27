@@ -1,153 +1,26 @@
-<nav class="navbar navbar-default navbar-fixed-top" style="border-bottom: 3px solid #ccc; ">
-  <div class="navbar-container" style="width:90%;">
-    <div class="navbar-header" >
-      <button class="navbar-toggle collapsed" data-target="#bs-navbar-collapse-1" data-toggle="collapse" type="button">
-        <span class="sr-only">Toggle Navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="navbar-brand" style="color:#ccc">
-        <%= link_to "BeePrinted", root_path %>
-      </div>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+<div id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href=<%=root_path%>>
+                        <img id="navlogo" src="images/MARCA-fundoEscuro.png" alt="microstore" height="45">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul id="navigation" class="nav navbar-nav navbar-right text-center">
+                        <li><a href="#products">Galeria</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                        <!-- <li><a href="#testimonial">Testimonials</a></li> -->
+                        <li><a href="#contact">Contato</a></li>
+                        <li><a class="external">Entrar</a></li>
+                        <li class="dropdown">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><strong>Registrar</strong></button>
+                        </li>
 
-
-      <div class="nav navbar-nav navbar-left" style="border:solid black 0px;height:0px;padding-top:7px;width:300px;">
-           
-        <div class='books-search'>
-          <%= form_tag search_path, method: :get do %>
-            <div class='form-group3'>
-            <%= text_field_tag :query, params[:query], class: 'form-control typeahead ', autocomplete: "off", placeholder: "Projetos e Designers" %>
-            
-
-            <%= button_tag(type: "submit", class: "btn btn-primary pull-right ",style:"display:inline-block") do %>
-            
-            <i class="fa fa-search" aria-hidden="true"></i>
-
-            <% end %>
+                    </ul>
+                </div>
 
             </div>
-          <% end %>  
         </div>
-          
-         </div>
-
-
-      <ul class="nav navbar-nav navbar-right">
-
-        <% if user_signed_in? %>
-          <li>
-            <%= render 'notifications/notification_dropdown' %>
-          </li> 
-          <li id='quant_order'>
-          <% if current_user.carrinhos.find_by(status: 'criado') %>
-            
-              <a href=<%=carrinho_path(current_user.user_name)%>>
-                  <%= current_user.carrinhos.find_by(status: 'criado').orders.count%>
-                <span class='glyphicon glyphicon-shopping-cart'></span>
-              </a>
-          <%end%>
-          </li>
-          <li>
-            <%= link_to "Página Inicial", browse_posts_path %>
-          </li>
-          <li>
-            <%= link_to "Galeria", galeria_path %>
-          </li>
-          <li>
-            <%= link_to "Tutoriais", learn_path %>
-          </li>
-          <li>
-            <%= link_to "Postar", new_post_path %>
-          </li>
-
-          <li>
-            <%= link_to "Perfil", profile_path(current_user.user_name) %>
-          </li>
-
-          <li>
-            <%= render 'configurations/configuration_dropdown' %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to "Navegar", browse_posts_path %>
-          </li>
-          <li>
-            <%= link_to "Galeria", galeria_path %>
-          </li>
-          <li>
-            <%= link_to "Tutoriais", learn_path %>
-          </li>
-          <li>
-            <%= link_to "Entrar", new_user_session_path %>
-          </li>
-          <li>
-            <%= link_to "Registrar", new_user_registration_path %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<style type="text/css">
-
-.form-group3{
-  width:340px !important;
-  max-width: 340px !important;
-
-}
-.twitter-typeahead{
-  width: 300 !important;
-
-}
-
-.btn-primary{
-
-background-color: transparent;;
-border-color:#ccc;
-color: #ccc;
-border-width: 1px;
-height: 34px;
-bottom: 100px;
-}
-
-.btn-primary:hover{
-
-background-color: #6441a4;;
-border-color:#ccc;
-color: white;
-border-width: 1px;
-height: 34px;
-bottom: 100px;
-}
-
-
-
-
-.tt-dropdown-menu {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 100;
-  display: none;
-  right: auto;
-  background-color: #f1f1f1;
-  border: 1px solid #6441a4;;
-  text-align: center;
-  color:#6441a4;;
-  margin-top: 0px;
-  padding-top: 0px;
-  border-bottom-left-radius:5px; 
-  border-bottom-right-radius:5px;
-  border-top:0px;
-}
-
-
-
-
-
-
-
-</style>
