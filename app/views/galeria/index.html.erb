@@ -1,4 +1,5 @@
 <script src=<%= asset_path('pagination.js') %>></script>
+<%= stylesheet_link_tag "style_micro"%>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 .w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
@@ -92,10 +93,17 @@ stylize any heading tags withing white-panel below
     <% @posts.each do |post| %>
     <article class="white-panel">
       <%= link_to (image_tag post.image.url(:medium)), post_path(post) %>
-        <div style="padding:10px 5px 0 5px">
-          <span style='float:left; color:#009FAB'><p><b><%= post.caption %></b></p></span>
-          <span style='float:right; color:#009FAB'><i class="fa fa-eye" aria-hidden="true"></i> <%=post.view%> <i class="fa fa-heart" aria-hidden="true"></i> <%=post.votes_for.up.by_type(User).size%> </li>
+      <!--<div style="padding:10px 5px 0 5px">
+        <span style='float:left; color:#009FAB'><p><b><%= post.caption %></b></p></span>
+        <span style='float:right; color:#009FAB'><i class="fa fa-eye" aria-hidden="true"></i> <%=post.view%> <i class="fa fa-heart" aria-hidden="true"></i> <%=post.votes_for.up.by_type(User).size%> </li>
         </span>
+        </div>-->
+        <div class="product-info col-md-12">
+                            <p class="project-price">R$<%=%></p>
+                            <div>
+                                <h4 class="project-title"><%=post.caption%></h4>
+                            </div>
+                        </div>
     </article>
     <% end %>
 
