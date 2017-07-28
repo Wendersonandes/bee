@@ -1,8 +1,28 @@
+<div id="perfil"></div>
+
+<div class="w3-container" id="portfolio">
+    <a href="#" onclick="w3_open()"></a>
+    <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i style='padding-top: 40px' class="fa fa-bars"></i></span>
+    <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc'>
+      <span class="w3-margin-right">Filtro:</span>
+      <button class="w3-btn menuNat" id="Todos"><i class="fa fa-photo w3-margin-right"></i>Todos</button>
+      <button class="w3-btn w3-white menuNat" id="Engenharia" bla="#{posts_path}"><i class="fa fa-print w3-margin-right"></i>Engenharia</button>
+      <button class="w3-btn w3-white menuNat" id="Decoracao"><i class="fa fa-diamond w3-margin-right"></i>Decoração</button>
+      <button class="w3-btn w3-white menuNat" id="Moda"><i class="fa fa-map-pin w3-margin-right"></i>Moda</button>
+      <button class="w3-btn w3-white menuNat" id="Outros"><i class="fa fa-map-pin w3-margin-right"></i>Outros</button>
+    </div>
+  </div>
 <div class="container">
   <div class="row">
     <hr>
     <section id="pinBoot">
+    <div id="my-posts">
+  </div>
 
+  <!-- Pagination -->
+  <div id="infinite-scrolling">
+     <%= will_paginate @posts%>
+  </div>
       <article class="white-panel"><img src="https://i.imgur.com/sDLIAZD.png" alt="">
         <h4><a href="#">Title 1</a></h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
