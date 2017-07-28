@@ -86,8 +86,7 @@ stylize any heading tags withing white-panel below
     <article class="white-panel">
       <div class="img-box">
         <a href=<%=post_path(post)%>><div class="hover-mask2"></div></a>
-        <span class="product-icon icon-eye"> <%=post.view%> </span>
-        <span class="product-icon fa fa-heart"> <%=post.votes_for.up.by_type(User).size%> </span>
+        <span class="product-icon fa fa-print"></span>
         <%= link_to (image_tag post.image.url(:medium)), post_path(post) %>
       <!--<div style="padding:10px 5px 0 5px">
         <span style='float:left; color:#009FAB'><p><b><%= post.caption %></b></p></span>
