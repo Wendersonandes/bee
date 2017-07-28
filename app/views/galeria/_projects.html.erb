@@ -1,31 +1,16 @@
 <div id="wrapper">
   <div id="columns">
     <% posts.each do |post| %>
-    <div class="img-box">
-      <a href=<%=post_path(post)%>><div class="hover-mask2"></div></a>
-      <span class="product-icon icon-eye"></span>
-      <%= link_to (image_tag post.image.url(:medium), class:"img-responsive project-image",alt:''), post_path(post) %>
-    </div>
-    <div class="product-info col-md-12">
-      <p class="project-price">R$<%=%></p>
-      <div>
-        <h4 class="project-title"><%=post.caption%></h4>
-      </div>
-    </div>
-      
+    <div class="pin">
+      <%= link_to (image_tag post.image.url(:medium), class:"w3-hover-opacity", style:'width:100%'), post_path(post) %>
+      <ul>
+        <li style='float:left'><p><b><%= post.caption %></b></p></li>
+        <li style='float:right'><i class="fa fa-eye" aria-hidden="true"></i> <%=post.view%> <i class="fa fa-heart" aria-hidden="true"></i> <%=post.votes_for.up.by_type(User).size%> </li>
+        </ul>
     </div>
     <% end %>
   </div>
 </div>
-<%= stylesheet_link_tag "bootstrap.min"%>
-        <%= stylesheet_link_tag "owl.carousel_micro"%>
-        <%= stylesheet_link_tag "anima"%>
-        <%= stylesheet_link_tag "icons"%>
-        <%= stylesheet_link_tag "style_micro"%>
-        <%= stylesheet_link_tag "sliders"%>
-        <%= stylesheet_link_tag "hero-slider"%>
-        <%= stylesheet_link_tag "project-slider"%>
-        <%= stylesheet_link_tag "blue"%>
 <style>
 
 #wrapper {
@@ -47,6 +32,38 @@
   column-fill: auto;
 }
 
+.pin {
+  display: inline-block;
+  background: #FEFEFE;
+  border: 2px solid #FAFAFA;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  margin: 0 2px 15px;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;
+  padding: 15px;
+  padding-bottom: 5px;
+  background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+  opacity: 1;
+  
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.pin img {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  margin-bottom: 5px;
+}
+
+.pin p {
+  font: 12px/18px Arial, sans-serif;
+  color: #333;
+  margin: 0;
+}
 
 @media (min-width: 960px) {
   #columns {
