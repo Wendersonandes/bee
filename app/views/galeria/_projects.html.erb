@@ -2,7 +2,7 @@
   <div id="columns">
     <% posts.each do |post| %>
     <div class="pin">
-      <%= link_to (image_tag post.image.url(:thumb), class:"w3-hover-opacity", style:'width:100%'), post_path(post) %>
+      <%= link_to (image_tag post.image.url(:medium), class:"w3-hover-opacity", style:'width:100%'), post_path(post) %>
       <ul>
         <li style='float:left'><p><b><%= post.caption %></b></p></li>
         <li style='float:right'><i class="fa fa-eye" aria-hidden="true"></i> <%=post.view%> <i class="fa fa-heart" aria-hidden="true"></i> <%=post.votes_for.up.by_type(User).size%> </li>
