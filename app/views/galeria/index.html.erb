@@ -8,67 +8,49 @@ background-color: #6441a4;
 </style>
 <style>
 
-#wrapper {
+/*
+Ref:
+Thanks to:
+https://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Style-Grid-Layout-Pinterest-Grid.html
+*/
+
+body {
+ background-color:#eee;   
+}    
+
+#pinBoot {
+  position: relative;
+  max-width: 100%;
   width: 100%;
-  max-width: 1100px;
-  min-width: 800px;
-  margin: auto;
 }
-
-#columns {
-  -webkit-column-count: 3;
-  -webkit-column-gap: 10px;
-  -webkit-column-fill: auto;
-  -moz-column-count: 3;
-  -moz-column-gap: 10px;
-  -moz-column-fill: auto;
-  column-count: 3;
-  column-gap: 15px;
-  column-fill: auto;
-}
-
-.pin {
-  display: inline-block;
-  margin: 0 2px 15px;
-  -webkit-column-break-inside: avoid;
-  -moz-column-break-inside: avoid;
-  column-break-inside: avoid;
-  padding-bottom: 5px;
-  background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
-  opacity: 1;
-  
-  -webkit-transition: all .2s ease;
-  -moz-transition: all .2s ease;
-  -o-transition: all .2s ease;
-  transition: all .2s ease;
-}
-
-.pin img {
+.white-panel img {
   width: 100%;
-  padding-bottom: 15px;
-  margin-bottom: 5px;
+  max-width: 100%;
+  height: auto;
 }
-
-.pin p {
-  font: 12px/18px Arial, sans-serif;
-  color: #333;
-  margin: 0;
+.white-panel {
+  position: absolute;
+  background: white;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+  padding: 10px;
 }
+/*
+stylize any heading tags withing white-panel below
+*/
 
-@media (min-width: 960px) {
-  #columns {
-    -webkit-column-count: 1;
-    -moz-column-count: 1;
-    column-count: 1;
-  }
+.white-panel h1 {
+  font-size: 1em;
 }
-
-@media (min-width: 1100px) {
-  #columns {
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
-  }
+.white-panel h1 a {
+  color: #A92733;
+}
+.white-panel:hover {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  margin-top: -5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 </style>
 <!--<script type="text/javascript" src="../assets/show_profile.js"></script>-->
@@ -96,8 +78,7 @@ background-color: #6441a4;
       <button class="w3-btn w3-white menuNat" id="Outros"><i class="fa fa-map-pin w3-margin-right"></i>Outros</button>
     </div>
   </div>
-  <div id="wrapper">
-  <div id="columns">
+<section id="pinBoot">
   <div id="my-posts">
   </div>
 
@@ -108,8 +89,7 @@ background-color: #6441a4;
   <!-- Footer -->
 
 <!-- End page content -->
-</div>
-</div>
+</section>
 </div>
 
 <script>
