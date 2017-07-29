@@ -89,6 +89,7 @@ stylize any heading tags withing white-panel below
     </div>
   </div>
 <section id="pinBoot">
+	<div id="my-posts">
     <% @posts.each do |post| %>
     <article class="white-panel">
       <div class="img-box">
@@ -109,6 +110,7 @@ stylize any heading tags withing white-panel below
         </div>
     </article>
     <% end %>
+    </div>
    <div id="infinite-scrolling">
   		<%= will_paginate @posts %>
 	</div>
