@@ -1,4 +1,4 @@
-$('#my-posts').append('<%= j render 'galeria/projects', posts: @posts %>');
+$('#my-posts section').append('<%= j render 'galeria/projects', posts: @posts %>');
 <% if @posts.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate @posts %>');
 <% else %>

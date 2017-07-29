@@ -89,7 +89,9 @@ stylize any heading tags withing white-panel below
     </div>
   </div>
  <div id="my-posts">
- 	<%= render 'galeria/projects', posts: @posts %>
+ 	<section id="pinBoot">
+ 		<%= render 'galeria/projects', posts: @posts %>
+ 	</section>
  </div>
    <div id="infinite-scrolling">
   		<%= will_paginate @posts %>
