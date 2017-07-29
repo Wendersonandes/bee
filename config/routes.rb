@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get 'galeria', to: 'galeria#index', as: :galeria
   get 'galeria/Arte', to: 'galeria#Arte', as: :galeria_arte
   get 'galeria/Brinquedos', to: 'galeria#Brinquedos', as: :galeria_brinquedos
+  get 'galeria/todos', to: 'galeria#todos', as: :galeria_todos
 
 
   get 'browse', to: 'posts#browse', as: :browse_posts
