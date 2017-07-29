@@ -39,11 +39,8 @@ Rails.application.routes.draw do
   resources :printers
 
   get 'galeria', to: 'galeria#index', as: :galeria
-  get 'galeria/engenharia', to: 'galeria#engenharia', as: :galeria_engenharia
-  get 'galeria/decoracao', to: 'galeria#decoracao', as: :galeria_decoracao
-  get 'galeria/moda', to: 'galeria#moda', as: :galeria_moda
-  get 'galeria/outros', to: 'galeria#outros', as: :galeria_outros
-  get 'galeria/projetos', to: 'galeria#todos', as: :galeria_todos
+  get 'galeria/Arte', to: 'galeria#Arte', as: :galeria_arte
+  get 'galeria/Brinquedos', to: 'galeria#Brinquedos', as: :galeria_brinquedos
 
 
   get 'browse', to: 'posts#browse', as: :browse_posts

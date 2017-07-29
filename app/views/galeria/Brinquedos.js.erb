@@ -1,0 +1,12 @@
+$('#my-posts section').empty();
+$('#infinite-scrolling').empty();
+$('#my-posts section').append('<%= j render 'galeria/projects', posts: @posts %>');
+$('#infinite-scrolling').append('<%= j will_paginate @posts %>');
+
+$('#my-posts section').append('<%= j render 'galeria/projects', posts: @posts %>');
+<% if @posts.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @posts %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

@@ -1,9 +1,0 @@
-<script src=<%= asset_path('pagination.js') %>></script>
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-.w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
-</style>
-    <%= render 'projects', posts: @posts %>
-    <div id="infinite-scrolling">
-    	<%= will_paginate @posts%>
-  	</div>

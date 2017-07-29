@@ -15,38 +15,25 @@ class GaleriaController < ApplicationController
   	end
   end
 
-  def engenharia
+  def Arte
   	@posts = Type.find_by_id(1).posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
         respond_to do |format|
       format.html
       format.js
     end
   end
-  def decoracao
-  	@posts = Type.find_by_id(2).posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
+  def Brinquedos
+    @posts = Type.find_by_id(9).posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
         respond_to do |format|
       format.html
       format.js
     end
   end
-  def moda
-  	@posts = Type.find_by_id(3).posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
-        respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-  def outros
-  	@posts = Type.find_by_id(4).posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
-        respond_to do |format|
-      format.html
-      format.js
-    end
-  end
+
 private
   def determine_layout
       case action_name
-      when "todos", "engenharia", "decoracao", "moda", "outros"
+      when "todos"
         false
       end
     end
