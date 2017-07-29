@@ -109,7 +109,9 @@ stylize any heading tags withing white-panel below
         </div>
     </article>
     <% end %>
-    <%= will_paginate @posts %>
+   <div id="infinite-scrolling">
+  		<%= will_paginate @posts %>
+	</div>
 
   <!-- Footer -->
 
