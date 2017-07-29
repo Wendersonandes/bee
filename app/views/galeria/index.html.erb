@@ -89,13 +89,17 @@ stylize any heading tags withing white-panel below
     </div>
   </div>
 <section id="pinBoot">
-	<div id="my-posts">
-  		<% @posts.each do |post| %>
-<article class="white-panel">
+    <% @posts.each do |post| %>
+    <article class="white-panel">
       <div class="img-box">
         <a href=<%=post_path(post)%>><div class="hover-mask2"></div></a>
         <span class="product-icon fa fa-print" style="display:inline;"></span>
         <%= link_to (image_tag post.image.url(:medium)), post_path(post) %>
+      <!--<div style="padding:10px 5px 0 5px">
+        <span style='float:left; color:#009FAB'><p><b><%= post.caption %></b></p></span>
+        <span style='float:right; color:#009FAB'><i class="fa fa-eye" aria-hidden="true"></i> <%=post.view%> <i class="fa fa-heart" aria-hidden="true"></i> <%=post.votes_for.up.by_type(User).size%> </li>
+        </span>
+        </div>-->
       </div>
         <div class="product-info col-md-12">
           <p class="project-price">R$<%=%></p>
@@ -104,12 +108,7 @@ stylize any heading tags withing white-panel below
           </div>
         </div>
     </article>
-<% end %>
-	</div>
-
-	<div id="infinite-scrolling">
-  		<%= will_paginate @posts %>
-	</div>
+    <% end %>
 
   <!-- Footer -->
 
@@ -117,7 +116,6 @@ stylize any heading tags withing white-panel below
 </section>
 </div>
 
-</div>
 <script>
 $(document).ready(function() {
 $('#pinBoot').pinterest_grid({
@@ -294,3 +292,5 @@ https://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Sty
 
 })(jQuery, window, document);
 </script>
+
+</div>
