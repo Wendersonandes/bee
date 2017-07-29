@@ -88,8 +88,8 @@ stylize any heading tags withing white-panel below
       <button class="filtro-btn" id="Outros"><i class="fa fa-map-pin w3-margin-right"></i>Outros</button>
     </div>
   </div>
+ <div id="my-posts">
 <section id="pinBoot">
-	<div id="bla">
     <% @posts.each do |post| %>
     <article class="white-panel">
       <div class="img-box">
@@ -110,7 +110,8 @@ stylize any heading tags withing white-panel below
         </div>
     </article>
     <% end %>
-    </div>
+</section>
+</div>
    <div id="infinite-scrolling">
   		<%= will_paginate @posts %>
 	</div>
@@ -118,7 +119,6 @@ stylize any heading tags withing white-panel below
   <!-- Footer -->
 
 <!-- End page content -->
-</section>
 </div>
 
 <script>
