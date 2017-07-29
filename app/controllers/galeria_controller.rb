@@ -33,7 +33,7 @@ class GaleriaController < ApplicationController
 private
   def determine_layout
       case action_name
-      when "todos"
+      when ""
         false
       end
     end
