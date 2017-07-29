@@ -1,4 +1,5 @@
 jQuery(function() {
+  
   if ($('#infinite-scrolling').size() > 0) {
     $(window).on('scroll', function() {
       var more_posts_url;
