@@ -13,10 +13,10 @@
                 <li><a href=<%=galeria_path%>>Galeria</a></li>
                 <li><a href="<%=root_path%>#about" >Sobre</a></li>
                 <!-- <li><a href="#testimonial">Testimonials</a></li> -->
-                <li><a href="#contact">Contato</a></li>
-                <li><a class="external">Entrar</a></li>
+                <li><a href="<%=root_path%>#contact">Contato</a></li>
+                <li><a href=<%=new_user_session_path%> class="external">Entrar</a></li>
                 <li class="dropdown">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><strong>Registrar</strong></button>
+                    <a href=<%=new_user_registration_path%> type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><strong>Registrar</strong></a>
                 </li>
             </ul>
         </div>
