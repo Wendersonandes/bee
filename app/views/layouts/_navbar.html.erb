@@ -15,14 +15,14 @@
                 <!-- <li><a href="#testimonial">Testimonials</a></li> -->
                 <li><a href="<%=root_path%>#contact">Contato</a></li>
                 <% if user_signed_in? %>
-                    <li><a href=<%=new_user_session_path%> class="external">Entrar</a></li>
-                    <li class="dropdown">
-                        <button onclick='location.href= "<%=new_user_registration_path%>"' type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><strong>Registrar</strong></button>
-                    </li>
-                <%else%>
                     <li><a href=<%=destroy_user_session_path%> class="external">Sair</a></li>
                     <li class="dropdown">
                         <button onclick='location.href= "<%=profile_path(current_user.user_name)%>"' type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><strong>Perfil</strong></button>
+                    </li>
+                <%else%>
+                    <li><a href=<%=new_user_session_path%> class="external">Entrar</a></li>
+                    <li class="dropdown">
+                        <button onclick='location.href= "<%=new_user_registration_path%>"' type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><strong>Registrar</strong></button>
                     </li>
                 <%end%>
 
