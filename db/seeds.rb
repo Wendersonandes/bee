@@ -48,4 +48,5 @@ Type.create(name: "Aprendizado")
 Type.create(name: "Modelos")
 Type.create(name: "Ferramentas")
 Type.create(name: "Brinquedos e Jogos")
+Type.create(name: "Outros")
 
