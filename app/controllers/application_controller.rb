@@ -11,22 +11,6 @@ end
 
 
   def after_sign_in_path_for(resource)
-  	if session[:previous_url] == root_path
-    	browse_posts_path
-    else
-    	if session[:previous_url] == galeria_todos_path
-        galeria_path
-      elsif session[:previous_url] == galeria_engenharia_path
-        galeria_path
-      elsif session[:previous_url] == galeria_decoracao_path
-        galeria_path
-      elsif session[:previous_url] == galeria_moda_path
-        galeria_path
-      elsif session[:previous_url] == galeria_outros_path
-        galeria_path
-      else
-        session[:previous_url]
-      end
-    end
+    session[:previous_url]
   end
 end
