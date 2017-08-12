@@ -12,32 +12,31 @@
 <input id="area" type="hidden" name="area" value="<%=@area%>">
 <input id="kwh" type="hidden" name="kwh" value="<%=@kwh%>">
 <input id="desgaste" type="hidden" name="desgaste" value="<%=@desgaste%>">
-	<div class="container" style='margin-top:100px;'>
-		<bla id="alerta_adicionar"> 
-        <div class="row">
+<div class="container" style='margin-top:100px;'>
+	<bla id="alerta_adicionar"></bla>
+    <div class="row">
 
             <!-- Blog Post Content Column -->
             <div class="col-lg-8">
-
                 <!-- Blog Post -->
+                <div class='row'>
+                	<div class='col-lg-2' style='width:90px'>
+                		<%= link_to (image_tag @post.user.avatar.url(:medium),class: "w3-circle", style: 'height:80px;width:80px;'), profile_path(@post.user.user_name) %>
+                	</div>
+	                <div class='col-lg-6'>
+	                <!-- Title -->
+	                	<h2 style='margin-bottom:0px; color:#009FAB'><%=@post.caption%></h2>
 
-                <!-- Title -->
-                <h2 style='margin-bottom:0px;'><%=@post.caption%></h2>
+	                <!-- Author -->
 
-                <!-- Author -->
-                <p class="lead">
-                    by <%=@post.user.completo%></a>
-                </p>
-
-                <hr>
-
-                <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
-
-                <hr>
+	                	<p class="lead">
+	                    	por <%= link_to "#{@post.user.completo}", profile_path(@post.user.user_name)%></a>
+	                	</p>
+	                </div>
+	            </div>
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                	<div class="img-responsive" style='width:100%' id="view"></div>
 
                 <hr>
 
@@ -182,4 +181,269 @@
 
     </div>
     <!-- /.container -->
+<script charset="UTF-8" type="text/javascript">
+  $(document).ready(function(){
+    window.addEventListener("load", function () {
+    "use strict";
+    var corAtual;
+    //--------------- IMPRIMIR -----------------------------
+      var volume = 0;
+      var area = 0;
+      var kwh = 0;
+      var quantidade = 0;
+      var escala = 0;
+      var material = 0;
+      var potencia = 0;
+      var densidade = 0;
+      var pM = 0;
+      var preenchN = 0;
+      var resolucao = 0;
+      var desgaste = 0;
+      var volScale3 = 0;
+      var peso = 0;
+      var precoMD = 0;
+      var precoE = 0;
+      var L = 0;
+      var shell = 0;
+      var percentShell = 0;
+      var precoTotal = 0;
+      var boundingBox = $('#bounding_box').text();
+      var x = $('#x').val();
+      var y = $('#y').val();
+      var z = $('#z').val();
+      volume = $('#volume_input').val();
+
+    $(document).on('click', '#print', function(){
+        var urlMain = window.location.pathname;
+        urlMain = urlMain + '/new';
+        //var urlMain = '/1/projetos';
+        console.log(urlMain);
+
+        $.ajax({
+            url: urlMain,
+            cache: false,
+            success: function(html){
+              $('#print').hide();
+              $('#print').after(html);
+            }
+        });
+
+    });
+    //------------------ PRECO DINAMICO ----------------------
+    $(document).on('change keyup', '.config_order', function(e){
+      area = $('#area').val();
+      kwh = $('#kwh').val();
+      quantidade = $('#order_quantidade').val();
+      escala = $('#order_scale').val();
+      var auxEscala = escala.indexOf(',');
+      if (auxEscala != -1) {
+        escala = escala.replace(/,/g, '.');
+        console.log(escala);
+        $('#order_scale').val(escala);
+      };
+      material = $('#order_material').val();
+      potencia = $('#potencia_'+material).val();
+      densidade = $('#densidade_'+material).val();
+      pM = $('#preco_'+material).val();
+      resolucao = $('#order_resolution').val();
+      desgaste = $('#desgaste').val();
+
+      var preench = $('#order_preench').val();
+      var aux = preench.indexOf('%');
+      preench = preench.slice(0, aux);
+      preenchN = preench/100;
+
+      console.log('volume:'+volume);
+      console.log('area:'+area);
+      console.log('kwh:'+kwh);
+      console.log('quantidade:'+quantidade);
+      console.log('escala:'+escala);
+      console.log('material:'+material);
+      console.log('potencia:'+potencia);
+      console.log('densidade:'+densidade);
+      console.log('pM:'+pM);
+      console.log('resolucao:'+resolucao);
+      console.log('desgaste:'+desgaste);
+
+
+      shell = area*0.08;
+      percentShell = shell/(volume*escala);
+      if (percentShell > 1) {
+        percentShell = 1;
+      };
+      volScale3 = volume*escala*escala*escala;
+      peso = volScale3*densidade*(percentShell + ((1 - percentShell)*preenchN));
+      precoMD = peso*pM;
+      precoMD = precoMD + peso*desgaste*0.2/resolucao;
+      precoE = ((peso/(40*resolucao)) + 0.2)*potencia*kwh;
+      if ((volScale3 >= 0) && (volScale3 < 30)) {
+        L = 3 - (0.7/30)*volScale3;
+      }else if ((volScale3 >= 30) && (volScale3 < 100)) {
+        L = 2.47143 - (0.4/70)*volScale3;
+      }else if ((volScale3 >= 100) && (volScale3 < 600)) {
+        L = 1.94 - 0.0004*volScale3
+      }else if (volScale3 >= 600) {
+        L = 1.70;
+      };
+      var custo = (precoMD + precoE);
+      console.log('CUSTO:'+custo);
+      precoTotal = (precoMD + precoE)*(L+1);
+
+      precoTotal = Math.round(100*precoTotal)/100;
+      peso = Math.round(100*peso)/100;
+      var idName = $(this).attr('id');
+      console.log("ID: "+idName);
+      if (idName == 'order_scale') {
+        BoundingBoxVolume(x, y, z, volume, escala);
+      };
+      if ((idName == 'order_scale')||(idName == 'order_material')||(idName == 'order_preench')) {
+        $('#peso').hide();
+        $('#peso').text(peso.toFixed(0)+' g');
+        $('#peso').fadeIn(800);
+      };
+
+      $('#preco_total').hide();
+      $('#preco_total').text('R$ '+precoTotal.toFixed(2));
+      $('#preco_total').fadeIn(800);
+
+      console.log('L:'+L);
+    });
+
+ 	var w = 750, h = 550;
+    //--------------------------------------------------------
+    //if (screen.width <= 450){
+    //	w = screen.width*0.8;
+    //	h = 550;
+    //}
+    
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(w, h);
+    var view = document.getElementById("view");
+    view.appendChild(renderer.domElement);
+    
+      var camera = new THREE.PerspectiveCamera(45, w / h, 1, 1000);
+      camera.position.set(0, 0, 150);
+      var controls = new THREE.OrbitControls(camera, view);
+    
+    var scene = new THREE.Scene();
+    scene.add(new THREE.AmbientLight(0x666666));
+    scene.background = new THREE.Color( 0xf9f9f9);
+    
+    var alpha;
+    var degrees;
+    var cameraAng;
+    var maior;
+    
+    var light1 = new THREE.DirectionalLight(0xffffff);
+    light1.position.set(0, 100, 100);
+    scene.add(light1);
+    
+    var light2 = new THREE.DirectionalLight(0xffffff);
+    light2.position.set(0, -100, -100);
+    scene.add(light2);
+    
+    var mat = new THREE.MeshPhongMaterial({
+        color: 0xcccccc, ambient: 0xcccccc, specular: 0x030303,
+    });
+    var obj = new THREE.Mesh(new THREE.Geometry(), mat);
+    scene.add(obj);
+
+    var pivot = new THREE.Object3D();
+    scene.add(pivot);
+    var manager = new THREE.LoadingManager();
+
+      // file load
+    var oStlLoader = new THREE.STLLoader();  //----------------------------------------------------------------------------------------
+    oStlLoader.load('<%=@post.attachment.url%>', function(geometry) {
+
+        var material = new THREE.MeshPhongMaterial({
+        color: 0x009FAB, ambient: 0xcccccc, specular: 0x030303,
+      });
+
+        obj = new THREE.Mesh(geometry, material);
+        obj.rotation.x = -90 * Math.PI/180; //-105 graus
+
+        var box = new THREE.Box3().setFromObject( obj );
+        console.log( box.min, box.max, box.size(),obj.rotation );
+            obj.position.y = -(box.max.y - (box.size().y/2));
+            obj.position.x = -(box.max.x - (box.size().x/2));
+            obj.position.z = -(box.max.z - (box.size().z/2));
+            //obj.position.x = box.max.x - box.size();
+            //obj.position.x = (box.min.x + (box.size().x/2));
+            //obj.position.y = obj.position.y - box.size().y/2;
+        pivot = new THREE.Object3D();
+
+        //pivot.position.set(obj.position.x, obj.position.y, obj.position.z);
+        pivot.position.set(0, 0, 0);
+        //pivot.rotation.set(obj.rotation.x, obj.rotation.y, obj.rotation.z);
+        //obj.rotation.set(0, 0, 0);
+        pivot.rotation.set(0, 0, 0);
+
+        pivot.add(obj);
+        //pivot.rotation.x = -105 * Math.PI/180;;
+
+        //var w = 640, h = 450;
+        if ((box.size().x>box.size().y)||(box.size().z>box.size().y)) {
+              if (box.size().z>box.size().y) {
+                maior = box.size().z;
+              }
+              else{
+                maior = box.size().x;
+              }
+        }else{
+            maior = box.size().y;
+        };
+
+        alpha = 2*Math.atan(maior/400);
+        console.log(alpha);
+
+        degrees = alpha * (180/Math.PI);
+        camera = new THREE.PerspectiveCamera(degrees, w / h, 1, 800);
+        //camera.position.set(0, 86.55, 150);
+        camera.position.set(0, 63.767, 300);
+        cameraAng = 12 * (Math.PI/180);
+        camera.rotation.set(-cameraAng, 0, 0);
+        controls = new THREE.OrbitControls(camera, view);
+
+        scene.add(pivot);
+    });//----------------------------------------------------------------------------------------------------------------------------
+    //pivot.rotation.z = 90;
+    function loop() {
+        requestAnimationFrame(loop);
+
+        corAtual = $('#order_color').val();
+        if (corAtual === "Vermelho") {
+            obj.material.color.setHex( 0xB22222 );
+        }else if (corAtual === "Azul") {
+            obj.material.color.setHex( 0x4682B4 );
+        }else if (corAtual === "Amarelo") {
+            obj.material.color.setHex( 0xFFD700 );
+        }else if (corAtual === "Verde") {
+            obj.material.color.setHex( 0x008000 );
+        };
+
+        //console.log(instaColor);
+        pivot.rotation.y += 0.0014;
+        controls.update();
+        renderer.clear();
+        renderer.render(scene, camera);
+    };
+       loop();
+
+}, false);
+});
+function BoundingBoxVolume(x, y, z, volume, escala){
+  x = x*escala;
+  y = y*escala;
+  z = z*escala;
+  volume = volume*escala*escala*escala;
+
+  $('#volume').hide();
+  $('#bounding_box').hide();
+  $('#volume').text(volume.toFixed(0)+' cm³');
+  $('#bounding_box').text(x.toFixed(1)+' x '+y.toFixed(1)+' x '+z.toFixed(1)+' cm');
+  $('#volume').fadeIn(800);
+  $('#bounding_box').fadeIn(800);
+}
+</script>
 
