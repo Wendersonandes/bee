@@ -29,14 +29,32 @@
 
 	                <!-- Author -->
 
-	                	<p class="lead">
-	                    	por <%= link_to "#{@post.user.completo}", profile_path(@post.user.user_name)%></a>
+	                	<p class="lead" style='font-size:17px; color:#838383;'>
+	                    	por <%= link_to "#{@post.user.completo}", profile_path(@post.user.user_name)%>, postado há <%= time_ago_in_words @post.created_at %></a>
 	                	</p>
 	                </div>
 	            </div>
 
                 <!-- Preview Image -->
+                <div class="w3-display-container mySlides">
                 	<div class="img-responsive" style='width:100%' id="view"></div>
+                </div>
+                <div class="w3-display-container mySlides">
+                	<%= link_to (image_tag @post.image.url(:medium), style:"width:100%;margin-bottom:-6px"), post_path(@post) %>
+                </div>
+
+                <div class="w3-row-padding w3-section">
+                	<div class="w3-col s3">
+                		<%=image_tag @post.image.url(:medium),style:"width:100%; cursor:pointer", onclick:"currentDiv(1)",class:"demo w3-opacity w3-hover-opacity-off", title: @post.caption%>
+                	</div>
+                	<div class="w3-col s3">
+                		<%=image_tag @post.image.url(:medium),style:"width:100%; cursor:pointer", onclick:"currentDiv(2)",class:"demo w3-opacity w3-hover-opacity-off", title: @post.caption%>
+                	</div>
+
+
+
+
+                </div>
 
                 <hr>
 
@@ -311,7 +329,7 @@
 
  	var w = 750, h = 550;
     //--------------------------------------------------------
-    //if (screen.width <= 450){
+    //if (screen.width <= 1000){
     //	w = screen.width*0.8;
     //	h = 550;
     //}
@@ -444,6 +462,40 @@ function BoundingBoxVolume(x, y, z, volume, escala){
   $('#bounding_box').text(x.toFixed(1)+' x '+y.toFixed(1)+' x '+z.toFixed(1)+' cm');
   $('#volume').fadeIn(800);
   $('#bounding_box').fadeIn(800);
+}
+</script>
+  <script>
+  	$("canvas").outerHeight($(window).height()-$("canvas").offset().top- Math.abs($("canvas").outerHeight(true) - $("canvas").outerHeight()));
+    $(window).on("resize", function(){         				$("canvas").outerHeight($(window).height()-$("canvas").offset().top- Math.abs($("canvas").outerHeight(true) - $("canvas").outerHeight()));
+    });
+  </script>
+    <script>
+// Slideshow Apartment Images
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-opacity-off";
 }
 </script>
 
