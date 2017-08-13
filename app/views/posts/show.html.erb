@@ -37,10 +37,10 @@
 
                 <!-- Preview Image -->
                 <div style='height:550px;overflow:hidden'>
-                <div class="w3-display-container mySlides">
+                <div class="w3-display-container mySlides" style='vertical-align:middle;'>
                 	<div class="img-responsive" style='width:100%' id="view"></div>
                 </div>
-                <div class="w3-display-container mySlides">
+                <div class="w3-display-container mySlides" style='vertical-align:middle;'>
                 	<%= link_to (image_tag @post.image.url(:medium), style:"width:100%;margin-bottom:-6px; overflow:hidden"), post_path(@post) %>
                 </div>
                 </div>
@@ -51,10 +51,6 @@
                 	<div class="w3-col s3">
                 		<%=image_tag @post.image.url(:medium),style:"width:100%; cursor:pointer", onclick:"currentDiv(2)",class:"demo w3-opacity w3-hover-opacity-off", title: @post.caption%>
                 	</div>
-
-
-
-
                 </div>
                 <hr>
 
