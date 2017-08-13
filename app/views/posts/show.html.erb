@@ -41,7 +41,7 @@
                 	<div class="img-responsive" style='width:100%' id="view"></div>
                 </div>
                 <div class="w3-display-container mySlides">
-                	<%= link_to (image_tag @post.image.url(:medium), style:"width:100%;margin-bottom:-6px"), post_path(@post) %>
+                	<%= link_to (image_tag @post.image.url(:medium), style:"width:100%;margin-bottom:-6px; overflow:hidden"), post_path(@post) %>
                 </div>
                 </div>
                 <div class="w3-row-padding w3-section">
