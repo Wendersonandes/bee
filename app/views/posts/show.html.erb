@@ -36,12 +36,12 @@
 	            </div>
 
                 <!-- Preview Image -->
-                <div style='height:550px;overflow:hidden; vertical-align:middle;'>
-                <div class="w3-display-container mySlides" style='vertical-align:middle;'>
+                <div style='height:550px;'>
+                <div class="w3-display-container mySlides" style='overflow:hidden;margin: 0 auto; position:relative; height:550px;' >
                 	<div class="img-responsive" style='width:100%' id="view"></div>
                 </div>
-                <div class="w3-display-container mySlides" style='vertical-align:middle;'>
-                	<%= link_to (image_tag @post.image.url(:medium), style:"width:100%;margin-bottom:-6px; overflow:hidden"), post_path(@post) %>
+                <div class="w3-display-container mySlides"  style='overflow:hidden;margin: 0 auto; position:relative; height:550px;'>
+                	<%= link_to (image_tag @post.image.url(:medium), style:"width:100%;margin-bottom:-6px; position:absolute"), post_path(@post) %>
                 </div>
                 </div>
                 <div class="w3-row-padding w3-section" style='padding-left:0px;'>
