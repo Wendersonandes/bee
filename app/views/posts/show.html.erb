@@ -19,6 +19,15 @@
   padding: 10px 20px;
 }
 
+#3dviewer {
+  height:550px;
+}
+@media only screen and (max-width: 500px) {
+    #3dviewer {
+        height:350px;
+    }
+}
+
 </style>
 
     <!-- Navigation -->
@@ -57,7 +66,7 @@
 	            </div>
 
                 <!-- Preview Image -->
-                <div style='height:550px;overflow:hidden;'>
+                <div id='3dviewer' style='overflow:hidden;'>
                 <div class="w3-display-container mySlides w3-center">
                 	<div class="img-responsive w3-center" style='width:100%' id="view"></div>
                 </div>
