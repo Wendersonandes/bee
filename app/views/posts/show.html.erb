@@ -82,16 +82,67 @@
                 		<%=image_tag @post.image.url(:medium),style:"width:100%; cursor:pointer", onclick:"currentDiv(2)",class:"demo w3-opacity w3-hover-opacity-off", title: @post.caption%>
                 	</div>
                 </div>
-                <hr>
-
+            </div>
                 <!-- Post Content -->
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
 
-                <hr>
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+              <div class='well'>
+                  <div>
+                      <h2 id="preco_total" class='w3-center'>R$<%= @preco %></h2>
+                  </div>
+                  <%if user_signed_in? %>
+                    <div id='print' class="filtro-btn-azul text-center">
+                      <strong>Imprimir</strong>
+                    </div>
+                  <%else%>
+                    <a href=<%=new_user_session_path%>> <div class='filtro-btn-azul text-center'>
+                      <strong>Imprimir</strong></div></a>
+                    </a>
+                  <%end%>
+                </div>
+
+                <!-- Blog Search Well -->
+
+                <!-- Blog Categories Well -->
+                <div class="well" style='padding-bottom:0px;'>
+                    <div class="row">
+                      <div style='color:#555555'>
+                        <p><i style='color: #3F315D' class="fa fa-arrows fa-fw w3-margin-right w3-text-theme"></i><bla id="bounding_box"><%=@post.x.round(1)%> x <%=@post.y.round(1)%> x <%=@post.z.round(1)%> cm</bla></p>
+          <input id="x" type="hidden" name="<%=@post.x%>" value="<%= @post.x %>">
+          <input id="y" type="hidden" name="<%=@post.y%>" value="<%= @post.y %>">
+          <input id="z" type="hidden" name="<%=@post.z%>" value="<%= @post.z %>">
+                      </div>
+                    <div style='color:#555555'>
+                      <p><i style='color: #3F315D' class="fa fa-cube fa-fw w3-margin-right w3-text-theme"></i><bla id="volume"><%=@post.volume.round(0)%> cm³<bla></p>
+          <input id="volume_input" type="hidden" name="<%=@post.volume%>" value="<%= @post.volume %>">
+                    </div>
+                  <div style='color:#555555'>
+                    <p><i style='color: #3F315D' class="fa fa-balance-scale fa-fw w3-margin-right w3-text-theme"></i><bla id="peso"><%=@peso.round(0)%> g</bla><bla style='color:#888888'> *</bla></p>
+                  </div>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                  <div class="w3-card-2 w3-round">
+                    <div class="w3-accordion w3-white">
+                      <a href=''><button style='background-color:#3F315D' onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.votes_for.up.by_type(User).size%> Curtidas</button></a>
+                      <a href=''><button style='background-color:#3F315D' onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.view%> Visualizações</button></a>
+                      <a href=''><button style='background-color:#3F315D' onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.prints%> Impressões</button></a>
+                    </div>      
+                  </div>
+                  <br>
+
+                <!-- Side Widget Well -->
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+        <%=@post.caption%>
+        <hr>
 
                 <!-- Blog Comments -->
 
@@ -148,63 +199,11 @@
                         <!-- End Nested Comment -->
                     </div>
                 </div>
-
-            </div>
-
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Blog Search Well -->
-
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
-
-                <!-- Side Widget Well -->
-                <div class="filtro-btn-azul text-center">
-                    <strong>Imprimir</strong>
-                </div>
-
-            </div>
-
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; Beeprinted 2017</p>
                 </div>
             </div>
             <!-- /.row -->
