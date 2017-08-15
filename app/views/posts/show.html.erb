@@ -58,8 +58,8 @@
 
                 <!-- Preview Image -->
                 <div style='height:550px;overflow:hidden;'>
-                <div class="w3-display-container mySlides">
-                	<div class="img-responsive" style='width:100%' id="view"></div>
+                <div class="w3-display-container mySlides w3-center">
+                	<div class="img-responsive w3-center" style='width:100%' id="view"></div>
                 </div>
                 <div class="w3-display-container mySlides">
                 	<%= link_to (image_tag @post.image.url(:medium), style:"width:100%;margin-bottom:-6px; overflow:hidden"), post_path(@post) %>
@@ -331,12 +331,12 @@
       console.log('L:'+L);
     });
 
- 	var w = 750, h = 550;
+ 	//var w = 750, h = 550;
     //--------------------------------------------------------
-    //if (screen.width <= 1000){
-    //	w = screen.width*0.8;
-    //	h = 550;
-    //}
+    if (screen.width <= 1000){
+    	var w = screen.width;
+    	var h = 550;
+    }
     
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(w, h);
