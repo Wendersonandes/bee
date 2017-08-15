@@ -46,10 +46,7 @@
 	<bla id="alerta_adicionar"></bla>
     <div class="row">
 
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
-                <!-- Blog Post -->
-                <div class='row'>
+<div class='row'>
                 	<div class='col-lg-2' style='width:90px'>
                 		<%= link_to (image_tag @post.user.avatar.url(:medium),class: "w3-circle", style: 'height:80px;width:80px;'), profile_path(@post.user.user_name) %>
                 	</div>
@@ -64,6 +61,9 @@
 	                	</p>
 	                </div>
 	            </div>
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+                <!-- Blog Post -->
 
                 <!-- Preview Image -->
                 <div class='viewer3d' style='overflow:hidden;'>
