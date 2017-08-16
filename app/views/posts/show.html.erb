@@ -46,21 +46,26 @@
 	<bla id="alerta_adicionar"></bla>
     <div class="row">
 
-<div class='row'>
-                	<div class='col-lg-2' style='width:90px'>
-                		<%= link_to (image_tag @post.user.avatar.url(:medium),class: "w3-circle", style: 'height:80px;width:80px;'), profile_path(@post.user.user_name) %>
-                	</div>
-	                <div class='col-lg-10'>
-	                <!-- Title -->
-	                	<h2 style='margin-bottom:0px; color:#009FAB'><%=@post.caption%></h2>
+		<div class='row'>
+			<div class="col-lg-8">
+            	<div class='col-lg-2' style='width:90px'>
+             		<%= link_to (image_tag @post.user.avatar.url(:medium),class: "w3-circle", style: 'height:80px;width:80px;'), profile_path(@post.user.user_name) %>
+              	</div>
+	            <div class='col-lg-10'>
+	            <!-- Title -->
+	              	<h2 style='margin-bottom:0px; color:#009FAB'><%=@post.caption%></h2>
 
 	                <!-- Author -->
 
-	                	<p class="lead" style='font-size:17px; color:#838383;'>
+	             	<p class="lead" style='font-size:17px; color:#838383;'>
 	                    	por <%= link_to "#{@post.user.completo}", profile_path(@post.user.user_name)%>, postado há <%= time_ago_in_words @post.created_at %></a>
-	                	</p>
-	                </div>
+	              	</p>
 	            </div>
+	        </div>
+	         <div class="col-md-4">
+	            <div style="float:right;"><%= render 'configurations/post_config_dropdown', post: @post %></div>
+	        </div>
+	   	</div>
             <!-- Blog Post Content Column -->
             <div class="col-lg-8">
                 <!-- Blog Post -->
