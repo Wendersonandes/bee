@@ -79,7 +79,7 @@
                 <!-- Blog Post -->
 
                 <!-- Preview Image -->
-                <div class='viewer3d' style='overflow:hidden;'>
+                <div class='viewer3d' style='overflow:hidden;border:1px solid #e3e3e3'>
                 <div class="w3-display-container mySlides w3-center">
                 	<div class="img-responsive w3-center" style='width:100%' id="view"></div>
                 </div>
@@ -155,13 +155,13 @@
 
         <hr>
         <div class="w3-section" style='height:60px;'>
-          <button onclick="$('.page_options').hide();$('#descricao').show()" class='col-md-4 w3-center' style='border:0px; height:100%; background-color:#e1e1e1;color:#666'>
+          <button id='btn-desc' onclick="$('.page_options').hide();$('#descricao').show();$('#btn-coment').css('background-color','white'); $('#btn-desc').css('background-color','#e1e1e1');$('#btn-feitos').css('background-color','white');" class='col-md-4 w3-center' style='border:0px; height:100%; background-color:#e1e1e1;color:#666'>
             <strong>Descriçao</strong>
           </button>
-          <button onclick="$('.page_options').hide();$('#comentarios').show()" class='col-md-4 w3-center' style='border:0px; border-left:1px solid #e0e0e0; height:100%;background-color:white;color:#666'>
+          <button id='btn-coment' onclick="$('.page_options').hide();$('#comentarios').show();$('#btn-coment').css('background-color','#e1e1e1'); $('#btn-desc').css('background-color','white');$('#btn-feitos').css('background-color','white');" class='col-md-4 w3-center' style='border:0px; border-left:1px solid #e0e0e0; height:100%;background-color:white;color:#666'>
             <strong>Comentarios</strong>
           </button>
-          <button onclick="$('.page_options').hide();$('#feitos').show()" class='col-md-4 w3-center' style='border:0px; border-left:1px solid #e0e0e0; height:100%; background-color:white;color:#666'>
+          <button id='btn-feitos' onclick="$('.page_options').hide();$('#feitos').show();$('#btn-coment').css('background-color','white'); $('#btn-desc').css('background-color','white');$('#btn-feitos').css('background-color','#e1e1e1');" class='col-md-4 w3-center' style='border:0px; border-left:1px solid #e0e0e0; height:100%; background-color:white;color:#666'>
             <strong>Feitos</strong>
           </button>
         </div>
