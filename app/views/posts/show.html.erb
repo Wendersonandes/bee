@@ -28,7 +28,9 @@
         height:350px;
     }
 }
-
+#comentarios, #feitos{
+  display:none;
+}
 
 </style>
 
@@ -149,10 +151,30 @@
         <!-- /.row -->
 
         <hr>
-        <h3 style='color:#777'>Descriçao:</h3>
-        <%=@post.caption%>
+        <div class="w3-row-padding w3-section" style='height:60px;'>
+          <button onclick="$('.page_options').hide();$('#descricao').show()" class='col-md-4 w3-center' style='height:100%; background-color:#e3e3e3'>
+            Descriçao
+          </button>
+          <button onclick="$('.page_options').hide();$('#comentarios').show()" class='col-md-4 w3-center' style='height:100%; background-color:#f5f5f5'>
+            Comentarios
+          </button>
+          <button onclick="$('.page_options').hide();$('#feitos').show()" class='col-md-4 w3-center' style='height:100%; background-color:#f5f5f5'>
+            Feitos
+          </button>
+        </div>
+        <div id='descricao' class='page_options'>
+          <h3 style='color:#777'>Descriçao:</h3>
+          <%=@post.caption%>
+        </div>
+        <div id='comentarios' class='page_options'>
+          <h3 style='color:#777'>Comentários:</h3>
+          <%=@post.caption%>
+        </div>
+        <div id='feitos' class='page_options'>
+          <h3 style='color:#777'>Feitos:</h3>
+          <%=@post.caption%>
+        </div>
         <hr>
-
                 <!-- Blog Comments -->
 
                 <!-- Comments Form -->
