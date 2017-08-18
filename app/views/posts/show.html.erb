@@ -31,6 +31,9 @@
 #comentarios, #feitos{
   display:none;
 }
+.well{
+  background-color:white;
+}
 
 </style>
 
@@ -151,15 +154,15 @@
         <!-- /.row -->
 
         <hr>
-        <div class="w3-row-padding w3-section" style='height:60px;'>
-          <button onclick="$('.page_options').hide();$('#descricao').show()" class='col-md-4 w3-center' style='height:100%; background-color:#e3e3e3'>
-            Descriçao
+        <div class="w3-section" style='height:60px;'>
+          <button onclick="$('.page_options').hide();$('#descricao').show()" class='col-md-4 w3-center' style='border:0px; border-left:1px solid #e0e0e0;height:100%; background-color:white;color:#666'>
+            <strong>Descriçao</strong>
           </button>
-          <button onclick="$('.page_options').hide();$('#comentarios').show()" class='col-md-4 w3-center' style='height:100%; background-color:#f5f5f5'>
-            Comentarios
+          <button onclick="$('.page_options').hide();$('#comentarios').show()" class='col-md-4 w3-center' style='border:0px; border-left:1px solid #e0e0e0; height:100%;background-color:white;color:#666'>
+            <strong>Comentarios</strong>
           </button>
-          <button onclick="$('.page_options').hide();$('#feitos').show()" class='col-md-4 w3-center' style='height:100%; background-color:#f5f5f5'>
-            Feitos
+          <button onclick="$('.page_options').hide();$('#feitos').show()" class='col-md-4 w3-center' style='border:0px; border-left:1px solid #e0e0e0; height:100%; background-color:white;color:#666'>
+            <strong>Feitos</strong>
           </button>
         </div>
         <div id='descricao' class='page_options'>
@@ -388,7 +391,7 @@
     
     var scene = new THREE.Scene();
     scene.add(new THREE.AmbientLight(0x666666));
-    scene.background = new THREE.Color( 0xf9f9f9);
+    scene.background = new THREE.Color( 0xffffff);
     
     var alpha;
     var degrees;
