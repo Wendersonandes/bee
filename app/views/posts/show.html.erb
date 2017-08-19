@@ -142,6 +142,7 @@
                       <a href=''><button style='background-color:#3F315D' onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.votes_for.up.by_type(User).size%> Curtidas</button></a>
                       <a href=''><button style='background-color:#3F315D' onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.view%> Visualizações</button></a>
                       <a href=''><button style='background-color:#3F315D' onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.prints%> Impressões</button></a>
+                      <a href='#comentarios'><button style='background-color:#3F315D' onclick="$('.page_options').hide();$('#comentarios').show();$('#btn-coment').css('background-color','#e1e1e1'); $('#btn-desc').css('background-color','white');$('#btn-feitos').css('background-color','white');" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.comments.count%> Comentários</button></a>
                     </div>      
                   </div>
                   <br>
@@ -169,38 +170,32 @@
           <h3 style='color:#777'>Descriçao:</h3>
           <%=@post.caption%>
         </div>
-        <div id='comentarios' class='page_options'>
+        <div name='comentarios' id='comentarios' class='page_options'>
                 <!-- Posted Comments -->
 
                 <!-- Comment -->
-          <% @post.comments.each do |comment|%>
-            <div class="well">
-              <div class='row' style='padding-bottom:10px'>
-                <div class='col-md-1', style='width:5%'>
-                  <%= image_tag comment.user.avatar.url(:medium), class:'media-object', style:'width:32px;height:32px'%>
-                </div>
-                <div class="col-lg-10">
-                  <h5 class=""><strong style='color:#009FAB'><%=link_to "#{comment.user.completo}", profile_path(comment.user.user_name)%></strong>
-                  </h5>
-                </div>
-                <div class='w3-padding' style='float:right'><%= time_ago_in_words @post.created_at %></div>
-              </div>
-              <div class='row w3-padding'>
-                <%=comment.content%>
-                <% if comment.user == current_user %>
-                  <%= link_to post_comment_path(@post, comment), method: :delete, data: {post_id: @post.id, value: @post.comments.count, confirm: "Are you sure?" }, remote: true, id: "delete-#{comment.id}", class: "delete-comment" do %>
-                  <span class="fa fa-times delete-comment-icon"></span>
-                  <% end %>
-                <% end %>
-              </div>   
+          <div class="comments" id="comments_<%= @post.id %>">
+                                    <% if @post.comments.any? %>
+                                      <%= render @post.comments.first(4), post: @post %>
+                                      <% unless @post.comments.count <= 4 %>
+                                        <div class="paginator" id="#comments-paginator-<%= @post.id %>">
+                                          <%= link_to "view all #{@post.comments.count} comments", post_comments_path(@post), remote: true, class: 'more-comments', id: "more_comments_#{@post.id}", data: {post_id: "#{@post.id}", type: "html", value: "#{@post.comments.count}"} %>
+                                        </div>
+                                      <% end %>
+                                    <% end %>
+                                  </div>
+          <br>
+          <%if user_signed_in? %>
+            <%= form_for([@post, @post.comments.build], remote: true, role:'form') do |f| %>
+              <%= f.text_area :content, placeholder: 'Comentar...', class: "comment_content form-control", rows:'3', id: "comment_content_#{@post.id}",data: { post_id: "#{@post.id}",value: "#{@post.comments.count}" } %>
+                  <br>
+              <%= f.submit 'Comentar', class: 'filtro-btn-azul comment-submit-button'%>
+            <% end %>
+          <%else%>
+            <div class='w3-center'>
+              <h3>Faça <a href=<%=new_user_session_path%> style='color:#009FAB'>login</a> para comentar</h3>
             </div>
           <%end%>
-          <br>
-                <%= form_for([@post, @post.comments.build], remote: true, role:'form') do |f| %>
-                  <%= f.text_area :content, placeholder: 'Comentar...', class: "comment_content form-control", rows:'3', id: "comment_content_#{@post.id}",data: { post_id: "#{@post.id}",value: "#{@post.comments.count}" } %>
-                  <br>
-                  <%= f.submit 'Comentar', class: 'filtro-btn-azul comment-submit-button'%>
-                <% end %>
 
                 <!-- Comment -->
         </div>
