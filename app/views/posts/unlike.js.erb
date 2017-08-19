@@ -1,3 +1,4 @@
 $("#like_<%= @post.id %>").removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
 $("#likes_<%= @post.id %>").html("<%= j (render partial: 'posts/likes', locals: { post: @post} ) %>");
 $("#unlike_<%= @post.id %>").html("<%= j (render partial: 'posts/unlike', locals: { post: @post} ) %>");
+$("#like_show").html("<%=@post.votes_for.up.by_type(User).size%> Curtidas");
