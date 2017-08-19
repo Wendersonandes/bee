@@ -170,31 +170,37 @@
           <%=@post.caption%>
         </div>
         <div id='comentarios' class='page_options'>
-                    <h4>Comentar:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="filtro-btn-azul">Comentar</button>
-                    </form>
-                <hr>
-
                 <!-- Posted Comments -->
 
                 <!-- Comment -->
-                <% @post.comments.each do |comment|%>
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <%= image_tag comment.user.avatar.url(:medium), class:'media-object', style:'width:64px;height:64px'%>
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><%=comment.user.completo%>
-                            <small><%= time_ago_in_words @post.created_at %></small>
-                        </h4>
-                        <%=comment.content%>
-                    </div>
+          <% @post.comments.each do |comment|%>
+            <div class="well">
+              <div class='row' style='padding-bottom:10px'>
+                <div class='col-md-1', style='width:5%'>
+                  <%= image_tag comment.user.avatar.url(:medium), class:'media-object', style:'width:32px;height:32px'%>
                 </div>
-                <%end%>
+                <div class="col-lg-10">
+                  <h5 class=""><strong style='color:#009FAB'><%=link_to "#{comment.user.completo}", profile_path(comment.user.user_name)%></strong>
+                  </h5>
+                </div>
+                <div class='w3-padding' style='float:right'><%= time_ago_in_words @post.created_at %></div>
+              </div>
+              <div class='row w3-padding'>
+                <%=comment.content%>
+                <% if comment.user == current_user %>
+                  <%= link_to post_comment_path(@post, comment), method: :delete, data: {post_id: @post.id, value: @post.comments.count, confirm: "Are you sure?" }, remote: true, id: "delete-#{comment.id}", class: "delete-comment" do %>
+                  <span class="fa fa-times delete-comment-icon"></span>
+                  <% end %>
+                <% end %>
+              </div>   
+            </div>
+          <%end%>
+          <br>
+                <%= form_for([@post, @post.comments.build], remote: true, role:'form') do |f| %>
+                  <%= f.text_area :content, placeholder: 'Comentar...', class: "comment_content form-control", rows:'3', id: "comment_content_#{@post.id}",data: { post_id: "#{@post.id}",value: "#{@post.comments.count}" } %>
+                  <br>
+                  <%= f.submit 'Comentar', class: 'filtro-btn-azul comment-submit-button'%>
+                <% end %>
 
                 <!-- Comment -->
         </div>
