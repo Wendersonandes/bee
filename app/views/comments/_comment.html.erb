@@ -7,7 +7,7 @@
                   <h5 class=""><strong style='color:#009FAB'><%=link_to "#{comment.user.completo}", profile_path(comment.user.user_name)%></strong>
                   </h5>
                 </div>
-                <div class='w3-padding' style='float:right'><%= time_ago_in_words post.created_at %></div>
+                <div class='w3-padding' style='float:right'><%= time_ago_in_words comment.created_at %></div>
               </div>
               <div class='row w3-padding'>
                 <%=comment.content%>
