@@ -218,29 +218,29 @@ background-color: #6441a4;
       <%end%>
       <% if botao == 'Seguidores'%>
         <a href=<%=seguidores_profile_path(user.user_name)%> data-remote="true" >
-          <button class="w3-btn" id="Seguidores" bla="#{posts_path}"><i class="fa fa-users w3-margin-right"></i>Seguidores</button>
+          <button class="w3-btn" id="Seguidores" bla="#{galeria_path}"><i class="fa fa-users w3-margin-right"></i>Seguidores</button>
         </a>
       <%else%>
         <a href=<%=seguidores_profile_path(user.user_name)%> data-remote="true" >
-          <button class="w3-btn w3-white menuNat" id="Seguidores" bla="#{posts_path}"><i class="fa fa-users w3-margin-right"></i>Seguidores</button>
+          <button class="w3-btn w3-white menuNat" id="Seguidores" bla="#{galeria_path}"><i class="fa fa-users w3-margin-right"></i>Seguidores</button>
         </a>
       <%end%>
       <% if botao == 'Seguindo'%>
         <a href=<%=seguindo_profile_path(user.user_name)%> data-remote="true" >
-          <button class="w3-btn" id="Seguindo" bla="#{posts_path}"><i class="fa fa-user w3-margin-right"></i>Seguindo</button>
+          <button class="w3-btn" id="Seguindo" bla="#{galeria_path}"><i class="fa fa-user w3-margin-right"></i>Seguindo</button>
         </a>
       <%else%>
         <a href=<%=seguindo_profile_path(user.user_name)%> data-remote="true" >
-          <button class="w3-btn w3-white menuNat" id="Seguindo" bla="#{posts_path}"><i class="fa fa-user w3-margin-right"></i>Seguindo</button>
+          <button class="w3-btn w3-white menuNat" id="Seguindo" bla="#{galeria_path}"><i class="fa fa-user w3-margin-right"></i>Seguindo</button>
         </a>
       <%end%>
       <% if botao == 'Printers'%>
         <a href=<%=printers_profile_path(user.user_name)%> data-remote="true" >
-          <button class="w3-btn" id="Impressoras" bla="#{posts_path}"><i class="fa fa-print w3-margin-right"></i>Impressoras</button>
+          <button class="w3-btn" id="Impressoras" bla="#{galeria_path}"><i class="fa fa-print w3-margin-right"></i>Impressoras</button>
         </a>
       <%else%>
         <a href=<%=printers_profile_path(user.user_name)%> data-remote="true" >
-          <button class="w3-btn w3-white menuNat" id="Impressoras" bla="#{posts_path}"><i class="fa fa-print w3-margin-right"></i>Impressoras</button>
+          <button class="w3-btn w3-white menuNat" id="Impressoras" bla="#{galeria_path}"><i class="fa fa-print w3-margin-right"></i>Impressoras</button>
         </a>
       <%end%>
     </div>

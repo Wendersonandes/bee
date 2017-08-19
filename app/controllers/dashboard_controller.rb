@@ -32,7 +32,7 @@ class DashboardController < ApplicationController
 	private
 	def set_user
 		if current_user.tipo != 'admin'
-			redirect_to browse_posts_path
+			redirect_to galeria_path
 		end
 	end
 end
