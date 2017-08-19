@@ -19,7 +19,7 @@ class PrintersController < ApplicationController
 
    	if @printer.save
      	flash[:success] = "Impressora Adicionada!"
-     	redirect_to browse_posts_path
+     	redirect_to galeria_path
     else
      	flash[:alert] = "Sua Impressora nao pôde ser adicionada!  Por favor, cheque o formulário."
      	render :new
@@ -69,7 +69,7 @@ class PrintersController < ApplicationController
   private
   def set_user
     if current_user.tipo != 'admin'
-      redirect_to browse_posts_path
+      redirect_to galeria_path
     end
   end
   def printer_params

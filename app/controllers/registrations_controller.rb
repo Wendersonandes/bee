@@ -34,7 +34,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   def after_update_path_for(resource)
       current_user.update_attribute(:completo, "#{resource.name} #{resource.sobrenome}")
-      browse_posts_path
+      session[:previous_url]
   end
 
   private

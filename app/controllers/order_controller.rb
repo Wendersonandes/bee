@@ -318,7 +318,7 @@ class OrderController < ApplicationController
     @user = User.find_by(user_name: params[:user_name])
     if (@user != current_user)
       if(current_user.tipo!='admin')
-        redirect_to browse_posts_path
+        redirect_to root_path
       end
     end
   end
