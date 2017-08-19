@@ -147,7 +147,15 @@
                   </div>
                   <br>
                   <div>
-                  <%= render 'posts/unlike', post: @post %>
+                  <%if user_signed_in? %>
+                    <%= render 'posts/unlike', post: @post %>
+                  <%else%>
+                    <%=link_to (new_user_session_path) do %>
+                      <div class='filtro-btn-azul text-center'>
+                        <strong>Curtir</strong>
+                      </div>
+                    <%end%>
+                  <%end%>
                   </div>
                   <br>
 
