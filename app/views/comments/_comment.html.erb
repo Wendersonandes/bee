@@ -3,7 +3,7 @@
                 <div class='col-md-1', style='width:5%'>
                   <%= image_tag comment.user.avatar.url(:medium), class:'media-object', style:'width:32px;height:32px'%>
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-8">
                   <h5 class=""><strong style='color:#009FAB'><%=link_to "#{comment.user.completo}", profile_path(comment.user.user_name)%></strong>
                   </h5>
                 </div>
