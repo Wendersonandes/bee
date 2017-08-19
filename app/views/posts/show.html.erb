@@ -71,7 +71,9 @@
 	            </div>
 	        </div>
 	         <div class="col-md-4">
+            <%if current_user == @post.user%>
 	            <div style="float:right;"><%= render 'configurations/post_config_dropdown', post: @post %></div>
+            <%end%>
 	        </div>
 	   	</div>
             <!-- Blog Post Content Column -->
