@@ -393,6 +393,21 @@
     var light2 = new THREE.DirectionalLight(0xffffff);
     light2.position.set(0, -100, -100);
     scene.add(light2);
+    var light3 = new THREE.DirectionalLight(0xffffff);
+    light3.position.set(100, 0, 0);
+    scene.add(light3);
+    var light4 = new THREE.DirectionalLight(0xffffff);
+    light4.position.set(0, 100, 0);
+    scene.add(light4);
+    var light5 = new THREE.DirectionalLight(0xffffff);
+    light5.position.set(0, 0, 100);
+    scene.add(light5);
+    var light6 = new THREE.DirectionalLight(0xffffff);
+    light6.position.set(100, 100, 100);
+    scene.add(light6);
+    var light7 = new THREE.DirectionalLight(0xffffff);
+    light7.position.set(100, -100, -100);
+    scene.add(light7);
     
     var mat = new THREE.MeshPhongMaterial({
         color: 0xcccccc, ambient: 0xcccccc, specular: 0x030303,
