@@ -103,8 +103,8 @@
             <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
               <div class='well'>
-                  <div>
-                      <h2 id="preco_total" class='w3-center'>R$<%= @preco %></h2>
+                  <div style='height:50px;overflow:hidden'>
+                      <h2 id="preco_total" class='w3-center' style='color:#666'>R$<%= @preco %></h2>
                   </div>
                   <%if user_signed_in? %>
                     <div id='print' class="filtro-btn-azul text-center">
@@ -139,6 +139,7 @@
                     </div>
                     <!-- /.row -->
                 </div>
+                <div id='dados'>
                   <div class="w3-card-2 w3-round">
                     <div class="w3-accordion w3-white">
                       <a href=''><button id='like_show' style='background-color:#3F315D' onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=@post.votes_for.up.by_type(User).size%> Curtidas</button></a>
@@ -148,6 +149,7 @@
                     </div>      
                   </div>
                   <br>
+                  </div>
                   <div>
                   <%if user_signed_in? %>
                     <%= render 'posts/unlike', post: @post %>
@@ -275,6 +277,7 @@
             url: urlMain,
             cache: false,
             success: function(html){
+              $('#dados').hide();
               $('#print').hide();
               $('#print').after(html);
             }

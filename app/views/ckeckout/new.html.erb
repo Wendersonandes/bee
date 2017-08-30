@@ -34,7 +34,7 @@ jQuery(function() {
   <li>
     <div class="field">
         <div class="esquerda">
-        <%= f.label :quantidade, "Quantidade:" %>
+        <%= f.label :quantidade, "Quantidade:",style:'color:#666' %>
         </div>
         <div class="direita">
         <%= f.select :quantidade, options_for_select([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], 1),{} %>
@@ -46,7 +46,7 @@ jQuery(function() {
   <li>
     <div class="field">
         <div class="esquerda">
-        <%= f.label :scale, "Escala:" %>
+        <%= f.label :scale, "Escala:",style:'color:#666' %>
         </div>
         <div class="direita">
         <!--<%= f.select :scale, options_for_select([0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.3,1.5,1.8,2,3,4,5,6,7,8,9,10,12,14,16,18,20], 1),{}  %>-->
@@ -59,7 +59,7 @@ jQuery(function() {
   <li>
     <div class="field">
         <div class="esquerda">
-       <%= f.label :material, "Material:" %>
+       <%= f.label :material, "Material:",style:'color:#666' %>
        </div>
         <div class="direita">
         <% if @materials.find_by(name: 'PLA')%>
@@ -75,7 +75,7 @@ jQuery(function() {
   <li>
     <div class="field">
       <div class="esquerda">
-      <%= f.label :color, "Cor:" %>
+      <%= f.label :color, "Cor:",style:'color:#666' %>
       </div>
       <div class="direita">
       <%= f.grouped_collection_select :color, @materials,:colors, :name, :name, :name, include_blank: true %>
@@ -87,7 +87,7 @@ jQuery(function() {
   <li>
     <div class="field">
         <div class="esquerda">
-       <%= f.label :resolution, "Resoluçao:" %>
+       <%= f.label :resolution, "Resoluçao:",style:'color:#666' %>
        </div>
        <div class="direita">
        <%= f.select :resolution, options_for_select(['0.1', '0.2', '0.3', '0.4'], '0.2'),{}, class: 'config_order' %>
@@ -99,7 +99,7 @@ jQuery(function() {
   <li>
     <div class="field" style="">
        <div class="esquerda">
-       <%= f.label :preench, "Infill:"%>
+       <%= f.label :preench, "Infill:",style:'color:#666'%>
        </div>
        <div class="direita">
        <%= f.select :preench, options_for_select(['10%', '15%', '20%', '25%','30%','35%','40%','45%','50%','55%','60%','65%','70%','75%','80%','85%','90%','95%','100%'], '20%'),{} , class:"direita config_order"%>
@@ -109,10 +109,10 @@ jQuery(function() {
   </ui>
     <br>
     <hr>
-    <%= f.submit 'Adicionar ao Carrinho', name: 'apenas_adicionar', id:'submit_add', class:'w3-btn-block w3-theme' %>
+    <%= f.submit 'Adicionar ao Carrinho', name: 'apenas_adicionar', id:'submit_add', class:'filtro-btn-azul text-center', style:'width:100%; background-color: #3F315D'%>
     <br>
     <br>
-    <%= f.submit 'Finalizar Compra', class:'w3-btn-block w3-theme', style: 'background-color: #F05F40' %>
+    <%= f.submit 'Finalizar Compra', class:'filtro-btn-azul text-center', style:'width:100%;' %>
     <br>
     <br>
 </div>
