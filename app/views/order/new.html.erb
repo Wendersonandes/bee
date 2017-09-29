@@ -3,9 +3,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
 .mySlides {display:none}
 </style>
     <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
-<body class="w3-content" style="max-width:1100px">
+<body class="" style="width:1170px">
 
-<div id="carrinho"></div>
+<div class='container' id="carrinho" style='width:1170px'>
 
 <!-- Sidenav/menu -->
 <br>
@@ -14,59 +14,51 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
 <br>
 <br>
 <br>
-  <div class="col-md-4">
+  <div class="w3-container w3-padding-8">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-closebtn w3-hover-text-red"></i>
     <p class="w3-center">
 
-      <%= image_tag "LOGO-claro.jpg",class: "w3-circle", style: 'height:130px;width:130px' %>
+      <%= image_tag "LOGO-claro.png", style: 'height:130px;width:130px' %>
     </p>
     <div class="w3-center"><strong>BEEPRINTED</strong></div>
     <div class="w3-center">Brasília, Brasil</div>
     <hr style="border-top: 1px solid #cccccc">
     <div style="color:#555555; margin-bottom:20px; font-size:15px;"><strong>Pagamento</strong></div>
 
-    <div class='w3-container' style="border-bottom:2px solid #888888; padding-bottom:10px">
-      <ul>
+    <div class='w3-container' style="border-bottom:2px solid #888888; padding-bottom:10px; padding-left:0px; padding-right:0px">
         <% @carrinho.orders.each do |order| %>
-          <div class="w3-container order_<%=order.id%>" style="padding:0px">
+          <div class="order_<%=order.id%>" style="padding:0px">
             <% if order.quantidade == 1 %>
-              <li style="float:left; font-size:13px; color:#555555;"><%=order.post.caption%></li>
+              <div class='col-lg-6' style="font-size:13px; color:#555555;"><%=order.post.caption%></div>
             <%else%>
-              <li style="float:left; font-size:13px; color:#555555;"><%=order.post.caption%> <strong>x<%=order.quantidade%></strong></li>
+              <div class='col-lg-6' style="font-size:13px; color:#555555;"><%=order.post.caption%> <strong>x<%=order.quantidade%></strong></div>
             <%end%>
-            <li style="float:right;font-size:13px;color:#555555;">R$<%='%.2f' % (order.price*order.quantidade).round(2)%></li>
+            <div class='col-lg-6 w3-center' style="float:right; font-size:13px; color:#555555;">R$<%='%.2f' % (order.price*order.quantidade).round(2)%></div>
           </div>
         <% end %>
-      </ul>
     </div>
-    <div class='w3-container'>
-      <ul>
-          <li style="float:left; font-size:14px; color:#555555;">Subtotal:</li>
-          <li id='preco_total' style="float:right;font-size:14px;color:#555555;">R$<%='%.2f' % @preco.round(2)%></li>
-      </ul>
+    <div class='w3-container' style="border-bottom:3px solid #888888; padding-bottom:10px;padding-left:0px; padding-right:0px">
+    <div>
+          <div class='col-lg-6' style="font-size:13px; color:#555555;">Subtotal:</div>
+         <div class='col-lg-6 w3-center' id='preco_total' style="float:right;font-size:14px;color:#555555;">R$<%='%.2f' % @preco.round(2)%></div>
     </div>
-    <div class='w3-container' style="border-bottom:3px solid #888888; padding-bottom:10px">
-          <ul>
-          <li style="float:left; font-size:14px; color:#555555;">Frete:</li>
+          <div class='col-lg-6' style="font-size:13px; color:#555555;">Frete:</div>
           <% if @frete_valor%>
-            <li id='frete' style="float:right;font-size:14px;color:#555555;">R$0.00</li>
+            <div class='col-lg-6 w3-center' id='frete' style="float:right;font-size:14px;color:#555555;">R$0.00</div>
           <% else %>
-            <li id='frete' style="float:right;font-size:14px;color:#555555;">?</li>
+            <div class='col-lg-6 w3-center' id='frete' style="float:right;font-size:14px;color:#555555;">?</div>
           <%end%>
-      </ul>
     </div>
-    <div class='w3-container'>
-      <ul>
+    <div class='w3-container' style='padding-bottom:10px; padding-left:0px; padding-right:0px'>
         <strong>
-          <li style="float:left; font-size:14px; color:#555555;">Total:</li>
+          <div class='col-lg-6' style="font-size:14px; color:#555555;">Total:</div>
           <%if @frete_valor %>
-            <li id='preco_final' style="float:right;font-size:14px;color:#555555;">R$<%='%.2f' % @preco.round(2)%></li>
+            <div class='col-lg-6 w3-center' id='preco_final' style="float:right;font-size:20px;color:#555555;">R$<%='%.2f' % @preco.round(2)%></div>
           <%else%>
-            <li id='preco_final' style="float:right;font-size:14px;color:#555555;"></li>
+            <div class='col-lg-6 w3-center' id='preco_final' style="float:right;font-size:20px;color:#555555;"></div>
           <%end%>
 
         </strong>
-      </ul>
     </div>
     <hr style="border-top: 1px solid #cccccc">
     <div style="color:#555555; margin-bottom:20px; font-size:15px;"><strong>Detalhes do Pedido</strong></div>
@@ -156,7 +148,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
     <div class="post-bottom">
     <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
             <div class="w3-col s2 w3-right" style="width:12%">
-              <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
+              <%= image_tag "LOGO-claro.png",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
             </div>
               <div class="w3-col s8 w3-right" style="background-color:#eeeeee; border-radius:10px;padding:10px">
                 Olá :)
@@ -164,7 +156,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
     </div>
     <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
             <div class="w3-col s2 w3-right" style="width:12%">
-              <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
+              <%= image_tag "LOGO-claro.png",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
             </div>
               <div class="w3-col s8 w3-right" style="background-color:#eeeeee; border-radius:10px;padding:10px">
                 Pergunte o que quiser e responderemos o mais rápido possível...
@@ -191,7 +183,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
     <%else%>
     <div class="w3-row-padding w3-section" style="padding-top:25px; border-top:1px solid #eeeeee">
       <div class="w3-col s2 w3-right" style="width:12%">
-        <%= image_tag "logo.jpg",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
+        <%= image_tag "LOGO-claro.png",class: "w3-circle w3-right", style: 'height:50px;width:50px' %>
       </div>
       <div class="w3-col s8 w3-right" style="background-color:#eeeeee; border-radius:10px;padding:10px">
         <%= form_for([@carrinho, @carrinho.car_comments.new], remote: true) do |f| %>
@@ -213,7 +205,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
   <div class="w3-center">
    <img src="https://stc.pagseguro.uol.com.br/public/img/banners/pagamento/todos_estatico_550_100.gif" alt="Logotipos de meios de pagamento do PagSeguro" title="Este site aceita pagamentos com Visa, Mastercard, Diners, American Express, Hipercard, Aura, Elo, PLENOCard, PersonalCard, BrasilCard, FORTBRASIL, Cabal, Mais!, Avista, Grandcard, Sorocred, Bradesco, Itaú, Banco do Brasil, Banrisul, Banco HSBC, saldo em conta PagSeguro e boleto.">
 </div>
-  <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by <a href=<%=root_path%> title="BEEPRINTED" target="_blank" class="w3-hover-text-green">BEEPRINTED</a></footer>
+<br>
+  <footer>
+            <div class="row">
+                <div>
+                    <p>Copyright &copy; Beeprinted 2017</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
 
 <!-- End page content -->
 </div>
@@ -414,6 +414,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
    <% end %>
     </div>
   </div>
+</div>
 </div>
 </body>
 <script>
