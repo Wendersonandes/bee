@@ -9,10 +9,10 @@ class ProfilesController < ApplicationController
       @user.update_attribute(:view, @user.view + 1)
     end
       #puts @user.avatar.url(:medium)
-      @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)
+      @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(12)
       @posts2 = @user.posts.where.not(status: 0).limit(2);
-      @posts = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
-      @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+      @posts = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
+      @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
       @botao = 'Projetos'
       respond_to do |format|
       format.html
