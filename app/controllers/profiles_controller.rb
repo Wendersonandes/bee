@@ -59,10 +59,10 @@ class ProfilesController < ApplicationController
     end
   end
   def projetos
-    @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(6)
-    @posts = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+    @footers = Post.all.where.not(status: 0).order('cached_votes_up DESC').first(12)
+    @posts = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
     @botao = 'Projetos'
-    @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 6).order('created_at DESC')
+    @posts_all = @user.posts.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
     respond_to do |format|
         format.html
         format.js
