@@ -156,7 +156,7 @@ stylize any heading tags withing white-panel below
           <% if user.city && user.city!=''%>
             <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <%=user.city%></p>
           <% end %>
-          <% if user.niver && user.niver!=' '  %>
+          <% if user.niver && user.niver!=''%>
             <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><%=user.niver%></p>
           <% end %>
         <% end %>
@@ -172,7 +172,7 @@ stylize any heading tags withing white-panel below
             <%else%>
               <div class="w3-center" style='padding-bottom:10px;'>
                 <a href=<%=follow_user_path(user.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="follow-button_<%=user.id%>">
-                <button type="button" class="perfil_seguir_<%=user.id%> w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
+                <button type="button" class="perfil_seguir_<%=user.id%> filtro-btn-azul" style='width:100%;'><i class="fa fa-pencil"></i>Seguir</button> 
                 </a>
               </div>
 
@@ -181,19 +181,18 @@ stylize any heading tags withing white-panel below
         <%else%>
           <div class="w3-center" style='padding-bottom:10px;'>
             <a href=<%=new_user_session_path%> rel="nofollow">
-              <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
+              <button type="button" class="filtro-btn-azul" style='width:100%;'><i class="fa fa-pencil"></i>Seguir</button> 
             </a>
           </div>
         <%end%>
       </div>
 
-      <div class='well'>
         <div class="w3-accordion w3-white">
-          <a href=<%=seguidores_profile_path(@user.user_name)%>><button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align" id='seguidores_button'><%=user.followers.count-1%> Seguidores</button></a>
-          <a href=<%=seguindo_profile_path(@user.user_name)%>><button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align" id='seguindo_button'><%=user.following.count-1%> Seguindo</button></a>
-          <a href=''><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align"><%=user.view%> Visualizações do Perfil</button></a>
+          <a href=<%=seguidores_profile_path(@user.user_name)%>><button onclick="myFunction('Demo1')" class="w3-btn-block w3-theme-l1 w3-left-align" id='seguidores_button' style='background-color: #3F315D;'><%=user.followers.count-1%> Seguidores</button></a>
+          <a href=<%=seguindo_profile_path(@user.user_name)%>><button onclick="myFunction('Demo2')" class="w3-btn-block w3-theme-l1 w3-left-align" id='seguindo_button'style='background-color: #3F315D;'><%=user.following.count-1%> Seguindo</button></a>
+          <a href=''><button onclick="myFunction('Demo3')" class="w3-btn-block w3-theme-l1 w3-left-align" style='background-color: #3F315D;'><%=user.view%> Visualizações do Perfil</button></a>
         </div>
-      </div>
+      <br>
       <div class='well'>
         <div class="w3-container">
           <p class="w3-center">Descricao</p>
