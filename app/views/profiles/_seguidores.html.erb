@@ -2,7 +2,7 @@
     <% if user_signed_in? %>
       <% if @user != seguidor %>
         <a href=<%=profile_path(seguidor.user_name)%> class="w3-center">
-          <div class='row well' style='margin-left:15px;margin-right:15px'>
+          <div class='row well' style='margin-right:15px'>
           <span class="col-md-2">
             <%= image_tag seguidor.avatar.url(:medium), class: "media-object img-circle img-notification",style:'width:32px;height:32px'%>
           </span>
@@ -30,7 +30,7 @@
     <%else%>
       <% if @user != seguidor %>
         <a href=<%=profile_path(seguidor.user_name)%> class="w3-center">
-          <div class='row well' style='margin-left:15px;margin-right:15px'>
+          <div class='row well' style='margin-right:15px'>
           <span class="col-md-2">
             <%= image_tag seguidor.avatar.url(:medium), class: "media-object img-circle img-notification"%>
           </span>
