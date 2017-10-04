@@ -1,4 +1,4 @@
-$('#oir').append('<%= j render 'projects', posts: @posts %>');
+$('#oir').append('<%= j render 'galeria/projects', posts: @posts %>');
 <% if @posts.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate @posts %>');
 <% else %>

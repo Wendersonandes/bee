@@ -8,7 +8,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <div id="my-posts">
     <div id="lady-gaga">
       <% if @posts.any? %>
-      <%= render 'projects', posts: @posts %>
+      <%= render 'galeria/projects', posts: @posts %>
     <% else %>
         <% if @user == current_user %>
          <h2 class="w3-center">Você ainda nao possui projetos</h2>

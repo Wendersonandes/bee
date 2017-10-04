@@ -15,7 +15,7 @@ window.addEventListener("load", function () {
         }
 
     //----------------------------------- PRINT CANVAS --------------------------------------------------
-    var w = 640, h = 550;
+    var w = 640, h = 410;
     
     //var renderer = new THREE.WebGLRenderer();
     var renderer = new THREE.WebGLRenderer({
