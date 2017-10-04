@@ -14,7 +14,7 @@
               <% if current_user != seguidor %>
                 <% if current_user_is_following(current_user.id, seguidor.id) %>
                   <a href=<%= unfollow_user_path(seguidor.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="unfollow-button_<%=seguidor.id%>">
-                    <button type="button" class="perfil_seguir_<%=seguidor.id%>" style='background-color:#aaaaaa'><i class="fa fa-pencil"></i>Seguindo</button> 
+                    <button type="button" class="perfil_seguir_<%=seguidor.id%>  filtro-btn-azul" style='background-color:#aaaaaa'><i class="fa fa-pencil"></i>Seguindo</button> 
                   </a>
                 <%else%>
                   <a href=<%= follow_user_path(seguidor.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="follow-button_<%=seguidor.id%>">
