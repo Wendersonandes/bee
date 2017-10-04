@@ -4,7 +4,7 @@ $('#unfollow-button_<%=@user.id%>')//.text('Seguir')
                      .attr('href', "<%= follow_user_path(@user.user_name, user_pag: @user_pag) %>")
                      .attr('id', 'follow-button_<%=@user.id%>');
 $('.perfil_seguir_<%=@user.id%>').html('<i class="fa fa-pencil"></i>Seguir</button>')
-                   .css('background-color', '#6441a4');
+                   .css('background-color', '#009FAB');
 $('#seguidores_button').html('<%=@user_pag.followers.count-1%> Seguidores');
 $('#seguindo_button').html('<%=@user_pag.following.count-1%> Seguindo');
 					//.children('.fa fa-envelope fa-fw w3-margin-right').toggleClass('class','fa fa-user fa-fw w3-margin-right');
