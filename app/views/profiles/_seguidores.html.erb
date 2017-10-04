@@ -1,50 +1,49 @@
 <div class="well">
-<% seguidores.each do |seguidor| %>
-<% if user_signed_in? %>
-<% if @user != seguidor %>
-<a href=<%=profile_path(seguidor.user_name)%> class="w3-center">
-        <span class="pull-left">
-        <%= image_tag seguidor.avatar.url(:medium), class: "media-object img-circle img-notification",style:'width:32px;height:32px'%>
-        </span>
-        <span class="media-body" style="text-align:left;padding-top:8px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
-        <strong style='color:#6441a4'><%=seguidor.completo%></strong>
-        </span>
-        <span class="media-body" style="text-align:left;padding-top:3px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
-        <div class="w3-right" style='width: 107px'>
-        <% if current_user != seguidor %>
-          <% if current_user_is_following(current_user.id, seguidor.id) %>
-              <a href=<%= unfollow_user_path(seguidor.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="unfollow-button_<%=seguidor.id%>">
-              <button type="button" class="perfil_seguir_<%=seguidor.id%> w3-btn-block w3-theme" style='background-color:#aaaaaa'><i class="fa fa-pencil"></i>Seguindo</button> 
-              </a>
-            <%else%>
-              <a href=<%= follow_user_path(seguidor.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="follow-button_<%=seguidor.id%>">
-              <button type="button" class="perfil_seguir_<%=seguidor.id%> w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
-              </a>
-            <%end%>
-        <%end%>
-        </div>
-        </span>
+  <% seguidores.each do |seguidor| %>
+    <% if user_signed_in? %>
+      <% if @user != seguidor %>
+        <a href=<%=profile_path(seguidor.user_name)%> class="w3-center">
+          <span class="pull-left">
+            <%= image_tag seguidor.avatar.url(:medium), class: "media-object img-circle img-notification",style:'width:32px;height:32px'%>
+          </span>
+          <span class="media-body" style="text-align:left;padding-top:8px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
+            <strong style='color:#6441a4'><%=seguidor.completo%></strong>
+          </span>
+          <span class="media-body" style="text-align:left;padding-top:3px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
+            <div class="w3-right" style='width: 107px'>
+              <% if current_user != seguidor %>
+                <% if current_user_is_following(current_user.id, seguidor.id) %>
+                  <a href=<%= unfollow_user_path(seguidor.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="unfollow-button_<%=seguidor.id%>">
+                    <button type="button" class="perfil_seguir_<%=seguidor.id%> w3-btn-block w3-theme" style='background-color:#aaaaaa'><i class="fa fa-pencil"></i>Seguindo</button> 
+                  </a>
+                <%else%>
+                  <a href=<%= follow_user_path(seguidor.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="follow-button_<%=seguidor.id%>">
+                    <button type="button" class="perfil_seguir_<%=seguidor.id%> w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
+                  </a>
+                <%end%>
+              <%end%>
+            </div>
+          </span>
         </a>
-<%end%>
-<%else%>
-<% if @user != seguidor %>
-<a href=<%=profile_path(seguidor.user_name)%> class="w3-center">
-        <span class="pull-left">
-        <%= image_tag seguidor.avatar.url(:medium), class: "media-object img-circle img-notification"%>
-        </span>
-        <span class="media-body" style="text-align:left;padding-top:8px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
-        <strong style='color:#6441a4'><%=seguidor.completo%></strong>
-        </span>
-        <span class="media-body" style="text-align:left;padding-top:3px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
-        <div class="w3-right" style='width: 107px'>
-        <a href=<%=new_user_session_path%> rel="nofollow">
-              <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
-        </a>
-        </div>
-        </span>
-        </div> 
-</a>
-<%end%>
-<%end%>
-<%end%>
+      <%end%>
+    <%else%>
+      <% if @user != seguidor %>
+        <a href=<%=profile_path(seguidor.user_name)%> class="w3-center">
+          <span class="pull-left">
+            <%= image_tag seguidor.avatar.url(:medium), class: "media-object img-circle img-notification"%>
+          </span>
+          <span class="media-body" style="text-align:left;padding-top:8px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
+            <strong style='color:#6441a4'><%=seguidor.completo%></strong>
+          </span>
+          <span class="media-body" style="text-align:left;padding-top:3px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
+            <div class="w3-right" style='width: 107px'>
+              <a href=<%=new_user_session_path%> rel="nofollow">
+                <button type="button" class="w3-btn-block w3-theme"><i class="fa fa-pencil"></i>Seguir</button> 
+              </a>
+            </div>
+          </span>
+        </a> 
+      <%end%>
+    <%end%>
+  <%end%>
 </div>
