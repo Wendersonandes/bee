@@ -9,7 +9,8 @@
           <span class="col-md-6" style="text-align:left;padding-top:8px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
             <strong style='color:#009FAB'><%=seguidor.completo%></strong>
           </span>
-          <span class="col-md-4" style="width:100%;float:right;text-align:left;padding-top:3px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
+          <span class="col-md-4" style="text-align:left;padding-top:3px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
+            <div class="w3-right">
               <% if current_user != seguidor %>
                 <% if current_user_is_following(current_user.id, seguidor.id) %>
                   <a href=<%= unfollow_user_path(seguidor.user_name, user_pag: @user) %> data-remote="true" rel="nofollow" data-method="post" id="unfollow-button_<%=seguidor.id%>">
@@ -21,6 +22,7 @@
                   </a>
                 <%end%>
               <%end%>
+            </div>
           </span>
           </div>
         </a>
