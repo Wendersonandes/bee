@@ -2,7 +2,7 @@
 <% seguidores.each do |seguidor| %>
 <% if user_signed_in? %>
 <% if @user != seguidor %>
-<div href=<%=profile_path(seguidor.user_name)%> class="media list-group-item w3-center">
+<a href=<%=profile_path(seguidor.user_name)%> class="w3-center">
         <span class="pull-left">
         <%= image_tag seguidor.avatar.url(:medium), class: "media-object img-circle img-notification",style:'width:32px;height:32px'%>
         </span>
@@ -24,11 +24,11 @@
         <%end%>
         </div>
         </span>
-        </div>
+        </a>
 <%end%>
 <%else%>
 <% if @user != seguidor %>
-<div href=<%=profile_path(seguidor.user_name)%> class="media list-group-item w3-center">
+<a href=<%=profile_path(seguidor.user_name)%> class="w3-center">
         <span class="pull-left">
         <%= image_tag seguidor.avatar.url(:medium), class: "media-object img-circle img-notification"%>
         </span>
