@@ -5,6 +5,7 @@
         <%= render 'galeria/projects', posts: @posts %>
       <% else %>
         <% if @user == current_user %>
+        <br>
          <h2 class="w3-center">Você ainda nao possui projetos</h2>
          <h3 class="w3-center"> Para postar, <%=link_to "clique aqui", new_post_path, style:"color:#009FAB"%>
         <% else %>

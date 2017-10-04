@@ -213,39 +213,39 @@ stylize any heading tags withing white-panel below
       <div class="w3-container" id="portfolio" style='padding-left:0px;'>
         <div class="" style='padding-bottom:8px; border-bottom:4px solid #ccc;'>
           <% if botao == 'Projetos'%>
-            <a href=<%=projetos_profile_path(user.user_name)%> data-remote="true">
+            <a href=<%=projetos_profile_path(user.user_name)%>>
               <button class="filtro-btn-azul" id="Projetos"><i class="fa fa-photo w3-margin-right"></i>Projetos</button>
             </a>
           <%else%>
-            <a href=<%=projetos_profile_path(user.user_name)%> data-remote="true">
+            <a href=<%=projetos_profile_path(user.user_name)%>>
               <button class="filtro-btn w3-white menuNat" id="Projetos"><i class="fa fa-photo w3-margin-right"></i>Projetos</button>
             </a>
           <%end%>
           <% if botao == 'Destaques'%>
-            <a href=<%=destaques_profile_path(user.user_name)%> data-remote="true">
+            <a href=<%=destaques_profile_path(user.user_name)%>>
               <button class="filtro-btn-azul" id="Destaques"><i class="fa fa-diamond w3-margin-right"></i>Destaques</button>
             </a>
           <%else%>
             
-            <a href=<%=destaques_profile_path(user.user_name)%> data-remote="true">
+            <a href=<%=destaques_profile_path(user.user_name)%> >
               <button class="filtro-btn w3-white menuNat" id="Destaques"><i class="fa fa-diamond w3-margin-right"></i>Destaques</button>
             </a>
           <%end%>
           <% if botao == 'Seguidores'%>
-            <a href=<%=seguidores_profile_path(user.user_name)%> data-remote="true" >
+            <a href=<%=seguidores_profile_path(user.user_name)%>>
               <button class="filtro-btn-azul" id="Seguidores" bla="#{galeria_path}"><i class="fa fa-users w3-margin-right"></i>Seguidores</button>
             </a>
           <%else%>
-            <a href=<%=seguidores_profile_path(user.user_name)%> data-remote="true" >
+            <a href=<%=seguidores_profile_path(user.user_name)%>>
               <button class="filtro-btn w3-white menuNat" id="Seguidores" bla="#{galeria_path}"><i class="fa fa-users w3-margin-right"></i>Seguidores</button>
             </a>
           <%end%>
           <% if botao == 'Seguindo'%>
-            <a href=<%=seguindo_profile_path(user.user_name)%> data-remote="true" >
+            <a href=<%=seguindo_profile_path(user.user_name)%> >
               <button class="filtro-btn-azul" id="Seguindo" bla="#{galeria_path}"><i class="fa fa-user w3-margin-right"></i>Seguindo</button>
             </a>
           <%else%>
-            <a href=<%=seguindo_profile_path(user.user_name)%> data-remote="true" >
+            <a href=<%=seguindo_profile_path(user.user_name)%> >
               <button class="filtro-btn w3-white menuNat" id="Seguindo" bla="#{galeria_path}"><i class="fa fa-user w3-margin-right"></i>Seguindo</button>
             </a>
           <%end%>
