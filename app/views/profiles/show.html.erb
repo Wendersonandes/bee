@@ -1,7 +1,7 @@
 <%= render 'top_show', user: @user, footers: @footers, posts2: @posts2, posts: @posts, botao: @botao %> 
   <div id="my-posts">
+  	<% if @posts.any? %>
     <section id="pinBoot">
-      <% if @posts.any? %>
         <%= render 'galeria/projects', posts: @posts %>
       <% else %>
         <% if @user == current_user %>
