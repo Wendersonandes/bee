@@ -9,9 +9,9 @@
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <%= f.error_notification %>
             <div class="panel-body">
-              <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'input-lg' } %>
               <%= f.input :name, required: true, label: false, placeholder: 'Nome', input_html: { class: 'input-lg' } %>
               <%= f.input :sobrenome, required: true, label: false, placeholder: 'Sobrenome', input_html: { class: 'input-lg' } %>
+              <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'input-lg' } %>
               <%= f.input :password, required: true, label: false, placeholder: 'Senha', input_html: { class: 'input-lg' } %>
               <%= f.input :password_confirmation, required: true, label: false, placeholder: 'Confirmar Senha', input_html: { class: 'input-lg' } %>
               <%= f.button :submit, "Registrar", class: 'btn-lg btn-info btn-block' %>
