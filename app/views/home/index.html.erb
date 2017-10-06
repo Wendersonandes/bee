@@ -42,6 +42,10 @@
   display:none; 
   z-index:99;
   left:50%;
+  top:50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 .hover_img a:hover span { 
   display:block;
@@ -164,11 +168,6 @@
                     <% else %>
                         <article class=" icons product anima fade-up d2" style='width:95%; margin: auto; padding-bottom: 10px;'>
                     <% end %>
-                    <div class="hover_img">
- <a href="#">
-   A picture of my face<span><img src="images/3d.png"/></span>
- </a>
-</div>
                         <div class="hover_img">
                             <a href=<%=post_path(item)%>><%= image_tag item.image.url(:medium), class:"img-responsive project-image",alt:''%><span><img src="images/3d.png"/></span></a>
                         </div>
