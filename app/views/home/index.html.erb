@@ -34,6 +34,22 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>.hover_img { 
+  position:relative;  
+}
+.hover_img a span { 
+  position:absolute; 
+  display:none; 
+  z-index:99;
+  left:50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.hover_img a:hover span { 
+  display:block;
+}
+</style>
     </head>
 
     <body id="home">
@@ -151,6 +167,11 @@
                     <% else %>
                         <article class=" icons product anima fade-up d2" style='width:95%; margin: auto; padding-bottom: 10px;'>
                     <% end %>
+                    <div class="hover_img">
+ <a href="#">
+   A picture of my face<span><img src="/image.png"/></span>
+ </a>
+</div>
                         <div class="img-box">
                             <a href=<%=post_path(item)%>><div class="hover-mask2"></div></a>
                             <span class="product-icon" style="display:inline;"><img class="" src="images/3d.png"></img></span>
