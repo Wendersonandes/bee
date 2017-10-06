@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   validates :attachment, presence: true
   mount_uploader :attachment, AttachmentUploader
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
