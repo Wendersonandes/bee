@@ -62,7 +62,7 @@ stylize any heading tags withing white-panel below
 </style>
 <!--<script type="text/javascript" src="../assets/show_profile.js"></script>-->
 
-<div class="w3-light-grey w3-content" style="max-width:1600px; padding-top: 45px">
+<div class="w3-light-grey w3-content" style="max-width:1200px; padding-top: 45px">
 
 <!-- Sidenav/menu -->
 
@@ -118,16 +118,6 @@ stylize any heading tags withing white-panel below
         <a href=<%=galeria_ferramentas_path%> class="filtro-btn-azul" id="Ferramentas"><i class="fa fa-wrench w3-margin-right"></i>Ferramentas</a>
       <%else%>
         <a href=<%=galeria_ferramentas_path%> class="filtro-btn" id="Ferramentas"><i class="fa fa-wrench w3-margin-right"></i>Ferramentas</a>
-      <%end%>
-      <% if @filtro == 9 %>
-        <a href=<%=galeria_brinquedos_path%> class="filtro-btn-azul" id="Brinquedos e jogos"><i class="fa fa-soccer-ball-o w3-margin-right"></i>Brinquedos e jogos</a>
-      <%else%>
-        <a href=<%=galeria_brinquedos_path%> class="filtro-btn" id="Brinquedos e jogos"><i class="fa fa-soccer-ball-o w3-margin-right"></i>Brinquedos e jogos</a>
-      <%end%>
-      <% if @filtro == 10 %>
-        <a href=<%=galeria_outros_path%> class="filtro-btn-azul" id="Outros"><i class="fa fa-ellipsis-h w3-margin-right"></i>Outros</a>
-      <%else%>
-        <a href=<%=galeria_outros_path%> class="filtro-btn" id="Outros"><i class="fa fa-ellipsis-h w3-margin-right"></i>Outros</a>
       <%end%>
     </div>
   </div>
