@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'galeria/index'
 
   post 'contato', to: 'home#create', as: :contatos
+  post 'oferta', to: 'home#create_oferta', as: :ofertas
 
   post ':user_name/pedidos', to: 'pedidos#create', as: :pedidos_create
   get ':user_name/pedidos', to: 'pedidos#index', as: :pedidos

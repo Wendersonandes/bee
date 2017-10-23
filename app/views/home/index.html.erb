@@ -271,11 +271,11 @@
                     <h4>Cadastre seu Email para Receber Notícias e Ofertas</h4>
                 </header>
                 <div class="row">
-                    <form id="newsletter-form" action="" method="POST" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 ">
+                    <form id="newsletter-form" action=<%=ofertas_path%> method="POST" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 " onsubmit="alert( &#39;Email adicionado!&#39; );">
                         <div class="input-group">
-                            <input id="newsletter-mail" name="email" placeholder="Email" class="form-control input-lg" type="email" >
+                            <input id="newsletter-mail" name="ofert[email]" placeholder="Email" class="form-control input-lg" type="email" >
                             <span class="input-group-btn">
-                                <button name="submit" type="submit" class="btn btn-store">Inscreva-se</button>
+                                <button name="commit" type="submit" class="btn btn-store">Inscreva-se</button>
                             </span>
                         </div>
                         <input type="hidden" name="submitted" id="submitted2" value="true">
@@ -307,7 +307,7 @@
                     <h1><strong>Contato</strong></h1>
                     <p>Alguma dúvida sobre o serviço que oferecemos? Entre em contato conosco.</p>
                 </header>
-                <form action="index.html" method="post" novalidate id="contact-form">
+                <form action=<%=contatos_path%> method="post" novalidate id="contact-form" onsubmit="alert( &#39;Obrigado pelo seu feedback!&#39; );">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-4 contact-info cta-message anima fade-right">
                             <address>
@@ -324,24 +324,24 @@
                             <div class="form-group">
                                 <label class="control-label" for="contact-name">Nome</label>
                                 <div class="controls">
-                                    <input id="contact-name" name="contactName" placeholder="Nome" class="form-control input-lg requiredField" type="text">
+                                    <input id="contact-name" name="contato[name]" placeholder="Nome" class="form-control input-lg requiredField" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="contact-mail">Email</label>
                                 <div class=" controls">
-                                    <input id="contact-mail" name="email" placeholder="Email" class="form-control input-lg requiredField" type="email">
+                                    <input id="contact-mail" name="contato[email]" placeholder="Email" class="form-control input-lg requiredField" type="email">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="contact-message">Mensagem</label>
                                 <div class="controls">
-                                    <textarea id="contact-message" name="comments" placeholder="Mensagem" class="form-control input-lg requiredField" rows="5"></textarea>
+                                    <textarea id="contact-message" name="contato[mensagem]" placeholder="Mensagem" class="form-control input-lg requiredField" rows="5"></textarea>
                                 </div>
                             </div>
                             <p>
                                 <button name="submit" type="submit" class="btn btn-store btn-block">Enviar Mensagem</button></p>
-                            <input type="hidden" name="submitted" id="submitted3" value="true">
+                            <input type="hidden" name="commit" id="contato_submit" value="Enviar Mensagem">
                         </div>
                     </div>
                 </form>

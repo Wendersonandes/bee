@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   def index
     @contato = Contato.new
     @posts = Post.all.where.not(status: 0).order('cached_votes_up DESC').limit(9)
+    @oferta = Ofert.new
   end
 
   def search
@@ -17,6 +18,12 @@ class HomeController < ApplicationController
       redirect_to root_path
     end
   end
+  def create_oferta
+    @oferta = Ofert.create(ofert_params)
+    if @oferta.save
+      redirect_to root_path
+    end
+  end
   def godaddy
   end
 
@@ -24,6 +31,9 @@ class HomeController < ApplicationController
 
   def contato_params
     params.require(:contato).permit(:name,:email,:mensagem)
+  end
+  def ofert_params
+    params.require(:ofert).permit(:email)
   end
   def determine_layout
   		case action_name
