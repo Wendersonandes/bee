@@ -38,6 +38,7 @@ Color.create(name: "Verde")
 Color.create(name: "Preto")
 Color.create(name: "Branco")
 Color.create(name: "Prata")
+Color.create(name: "Preto")
 
 Type.create(name: "Arte")
 Type.create(name: "Fashion")
