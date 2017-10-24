@@ -115,7 +115,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
       </form>
       <div class="w3-left">
          <%= form_tag "/order/frete?carrinho_id=#{@carrinho.id}", id:"form_cep", style:"display:none;", remote: true do %>
-          <%= text_field_tag "CEP", "#{@user.postal_code}" %>
+          <%= text_field_tag "Calcular", "#{@user.postal_code}" %>
           <%= submit_tag "CEP" %>
         <% end %>
       </div>
