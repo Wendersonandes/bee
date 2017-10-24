@@ -1,5 +1,5 @@
 <div class="w3-container" id="apartment">
-    <h2 class="w3-text-green">Seus Pedidos</h2>
+    <h2 class="w3-text-green">Seu Carrinho</h2>
 
     <% carrinho.orders.each do |order| %>
       <div class="w3-display-container mySlides">
@@ -13,7 +13,7 @@
         </div>
         <%= link_to order_path(id: order, user_name: carrinho.user.user_name), method: :delete, data: { confirm: "Are you sure?" } do %>
         <div class="w3-display-topright w3-container w3-black">
-          <span class="glyphicon glyphicon-remove delete-comment" style="color:gray; font-size:20px"></span>
+          <span class="fa fa-remove delete-comment" style="color:gray; font-size:20px"></span>
         </div>
       <% end %>  
       </div>
