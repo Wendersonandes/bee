@@ -1,7 +1,8 @@
 .dropdown.notification-dropdown
-  %button.btn.btn-default.dropdown-toggle{ type: 'button', id: 'dropdownMenu1', data: { toggle: 'dropdown' }, 'aria-haspopup': true, 'aria-expanded': true }
-    %span.glyphicon.glyphicon-user
-    %span.glyphicon.glyphicon-chevron-down
+  %button.btn.btn-default.dropdown-toggle{ type: 'button',style: 'background-color:#242424; padding-top:8px;', id: 'dropdownMenu1', data: { toggle: 'dropdown' }, 'aria-haspopup': true, 'aria-expanded': true }
+    %a
+      %span.fa.fa-user
+      %span.fa.fa-chevron-down
   %ul.dropdown-menu{ 'aria-labelledby': 'dropdownMenu1' }
     - if current_user.carrinhos.where.not(status: 'criado').any?
       %li.text-center= link_to "Compras Feitas", carrinhos_path(current_user.user_name)

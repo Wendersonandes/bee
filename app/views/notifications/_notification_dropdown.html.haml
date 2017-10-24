@@ -1,7 +1,8 @@
 .dropdown.notification-dropdown
-  %button.btn.btn-default.dropdown-toggle{ type: 'button', id: 'dropdownMenu1', data: { toggle: 'dropdown' }, 'aria-haspopup': true, 'aria-expanded': true }
-    = current_user.notifications.where(read: false).count
-    %span.glyphicon.glyphicon-flag
+  %button.btn.btn-default.dropdown-toggle{ type: 'button',style: 'background-color:#242424; padding-top:8px;', id: 'dropdownMenu1', data: { toggle: 'dropdown' }, 'aria-haspopup': true, 'aria-expanded': true }
+    %a
+      = current_user.notifications.where(read: false).count
+      %span.fa.fa-bell
   %ul.dropdown-menu{ 'aria-labelledby': 'dropdownMenu1' }
     %li.dropdown-header.text-center Notifications
     = render current_user.notifications.order('created_at DESC').limit(5)

@@ -45,7 +45,7 @@
             
               <a href=<%=carrinho_path(current_user.user_name)%>>
                   <%= current_user.carrinhos.find_by(status: 'criado').orders.count%>
-                <span class='glyphicon glyphicon-shopping-cart'></span>
+                <span class='fa fa-shopping-cart'></span>
               </a>
           <%end%>
           </li>
