@@ -7,7 +7,7 @@
         <% if @user == current_user %>
         <br>
          <h2 class="w3-center">Você ainda nao possui projetos</h2>
-         <h3 class="w3-center"> Para postar, <%=link_to "clique aqui", new_post_path, style:"color:#009FAB"%>
+         <h3 class="w3-center"> Caso queira postar algum modelo, entre em contato com a Beeprinted <a style='color:#009FAB' href="<%=root_path%>#contact">Contato</a>
         <% else %>
             <h2 class="w3-center"><%= @user.completo%> ainda nao possui projetos</h2>
         <% end %>
