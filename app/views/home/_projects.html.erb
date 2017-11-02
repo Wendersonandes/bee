@@ -1,16 +1,20 @@
-  <%posts.in_groups_of(3, false).each do |group| %>
-  <div class="w3-row-padding">
-    <% group.each do |item| %>
-    <div class="w3-third w3-container w3-margin-bottom">
-      <%= link_to (image_tag item.image.url(:thumb), class:"w3-hover-opacity", style:'width:100%'), post_path(item) %>
-      <div class="w3-container w3-white">
-        <br>
-        <ul>
-        <li style='float:left'><p><b><%= item.caption %></b></p></li>
-        <li style='float:right'><i class="fa fa-eye" aria-hidden="true"></i> <%=item.view%> <i class="fa fa-heart" aria-hidden="true"></i> <%=item.votes_for.up.by_type(User).size%> </li>
-        </ul>
+    <% @posts.each do |post| %>
+    <article class="white-panel", style='background-color:#f2f2f2'>
+      <div class="img-box">
+        <a href=<%=post_path(post)%>><div class="hover-mask2"></div></a>
+        <span class="product-icon fa fa-print" style="display:inline;"></span>
+        <%= link_to (image_tag post.image.url(:medium)), post_path(post) %>
+      <!--<div style="padding:10px 5px 0 5px">
+        <span style='float:left; color:#009FAB'><p><b><%= post.caption %></b></p></span>
+        <span style='float:right; color:#009FAB'><i class="fa fa-eye" aria-hidden="true"></i> <%=post.view%> <i class="fa fa-heart" aria-hidden="true"></i> <%=post.votes_for.up.by_type(User).size%> </li>
+        </span>
+        </div>-->
       </div>
-    </div>
+        <div class="product-info col-md-12">
+          <p class="project-price">R$<%=%></p>
+          <div>
+           <h4 class="project-title"><%=post.caption%></h4>
+          </div>
+        </div>
+    </article>
     <% end %>
-  </div>
-  <% end %>
