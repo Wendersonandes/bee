@@ -21,12 +21,14 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    user_name:      'lucasfneves14@gmail.com',
+    user_name:      'contato@beeprinted.com.br',
     password:       'Saculf14/',
     domain:         'localhost:3000',
-    address:       'smtp.gmail.com',
-    port:          '587',
-    authentication: :plain,
+    address:       'smtp.zoho.com',
+    port:          '465',
+    authentication: :login,
+    ssl:             true,
+    tls:             true,
     enable_starttls_auto: true
   }
   # Print deprecation notices to the Rails logger.

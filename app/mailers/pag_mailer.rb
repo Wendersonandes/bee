@@ -1,5 +1,5 @@
 class PagMailer < ApplicationMailer
-	default from: "lucasfneves14@gmail.com"
+	default from: "contato@beeprinted.com.br"
 	def print_email(carrinho)
 		@carrinho = carrinho
 		@user = carrinho.user
