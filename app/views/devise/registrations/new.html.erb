@@ -84,7 +84,9 @@
               <%= f.input :password, required: true, label: false, placeholder: 'Senha', input_html: { class: 'input-lg' } %>
               <%= f.input :password_confirmation, required: true, label: false, placeholder: 'Confirmar Senha', input_html: { class: 'input-lg' } %>
               <%= f.button :submit, "Registrar", class: 'btn-lg btn-info btn-block' %>
-              <br>
+            </div>
+          <% end %>
+          <br>
               <div class='w3-center' style='width:100%'>
               <a class="w3-center" style='margin:auto;' href=<%=facebook_path%>>
                 <button class="loginBtn loginBtn--facebook" style='width:100%; text-align:center; margin:0px;'>
@@ -92,8 +94,6 @@
                 </button>
               </a>
               </div>
-            </div>
-          <% end %>
         </div>
       </div>
     </div>

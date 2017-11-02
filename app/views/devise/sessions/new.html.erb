@@ -81,7 +81,9 @@
               <%= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email', input_html: { class: 'input-lg' } %>
               <%= f.input :password, required: true, label: false, placeholder: 'Password', input_html: { class: 'input-lg' } %>
               <%= f.button :submit, "Entrar", class: 'btn-lg btn-info btn-block' %>
-              <br>
+            </div>
+          <% end %>
+          <br>
               <div class='w3-center' style='width:100%'>
               <a class="w3-center" style='margin:auto;' href=<%=facebook_path%>>
                 <button class="loginBtn loginBtn--facebook" style='width:100%; text-align:center; margin:0px;'>
@@ -89,8 +91,6 @@
                 </button>
               </a>
               </div>
-            </div>
-          <% end %>
         </div>
       </div>
     </div>
