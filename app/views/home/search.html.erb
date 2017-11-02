@@ -74,8 +74,8 @@ stylize any heading tags withing white-panel below
     <span class="w3-opennav w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i style='padding-top: 40px' class="fa fa-bars"></i></span>
     <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc'>
       <span class="w3-margin-right">Filtro:</span>
-      <button class="w3-btn menuNat" id="posts_search"><i class="fa fa-photo w3-margin-right"></i>Projetos <span style="color:red"><%=@posts.count%></span></button>
-      <button class="w3-btn w3-white menuNat" id="users_search" bla="#{galeria_path}"><i class="fa fa-user w3-margin-right"></i>Usuários <span style="color:red"><%=@users.count%></span></button>
+      <button class="w3-btn menuNat filtro-btn-azul" id="posts_search"><i class="fa fa-photo w3-margin-right"></i>Projetos <span style="color:red"><%=@posts.count%></span></button>
+      <button class="w3-btn menuNat filtro-btn"" id="users_search" bla="#{galeria_path}"><i class="fa fa-user w3-margin-right"></i>Usuários <span style="color:red"><%=@users.count%></span></button>
     </div>
   </div>
   
@@ -128,14 +128,18 @@ function w3_close() {
 <script>
 $("#posts_search").click(function() {
   console.log("blaaaaaa");
-  $('.w3-btn').addClass('w3-white');
-  $(this).removeClass('w3-white');
+  $('.w3-btn').addClass('filtro-btn');
+  $('.w3-btn').removeClass('filtro-btn-azul');
+  $(this).removeClass('filtro-btn');
+  $(this).addClass('filtro-btn-azul');
   $("#users").hide();
   $("#posts").show();
 });
 $("#users_search").click(function() {
-  $('.w3-btn').addClass('w3-white');
-  $(this).removeClass('w3-white');
+  $('.w3-btn').addClass('filtro-btn');
+  $('.w3-btn').removeClass('filtro-btn-azul');
+  $(this).removeClass('filtro-btn');
+  $(this).addClass('filtro-btn-azul');
   console.log("blaaaaaa");
   $("#posts").hide();
   $("#users").show();
