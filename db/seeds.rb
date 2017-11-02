@@ -10,6 +10,11 @@ Modelo.destroy_all
 Mat.destroy_all
 Color.destroy_all
 Type.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('colors')
+ActiveRecord::Base.connection.reset_pk_sequence!('marcas')
+ActiveRecord::Base.connection.reset_pk_sequence!('modelos')
+ActiveRecord::Base.connection.reset_pk_sequence!('mats')
+ActiveRecord::Base.connection.reset_pk_sequence!('types')
 
 Marca.create(name: "3D Cloner")
 Marca.create(name: "3D Factories")
