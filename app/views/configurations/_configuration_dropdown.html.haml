@@ -6,9 +6,7 @@
   %ul.dropdown-menu{ 'aria-labelledby': 'dropdownMenu1' }
     - if current_user.carrinhos.where.not(status: 'criado').any?
       %li.text-center= link_to "Compras Feitas", carrinhos_path(current_user.user_name)
-    %li.text-center= link_to "Pedidos Personalizados", pedidos_path(current_user.user_name)
     %li.text-center= link_to "Editar Perfil", profile_path(current_user.user_name)
     %li.text-center= link_to "Editar Conta", edit_user_registration_path
-    %li.text-center= link_to "Editar Conta Bancária", banco_path(current_user.user_name)
     %li.divider{ role: 'separator' }
     %li.text-center= link_to "Sair", destroy_user_session_path, method: :delete
