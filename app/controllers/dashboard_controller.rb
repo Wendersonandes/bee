@@ -7,12 +7,12 @@ class DashboardController < ApplicationController
 
 	end
 	def usuarios
-		@users = User.all
+		@users = User.all.order('created_at DESC')
 		@sidenav = 'usuarios'
 
 	end
 	def carrinhos
-		@carrinhos = Carrinho.all
+		@carrinhos = Carrinho.all.order('created_at DESC')
 		@sidenav = 'carrinhos'
 
 	end
