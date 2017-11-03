@@ -72,6 +72,9 @@ class PostsController < ApplicationController
   end
 
   def new
+    if current_user.tipo != 'admin'
+      redirect_to galeria_path
+    end
     @post = current_user.posts.build
   end
 
