@@ -2,7 +2,7 @@ class GaleriaController < ApplicationController
   layout :determine_layout
   def index
     @filtro = 0
-  	@posts = Post.all.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('created_at DESC')
+  	@posts = Post.all.where.not(status: 0).paginate(page: params[:page], per_page: 12).order('cached_votes_up DESC')
   	respond_to do |format|
       format.html
       format.js
