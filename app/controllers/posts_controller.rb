@@ -99,7 +99,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     @post.status = 1
-    converter @post
+    #converter @post
     if @post.save
       flash[:success] = "Your post has been created!"
       redirect_to post_path(@post)
