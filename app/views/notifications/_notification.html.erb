@@ -3,7 +3,7 @@
 <% else %>
 	<a href=<%=link_through_path(notification)%> class="w3-center">
 <% end %>
-	<div class='row well' style='margin:auto'>
+	<div class='row well' style='background-color:#bfbfbf; margin:auto'>
 	    <span class="col-md-2">
 	    <%= image_tag notification.notified_by.avatar.url(:medium), class: "media-object img-circle img-notification",style:'width:32px;height:32px'%>
 	    </span>
