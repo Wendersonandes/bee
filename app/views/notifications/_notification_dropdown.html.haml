@@ -3,7 +3,7 @@
     %a
       = current_user.notifications.where(read: false).count
       %span.fa.fa-bell
-  %ul.dropdown-menu{ 'aria-labelledby': 'dropdownMenu1', style:'width:430px;' }
+  %ul.dropdown-menu{ 'aria-labelledby': 'dropdownMenu1', style:'width:430px;background-color:#f2f2f2' }
     %li.dropdown-header.text-center Notifications
     = render current_user.notifications.order('created_at DESC').limit(5)
     %li.divider{ role: 'separator' }
