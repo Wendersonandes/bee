@@ -317,7 +317,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
          </div>
        </fieldset>
        <fieldset>
+         <legend>Valor da Compra</legend>
+         <strong><div id="valor_pagamento" style='font-size:20px;color:#555555'></div></strong>
+
+         <br>
+         <br>
+       </fieldset>
+       <fieldset>
          <legend>Dados do Cartão</legend>
+
+         <div class="valor_pagamento"></div>
          <div class="form-group">
            <label class="col-sm-3 control-label">Nome no Cartão</label>
            <div class="col-sm-5">
@@ -460,6 +469,7 @@ $(document).on('click', 'input:radio', function() {
   $('#price').val(precoTotal);
   $('#preco_final').hide();
   $('#preco_final').text('R$'+precoTotal.toFixed(2));
+  $('#valor_pagamento').text('R$'+precoTotal.toFixed(2));
   $('#preco_final').fadeIn(400);
 });
 function FreteFade(valor){
