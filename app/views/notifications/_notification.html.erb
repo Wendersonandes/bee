@@ -1,13 +1,15 @@
 <%if notification.read == true %>
-	<a href=<%=link_through_path(notification)%> class="media list-group-item" style= "background-color:#bfbfbf">
+	<a href=<%=link_through_path(notification)%> class="w3-center" style= "background-color:#bfbfbf">
 <% else %>
-	<a href=<%=link_through_path(notification)%> class="media list-group-item">
+	<a href=<%=link_through_path(notification)%> class="w3-center">
 <% end %>
-    <span class="pull-left">
-    <%= image_tag notification.notified_by.avatar.url(:medium), class: "media-object img-circle img-notification"%>
-    </span>
-    <span class="media-body">
-        <p><%=notification.notice_type%></p>
-    	<small class="text-muted"><%= time_ago_in_words notification.created_at%></small>
-    </span>
+	<div class='row well' style='margin-left:4px;margin-right:15px'>
+	    <span class="col-md-2">
+	    <%= image_tag notification.notified_by.avatar.url(:medium), class: "media-object img-circle img-notification",style:'width:32px;height:32px'%>
+	    </span>
+	    <span class="col-md-6" style="text-align:left;padding-top:8px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
+	        <p><%=notification.notice_type%></p>
+	    	<small class="text-muted"><%= time_ago_in_words notification.created_at%></small>
+	    </span>
+	</div>
 </a>
