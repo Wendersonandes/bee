@@ -21,7 +21,6 @@ body {
   color: black;
   cursor: pointer;
   border:none;
-  border-radius: 5px;
   padding: 10px 18px;
 }
 .filtro-btn:hover {
@@ -32,7 +31,6 @@ body {
   color:white;
   cursor: pointer;
   border:none;
-  border-radius: 5px;
   padding: 10px 20px;
 }
 #pinBoot {
@@ -59,6 +57,51 @@ stylize any heading tags withing white-panel below
 .white-panel h1 a {
   color: #A92733;
 }
+
+
+.filtro_nav{
+	width: 100%;
+    background: #f2f2f2;
+    border-right: none;
+}
+
+.filtro_nav ul {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.filtro_nav ul li {
+    list-style: none;
+    float: left;
+    text-align: center;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    width: 16.6667%; /* fallback for non-calc() browsers */
+    width: calc(100% / 6);
+    box-sizing: border-box;
+}
+
+.filtro_nav ul li:first-child {
+    border-left: none;
+}
+
+.filtro_nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: #616161;
+    padding: 10px 0;
+}
+
+@media screen and (max-width: 480px) {
+
+.filtro_nav ul li {
+	width: 25%;
+}
+
+
+
 </style>
 <!--<script type="text/javascript" src="../assets/show_profile.js"></script>-->
 
@@ -74,53 +117,140 @@ stylize any heading tags withing white-panel below
   <!-- Header -->
   <div class="w3-container" id="portfolio" style='padding-left:0px; padding-right:12px; '>
     <div class="w3-section w3-padding-16" style='border-bottom:4px solid #ccc'>
-      <div class='row'>
+
+    <div class='filtro_nav'>
+    	<ul>
+    		<% if @filtro == 0 %>
+    			<li><a class="filtro-btn-azul" style='color:white;' href=<%=galeria_path%>><i class="fa fa-cubes w3-margin-right"></i>Todos</a></li>
+    		<%else%>
+    			<li><a class="filtro-btn" href=<%=galeria_path%>><i class="fa fa-cubes w3-margin-right"></i>Todos</a></li>
+    		<%end%>
+    		<% if @filtro == 1 %>
+		    	<li><a class="filtro-btn-azul" style='color:white;' href=<%=galeria_arte_path%>><i class="fa fa-paint-brush w3-margin-right"></i>Arte</a></li>
+		    <%else%>
+		    	<li><a class="filtro-btn" href=<%=galeria_arte_path%>><i class="fa fa-paint-brush w3-margin-right"></i>Arte</a></li>
+		    <%end%>
+		    <% if @filtro == 2 %>
+		    	<li><a class="filtro-btn-azul" style='color:white;' href=<%=galeria_fashion_path%>><i class="fa fa-diamond w3-margin-right"></i>Fashion</a></li>
+		    <%else%>
+		    	<li><a class="filtro-btn" href=<%=galeria_fashion_path%>><i class="fa fa-diamond w3-margin-right"></i>Fashion</a></li>
+		    <%end%>
+		    <% if @filtro == 3 %>
+		    	<li><a class="filtro-btn-azul" style='color:white;' href=<%=galeria_gadgets_path%>><i class="fa fa-microchip w3-margin-right"></i>Gagdets</a></li>
+		    <%else%>
+		    	<li><a class="filtro-btn" href=<%=galeria_gadgets_path%>><i class="fa fa-microchip w3-margin-right"></i>Gagdets</a></li>
+		    <%end%>
+		    <% if @filtro == 4 %>
+		    	<li><a class="filtro-btn-azul" style='color:white;' href=<%=galeria_hobby_path%>><i class="fa fa-plane w3-margin-right"></i>Hobby</a></li>
+		    <%else%>
+		    	<li><a class="filtro-btn" href=<%=galeria_hobby_path%>><i class="fa fa-plane w3-margin-right"></i>Hobby</a></li>
+		    <%end%>
+		    <% if @filtro == 5 %>
+		    	<li><a class="filtro-btn-azul" style='color:white;' href=<%=galeria_casa_path%>><i class="fa fa-home w3-margin-right"></i>Para Casa</a></li>
+		    <%else%>
+		    	<li><a class="filtro-btn" href=<%=galeria_casa_path%>><i class="fa fa-home w3-margin-right"></i>Para Casa</a></li>
+		    <%end%>
+		    <% if @filtro == 6 %>
+		    	<li><a class="filtro-btn-azul" style='color:white;' href=<%=galeria_aprendizado_path%>><i class="fa fa-pencil w3-margin-right"></i>Aprendizado</a></li>
+		    <%else%>
+		    	<li><a class="filtro-btn" href=<%=galeria_aprendizado_path%>><i class="fa fa-pencil w3-margin-right"></i>Aprendizado</a></li>
+		    <%end%>
+		    <% if @filtro == 7 %>
+		    	<li><a class="filtro-btn-azul" style='color:white;' href=<%=galeria_modelos_path%>><i class="fa fa-cube w3-margin-right"></i>Modelos</a></li>
+		    <%else%>
+		    	<li><a class="filtro-btn" href=<%=galeria_modelos_path%>><i class="fa fa-cube w3-margin-right"></i>Modelos</a></li>
+		    <%end%>
+		    <% if @filtro == 8 %>
+		    	<li><a class="filtro-btn-azul" style='color:white;' href=<%=galeria_ferramentas_path%>><i class="fa fa-wrench w3-margin-right"></i>Ferramentas</a></li>
+		    <%else%>
+		    	<li><a class="filtro-btn" href=<%=galeria_ferramentas_path%>><i class="fa fa-wrench w3-margin-right"></i>Ferramentas</a></li>
+		    <%end%>
+    	</ul>
+    </div>
+
+      <!--<div class='row'>
         <% if @filtro == 0 %>
-          <a href=<%=galeria_path%> class="filtro-btn-azul" id="Todos"><i class="fa fa-cubes w3-margin-right"></i>Todos</a>
+          <div class="col-md-2">
+          	<a href=<%=galeria_path%> class="filtro-btn-azul" id="Todos"><i class="fa fa-cubes w3-margin-right"></i>Todos</a>
+          </div>
         <%else%>
-          <a href=<%=galeria_path%> class="filtro-btn" id="Todos"><i class="fa fa-cubes w3-margin-right"></i>Todos</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_path%> class="filtro-btn" id="Todos"><i class="fa fa-cubes w3-margin-right"></i>Todos</a>
+          	</div>
         <%end%>
         <% if @filtro == 1 %>
-          <a href=<%=galeria_arte_path%> class="filtro-btn-azul" id="Arte"><i class="fa fa-paint-brush w3-margin-right"></i>Arte</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_arte_path%> class="filtro-btn-azul" id="Arte"><i class="fa fa-paint-brush w3-margin-right"></i>Arte</a>
+        	</div>
         <%else%>
-          <a href=<%=galeria_arte_path%> class="filtro-btn" id="Arte"><i class="fa fa-paint-brush w3-margin-right"></i>Arte</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_arte_path%> class="filtro-btn" id="Arte"><i class="fa fa-paint-brush w3-margin-right"></i>Arte</a>
+        	</div>
         <%end%>
         <% if @filtro == 2 %>
-          <a href=<%=galeria_fashion_path%> class="filtro-btn-azul" id="Fashion"><i class="fa fa-diamond w3-margin-right"></i>Fashion</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_fashion_path%> class="filtro-btn-azul" id="Fashion"><i class="fa fa-diamond w3-margin-right"></i>Fashion</a>
+        	</div>
         <%else%>
-            <a href=<%=galeria_fashion_path%> class="filtro-btn" id="Fashion"><i class="fa fa-diamond w3-margin-right"></i>Fashion</a>
+        	<div class="col-md-2">
+            	<a href=<%=galeria_fashion_path%> class="filtro-btn" id="Fashion"><i class="fa fa-diamond w3-margin-right"></i>Fashion</a>
+            </div>
         <%end%>
         <% if @filtro == 3 %>
-          <a href=<%=galeria_gadgets_path%> class="filtro-btn-azul" id="Gagdets"><i class="fa fa-microchip w3-margin-right"></i>Gadgets</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_gadgets_path%> class="filtro-btn-azul" id="Gagdets"><i class="fa fa-microchip w3-margin-right"></i>Gadgets</a>
+          	</div>
         <%else%>
-          <a href=<%=galeria_gadgets_path%> class="filtro-btn" id="Gagdets"><i class="fa fa-microchip w3-margin-right"></i>Gadgets</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_gadgets_path%> class="filtro-btn" id="Gagdets"><i class="fa fa-microchip w3-margin-right"></i>Gadgets</a>
+        	</div>
         <%end%>
         <% if @filtro == 4 %>
-          <a href=<%=galeria_hobby_path%> class="filtro-btn-azul" id="Hobby"><i class="fa fa-plane w3-margin-right"></i>Hobby</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_hobby_path%> class="filtro-btn-azul" id="Hobby"><i class="fa fa-plane w3-margin-right"></i>Hobby</a>
+        	</div>
         <%else%>
-          <a href=<%=galeria_hobby_path%> class="filtro-btn" id="Hobby"><i class="fa fa-plane w3-margin-right"></i>Hobby</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_hobby_path%> class="filtro-btn" id="Hobby"><i class="fa fa-plane w3-margin-right"></i>Hobby</a>
+        	</div>
         <%end%>
         <% if @filtro == 5 %>
-          <a href=<%=galeria_casa_path%> class="filtro-btn-azul" id="Para Casa"><i class="fa fa-home w3-margin-right"></i>Para Casa</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_casa_path%> class="filtro-btn-azul" id="Para Casa"><i class="fa fa-home w3-margin-right"></i>Para Casa</a>
+        	</div>
         <%else%>
-          <a href=<%=galeria_casa_path%> class="filtro-btn" id="Para Casa"><i class="fa fa-home w3-margin-right"></i>Para Casa</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_casa_path%> class="filtro-btn" id="Para Casa"><i class="fa fa-home w3-margin-right"></i>Para Casa</a>
+        	</div>
         <%end%>
         <% if @filtro == 6 %>
-          <a href=<%=galeria_aprendizado_path%> class="filtro-btn-azul" id="Aprendizado"><i class="fa fa-pencil w3-margin-right"></i>Aprendizado</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_aprendizado_path%> class="filtro-btn-azul" id="Aprendizado"><i class="fa fa-pencil w3-margin-right"></i>Aprendizado</a>
+        	</div>
         <%else%>
-          <a href=<%=galeria_aprendizado_path%> class="filtro-btn" id="Aprendizado"><i class="fa fa-pencil w3-margin-right"></i>Aprendizado</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_aprendizado_path%> class="filtro-btn" id="Aprendizado"><i class="fa fa-pencil w3-margin-right"></i>Aprendizado</a>
+        	</div>
         <%end%>
         <% if @filtro == 7 %>
-          <a href=<%=galeria_modelos_path%> class="filtro-btn-azul" id="Modelos"><i class="fa fa-cube w3-margin-right"></i>Modelos</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_modelos_path%> class="filtro-btn-azul" id="Modelos"><i class="fa fa-cube w3-margin-right"></i>Modelos</a>
+        	</div>
         <%else%>
-          <a href=<%=galeria_modelos_path%> class="filtro-btn" id="Modelos"><i class="fa fa-cube w3-margin-right"></i>Modelos</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_modelos_path%> class="filtro-btn" id="Modelos"><i class="fa fa-cube w3-margin-right"></i>Modelos</a>
+        	</div>
         <%end%>
         <% if @filtro == 8 %>
-          <a href=<%=galeria_ferramentas_path%> class="filtro-btn-azul" id="Ferramentas"><i class="fa fa-wrench w3-margin-right"></i>Ferramentas</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_ferramentas_path%> class="filtro-btn-azul" id="Ferramentas"><i class="fa fa-wrench w3-margin-right"></i>Ferramentas</a>
+        	</div>
         <%else%>
-          <a href=<%=galeria_ferramentas_path%> class="filtro-btn" id="Ferramentas"><i class="fa fa-wrench w3-margin-right"></i>Ferramentas</a>
+        	<div class="col-md-2">
+          		<a href=<%=galeria_ferramentas_path%> class="filtro-btn" id="Ferramentas"><i class="fa fa-wrench w3-margin-right"></i>Ferramentas</a>
+        	</div>
         <%end%>
-      </div>
+      </div>-->
     </div>
   </div>
  <div id="my-posts">
