@@ -7,8 +7,8 @@
 	    <span class="col-md-2">
 	    <%= image_tag notification.notified_by.avatar.url(:medium), class: "media-object img-circle img-notification",style:'width:32px;height:32px'%>
 	    </span>
-	    <span class="col-md-6" style="text-align:left;padding-top:8px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
-	        <p><%=notification.notice_type%></p>
+	    <span style="width:75%; text-align:left;padding-top:8px;vertical-align: middle;border: 0px solid black;text-transform:capitalize;margin:0px;">
+	        <p style='margin-bottom:5px'><%=notification.notice_type%></p>
 	    	<small class="text-muted"><%= time_ago_in_words notification.created_at%></small>
 	    </span>
 	</div>
