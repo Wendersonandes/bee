@@ -1,11 +1,21 @@
 <%= render 'top_show', user: @user, footers: @footers, posts2: @posts2, posts: @posts, botao: @botao %> 
   <div id="my-posts">
-  <section id="pinBoot">
-    <%= render 'galeria/projects', posts: @posts %>
-  </section>
- </div>
-   <div id="infinite-scrolling">
-      <%= will_paginate @posts %>
+  	<% if @posts.any? %>
+        <section id="pinBoot">
+            <%= render 'galeria/projects', posts: @posts %>
+        </section>
+    <% else %>
+        <% if @user == current_user %>
+            <br>
+             <h2 class="w3-center">Você ainda nao possui projetos</h2>
+             <h3 class="w3-center"> Caso queira postar algum modelo, entre em contato com a Beeprinted <a style='color:#009FAB' href="<%=root_path%>#contact">Contato</a>
+        <% else %>
+            <h2 class="w3-center"><%= @user.completo%> ainda nao possui projetos</h2>
+        <% end %>
+    <% end %>
+      <div id="infinite-scrolling" class="w3-center">
+     <%= will_paginate @posts%>
+  </div>
   </div>
   <!-- Pagination -->
 
