@@ -192,7 +192,7 @@ Devise.setup do |config|
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
   # change their passwords.
-  config.allow_unconfirmed_access_for = 7.days
+  config.allow_unconfirmed_access_for = 365.days
   config.reset_password_within = 6.hours
 
   # When set to false, does not sign a user in automatically after their password is
