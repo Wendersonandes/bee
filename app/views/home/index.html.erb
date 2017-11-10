@@ -87,7 +87,7 @@
                       <li id='quant_order'>
                       <% if current_user.carrinhos.find_by(status: 'criado') %>
                         
-                          <a href=<%=carrinho_path(current_user.user_name)%>>
+                          <a href=<%=carrinho_path(current_user.user_name)%> class="external">
                               <%= current_user.carrinhos.find_by(status: 'criado').orders.count%> 
                             <span class='fa fa-shopping-cart'></span>
                           </a>
