@@ -4,7 +4,7 @@
       = current_user.notifications.where(read: false).count
       %span.fa.fa-bell
   %ul.dropdown-menu{ 'aria-labelledby': 'dropdownMenu1', style:'width:430px;background-color:#242424' }
-    %li.dropdown-header.text-center Notificaçoes
+    %li.dropdown-header.text-center Notificações
     = render current_user.notifications.order('created_at DESC').limit(5)
     %li.divider{ role: 'separator' }
     %li.text-center= link_to 'Ver Todas', notifications_path, class:"external"
