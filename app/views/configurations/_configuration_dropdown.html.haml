@@ -9,4 +9,4 @@
     %li.text-center= link_to "Editar Perfil", profile_path(current_user.user_name)
     %li.text-center= link_to "Editar Conta", edit_user_registration_path
     %li.divider{ role: 'separator' }
-    %li.text-center= link_to "Sair", destroy_user_session_path, method: :delete
+    %li.text-center= link_to "Sair", destroy_user_session_path, method: :delete, class: "external"
