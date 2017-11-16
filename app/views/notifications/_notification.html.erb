@@ -1,9 +1,9 @@
 <%if notification.read == true %>
 	<a href=<%=link_through_path(notification)%> class="w3-center" style= "background-color:#bfbfbf">
 <% else %>
-	<a href=<%=link_through_path(notification)%> class="w3-center">
+	<a href=<%=link_through_path(notification)%> class="w3-center" style= "background-color:white">
 <% end %>
-	<div class='row well' style='background-color:#bfbfbf; margin:auto'>
+	<div class='row well' style='border: 1px solid #bfbfbf;margin:auto'>
 	    <span class="col-md-2">
 	    <%= image_tag notification.notified_by.avatar.url(:medium), class: "media-object img-circle img-notification",style:'width:32px;height:32px'%>
 	    </span>
