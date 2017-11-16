@@ -11,6 +11,10 @@ end
 
 
   def after_sign_in_path_for(resource)
-    session[:previous_url]
+    if session[:previous_url] 
+      session[:previous_url]
+    else
+      root_path
+    end
   end
 end
