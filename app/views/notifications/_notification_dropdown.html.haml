@@ -1,4 +1,4 @@
-.dropdown.notification-dropdown
+.dropdown.notification-dropdown.external
   %button.btn.btn-default.dropdown-toggle{ type: 'button',style: 'background-color:#242424; padding-top:8px;', id: 'dropdownMenu1', data: { toggle: 'dropdown' }, 'aria-haspopup': true, 'aria-expanded': true }
     %a
       = current_user.notifications.where(read: false).count
@@ -7,4 +7,4 @@
     %li.dropdown-header.text-center Notificaçoes
     = render current_user.notifications.order('created_at DESC').limit(5)
     %li.divider{ role: 'separator' }
-    %li.text-center= link_to 'Ver Todas', notifications_path
+    %li.text-center= link_to 'Ver Todas', notifications_path, class:"external"
