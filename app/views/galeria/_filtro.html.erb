@@ -263,31 +263,43 @@ stylize any heading tags withing white-panel below
   </div>
 
   <!-- Footer -->
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <!-- End page content -->
 </div>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 
 <script>
 $(document).ready(function() {
-$('#pinBoot').pinterest_grid({
-no_columns: 4,
-padding_x: 10,
-padding_y: 10,
-margin_bottom: 0,
-single_column_breakpoint: 50
-});
-});
+if($(window).width() < 700){
+  $('#pinBoot').pinterest_grid({
+  no_columns: 4,
+  padding_x: 10,
+  padding_y: 10,
+  margin_bottom: 0,
+  single_column_breakpoint: 0
+  });
+}
+else{
+  $('#pinBoot').pinterest_grid({
+  no_columns: 2,
+  padding_x: 10,
+  padding_y: 10,
+  margin_bottom: 0,
+  single_column_breakpoint: 0
+  });
 
+}
+
+
+
+  });
 /*
 Ref:
 Thanks to:
