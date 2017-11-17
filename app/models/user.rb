@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   validates :sobrenome, presence: true
   validates :email, presence: true
   
-  has_attached_file :avatar, styles: { medium: '150x150#', :thumb => "100x100" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: '150x150#', :thumb => "100x100" }, :default_url => "/images/:style/missing.png",:s3_protocol => :https
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
