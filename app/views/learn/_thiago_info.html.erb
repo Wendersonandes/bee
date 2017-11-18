@@ -1,7 +1,7 @@
 <div class="col-md-3 w3-collapse w3-animate-left">
                 <div class='well'>
                   <h4 class="w3-center" style="color: #009FAB"><%=@user.completo%></h4>
-                  <p class="w3-center">
+                  <p class="w3-center" style="margin-top:0px;"" >
 
                     <%= link_to (image_tag @user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(@user.user_name) %>
 
