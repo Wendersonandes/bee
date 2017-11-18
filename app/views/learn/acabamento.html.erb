@@ -332,33 +332,7 @@ body {
     <article>
         <div class="container">
             <div class="row">
-              <div class="col-md-3 w3-collapse w3-animate-left">
-                <div class='well'>
-                  <h4 class="w3-center" style="color: #009FAB"><%=@user.completo%></h4>
-                  <p class="w3-center">
-
-                    <%= link_to (image_tag @user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(@user.user_name) %>
-
-                  </p>
-                  <% if @user.prof && @user.prof!=''%>
-                    <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> <%=@user.prof%></p>
-                  <% end %>
-                  <% if @user.city && @user.city!=''%>
-                    <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <%=@user.city%></p>
-                  <% end %>
-                  <% if @user.niver && @user.niver!=''%>
-                    <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><%=@user.niver%></p>
-                  <% end %>
-
-
-                </div>
-                <div class='well'>
-                  <div class="w3-container">
-                    <p class="w3-center" style="margin-top:0px;">Descricao</p>
-                    <p class="w3-text-grey" style="font-size:15px;"><%=@user.bio%></p>
-                  </div>
-                </div>
-              </div>
+              <%= render "thiago_info" %>
               <div class="col-lg-8"  style='padding-left:0px;'>
                 <p>Você pode encontrar alguns modelos de varinhas no Olivaras, mas esse modelo específico foi obtido no thingiverse. Você vai encontrar o modelo 3D  neste <a href="http://www.thingiverse.com/thing:1069671">link</a>.</p>
                 <p>Agora imprimar com as especificações abaixo:</p>
