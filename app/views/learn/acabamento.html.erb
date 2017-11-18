@@ -334,7 +334,7 @@ body {
             <div class="row">
               <div class="col-md-3 w3-collapse w3-animate-left">
                 <div class='well'>
-                  <h4 class="w3-center"><%=@user.completo%></h4>
+                  <h4 class="w3-center" style="color: #009FAB"><%=@user.completo%></h4>
                   <p class="w3-center">
 
                     <%= link_to (image_tag @user.avatar.url(:medium),class: "w3-circle", style: 'height:106px;width:106px'), profile_path(@user.user_name) %>
@@ -507,15 +507,15 @@ body {
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="list-inline text-center">
                         <li>
-                            <a href="#">
+                            <a href="https://www.instagram.com/beeprinted/">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="https://www.facebook.com/beeprinted/">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -523,10 +523,10 @@ body {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href=<%=root_path%>>
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                    <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
                         </li>
