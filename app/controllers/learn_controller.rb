@@ -4,6 +4,7 @@ class LearnController < ApplicationController
 	def primeira
 	end
 	def acabamento
+		@user = User.find(6)
 	end
 	def modelagem
 	end
