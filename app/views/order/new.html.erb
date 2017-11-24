@@ -197,7 +197,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Open Sans", sans-serif}
 <div class="w3-container" style="border-top:2px solid #eeeeee;margin-top:15px;padding-top:15px;">
 
   <div class="w3-center">
-<button id="comprar" href="javascript:void(0)" title="Selecione o modo de entrega" class="w3-btn w3-green w3-section" onclick="document.getElementById('subscribe').style.display='block'" style="border-radius:5px;" disabled>Ir para Pagamento</button>
+<button id="comprar" href="javascript:void(0)" title="Selecione o modo de entrega" class="w3-btn w3-green w3-section" onclick="$('#valor_pagamento').text($('#preco_final').text());document.getElementById('subscribe').style.display='block';" style="border-radius:5px;" disabled>Ir para Pagamento</button>
   </div>
   <div class="w3-center">
   Pagamento Seguro por
